@@ -8,6 +8,7 @@
 \begin{document}
 \setlength\parindent{0pt} %TODO this somehow messes up paragraph vertical spacing as well?
 \scriptsize
+% \tiny
 \pagenumbering{gobble}
 
 \begin{center}
@@ -29,12 +30,19 @@ while (i < 10) {
 
 // join many lists together
 accumulate(append, [], xxs);
+
+// clone a list
+map(function(x) { return x; }, xs);
+
+// clone an object
+JSON.parse(JSON.stringify(obj));
 \end{verbatim}
 
 \begin{itemize}
 \itemsep -0.5em
 \item \texttt{parseInt(string)}: Interprets the given \texttt{string} as an integer, and returns that integer
 \item \texttt{math\_pi}: Refers to the number $\pi$, the mathematical constant
+\item \texttt{math\_max(a, b, c, ...)}: Returns the largest argument given
 \item \texttt{math\_floor(x)}: Returns the largest integer smaller than \texttt{x}
 \item \texttt{math\_ceil(x)}: Returns the smallest integer larger than \texttt{x}
 \item \texttt{math\_sqrt(x)}: Refers to the square root function, returns $\sqrt{x}$
@@ -340,9 +348,8 @@ function coin_change(amount, coin_range) {
 \end{verbatim}
 
 % SORTING %
-{\small\textbf{Sorting}}
+{\small\textbf{Insertion sort}} takes elements from left to right, and \textit{inserts} them into correct positions in the sorted portion of the list (or array) on the left. This is analagous to how most people would arrange playing cards.
 \begin{verbatim}
-// INSERTION SORT
 function insertion_sort(xs) {
     return (is_empty_list(xs))
         ? xs
@@ -359,8 +366,10 @@ function insert(x, xs) {
                 insert(x, tail(xs))
             );
 }
+\end{verbatim}
 
-// SELECTION SORT
+{\small\textbf{Selection sort}} picks the smallest element from a list (or array) and puts them in order in a new list.
+\begin{verbatim}
 function selection_sort(xs) {
     if (is_empty_list(xs)) {
         return xs;
@@ -382,7 +391,10 @@ function smallest(xs) {
     }
     return sm(head(xs), tail(xs));
 }
+\end{verbatim}
 
+{\small\textbf{Quicksort}} is a divide-and-conquer algorithm. \texttt{Partition} takes a pivot, and positions all elements smaller than the pivot on one side, and those larger on the other. The two `sides' are then partitioned again.
+\begin{verbatim}
 // QUICKSORT
 function quicksort(xs) {
     if (is_empty_list(xs)) {
@@ -416,8 +428,9 @@ function partition(xs, p) {
     }
     return accumulate(helper, pair([], []), xs);
 }
-
-// BUBBLESORT (arrays)
+\end{verbatim}
+{\small\textbf{Bubble sort}} repeated swaps adjacent elements if they are in the wrong order, until the whole list (or array) is in the right order.
+\begin{verbatim}
 function sort(b) {
     var length_b = array_length(b);
     for (var num_sorted = 0; 
