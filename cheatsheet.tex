@@ -97,7 +97,7 @@ function chain(f, n) {
 \par $n(c(t,3),2)(p)(0) \rightarrow n(c(t,2)(t),2)(p)(0)$\\
      $\rightarrow n(c(t,1)(tt), 2)(p)(0) \rightarrow n(t(tt), 2)(p)(0)$\\
      $\rightarrow n(tttt, 2)(p)(0) \rightarrow t^8(p)(0) \rightarrow p^{2^8}(0)$\\
-     $\rightarrow p^{256}(0) \rightarrow 245$
+     $\rightarrow p^{256}(0) \rightarrow 256$
 \\
 \par \texttt{((chain(twice,4))(plus\_one))(0)}
 \par $((c(t,4))(p))(0) \rightarrow c(t,3)(t)(p)(0) \rightarrow c(t,2)(tt)(p)(0)$\\
@@ -116,6 +116,8 @@ To apply a function $f$,
 \item In $A$, bind the parameters of $f$ to the values of the arguments given during the function call
 \item Evaluate the body of $f$ within $A$
 \end{enumerate}
+
+When checking through the workings, \textbf{make sure the frames all point back to some other frame}. \\
 
 % LISTS %
 {\small\textbf{Lists}}: a list is either the empty list \texttt{[]} or a pair whose tail is a list.
@@ -145,6 +147,49 @@ To apply a function $f$,
 \item \texttt{list\_ref(xs, n)}: Returns the element of list xs at position n, where the first element has index 0. Iterative process; time: O(n), space: O(1), where n is the length of xs.
 \item \texttt{accumulate(op, initial, xs)}: Applies binary function op to the elements of xs from right-to-left order, first applying op to the last element and the value initial, resulting in r1, then to the second-last element and r1, resulting in r2, etc, and finally to the first element and rn−1, where n is the length of the list. Thus, accumulate(op,zero,list(1,2,3)) results in op(1, op(2, op(3, zero))). Recursive process; time: O(n), space: O(n), where n is the length of xs, assuming op takes constant time.
 \end{itemize}
+
+% OBJECTS %
+{\small\textbf{Objects}}
+\begin{verbatim}
+var obj = {'aa': 4, 'bb': true, 
+    'cc': function(x) { return x * x; } };
+obj['aa'] === obj.aa // true
+obj['bb'] === obj.bb // true
+obj['cc'] === obj.cc // true
+obj['cc'](5) === obj.cc(5) // true
+\end{verbatim}
+
+% OOP %
+{\small\textbf{Pseudo-classical Inheritance}}
+\\ \\
+The \texttt{new} keyword,
+\begin{enumerate}
+\itemsep -0.5em
+\item Constructs an empty object
+\item Calls the constructor function with that object as \texttt{this}
+\item Returns the object
+\end{enumerate}
+
+Class methods can be added within the constructor function, or dynamically by accessing the contructor's \texttt{prototype}.
+
+\begin{verbatim}
+function MyClass() {
+    this.my_method = function() {
+        // do something
+    };
+}
+
+MyClass.prototype.another_method =
+    function() {
+        // do something else
+    };
+
+function OtherClass() { }
+
+MyClass.Inherits(OtherClass);
+\end{verbatim}
+
+Inheritance is created using \texttt{Inherits}, which sets the \texttt{\_\_proto\_\_} of \texttt{MyClass} to \texttt{ParentClass.prototype}. \\
 
 % TREES %
 {\small\textbf{Trees}}: A tree of certain data items is a list whose elements are such data items, or trees of such data items.
