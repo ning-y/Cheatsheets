@@ -1,0 +1,14 @@
+You are free to contribute cheatsheets for NUS modules in this
+repository through pull requests. You must have proper rights to
+distribute the cheatsheet. The content you contribute will be licensed
+under this repository's license (./LICENSE).
+
+Required in your pull request:
+(1) The LaTeX file for the cheatsheet under ./src/
+(2) Name of the module, and which exam (midterms/finals) the cheathseet
+    serves
+
+Optional in your pull request:
+(1) Compiled PDF from your LaTeX file under ./pdf/
+(2) PNG per page in ./docs/, for the...
+(3) Entry in README.rst (alphabetically ordered)
