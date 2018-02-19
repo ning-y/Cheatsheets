@@ -5,6 +5,7 @@
 ]{geometry}
 \usepackage{multicol}
 \usepackage{mhchem}
+\usepackage{IEEEtrantools}
 \usepackage{color, soul}  % enable highlighting
                           % note: does not work with \ce{}
 
@@ -37,9 +38,21 @@
     % Beach Water Quality
     \item Recognise key indicators of beach water quality
     \item Know how beach water quality is quantified
+    % Scientific Method
     \item Qualitatively discuss our observations/questions of interest to us
-    \item Be able to formulate hypothesis to `answer' our questions
-    \item Be able to deduce predictions for testing our hypotheses
+    \item Able to formulate hypothesis to `answer' our questions
+    \item Able to deduce predictions for testing our hypotheses
+    % Empirical Tests
+    \item Describe the different methods used to collect data for testing 
+        our predictions
+    \item Explain the advantages/disadvantages of the various methods of
+        data collection
+    \item Identify the various factors that can affect the validity of outcomes
+        in our study
+    % Probability
+    \item Relate probability to quantitative reasoning
+    \item Able to perform probability calculations
+    \item Understand conditional probability and independence
 \end{itemize}
 
 %% Quantitative Reasoning %%
@@ -82,7 +95,7 @@ sequential steps:
         survey of existing literature; \hl{must be falsifiable}
     \item \textbf{Prediction}---then, deduce a specific prediction
         \hl{based on the hypothesis}
-    \item \textbf{Empirical Test}---everything else\dots
+    \item \textbf{Empirical Test}---using everything else
 \end{enumerate}
 
 %% Operationalise %%
@@ -129,11 +142,11 @@ human health, or the environment}.
     \item \hl{Non-reactive species} in urban air
     \item Does not react rapidly with surfaces
     \item Low solubility in air
-    \item \hl{Atmospheric concentrations vary directly with emissions}
+    \item Atmospheric concentrations vary directly with emissions
     \item Main fate is oxidation to \ce{CO_2}
     \item Binds irreversibly with haemoglobin
-    \item \hl{Impairs visual perception, work capacity, manual dexterity, 
-        learning ability, and performance of complex tasks}
+    \item Impairs visual perception, work capacity, manual dexterity, 
+        learning ability, and performance of complex tasks
     \item \hl{Life-threatening at high levels (about 600 ppm)}
     \item Elderly, young, and those with pre-existing cardiovascular diseases most
         sensitive
@@ -275,6 +288,122 @@ $$ I_i =
     \item Monitored through \textit{Telemetric Air Quality Monitoring Network}, 22
         stations islandwide place according to population density
 \end{itemize}
+
+%% Beach Water Quality %%
+\headingsmall{Beach Water Quality}
+\begin{itemize} \itemsep -0.5em
+    \item Most common pollutant is \hl{faecal pollution}
+    \item From sources such as sewage leaks, decomposition, wildlife, humans, 
+        marine vessels dumping waste, industrial wastes, surface runoff
+    \item Can cause diarrhea, vomitting, respiratory infections, infections of
+        the eyes/ears/nose/skin; or gastroenteritis
+    \item Levels of faecal pollution can be measured by indicators of 
+        coliform bacterial or faecal \textit{streptococci}
+    \item Total coliforms---can occur in human faeces but also naturally e.g. 
+        in soil or submerged wood; therefore not recommended
+    \item Faecal coliforms---a subset of total coliforms more specific to
+        human faeces, but contains genus \textit{Klebsiella} which may also
+        occur naturally e.g. textiles, pulp, and paper mill wastes
+    \item \hl{\textit{E. Coli}}---a species of feacal coliform specific to human
+        and mammal faeces; most specific measure of coliform bacteria; currently
+        recommended by USEPA
+    \item Faecal \textit{streptococci}---generally occur in digestive systems
+        of mammals
+    \item \hl{\textit{Enterococci}}---a genus more human-specific than faecal
+        \textit{streptococci}, previously categorised under the 
+        genus \textit{streptococcus}; currently recommended by USEPA as a
+        indicator for salt water, since these more more \hl{able to survive in
+        salt water environments}
+\end{itemize}
+
+%% Singapore's Reacreational Water Guidelines %%
+\headingsmall{SG's Recreational Water Guidelines}
+\begin{itemize} \itemsep -0.5em
+    \item 95\% of the time, \textit{Entorococcus} counts must be less than or
+        equal \hl{200 counts per 100ml}; these are rated `Good' or better
+    \item Also takes into account susceptibility of the location to faecal influence
+    \item Only `Good' or better beaches are considered suitable for \hl{primary 
+        contact activities}
+    \item Beaches are sampled weekly
+\end{itemize}
+
+%% Empirical Tests %%
+\headingsmall{Empirical Tests} are conducted on predictions made (through the
+scientific method), using data\dots
+\begin{itemize} \itemsep -0.5em
+    \item Data---numerical values of physical quantities; \hl{collected through}
+         restrospective studies, observational studies, or designed experiments
+    \item \hl{Retrospective studies}---looks at limited historical records
+    \item Hard to determine a `sole impact', because lack of control over variables
+    \item Independent variable may not have varied historically
+    \item Form of data may not be ideal (want daily, have yearly)
+    \item May not get most relevant data (want diesel vehicles, have all vehicles)
+    \item Overall, difficult to obtain solid and reliable results; hard, if not impossible
+        to conclusively prove causal relationships
+    \item \hl{Observational studies}---observe population of interest with minimal 
+        disturbance
+    \item Usually carried out over a short period of time
+    \item Allows measurements of some variables normally unavailable to retrospective studies
+    \item \hl{Designed experiments}---able to make deliberate changes to independent
+        variables, in order to observe change in dependent variable
+    \item Good control over what to measure, and how
+    \item \hl{Time range to collect} influenced by praticality, periodic trends 
+        (e.g. seasonal), relevance to current conditions (e.g. data from 1900s vs 2000s)
+    \item \hl{Type of data chosen} influenced by relevance (e.g. rainfall near 
+        \textit{E. Coli} sampling sites); can include control measurements
+    \item Generally, three factors leading to \hl{invalidation} of data
+    \item \hl{Measurement}---such as counting errors, contamination
+    \item \hl{Sampling}---such as proximity of rainfall station, sample representative 
+        \textit{E. Coli} samples of the whole beach, using outdated data
+    \item \hl{Operationalise}---such as choosing 12h, 24h, 48h, or 96h rainfall
+    \item Followed by modeling, analysis, and critical thinking (e.g. examine assumptions
+        made)
+\end{itemize}
+
+%% Probability %%
+\headingsmall{Probability}
+\begin{itemize} \itemsep -0.5em
+    \item Relative frequency of an outcome settles down to one value over the long run
+    \item The one value is then the probability of that outcome
+\end{itemize}
+
+%% Other Statistical Terms %%
+\headingsmall{Other Statistical Terms}
+\begin{itemize} \itemsep -0.5em
+    \item Variability---higher-end, lower-end
+    \item Sampling---choosing subset of population to characterise 
+        properties of population
+    \item Sample space---all possible outcomes
+    \item Event---subset of the sample space
+    \item Outliers
+\end{itemize}
+
+%% Formulas %%
+\headingsmall{Formulas}
+% Percentile
+\begin{IEEEeqnarray*}{rCl}
+\mathrm{Percentile\ Rank,\ r} &=&
+    1 + p\ (n-1) \\
+\mathrm{p^{th}\ percentile} &=&
+    (1 - (r\ \mathrm{mod}\ 1))\ X_{\mathrm{int}(r)}\ + \\
+    && \mathrm{int}(r) \cdot X_{\mathrm{int}(r)+1}
+\end{IEEEeqnarray*}
+% Probability
+\begin{IEEEeqnarray*}{rCCCl}
+E_1\ & \mathrm{OR}    &  E_2 &=& E_1 \cup E_2 \\
+E_1\ & \mathrm{AND}\  &  E_2 &=& E_1 \cap E_2 \\
+     & \mathrm{NOT}\  &  E   &=& E'
+\end{IEEEeqnarray*}
+\begin{IEEEeqnarray*}{rCl}
+\mathrm{P}(B|A) &=& 
+    \frac{\mathrm{P}(A\cap B)}{\mathrm{P}(A)}
+\end{IEEEeqnarray*}
+\begin{IEEEeqnarray*}{rrCl}
+\mathrm{if}  & E_1 \cap E_2 &=& 0 \\
+\mathrm{then}&\  \mathrm{P}(E_1 \cup E_2) &=&
+    \mathrm{P}(E_1) + \mathrm{P}(E_2) \\
+\mathrm{and} & \mathrm{P}(E_1 \cap E_2) &=& 0
+\end{IEEEeqnarray*}
 
 \end{multicols*}
 \end{document}
