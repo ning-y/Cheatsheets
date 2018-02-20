@@ -380,31 +380,38 @@ scientific method), using data\dots
 \end{itemize}
 
 %% Formulas %%
-\headingsmall{Formulas}
+\headingsmall{Formulas} \\[5pt]
 % Percentile
-\begin{IEEEeqnarray*}{rCl}
-\mathrm{Percentile\ Rank,\ r} &=&
-    1 + p\ (n-1) \\
-\mathrm{p^{th}\ percentile} &=&
-    (1 - (r\ \mathrm{mod}\ 1))\ X_{\mathrm{int}(r)}\ + \\
-    && \mathrm{int}(r) \cdot X_{\mathrm{int}(r)+1}
-\end{IEEEeqnarray*}
-% Probability
-\begin{IEEEeqnarray*}{rCCCl}
-E_1\ & \mathrm{OR}   &\ E_2 &=& E_1 \cup E_2 \\
-E_1\ & \mathrm{AND}  &\ E_2 &=& E_1 \cap E_2 \\
-     & \mathrm{NOT}  &\ E   &=& E'
-\end{IEEEeqnarray*}
-\begin{IEEEeqnarray*}{rCl}
-\mathrm{P}(B|A) &=& 
-    \frac{\mathrm{P}(A\cap B)}{\mathrm{P}(A)}
-\end{IEEEeqnarray*}
-\begin{IEEEeqnarray*}{rrCl}
-\mathrm{if}  & E_1 \cap E_2 &=& 0 \\
-\mathrm{then}&\  \mathrm{P}(E_1 \cup E_2) &=&
-    \mathrm{P}(E_1) + \mathrm{P}(E_2) \\
-\mathrm{and} & \mathrm{P}(E_1 \cap E_2) &=& 0
-\end{IEEEeqnarray*}
+{
+% Reduce before and after between equations
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\textbf{Percentile Calculations}
+    \begin{IEEEeqnarray*}{rCl}
+    \mathrm{Percentile\ Rank,\ r} &=&
+        1 + p\ (n-1) \\
+    \mathrm{p^{th}\ percentile} &=&
+        (1 - (r\ \mathrm{mod}\ 1))\ X_{\mathrm{int}(r)}\ + \\
+        && \mathrm{int}(r) \cdot X_{\mathrm{int}(r)+1}
+    \end{IEEEeqnarray*}
+\textbf{Basic Probability}
+    \begin{IEEEeqnarray*}{rCCCl}
+    E_1\ & \mathrm{OR}   &\ E_2 &=& E_1 \cup E_2 \\
+    E_1\ & \mathrm{AND}  &\ E_2 &=& E_1 \cap E_2 \\
+         & \mathrm{NOT}  &\ E   &=& E'
+    \end{IEEEeqnarray*}
+    \begin{IEEEeqnarray*}{rCl}
+    \mathrm{P}(B|A) &=& 
+        \frac{\mathrm{P}(A\cap B)}{\mathrm{P}(A)}
+    \end{IEEEeqnarray*}
+\textbf{Mutual Exclusitivity}
+    \begin{IEEEeqnarray*}{rrCl}
+    \mathrm{if}  & E_1 \cap E_2 &=& 0 \\
+    \mathrm{then}&\  \mathrm{P}(E_1 \cup E_2) &=&
+        \mathrm{P}(E_1) + \mathrm{P}(E_2) \\
+    \mathrm{and} & \mathrm{P}(E_1 \cap E_2) &=& 0
+    \end{IEEEeqnarray*} 
+}
 
 \end{multicols*}
 \end{document}
