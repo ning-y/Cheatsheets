@@ -1,0 +1,522 @@
+\documentclass{article}
+
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+\usepackage{multicol}
+\usepackage{mhchem}
+\usepackage{IEEEtrantools}
+\usepackage{color, soul}  % enable highlighting
+                          % note: does not work with \ce{}
+
+\newcommand{\headingsmall}[1]{{\small\textbf{#1}}}
+
+\begin{document}
+
+\scriptsize                % Small fonts
+\pagenumbering{gobble}     % No page numbers
+\setlength\parindent{0pt}  % No indents at start of paragraphs
+
+% TITLE %
+\begin{center}
+{\large UQF2101I Cheatsheet}\\{for test 1, by ning}
+\end{center}
+
+% BODY %
+\begin{multicols*}{4}
+
+%% Learning Objectives %%
+\headingsmall{Learning Objectives}
+\begin{itemize} \itemsep -0.5em
+    % QR Framework
+    \item Approach a problem quantitatively
+    \item Critically think about problem w/ QR tools
+    \item To solve (or make a good effort) the problem
+    % Air Quality
+    \item Criteria air pollutants and their adverse effects
+    \item Know how air quality is quantified and reported
+    % Beach Water Quality
+    \item Recognise key indicators of beach water quality
+    \item Know how beach water quality is quantified
+    % Scientific Method
+    \item Qualitatively discuss observations/questions
+    \item Able to formulate hypothesis
+    \item Able to deduce predictions for hypotheses
+    % Empirical Tests
+    \item Describe the different methods used to collect data for testing 
+        our predictions
+    \item Explain the advantages/disadvantages of the various methods of
+        data collection
+    \item Identify the various factors that can affect the validity of outcomes
+        in our study
+    % Probability
+    \item Relate probability to quantitative reasoning
+    \item Able to perform probability calculations
+    \item Conditional probability \& independence
+    % Basic Statistics
+    \item Preliminary analysis of data
+    \item Descriptive statistics
+    % Graphical methods
+    \item Graphical methods
+\end{itemize}
+
+%% Quantitative Reasoning %%
+\headingsmall{Quantitative Reasoning} is \textit{
+    the way in which we can use numbers to provide evidence for our 
+    arguments.
+} It has 10 elements,
+\begin{enumerate} \itemsep -0.5em
+    \item Scientific method
+    \item Hypothesis
+    \item Sampling
+    \item Data
+    \item Operationalize
+    \item Variable
+    \item Modelling
+    \item Analysis
+    \item Deduction
+    \item Critical Thinking
+\end{enumerate}
+This module examines `pressing environmental issues that
+\textit{continue to have a significant impact on human health}. QR
+provides\dots
+\begin{itemize} \itemsep -0.5em
+    \item more clarity, better structured, objective, and useful 
+        analysis of issues, 
+    \item so that decision-making and arguments can be guided and
+        supported by quantitative proof and rigorous analysis
+    \item proof with numbers that a problem exists, and the magnitude
+        of that problem
+\end{itemize}
+
+%% Scientific Method %%
+The \headingsmall{scientific method} involves four generally 
+sequential steps:
+\begin{enumerate} \itemsep -0.5em
+    \item \textbf{Observation/Question}---start off by noticing a phenomenon
+        that poses a problem/question
+    \item \textbf{Hypothesis}---form a \textit{suggested explanation} of the
+        observation above; made on the basis of limited evidence or
+        survey of existing literature; \hl{must be falsifiable}
+    \item \textbf{Prediction}---then, deduce a specific prediction
+        \hl{based on the hypothesis}
+    \item \textbf{Empirical Test}---using everything else
+\end{enumerate}
+
+%% Operationalise %%
+In order to test the hypothesis, we need to translate theoretical
+concepts to actual measures through \headingsmall{operationalisation}.
+By measuring these to obtain values, we can \hl{quantify} those concepts. \\
+
+%% Variables %%
+A \headingsmall{variable} is something whose value can vary
+\begin{itemize} \itemsep -0.5em
+    \item A \hl{random variable} is a variable that can take on one or more
+        values, each associated with a certain \hl{probability}
+    \item Variables are either \hl{dependent or independent}
+    \item Dependent variables corresponds to the outcomes we want to explain, 
+        they are determined by other variables
+    \item Independent variables vary independently of other variables, they
+        determine (fully or partially) the dependent variable
+\end{itemize}
+
+%% Air Quality %%
+\headingsmall{Air Quality} problems all begin with the emission of
+pollutants. Pollutants are substances in the air that \hl{change the
+original composition of the air around us, and has an adverse effect on
+human health, or the environment}. 
+\begin{itemize} \itemsep -0.5em
+    \item Excessive levels of pollutants can cause adverse health 
+        effects. Singapore tracks 6 criteria health pollutants: 
+        \ce{CO, NO_2, O_3, SO_2, PM_{2.5}, PM_{10}}. 
+    \item Sources of these air pollutants can be categorised as 
+        \hl{mobile or stationary}, and \hl{primary or secondary}. 
+        Primary sources directly emit pollutants into the air, 
+        secondary sources are the formation of pollutants through
+        physical or chemical processes in the air.
+    \item Air quality control measures aim to limit airborne 
+        concentrations to \hl{a level where no adverse health effects 
+        are expected}.
+    \item Air control measures can be \hl{source reduction, or
+        air-scrubbing (indirect)}
+\end{itemize}
+
+%% Carbon Monoxide %%
+\headingsmall{Carbon Monoxide, \ce{CO}}
+\begin{itemize} \itemsep -0.5em
+    \item \hl{Non-reactive species} in urban air
+    \item Does not react rapidly with surfaces
+    \item Low solubility in air
+    \item Atmospheric concentrations vary directly with emissions
+    \item Main fate is oxidation to \ce{CO_2}
+    \item Binds irreversibly with haemoglobin
+    \item Impairs visual perception, work capacity, manual dexterity, 
+        learning ability, and performance of complex tasks
+    \item \hl{Life-threatening at high levels (about 600 ppm)}
+    \item Elderly, young, and those with pre-existing cardiovascular diseases most
+        sensitive
+    \item \hl{From incomplete combustion of hydrocarbon-based fuels}
+    \item From (predominantly) vehicle exhaust
+    \item From cigarette smoke (indoor pollutant)
+    \item \hl{Control by catalytic converters to treat exhaust}
+    \item Control by inspection programmes (smog check)
+    \item Control by using reformulated, oxygenated fuels
+\end{itemize}
+
+%% Nitrogen Dioxide %%
+\headingsmall{Nitrogen Dioxide, \ce{NO_2}}
+\begin{itemize} \itemsep -0.5em
+    \item Most nitrous oxide missions are in the form \ce{NO}, with remainder
+        \ce{NO_2}. However, since \ce{NO} quickly oxidises to \ce{NO_2} in
+        the air, nitrous oxide concentrations are reported and measured as
+        \ce{NO_2} concentrations
+    \item \hl{Respiratory irritant} that lowers resistance to respiratory
+        infections when inhaled
+    \item Long-term exposure to elevated levels may cause increased
+        incidence of acute respiratory diseases in children
+    \item Contributes to \hl{formation of ozone}
+    \item Causes visibility problems (reddish-brown colour in smog)
+    \item Forms acid deposition (rain): \ce{NO_2 + OH -> HNO_3}
+    \item From \hl{oxidation of NO} in the air, and \ce{NO} is a combustion
+        by-product from industries, power plants, and motor vehicles
+    \item Control by combustion manipulation---using the minimum mix of
+        atmospheric air (rich in \ce{N_2}) for complete combustion
+    \item Control by \hl{catalytic converters} reducing \ce{NO_X} back to \ce{N_2}
+\end{itemize}
+
+%% Ozone %%
+\headingsmall{Ozone, \ce{O_3}}
+\begin{itemize} \itemsep -0.5em
+    \item Refers to low altitude ozone
+    \item Strong oxidant that cause \hl{chemical damage} to lung tissue
+        and makes lungs more sensitive to other pollutants/irritants
+    \item Can cause chest pain, coughing and nausea
+    \item Long-term exposure may lead to \hl{permanent structural damage of lungs}
+    \item Damages flora (crops, trees) as well
+    \item From \hl{secondary sources only: photochemical reactions} in the atmosphere,
+        with \ce{NO_X} and VOC (volatile organic compounds) as reactants
+    \item VOC from various sources, such as vehicle exhaust, \hl{fuel/solvent
+        evaporation}, industrial processes, plant emissions
+    \item Control by reducing emissions of reactants \ce{NO_X} and VOCs
+    \item Control by \hl{controlling VOC} through product substitution/
+        reformulation, sorption by activated carbon, better vapour containment, or
+        catalytic oxidation
+\end{itemize}
+
+%% Sulfur Dioxide %%
+\headingsmall{Sulfur Dioxide, \ce{SO_2}}
+\begin{itemize} \itemsep -0.5em
+    \item Highly water soluble, likely to be absorbed by moist surfaces of upper 
+        respiratory tract
+    \item But, can travel deeper into lungs when entrained in particles
+    \item Affects breathing, causes respiratory illnesses, alters defence
+        mechanisms of lungs, aggravates pre-existing symptoms
+    \item Dominant precursor for acid deposition
+    \item From \hl{combustion of sulfur-containing fuels} (for electricity/industry)
+    \item From combustion of high sulfur fuel by vehicles and off-road equipment
+        (minor source)
+    \item Control by \hl{reducing sulfur content} in fuels
+    \item Treating flue gas to remove \ce{SO_2}
+\end{itemize}
+
+%% Particulate Matter %%
+\headingsmall{Particulate Matter, \ce{PM_{10} \& PM_{2.5}}}
+\begin{itemize} \itemsep -0.5em
+    \item Number following `PM' is the `size' of the particle in \ce{\mu m}
+    \item Particle \hl{behaviour dependent on particle size}
+    \item Course particles $> 2.5 \mu \mathrm{m}$ are controlled by mass and
+        inertia, have lifetime of days to weeks before settling or impacting; 
+        therefore, effect mostly on areas near its source
+    \item Ultrafine particles $< 0.1 \mu \mathrm{m}$ readily diffuse and coalesce
+        with other particles; have lifetime of a few days to weeks
+    \item Intermediate particles $0.1 - 2.5 \mu \mathrm{m}$ \hl{too small to settle,
+        too light to impact, too large to diffuse; have lifetime on the order of
+        weeks; can be transported across large distances before depositing}
+    \item Adverse effects on breathing, aggravates pre-existing respiratory and
+        cardiovascular diseases, particularly asthma
+    \item Impairs immune system, mechanical damage to lung tissue
+    \item Major contributor against atmospheric visibility
+    \item From primary sources, for coarse: road dust, construction, industrial,
+        and agricultural emissions
+    \item From primary sources, for fine: industrial emissions, diesel soot from
+        vehicles, wood burning
+    \item From \hl{secondary sources, for fine}: oxidation of hydrocarbons into
+        organics, formation of aerosol salts from \ce{SO_2} and \ce{NO_X}
+    \item Control by filtration mechanisms such as electrostatic precipitation,
+        mechanical filtration
+\end{itemize}
+
+%% Pollutant Standards Index %%
+\headingsmall{Pollutant Standards Index, PSI}
+\begin{center}\begin{tabular}{l|c|c|c}
+    Air Q.  & PSI       & 24-hr \ce{PM_{10}} & 24-hr \ce{SO_2} \\
+    \hline
+    Good    & $0-50$    & $0-50$             & $0-80$          \\
+    Mod.    & $51-100$  & $51-150$           & $81-365$        \\
+    Unh.    & $101-200$ & $151-350$          & $366-800$       \\
+    V. Unh. & $201-300$ & $351-420$          & $801-1600$      \\
+    Hazard. & $301-400$ & $421-500$          & $1601-2100$     \\
+    Hazard. & $401-500$ & $501-600$          & $2101-2620$     \\
+\end{tabular}\end{center}
+\begin{center}\begin{tabular}{l|c|c|c}
+    Air Q.  & PSI       & 8-hr \ce{CO} & 8-hr \ce{O_3} \\
+    \hline
+    Good    & $0-50$    & $0.0-5.0$    & $0-118$       \\
+    Mod.    & $51-100$  & $5.1-10.0$   & $119-157$     \\
+    Unh.    & $101-200$ & $10.1-17.0$  & $158-235$     \\
+    V. Unh. & $201-300$ & $17.1-34.0$  & $236-785$     \\
+    Hazard. & $301-400$ & $34.1-46.0$  & $786-980$     \\
+    Hazard. & $401-500$ & $46.1-57.5$  & $981-1180$    \\
+\end{tabular}\end{center}
+\begin{center}\begin{tabular}{l|c|c|c}
+    Air Q.  & PSI       & 1-hr \ce{NO_2} & 24-hr \ce{PM_{2.5}} \\
+    \hline
+    Good    & $0-50$    & --             & $0-12$              \\
+    Mod.    & $51-100$  & --             & $13-55$             \\
+    Unh.    & $101-200$ & $1130$         & $56-150$            \\
+    V. Unh. & $201-300$ & $1131-2260$    & $151-250$           \\
+    Hazard. & $301-400$ & $2261-3000$    & $251-350$           \\
+    Hazard. & $401-500$ & $3001-3750$    & $251-500$           \\
+\end{tabular}\end{center}
+All measures are in $\mu\mathrm{g/m^3}$, except for \ce{CO} which is in
+$\mathrm{mg/m^3}$.
+$$ I_i = 
+    \frac{I_{i, j+1} - I_{i, j}}{X_{i, j+1} - X_{i, j}} 
+    \cdot (X_i - X_{i,j})
+    + I_{i, j} $$
+\begin{itemize} \itemsep -0.5em
+    \item \hl{Relates health effects} with varying levels of pollution
+    \item Provides \hl{health advisories} to the public on the necessary precautions
+        when pollution levels go into unsafe levels
+    \item Average pollutant concentration is converted into a sub-index, highest
+        sub-index for a region is taken as its PSI
+    \item Monitored through \textit{Telemetric Air Quality Monitoring Network}, 22
+        stations islandwide place according to population density
+\end{itemize}
+
+%% Beach Water Quality %%
+\headingsmall{Beach Water Quality}
+\begin{itemize} \itemsep -0.5em
+    \item Most common pollutant is \hl{faecal pollution}
+    \item From sources such as sewage leaks, decomposition, wildlife, humans, 
+        marine vessels dumping waste, industrial wastes, surface run-off
+    \item Can cause diarrhea, vomiting, respiratory infections, infections of
+        the eyes/ears/nose/skin; or gastroenteritis
+    \item Levels of faecal pollution can be measured by indicators of 
+        coliform bacterial or faecal \textit{streptococci}
+    \item Total coliforms---can occur in human faeces but also naturally e.g. 
+        in soil or submerged wood; therefore not recommended
+    \item Faecal coliforms---a subset of total coliforms more specific to
+        human faeces, but contains genus \textit{Klebsiella} which may also
+        occur naturally e.g. textiles, pulp, and paper mill wastes
+    \item \hl{\textit{E. Coli}}---a species of faecal coliform specific to human
+        and mammal faeces; most specific measure of coliform bacteria; currently
+        recommended by USEPA
+    \item Faecal \textit{streptococci}---generally occur in digestive systems
+        of mammals
+    \item \hl{\textit{Enterococci}}---a genus more human-specific than faecal
+        \textit{streptococci}, previously categorised under the 
+        genus \textit{streptococcus}; currently recommended by USEPA as a
+        indicator for salt water, since these more more \hl{able to survive in
+        salt water environments}
+\end{itemize}
+
+%% Singapore's Recreational Water Guidelines %%
+\headingsmall{Singapore Recreational Water Guidelines}
+\begin{itemize} \itemsep -0.5em
+    \item 95\% of the time, \textit{Entorococcus} counts for the last three years
+        must be less than or equal \hl{200 counts per 100ml}; these are rated 
+        `Good' or better
+    \item Also takes into account susceptibility of the location to faecal influence
+    \item Only `Good' or better beaches are considered suitable for \hl{primary 
+        contact activities}
+    \item Beaches are sampled weekly
+\end{itemize}
+
+%% Hong Kong's Beach Grading System
+\headingsmall{Hong Kong Beach Grading System}
+\begin{center}\begin{tabular}{c|c|c|c}
+Grd & BWQ   & n/100ml                & Ill/1000ppl \\
+\hline
+1   & Good  & $\leq$ 24              & $-$         \\
+2   & Fair  & $24-180$               & $\leq 10$   \\
+3   & Poor  & $181-610$              & $11 - 15$   \\
+4   & V. Pr & $<610$ or last $>1600$ & $> 15$
+\end{tabular}\end{center}
+\begin{itemize} \itemsep -0.5em
+    \item Based on geometric mean of 5 most recent samples, or if last reading
+        very high
+    \item Public advised not to swim in Grade 4 beaches until quality improves
+    \item During bathing season (March to October), beaches monitored at least
+        three times a month, interval between sampling 3 to 14 days
+    \item During non-bathing season (November to February), beaches which
+        remain open still monitored at least three times a month, but other
+        beaches monitored once per month
+\end{itemize}
+
+%% Empirical Tests %%
+\headingsmall{Empirical Tests} are conducted on predictions made (through the
+scientific method), using data\dots
+\begin{itemize} \itemsep -0.5em
+    \item Data---numerical values of physical quantities; \hl{collected through}
+         retrospective studies, observational studies, or designed experiments
+    \item \hl{Retrospective studies}---looks at limited historical records
+    \item Hard to determine a `sole impact', because lack of control over variables
+    \item Independent variable may not have varied historically
+    \item Form of data may not be ideal (want daily, have yearly)
+    \item May not get most relevant data (want diesel vehicles, have all vehicles)
+    \item Overall, difficult to obtain solid and reliable results; hard, if not impossible
+        to conclusively prove causal relationships
+    \item \hl{Observational studies}---observe population of interest with minimal 
+        disturbance
+    \item Usually carried out over a short period of time
+    \item Allows measurements of some variables normally unavailable to retrospective studies
+    \item \hl{Designed experiments}---able to make deliberate changes to independent
+        variables, in order to observe change in dependent variable
+    \item Good control over what to measure, and how
+    \item \hl{Time range to collect} influenced by practicality, periodic trends 
+        (e.g. seasonal), relevance to current conditions (e.g. data from 1900s vs 2000s)
+    \item \hl{Type of data chosen} influenced by relevance (e.g. rainfall near 
+        \textit{E. Coli} sampling sites); can include control measurements
+    \item Generally, three factors leading to \hl{invalidation} of data
+    \item \hl{Measurement}---such as counting errors, contamination
+    \item \hl{Sampling}---such as proximity of rainfall station, sample representative 
+        \textit{E. Coli} samples of the whole beach, using outdated data
+    \item \hl{Operationalise}---such as choosing 12h, 24h, 48h, or 96h rainfall
+    \item Followed by modelling, analysis, and critical thinking (e.g. examine assumptions
+        made)
+\end{itemize}
+
+%% Probability %%
+\headingsmall{Probability}
+\begin{itemize} \itemsep -0.5em
+    \item Relative frequency of an outcome settles down to one value over the long run
+    \item The one value is then the probability of that outcome
+\end{itemize}
+
+%% Basic Statistics %%
+\headingsmall{Basic Statistics}
+\begin{itemize} \itemsep -0.5em
+    \item Presents data economically
+    \item Set of numbers to summarise data and its characteristics
+    \item Three types: \hl{Measures of central tendency, dispersion
+        and asymmetry}
+    \item Central tendency---a value that many systems tend to cluster
+        around; can be taken as being \hl{representative of data collected}
+    \item Sample arithmetic mean---strongly \hl{influenced by outliers}
+    \item Median---also the $50^{\mathrm{th}}$ percentile; less sensitive
+         to outliers (although $95^{\mathrm{th}}$ percentile is 
+        \textit{more} sensitive to outliers
+    \item Geometric mean---less sensitive to outliers, always $\leq$ the
+        arithmetic mean; used in averaging values that represent 
+        rate of change
+    \item Mode---most frequently occurring values, can be more than one
+    \item A. Mean $=$ Median $\implies$ symmetrical distribution; other
+        direction not always true
+    \item Range---extremely susceptible to outliers $\implies$ mainly
+        used for small $n$
+    \item Interquartile range---difference of the $1^\mathrm{st}$ and
+        $3^\mathrm{rd}$ percentile; more resistant to outliers
+    \item Variance ($s^2/\sigma^2$) and standard deviation ($s/\sigma$)
+        ---sensitive to extreme values
+    \item Data can be considered to be \hl{dispersed if \textit{coefficient of 
+        variation} $>$ 1}
+\end{itemize}
+
+%% Graphical Methods %%
+\headingsmall{Graphical Methods}
+\begin{itemize} \itemsep -0.5em
+    \item Dotplot---good for small pool of data, for spotting unusual data points,
+        bad for spotting dispersion pattern
+    \item Boxplot---good for highlighting distribution features, for comparing
+        data measuring related or similar characteristics; box shows $1^\mathrm{st}$,
+     $2^\mathrm{nd}$ and $3^\mathrm{rd}$ quartiles, whiskers to first data point
+        within 1.5 IQR of box borders, rest are outliers
+    \item Histogram---good for observing shape of distribution, central tendency and scatter,
+        for guessing type of probability distribution, bad for small bin size;
+        \hl{recommended number of bins is $\sqrt{n}$}, traditionally bottom 
+        inclusive and top exclusive (but reversed for excel)
+    \item Data points can be considered to be \hl{outliers if outside 
+        $[\bar x-3s, \bar x+3s]$}
+    \item Skew---a measure of symmetry; positive indicates right skew, tail to the right,
+        negative indicates left skew, tail to the left; zero is symmetrical
+    \item Time series---a plot of data against time, since time may be an important
+        factor in variability; can \hl{compare trends in mean and dispersion} through time
+\end{itemize}
+
+%% Other Statistical Terms %%
+\headingsmall{Other Statistical Terms}
+\begin{itemize} \itemsep -0.5em
+    \item Variability---can be higher-end, lower-end
+    \item Sampling---choosing subset of population to characterise 
+        properties of population
+    \item Sample space---all possible outcomes
+    \item Event---subset of the sample space
+    \item Outliers---data that do not seem to conform to distribution
+        of the rest of the data; due to errors in data collection 
+        \textit{(above)}
+\end{itemize}
+
+%% Formulas %%
+\headingsmall{Formulas} \\[5pt]
+% Percentile
+{
+% Reduce before and after between equations
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\textbf{Percentile Calculations}
+    \begin{IEEEeqnarray*}{rCl}
+    \mathrm{Percentile\ Rank,\ r} &=&
+        1 + p\ (n-1) \\
+    \mathrm{p^{th}\ percentile} &=&
+        (1 - (r\ \mathrm{mod}\ 1))\ X_{\mathrm{int}(r)}\ + \\
+        && \mathrm{int}(r) \cdot X_{\mathrm{int}(r)+1}
+    \end{IEEEeqnarray*}
+\textbf{Basic Probability}
+    \begin{IEEEeqnarray*}{rCCCl}
+    E_1\ & \mathrm{OR}   &\ E_2 &=& E_1 \cup E_2 \\
+    E_1\ & \mathrm{AND}  &\ E_2 &=& E_1 \cap E_2 \\
+         & \mathrm{NOT}  &\ E   &=& E'
+    \end{IEEEeqnarray*}
+    \begin{IEEEeqnarray*}{rCl}
+    \mathrm{P}(B|A) &=& 
+        \frac{\mathrm{P}(A\cap B)}{\mathrm{P}(A)}
+    \end{IEEEeqnarray*}
+\textbf{Mutual Exclusitivity}
+    \begin{IEEEeqnarray*}{rrCl}
+    \mathrm{if}  & E_1 \cap E_2 &=& 0 \\
+    \mathrm{then}&\  \mathrm{P}(E_1 \cup E_2) &=&
+        \mathrm{P}(E_1) + \mathrm{P}(E_2) \\
+    \mathrm{and} & \mathrm{P}(E_1 \cap E_2) &=& 0
+    \end{IEEEeqnarray*} 
+\textbf{Independence}
+    \begin{IEEEeqnarray*}{rCl}
+        &&     \mathrm{E_1\ and\ E_2\ are\ independent} \\
+        &\iff& \mathrm{P}(E_1|E_2) = \mathrm{P}(E_1) \\
+        &\iff& \mathrm{P}(E_2|E_1) = \mathrm{P}(E_2) \\
+        &\iff& \mathrm{P}(E_1 \cap E_2) =
+                \mathrm{P}(E_1)\mathrm{P}(E_2)
+    \end{IEEEeqnarray*}
+\textbf{Basic Statistics}
+    \begin{IEEEeqnarray*}{rCl}
+        \bar x_a &=& \frac{1}{n}(x_1 + x_2 + \cdots + x_n) \\
+                 &=& \frac{1}{n}\sum^n_{i=1}x_i \\
+        \bar x_g &=& \sqrt[n]{x_1 \cdot x_2 \cdot \cdots x_n} \\
+                 &=& \left ( \prod^n_{i=1} x_i \right )^{\frac{1}{n}}
+    \end{IEEEeqnarray*}
+    \begin{IEEEeqnarray*}{rCl}
+        s^2 &=& \frac{1}{(n-1)}\sum^n_{i=1}(x_i - \bar x)^2 \\
+              &=& \frac{1}{(n-1)} 
+        \left [
+            \sum^n_{i=1} x_i^2 
+                - \frac{\left ( \sum^n_{i=1} x_i \right )^2}{n}
+        \right ]
+    \end{IEEEeqnarray*}
+    \begin{IEEEeqnarray*}{C}
+        \mathrm{CV} = \frac{s}{\bar x} \times 100\%\ 
+        \mathrm{or}\ \frac{\sigma}{\mu} \times 100\%
+    \end{IEEEeqnarray*}
+}
+
+\end{multicols*}
+\end{document}
