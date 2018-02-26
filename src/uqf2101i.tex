@@ -468,9 +468,11 @@ scientific method), using data\dots
     \begin{IEEEeqnarray*}{rCl}
     \mathrm{Percentile\ Rank,\ r} &=&
         1 + p\ (n-1) \\
-    \mathrm{p^{th}\ percentile} &=&
-        (1 - (r\ \mathrm{mod}\ 1))\ X_{\mathrm{int}(r)}\ + \\
-        && \mathrm{int}(r) \cdot X_{\mathrm{int}(r)+1}
+    \end{IEEEeqnarray*}
+    \begin{IEEEeqnarray*}{rCl}
+    \mathrm{p^{th}\ percentile} =
+        (1 - && (r\ \mathrm{mod}\ 1))\     X_{\mathrm{int}(r)}\ + \\
+             && (r\ \mathrm{mod}\ 1) \cdot X_{\mathrm{int}(r)+1}
     \end{IEEEeqnarray*}
 \textbf{Basic Probability}
     \begin{IEEEeqnarray*}{rCCCl}
