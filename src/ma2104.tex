@@ -1,0 +1,324 @@
+\documentclass{article}
+
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+\usepackage{multicol}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{IEEEtrantools}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{color, soul}  % enable highlighting
+                          % note: does not work with \ce{}
+
+\newcommand{\headingsmall}[1]{{\small\textbf{#1}}}
+\def\*#1{\vec{#1}}
+\begin{document}
+\setlength{\parskip}{0pt}
+\scriptsize                % Small fonts
+\pagenumbering{gobble}     % No page numbers
+\setlength\parindent{0pt}  % No indents at start of paragraphs
+
+% BODY %
+\begin{multicols*}{4}
+
+\headingsmall{Vectors}
+
+${\*u}= \langle u_1, u_2, u_3 \rangle$
+${\*v}= \langle v_1, v_2, v_3 \rangle$
+${\*w}= \langle w_1, w_2, w_3 \rangle$
+
+$c\in\mathbb{R}$,
+$\theta$ be the angle between $\*u$ and $\*v$
+
+$\|{\*u}\|=\sqrt{{u_1}^2+{u_2}^2+{u_3}^2}$
+
+\textbf{Theorem 1.} $\text{If } \*v \neq 0, \text{unit vector}, {\*u}=\frac{\*v}{\|{\*v}\|}$
+
+$\*u\cdot\*v=u_1v_1+u_2v_2+u_3v_3$
+
+\textbf{Theorem 2.} Properties of Dot Product
+\begin{itemize}[nosep]
+	\item $\*u\cdot\*v=\*v\cdot\*u$
+	\item $\*u\cdot(\*v+\*w)=\*u\cdot\*v+\*u\cdot\*w$
+	\item $(c\*u)\cdot\*v=c(\*u\cdot\*v)=\*u\cdot(c\*v)$
+	\item $\*0\cdot\*u=0$
+	\item $\*u\cdot\*u=\|\*u\|^2$
+\end{itemize}
+
+\hl{\textbf{Theorem 3.} $\*u\cdot\*v=\|\*u\|\|\*v\|\cos\theta$}
+
+\textbf{Theorem 4.} $\*u\text{ and } \*v \text{ are orthogonal iff }\*u\cdot\*v=0$
+
+\textbf{Component \& Projection}
+
+\centerline{\hl{$\text{comp}_{\*u}\*v=\|\*v\|\cos\theta=\frac{\*v\cdot\*u}{\|\*v\|}$}}\centerline{\hl{$\text{proj}_{\*u}\*v$}=$\text{comp}_{\*u}\*v\times\frac{\*v}{\|\*v\|}=\left(\frac{\*v\cdot\*u}{\|\*v\|}\right)\frac{\*v}{\|\*v\|}=$\hl{$\frac{\*v\cdot\*u}{\|\*v\|^2}\*v$}}
+\textbf{Cross Product}
+
+$\*u\times\*v=\langle (u_2v_3-u_3v_2),-(u_1v_3-u_3v_1),(u_1v_2-u2v_1)\rangle$\\
+\textbf{Theorem 5.} $\*u\times\*v$ is orthogonal to both $\*u \text{ and } \*v$
+
+\textbf{Theorem 6.} Properties of Cross Product
+\begin{itemize}[nosep]
+	\item $\*u\times\*v=-\*v\times\*u$
+	\item $(c\*u)\times\*v=c(\*u\times\*v)=\*u\times(c\*v)$
+	\item $\*u\times(\*v+\*w)=\*u\times\*v+\*u\times\*w$
+	\item $(\*u+\*v)\times\*w=\*u\times\*w+\*v+\*w$
+\end{itemize}
+\hl{\textbf{Theorem 7.} $\|\*u\times\*v\|=\|\*u\|\|\*v\|\sin\theta$}
+
+Area of parallelogram is given by $\|\*u\times\*v\|$
+
+Distance from point Q to the line through P and R is
+\centerline{$\|\overrightarrow{PQ}\|\sin\theta=\frac{\|\overrightarrow{PQ}\times\overrightarrow{PR}\|}{\|\overrightarrow{PR}\|}$}
+\textbf{Scalar Triple Product}
+
+Volume of the parallelepiped is $|\*u\cdot(\*v\times\*w)|$
+
+if \hl{$\*u\cdot(\*v\times\*w)=0$} then $\*u,\*v \text{ and }\*w$ are coplanar
+
+\headingsmall{Lines and Planes}
+
+\textbf{Lines}
+\begin{itemize}[nosep]
+	\item A point on the line $L$, $P_0(x_0,y_0,z_0)$
+	\item A vector $\*v$ parallel to the line $L$
+\end{itemize}
+Vector equation of $L$: \hl{$\*r=\*r_0+t\*v, t\in\mathbb{R}$}
+
+\textbf{Theorem 8.} Parametric Equation of Line
+
+$x=x_0+at, y=y_0+bt, z=z_0+ct, t\in\mathbb{R}$
+
+Lines are parallel; intersecting; or skew
+
+\textbf{Planes}
+\begin{itemize}[nosep]
+	\item A point on the plane, $P_0(x_0,y_0,z_0)$
+	\item A vector $\*n$ perpendicular to the plane
+\end{itemize}
+\textbf{Theorem 9.} Vector equation of plane: $\*n\cdot\*r=\*n\cdot\*r_0$
+
+\textbf{Theorem 10.} Linear equation of Plane:
+
+$ax+by+cz=d, \text{where } d=ax_0+by_0+cz_0$
+
+Angle between planes: dot product of normals
+
+\hl{Shortest distance between planes}: $\|\text{comp}_{\*n}\*u\|$, where $\*u$ is a vector from a point on the first plane to a point on the other plane
+
+\vfill\null
+\columnbreak
+
+\headingsmall{Vector-valued function}$\*r(t)=\langle f(t), g(t), h(t) \rangle$
+
+Derivative (rate of change) of $\*r(t)$ at $t=a$ defined by 
+\centerline{$\*r'(a)=\lim\limits_{\Delta t\to0} \frac{\*r(a+\Delta t)-\*r(a)}{\Delta t}$}
+
+$\*r'(a)$ is a tangent vector to to curve at $t=a$, 
+
+\hl{\textbf{Theorem 11.} $\*r'(a)=\langle f'(a),g'(a),h'(a)\rangle$}\\
+\textbf{Theorem 12.} Derivative Rules
+\begin{itemize}[nosep]
+	\item $\frac{d}{dt}(\*r(t)+\*s(t))=\*r'(t)+\*s'(t)$
+	\item $\frac{d}{dt}(c\*r(t))=c\*r'(t)$
+	\item $\frac{d}{dt}f(t)\*r(t)=f'(t)\*r(t)+f(t)\*r'(t)$
+	\item $\frac{d}{dt}\*r(t)\cdot\*s(t)=\*r'(t)\cdot\*s(t)+\*r(t)\cdot\*s'(t)$
+	\item $\frac{d}{dt}(\*r(t)\times\*s(t))=\*r'(t)\times\*s(t)+\*r(t)\times\*s'(t)$
+\end{itemize}
+
+\textbf{Theorem 13.} Arc Length Formula from $t=a$ to $t=b$
+
+s = $\int_a^b \sqrt{f'(t)^2+g'(t)^2+h'(t)^2} dt=$ \hl{$\int_a^b \|\*r'(t)\|dt$}
+
+\headingsmall{Functions of Two Variables} $z=f(x,y)$
+
+Level surface: $f(x,y)=k$ for some constant $k$
+
+Cylinder definition: A surface is a cylinder if there is a plane P s.t. all the planes parallel to P intersect the surface in the same curve
+
+Quadric surface: graph of a second-degree equation in three variables
+
+$Ax^2+By^2+Cz^2+J=0$ or $Ax^2+By^2+Iz=0$
+\begin{center}
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|l|c|}	
+	\hline
+    Equation  & Surface (z-axis symmetry)\\\hline
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}=\frac{z}{c}$ & Elliptic paraboloid   \\\hline
+    $\frac{x^2}{a^2}-\frac{y^2}{b^2}=\frac{z}{c}$ & Hyperbolic paraboloid \\\hline
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1$ & Ellipsoid \\\hline
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=0$ & Elliptic cone \\\hline
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1$ & Hyperboloid of one sheet\\\hline
+    $\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=-1$ & Hyperboloid of two sheets\\\hline
+\end{tabular}\end{center}
+\headingsmall{Functions of Three variables} $w=f(x,y,z)$
+
+Level surface: $f(x,y,z)=k$ for some constant $k$
+
+\includegraphics[width=25mm]{ellip-para}
+\includegraphics[width=30mm]{hyper-para}
+\includegraphics[width=20mm]{ellip}
+\includegraphics[width=20mm]{ellip-cone}
+\includegraphics[width=20mm]{hyper-one}
+\includegraphics[width=20mm]{hyper-two}
+
+\vfill\null
+\columnbreak
+
+\headingsmall{Limits}
+
+\textbf{Theorem 14.} Definition of Limit
+
+Limit of $f(x,y)$ as $(x,y)$ approaches $(a,b)$ is $L\in\mathbb{R}$,
+\centerline{$\lim\limits_{(x,y)\to(a,b)}f(x,y)=L$}
+if for any $\epsilon>0$, there exists a $\delta > 0$ s.t.
+
+$|f(x,y)-L|<\epsilon$ when $0<\sqrt{(x-a)^2+(y-b)^2}<\delta$
+
+\textbf{Remarks:}
+\begin{itemize}[nosep]
+	\item $f$ need not be defined at $(a,b)$
+	\item L is unique and independent of the choice of the path approaching $(a,b)$
+\end{itemize}
+
+\textbf{Theorem 15.} Showing limit does not exist
+\begin{itemize}[nosep]
+	\item If $f(x,y)$ approaches $L_1$ as $(x,y)$ approaches $(a,b)$ along a path $P_1$,
+	\item if $f(x,y)$ approaches $L_2$ as $(x,y)$ approaches $(a,b)$ along a path $P_2$,
+	\item and $L_1 \neq L_2$, then limit does not exist	
+\end{itemize}
+\hl{\textbf{Some paths to try}}
+\begin{itemize}[nosep]
+	\item $x=a,y\to b$
+	\item $y=b,x\to a$
+	\item $x=g(y),y\to b$ where $g(y)$ is some simple function s.t. $g(b)=a$
+	\item $y=g(x),x\to a$ where $g(x)$ is some simple function s.t. $g(a)=b$
+\end{itemize}
+To show limit exists: 
+
+\textbf{Theorem 16/17.} Limit Theorems
+
+\mbox{$\lim\limits_{(x,y)\to(a,b)}(f(x,y)\pm g(x,y))=\lim\limits_{(x,y)\to(a,b)}f(x,y)\pm \lim\limits_{(x,y)\to(a,b)}g(x,y)$}
+
+\mbox{$\lim\limits_{(x,y)\to(a,b)}f(x,y)g(x,y)=\left(\lim\limits_{(x,y)\to(a,b)}f(x,y)\right)\left(\lim\limits_{(x,y)\to(a,b)}g(x,y)\right)$}
+
+\mbox{$\lim\limits_{(x,y)\to(a,b)}\frac{f(x,y)}{g(x,y)}=\frac{\lim_{(x,y)\to(a,b)}f(x,y)}{\lim_{(x,y)\to(a,b)}g(x,y)}$, provided $\lim\limits_{(x,y)\to(a,b)}g(x,y)\neq 0$}
+
+\textbf{Theorem 18.} Squeeze
+
+Suppose that \hl{$|f(x,y)-L|\leq g(x,y)$} for all $(x,y)$ in the interior of some circle centered at $(a,b)$, except possibly at $(a,b)$.
+
+\centerline{If $\lim\limits_{(x,y)\to(a,b)}g(x,y)=0$, then $\lim\limits_{(x,y)\to(a,b)}f(x,y)=L$}
+
+\headingsmall{Continuity}
+
+\textbf{Theorem 19.} Definition of Continuity
+
+$f$ is continuous at $(a,b)$ if $\lim\limits_{(x,y)\to(a,b)}f(x,y)=f(a,b)$
+
+\textbf{Theorem 20.} Continuity Theorems
+
+If $f(x,y)$ and $g(x,y)$ are continuous at $(a,b)$, then $f\pm g, f\cdot g, \frac{f}{g}$ are all continuous at $(a,b)$, provided $g(a,b)\neq 0$
+
+\textbf{Theorem 21.} Continuity and Composition
+
+Suppose $f(x,y)$ is continuous at $(a,b)$ and $g(x)$ is continuous at $f(a,b)$. Then $h(x,y) = (g\circ f)(x,y) = g(f(x,y))$ is continuous at (a,b)
+
+\headingsmall{Partial Derivatives}
+
+\textbf{Definition}
+
+If $f$ is a function of two variables, its partial derivatives are the functions $f_x$ and $f_y$ defined by:
+
+\centerline{\hl{$f_x(x,y)=\lim\limits_{h\to0}\frac{f(x+h,y)-f(x,y)}{h}$,}}
+\centerline{\hl{$f_y(x,y)=\lim\limits_{h\to0}\frac{f(x,y+h)-f(x,y)}{h}$}}
+
+$f_{xy}$ means we first differentiate with respect to x and then with respect to y
+
+\textbf{Clairaut's Theorem}
+
+Suppose f is defined on a disk $D$ that contains $(a,b)$. If the functions $f_{xy}$ and $f_{yx}$ are both continuous on $D$, then
+\centerline{$f_{xy}(a,b)=f_{yx}(a,b)$}
+
+\vfill\null
+\columnbreak
+
+\textbf{Tangent Planes}
+
+The tangent plane to the surface $S$ at the point $P$ is defined to be the plane that contains both tangent lines $T_1$ and $T_2$.
+
+\centerline{$\*v_1= \langle 1,0,f_x(a,b) \rangle $}
+\centerline{$\*v_2= \langle 0,1,f_y(a,b) \rangle $}
+\centerline{$\*n = \*v_1\times\*v_2=\langle f_x(a,b),f_y(a,b),-1 \rangle$}
+
+Point on plane: $x=a, y=b, z=f(a,b)$
+
+Equation of plane: 
+
+\centerline{\hl{$f_x(a,b)(x-a)+f_y(a,b)(y-b)-(z-f(a,b))=0$}}
+\centerline{or}
+\centerline{\hl{$z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$}}
+
+\textbf{Definition of Increment}
+
+\centerline{\hl{$\Delta z=f(a+\Delta x,b+\Delta y)-f(a,b)$}}
+
+\textbf{Definition of differentiability}
+
+Let $z=f(x,y)$. $f$ is differentiable at $(a,b)$ if we can write
+
+\centerline{\hl{$\Delta z=f_x(a,b)\Delta x+f_y(a,b)\Delta y + \epsilon _1 \Delta x+\epsilon _2 \Delta y$}}
+
+where $\epsilon _1$ and $\epsilon _2$ are functions of $\Delta x$ and $\Delta y$ and \hl{$\epsilon _1,\epsilon _2 \to 0$ as $(\Delta x,\Delta y)\to(0,0)$.}
+
+\textbf{Linear approximation}
+
+\centerline{$f(a+\Delta x,b+\Delta y, c+\Delta z)\approx$}
+\centerline{\hl{$f(a,b,c)+f_x(a,b,c)\Delta x+f_y(a,b,c)\Delta y+f_z(a,b,c)\Delta z$}}
+
+\vfill\null
+\columnbreak
+
+\textbf{QM-AM-GM-HM inequality(for squeeze)}
+
+$\sqrt{\frac{x^2+y^2}{2}}\geq \frac{x+y}{2} \geq \sqrt{xy} \geq \frac{2}{\frac{1}{x}+\frac{1}{y}}$
+
+\textbf{Trigonometric identities}
+\begin{center}
+\begin{tabular}{c c}	
+    $\tan(x)=\frac{\sin(x)}{\cos(x)}$ & $\cot(x)=\frac{1}{\tan(x)}$\\
+    $\sec(x)=\frac{1}{\cos(x)}$ & $\csc(x)=\frac{1}{\sin(x)}$  \\
+    $\sin^2(x)+\cos^2(x)=1$ & \\
+    $\sec^2(x)=1+\tan^2(x)$ &  $\csc^2(x)=1+\tan^2(x)$\\
+    $\sin(2x)=2\sin(x)\cos(x)$ & $\cos(2x)=1-2\sin^2(x)$\\
+    $\cos(2x)=2\cos^2(x)-1$& $\cos(2x)=\cos^2(x)-\sin^2(x)$\\
+    $\sin(x\pm y)=\sin(x)\cos(y)\pm\cos(x)\sin(y)$\\
+    $\cos(x\pm y)=\cos(x)\cos(y) \mp\sin(x)sin(y)$\\
+    $\tan(x\pm y)=\frac{\tan(x)\pm\tan(y)}{1\mp\tan(x)\tan(y)}$\\
+\end{tabular}
+\end{center}
+
+\textbf{Derivatives}
+
+$\frac{d}{dx}(\ln(kx))=\frac{1}{x}$
+
+$\frac{d}{dx}(e^{kx})=ke^{kx}$
+
+$\frac{d}{dx}(\sin(kx))=k\cos(x)$
+
+$\frac{d}{dx}(\cos(kx))=-k\sin(x)$
+
+$\frac{d}{dx}(\tan(kx))=k\sec^2(kx)$
+
+$\frac{d}{dx}(\csc(x))=-\csc(x)\cot(x)$
+
+$\frac{d}{dx}(\sec(x))=\sec(x)\tan(x)$
+
+$\frac{d}{dx}(\cot(x))=-\csc^2(x)$
+
+
+\end{multicols*}
+\end{document}
