@@ -1,0 +1,122 @@
+\documentclass[a4paper]{article}
+
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{IEEEtrantools}
+
+\newcommand{\heading}[1]{{\small\textbf{#1}}}
+\newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
+
+\begin{document}
+
+\scriptsize                         % Small fonts
+\pagenumbering{gobble}              % No page numbers
+\setlength\parindent{0pt}           % No indents at start of paragraphs
+\setlength{\abovedisplayskip}{3pt}  % Less spacing before equations
+\setlength{\belowdisplayskip}{3pt}  % less spacing after equations
+
+% TITLE %
+\begin{center}
+{\large UQF2101I Cheatsheet}\\{for test 2, by ning}
+\end{center}
+
+% BODY %
+\begin{multicols*}{4}
+
+%% Learning Objectives %%
+\heading{Learning Objectives}
+\begin{itemize} \itemsep -0.5em
+    % WEEKS 4 TO 7
+    % COVERS FROM PROBABILITY DISTRIBUTIONS 
+    %   TO HYPOTHESIS TESTING, INCLUSIVE
+    % WEEK 4 CLASS 2
+    \item Random variables
+    \item Distribution of probabilities
+    \item Taking expectation, $\mathrm{E}$---mean and variance
+    \item Normal distribution \& derived distributions
+\end{itemize}
+
+%% Random variables %%
+\heading{Random variables \& their distributions}
+\begin{itemize} \itemsep -0.5em
+    \item Variable that can take on one or more values, each of them
+        associated with a probability
+    \item Can be discrete or continuous
+    \item Discrete random variables are described by a probability mass
+        function
+    \item Continuous random variables are described by a probability
+        density function
+    \item The area under a probability distribution function (PDF) is 
+        always 1, i.e. $$\int^{\infty}_{-\infty} P(x)\ dx = 1$$
+    \item The mean, $\mu$ of a PDF is its central tendency; its variance
+        is its variability, or dispersion about the mean.
+
+        For discrete random variables,
+        \begin{align*}
+            \mu &= \sum_{i=1}^n x_i \cdot f(x_i) \\
+            \sigma^2 &= \sum_{i=1}^n
+                (x_i - \mu)^2 \cdot f(x_i)
+        \end{align*}
+
+        For continuous random variables,
+        \begin{align*}
+            \mu &= \int^\infty_{-\infty} x \cdot f(x)\ dx \\
+            \sigma^2 &= \int^\infty_{-\infty} (x - \mu)^2 \cdot f(x)\ dx
+        \end{align*}
+\end{itemize}
+
+%% Expectation operator%%
+\heading{Expectation operator}
+\begin{itemize} \itemsep -0.5em
+    \item First, note that the mean and variance produce a single number
+        from many outcomes using a weighted average
+    \item Intuitively, the taking the expected value is a similar
+        process of finding a weighted average
+    
+        Some basic properties of the expectation operator, $\mathrm{E}$,
+        for constants $a$, $b$, and random variable $X$,
+        \begin{align*}
+            \mathrm{E}(b) &= b\\
+            \mathrm{E}(aX + b) &= a\mathrm{E}(X) + b\\
+            \mathrm{E}(\mathrm{g}(X)) &\neq \mathrm{g}(\mathrm{E}(X))
+        \end{align*}
+\end{itemize}
+
+%% Normal distribution%%
+\heading{Normal distribution}
+\begin{itemize} \itemsep -0.5em
+    \item Typically notated as $X\sim N(\mu,\ \sigma^2)$; $X$ is a random
+        variable that is normally distribution with mean $\mu$ and
+        variance $\sigma^2$
+    \item The standard normal distribution, $Z$ is defined as
+        $$ Z = \frac{X - \mu}{\sigma} \implies Z\sim N(0,\ 1) $$
+        and has a shorthand $P(Z \leq z) = \Phi(z)$
+\end{itemize}
+
+%% Other distributions %%
+\heading{Derived distributions}\\
+The normal distribution is used as a basis to generate other important 
+distributions\\
+
+\subheading{Log-normal distribution}\\
+If $Y = \mathrm{ln}(X)$, where $Y\sim N(\lambda,\ \xi^2)$, then X is
+log-normally distributed with mean $\mu$ and variance $\sigma^2$,
+\begin{align*}
+    X       &\sim \text{Lognormal}(\mu,\ \sigma^2)\\
+    \lambda &= \mathrm{ln}\ \mu - \frac{1}{2}\ \xi^2\\
+    \xi^2   &= \mathrm{ln}\left ( 1 + \frac{\sigma^2}{\mu^2} \right )
+\end{align*}
+
+\subheading{Chi-square ($\chi^2$)}\\
+If $X = Z^2$, where $Z$ is the standard normal, i.e. $Z\sim N(0,\ 1)$,
+then X is chi-square ($\chi^2$) distributed. The $\chi^2$ distribution
+has an additional parameter $k$, the degree of freedom.
+
+% TODO: GC column
+% TODO: consider an 'examples' column
+
+\end{multicols*}
+\end{document}
