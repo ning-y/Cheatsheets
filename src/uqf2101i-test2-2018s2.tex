@@ -28,15 +28,24 @@
 
 %% Learning Objectives %%
 \heading{Learning Objectives}
+% WEEKS 4 TO 7
+% COVERS FROM PROBABILITY DISTRIBUTIONS 
+%   TO HYPOTHESIS TESTING, INCLUSIVE
 \begin{itemize} \itemsep -0.5em
-    % WEEKS 4 TO 7
-    % COVERS FROM PROBABILITY DISTRIBUTIONS 
-    %   TO HYPOTHESIS TESTING, INCLUSIVE
     % WEEK 4 CLASS 2
     \item Random variables
     \item Distribution of probabilities
     \item Taking expectation, $\mathrm{E}$---mean and variance
     \item Normal distribution \& derived distributions
+    % WEEK 5 CLASS 1
+    \item Data transformations in its distribution
+    \item Linear combinations of random variables
+    % WEEK 5 CLASS 2 no class due to PH
+    % WEEK 6 CLASS 1
+    \item Inferring about a population from a sample
+    \item Functions of sample data---statistics \& point estimators
+    \item Sampling distributions
+    \item Interval estimators
 \end{itemize}
 
 %% Random variables %%
@@ -88,22 +97,23 @@
 %% Normal distribution%%
 \heading{Normal distribution}
 \begin{itemize} \itemsep -0.5em
-    \item Typically notated as $X\sim N(\mu,\ \sigma^2)$; $X$ is a random
-        variable that is normally distribution with mean $\mu$ and
-        variance $\sigma^2$
+        \item Typically notated as $X\sim \mathrm{N}(\mu,\ \sigma^2)$;
+        $X$ is a random variable that is normally distribution with 
+        mean $\mu$ and variance $\sigma^2$
     \item The standard normal distribution, $Z$ is defined as
-        $$ Z = \frac{X - \mu}{\sigma} \implies Z\sim N(0,\ 1) $$
+        $$Z = \frac{X - \mu}{\sigma} \implies Z\sim \mathrm{N}(0,\ 1)$$
         and has a shorthand $P(Z \leq z) = \Phi(z)$
 \end{itemize}
 
 %% Other distributions %%
 \heading{Derived distributions}\\
 The normal distribution is used as a basis to generate other important 
-distributions\\
+distributions.\\
 
 \subheading{Log-normal distribution}\\
-If $Y = \mathrm{ln}(X)$, where $Y\sim N(\lambda,\ \xi^2)$, then X is
-log-normally distributed with mean $\mu$ and variance $\sigma^2$,
+If $Y = \mathrm{ln}(X)$, where $Y\sim \mathrm{N}(\lambda,\ \xi^2)$, 
+then X is log-normally distributed with mean $\mu$ and variance 
+$\sigma^2$,
 \begin{align*}
     X       &\sim \text{Lognormal}(\mu,\ \sigma^2)\\
     \lambda &= \mathrm{ln}\ \mu - \frac{1}{2}\ \xi^2\\
@@ -111,9 +121,69 @@ log-normally distributed with mean $\mu$ and variance $\sigma^2$,
 \end{align*}
 
 \subheading{Chi-square ($\chi^2$)}\\
-If $X = Z^2$, where $Z$ is the standard normal, i.e. $Z\sim N(0,\ 1)$,
-then X is chi-square ($\chi^2$) distributed. The $\chi^2$ distribution
-has an additional parameter $k$, the degree of freedom.
+If $X = Z^2$, where $Z$ is the standard normal, i.e. 
+$Z\sim \mathrm{N}(0,\ 1)$, then X is chi-square ($\chi^2$) distributed.
+The $\chi^2$ distribution has an additional parameter $k$, the degree of
+freedom. \\
+
+%% Data transformations %%
+\heading{Data transformations}
+\begin{itemize} \itemsep -0.5em
+    \item If the data is asymmetric, or has significant outliers, it may
+        be useful to re-express the data in other terms
+    \item This makes the data `normal' and more easily understandable
+    \item Still, when reporting results, we often report in terms of the
+        original expression
+    \item Some common transformations are,
+
+    \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Observation} & \textbf{Transformation} \\
+    \hline
+    Strong positive skew & $\mathrm{ln}\ X$ \\
+    Moderate positive skew & $\sqrt{X} $ \\
+    Moderate negative skew & $\sqrt{K-X} $ \\
+    Strong negative skew & $\mathrm{ln}\ (K-X) $ \\
+    \hline
+    \end{tabular}
+
+    where $K = \mathrm{max} + 1$
+\end{itemize}
+
+%% Linear combinations %%
+\heading{Linear combinations}
+\begin{itemize} \itemsep -0.5em
+    \item The linear combination of random variables is a random
+        variable
+    \item In particular, if $X_1\sim \mathrm{N}(\mu_1,\ {\sigma_1}^2)$
+        and $X_2\sim \mathrm{N}(\mu_2,\ {\sigma_2}^2)$; and $X_1$, 
+        $X_2$ are independent, then for $Y = a_1X_1 + a_2X_2$,
+        $$Y \sim \mathrm{N}(a_1\mu_1 + a_2\mu_2,\ 
+            {a_1}^2{\sigma_1}^2 + {a_2}^2{\sigma_2}^2)$$
+    \item However, if $X_1$ and $X_2$ are not normally distributed,
+        their linear combination $Y$ may not always be linearly
+        distributed
+    \item Nonetheless, we can still obtain the mean and variance for
+        linear combinations of random variables of any distributions,
+        \begin{align*}
+            Y &= a_1X_1 + a_2X_2\\
+            \mu_Y &= a_1\mathrm{E}(X_1) + a_2\mathrm{E}(X_2) \\
+            {\sigma_Y}^2 &= \mathrm{E}((Y-\mu_Y)^2) \\
+                &= {a_1}^2\mathrm{E}((X_1-\mu_q)^2) \\
+                &+\ {a_2}^2\mathrm{E}((X_2-\mu_2)^2)\\
+                &+\  2a_1a_2\mathrm{E}(X_1-\mu_1)(X_2-\mu_2)
+        \end{align*}
+        Note that the last term is the covariance, and the covariance 
+        $=0$ if $X_1$ and $X_2$ are independent
+\end{itemize}
+\subheading{Central limit theorem}
+\begin{itemize} \itemsep -0.5em
+    \item The sum of a large number of identical and independent random
+        variables has an approximately normal distribution
+    \item Rule of thumb for `large number': $n \geq 30$
+\end{itemize}
+
+%%
 
 % TODO: GC column
 % TODO: consider an 'examples' column
