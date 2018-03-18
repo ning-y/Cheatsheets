@@ -41,11 +41,15 @@
     \item Data transformations in its distribution
     \item Linear combinations of random variables
     % WEEK 5 CLASS 2 no class due to PH
-    % WEEK 6 CLASS 1
+    % WEEK 6 CLASS 1, CLASS 2
     \item Inferring about a population from a sample
     \item Functions of sample data---statistics \& point estimators
     \item Sampling distributions
     \item Interval estimators
+    % RECESS WEEK %
+    \item Testing the significance of sample findings
+    \item Errors in hypothesis testing
+    \item Reducing probability of errors in hypothesis testing
 \end{itemize}
 
 %% Random variables %%
@@ -110,21 +114,27 @@
 The normal distribution is used as a basis to generate other important 
 distributions.\\
 
-\subheading{Log-normal distribution}\\
+\subheading{Log-normal distribution}
 If $Y = \mathrm{ln}(X)$, where $Y\sim \mathrm{N}(\lambda,\ \xi^2)$, 
 then X is log-normally distributed with mean $\mu$ and variance 
 $\sigma^2$,
-\begin{align*}
-    X       &\sim \text{Lognormal}(\mu,\ \sigma^2)\\
-    \lambda &= \mathrm{ln}\ \mu - \frac{1}{2}\ \xi^2\\
-    \xi^2   &= \mathrm{ln}\left ( 1 + \frac{\sigma^2}{\mu^2} \right )
-\end{align*}
+    \begin{align*}
+        X       &\sim \text{Lognormal}(\mu,\ \sigma^2)\\
+        \lambda &= \mathrm{ln}\ \mu - \frac{1}{2}\ \xi^2\\
+        \xi^2   &= \mathrm{ln}\left ( 1 + \frac{\sigma^2}{\mu^2} \right )
+    \end{align*}
 
 \subheading{Chi-square ($\chi^2$)}\\
 If $X = Z^2$, where $Z$ is the standard normal, i.e. 
 $Z\sim \mathrm{N}(0,\ 1)$, then X is chi-square ($\chi^2$) distributed.
 The $\chi^2$ distribution has an additional parameter $k$, the degree of
 freedom. \\
+
+\subheading{T-distribution}\\
+If $Z$ and $\chi^2_k$ are independent standard normal and chi-square
+random variables respectively, then
+    $$ T = \frac{Z}{\sqrt{\chi^2_k / k}} $$
+is t-distributed with $k$ degrees of freedom.\\
 
 %% Data transformations %%
 \heading{Data transformations}
@@ -183,10 +193,224 @@ freedom. \\
     \item Rule of thumb for `large number': $n \geq 30$
 \end{itemize}
 
-%%
+%% From sample to population %%
+\heading{From sample to population}
+\begin{itemize} \itemsep -0.5em
+    \item Population: the totality of observations that we are
+        interested; Sample: a subset of the population obtained
+    \item In reality, it is often practically impossible to collect
+        enough data to definitively draw conclusions and make decisions
+        about the population
+    \item What we can do, however, is to sample a portion of the
+        population, and infer about he population from having analysed
+        the sample
+    \item However, while we can be certain about our conclusions about
+        the sample group, there is going to be some ambiguity when we
+        apply sample conclusions to unobserved data points in the
+        population
+    \item Using probability as an analogy,
+
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{Sample-population} & \textbf{Probability} \\
+        \hline
+        Population                 & Sample space         \\
+        Sample                     & Event                \\
+        \hline
+    \end{tabular}
+\end{itemize}
+
+%% Point estimators %%
+\heading{Point estimators}
+\begin{itemize} \itemsep -0.5em
+    \item Suppose we are trying to obtain some parameters of the
+        population distribution, e.g. mean, $\mu$ or variance, 
+        $\sigma^2$
+    \item One way to estimate these parameters is to apply some function
+        to our sample to condense them to a single number (that
+        estimates the parameter we are trying to obtain)
+    \item This function is known as a point estimator, $\hat\Theta$; it
+        produces a point estimate, or statistic $\hat\theta$, which
+        estimates the population parameter $\theta$
+\end{itemize}
+\subheading{Unbiased estimators}
+\begin{itemize} \itemsep -0.5em
+    \item An estimator is unbiased if 
+        $ \mathrm{E}(\hat\Theta) = \theta $
+    \item Otherwise, the bias of an estimator is
+        $ \mathrm{bias} = \mathrm{E}(\hat\Theta) - \theta$
+    \item Intuitively, the expectation of $\hat\Theta$ is the average
+        value of that estimator over many outcomes
+    \item Note that the sample mean, $\bar{X}$ and the sample variance,
+        $S^2$ are unbiased estimators for the population mean, $\mu$,
+        and population variance, $\sigma^2$ respectively
+\end{itemize}
+\subheading{Estimator variance}
+\begin{itemize} \itemsep -0.5em
+    \item Many estimators can be biased; we can further rate estimators
+        by their variance (precision)
+    \item Typically presented as the standard error, which is the
+        standard deviation of the estimator
+\end{itemize}
+\subheading{Mean square error}
+\begin{itemize} \itemsep -0.5em
+    \item Overall, we can quantify the goodness of an estimator by its
+        bias and standard error. The mean square error combines the two
+        into a single quantity, the mean square error:
+        \begin{align*}
+            \mathrm{MSE}(\hat\Theta) 
+                &= (\text{Std error})^2 +
+                   (\mathrm{E}(\hat\Theta) - \theta)^2 \\
+                &= \text{Var}(\hat\Theta) + \text{bias}^2
+        \end{align*}
+        Note: an unbiased estimator has $\text{MSE} = \text{Var}$
+\end{itemize}
+
+%% Sampling distributions %%
+\heading{Sampling distributions}
+\begin{itemize} \itemsep -0.5em
+    \item Point estimators, $\hat\Theta$, are random variables
+    \item Therefore, they have a mean and variance (above)
+    \item But also a probability distribution
+    \item The probability distribution of a point estimator is known as
+        the sampling distribution---the type of distribution depends on
+        the nature of the underlying population, sample size $n$, the
+        estimator itself
+\end{itemize}
+\subheading{Sample mean} \\
+Under conditions of the central limit theorem, the sample mean, 
+$\bar{X}$ is normally distributed, 
+    $$ \bar{X} \sim \mathrm{N}(\mu,\ \sigma^2/n) $$
+\subheading{Sample variance} \\
+The sample variance is $\chi^2$ distributed,
+    $$ \frac{(n-1)\ S^2}{\sigma^2} \sim \chi^2_{n-1} $$
+\subheading{Sample mean, unknown $\sigma^2$} \\
+If the population variance is unknown, it is substituted by the sample
+variance, a $\chi^2$-distributed random variable. Hence, the sample mean
+takes the form of a t-distribution,
+    $$ T = \frac{\bar{X} - \mu}{S/\sqrt{n}} $$
+
+%% Interval estimates %%
+\heading{Interval estimates}
+\begin{itemize} \itemsep -0.5em
+    \item The confidence of an interval is not the probability that a
+        calculated interval around the sample mean includes the 
+        population mean; that probability is either $0$ or $1$, since
+        the interval is already calculated---``the die has been cast"
+    \item Rather, it can be understood as the proportion of calculated
+        intervals that will contain the population mean
+\end{itemize}
+
+%% Hypothesis testing%%
+\heading{Hypothesis testing}
+\begin{itemize} \itemsep -0.5em
+    \item $X$, a sample, can be defined as $$X=\mu+\epsilon$$ 
+        where $\epsilon$ is a random variable representing `random
+        disturbance' due to any sources of variability in the sampling
+        method or population
+    \item Therefore, there is an uncertainty that comes with estimating
+        $\mu$ with $\bar{X}$---is the value obtained, $\bar{x}$ the
+        population mean, $\mu$? If not, how close are $\bar{x}$ and
+        $\mu$?
+    \item Since sample variance is practically non-zero, then we are
+        unable to make the correct conclusions every time
+    \item We can only hope to `be correct most of the time'
+    \item The aim of hypothesis testing is `to know if the mean of the
+        unknown population has a value of $\mu_0$, with only a single
+        small sample available
+    \item i.e. to make a general conclusion about the population based
+        on specific observations from the sample
+    \item $H_0$ must be specific, $H_1$ is usually non-specific
+    \item The significance level $\alpha$, determines the values of
+        $\bar{x}$ where $H_0$ is rejected
+    \item The p-value is the probability of obtaining a result equal to
+        or more severe than what was obtained, given that $H_0$ is true
+    \item For a two-tail test, the p-value is $2 \times
+        \mathrm{P}(\bar{X} \leq \bar{x}$ or $2 \times \mathrm{P}(\bar{X}
+        \geq \bar{x}$, whichever is smaller
+\end{itemize}
+
+%% Errors in hypothesis testing %%
+\heading{Errors in hypothesis testing}
+\begin{itemize} \itemsep -0.5em
+    \item Type I error: rejecting $H_0$ when $H_0$ is true
+    \item The probability of committing a type I error is the
+        significance level, $\alpha$ of the test
+    \item Type II error: failing to reject $H_0$ when $H_1$ is true
+    \item Power: probability of not committing a type II error, i.e.
+        $$\mathrm{Power} = (1-\beta)$$
+        Power is also the probability of correctly rejecting a false
+        null hypothesis
+    \item Power is a measure of specificity---the ability of a test to 
+        detect differences
+    \item Then, there is a specific difference to detect; i.e. the
+        difference between $\mu_0 = 50; \mu_1 = 52$ is harder to detect
+        than the difference between $\mu_0 = 50; \mu_1 = 60$
+    \item Therefore, to calculate the probability of a type II error,
+        one must specify what is the magnitude of difference to detect
+    \item Fixing the sample size, $n$, decreasing the probability of one
+        type of error increases the probability of the other
+\end{itemize}
+
+%% Reducing probability of errors in hypothesis testing %%
+\heading{Reducing probability of errors in hypothesis testing}
+\begin{itemize} \itemsep -0.5em
+    \item To increase the power of a test, i.e. decrease the 
+        probability of a type II error, define a larger difference
+        that you would like to reliability detect
+    \item Alternatively, increase the sample size
+    \item The probability of a type I error is usually defined by the
+        tester as the level of significance, $\alpha$
+\end{itemize}
 
 % TODO: GC column
-% TODO: consider an 'examples' column
+%% Examples %%
+\heading{Examples} \\
+\subheading{Calculating the 95\% confidence interval for sample mean}
+\begin{align*}
+&P \left (
+    \bar{X} - 1.96 \cdot \frac{\sigma}{\sqrt{n}} \leq
+    \mu \leq
+    \bar{X} + 1.96 \cdot \frac{\sigma}{\sqrt{n}}
+    \right ) \\ 
+&= 0.95
+\end{align*}
+\subheading{Calculating the 95\% confidence interval for sample mean 
+with unknown $\sigma^2$,}
+\begin{align*}
+&P \left (
+    \bar{X} - t_{0.025, n-1} \cdot \frac{s}{\sqrt{n}} \leq
+    \mu \leq
+    \bar{X} + t_{0.025, n-1} \cdot \frac{s}{\sqrt{n}}
+    \right ) \\ 
+&= 0.95
+\end{align*}
+\subheading{Hypothesis testing on the mean}
+\begin{enumerate} \itemsep -0.5em
+    \item Identify the parameter of interest from the problem context
+    \item State the null hypothesis, $\mathrm{H}_0$
+        $$\mathrm{H}_0: \mu = \mu_0 = 60$$
+    \item State an appropriate alternative hypothesis, $\mathrm{H}_1$
+        $$\mathrm{H}_1: \mu \neq 60$$
+    \item Choose a significance level, $\alpha$
+        $$\alpha = 0.05$$
+    \item State an appropriate test statistic; usually $Z$ if population
+        variance is known, otherwise $t$
+        $$Z_0 = \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}$$
+    \item State and compute the rejection region for the statistic, 
+        e.g. for $\sigma^2 = 100$ and $n = 10$
+        \begin{align*}
+            P(z_{\alpha=0.025} \leq
+                \frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}} \leq
+                z_{\alpha=0.975}) &= 0.95 \\
+            P(-1.96 \cdot \frac{10}{\sqrt{10}} + 60 \leq
+                \bar{X} \leq
+                1.96 \cdot \frac{10}{\sqrt{10}} + 60) &= 0.95 \\
+            P(53.8 \leq \bar{X} \leq 66.2) &= 0.95
+        \end{align*}
+    \item Decide if $H_0$ should be rejected, and report it in the
+        problem context
+\end{enumerate}
 
 \end{multicols*}
 \end{document}
