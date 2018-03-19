@@ -363,7 +363,6 @@ takes the form of a t-distribution,
         tester as the level of significance, $\alpha$
 \end{itemize}
 
-% TODO: GC column
 %% Examples %%
 \heading{Examples} \\
 \subheading{Calculating the 95\% confidence interval for sample mean}
@@ -411,6 +410,39 @@ with unknown $\sigma^2$,}
     \item Decide if $H_0$ should be rejected, and report it in the
         problem context
 \end{enumerate}
+\subheading{The amount of time for a lab to process samples is a RV with
+mean 9.2 mins and standard deviation 1.8 mins. Suppose a random sample
+of $n = 48$ is collected. Find the probability that the average 
+processing time for these samples is (a) less than 10 mins; (b) between
+9 and 10 mins.}
+\begin{align*}
+    &\text{let }\bar{X}=\frac{1}{48}\sum^{48}_{i=1}X_i,\\
+    &\text{then, by the central limit theorem,} \\
+    &\bar{X}\sim\mathrm{N}(9.2,\ 1.8^2 / 48) \\
+\end{align*}
+\begin{IEEEeqnarray*}{rl}
+    &\ \mathrm{P}(\bar{X} \leq 10) \\[5pt]
+    =&\ \mathrm{P}\left( \frac{\bar{X} - 9.2}{\sqrt{1.8^2/48}} \leq
+                         \frac{10-9.2}{\sqrt{1.8^2/48}} \right )\\[5pt]
+    =&\ \Phi\left (\frac{10-9.2}{\sqrt{1.8^2/48}} \right ) \\[5pt]
+    =&\ \Phi\left (3.07) \\
+    =&\ 0.99893 \approx 0.999 \\[10pt]
+     &\ \mathrm{P}(9 \leq \bar{X} \leq 10) \\[5pt]
+    =&\ \Phi\left (\frac{10-9.2}{\sqrt{1.8^2/48}} \right ) -
+        \Phi\left (\frac{ 9-9.2}{\sqrt{1.8^2/48}} \right ) \\
+    =&\ \Phi(3.07) - \Phi(-0.7698) \\
+    =&\ 0.99893 - 0.220650 \\
+    =&\ 0.77828 \approx 0.778
+\end{IEEEeqnarray*}
+\subheading{Find the mean square error for $\hat{\Theta} = 1/2 \cdot 
+(2X_1 - X_6 + X_4)$, for a random sample $X_1, X_2, \cdots, X_6$}
+\begin{IEEEeqnarray*}{rCl}
+    \text{MSE} &=& \text{Std. Error}^2 + \text{Bias}^2 \\
+               &=& \mathrm{Var}(X_1 + 1/4\cdot X_6 + 1/4\cdot X_4) + \\
+               &&\ (1/2\cdot\mathrm{E}(2X_1 - X_6 + X_4) - \mu)^2 \\
+               &=& 3/2 \cdot \sigma^2 + (1/2\cdot (2\mu)-\mu)^2 \\
+               &=& 3/2 \cdot \sigma^2
+\end{IEEEeqnarray*}
 
 \end{multicols*}
 \end{document}
