@@ -149,8 +149,12 @@
 \\ \textbf{K-maps}
 \begin{itemize}
 \itemsep -0.5em
-\item Labelling in a {\i gray code} manner e.g $00, 01, 11, 10$
-\item Grouping $2^N$ cells eliminates n variables
+\item Prime Implicant (PI) is a product term formed by combining the {\i maximum} possible no. of minterms (largest group)
+\item Essential Prime Implicant (EPI) is a PI that includes at least one minterm not covered by any other group
+\item Label the K-map rows/columns in a {\i gray code} manner e.g $00, 01, 11, 10$
+\item Grouping $2^N$ cells(only power-sizes are allowed) eliminates n variables
+\item EPIs are counted only by checking 1s, {\bf not} $X$s
+\item K-maps help to obtain canonical SOP, but might not provide the simplest expression possible (need to use boolean algebra for that)
 \end{itemize}
 
 
