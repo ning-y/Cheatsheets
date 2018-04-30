@@ -16,7 +16,7 @@
 \end{center}
     \begin{multicols*}{4}
 
-% DOCUMENTATION %
+% NUMBER SYSTEMS & DATA REPRESENTATION %
 {\small\textbf{Number Systems \& Data Representation }}
 \textbf{Sizes of data/types}
 \begin{itemize} 
@@ -41,7 +41,8 @@
 \item 2s complement has only 1 representation of 0
 \item 2s complement can represent an \i{additional} negative number e.g for binary, 1000 represents -8 (+8 cannot be represented in a signed 4 bit number)
 \item Convert to excess X: Take number minus X (0 refers to -x)
-\item Float has 1 bit sign, 8 bit excess-127 exponent, 23 bit mantissa (normalized with a leading bit 1 i.e the mantissa is the X in 1.X)
+\item IEEE 754 Floating-Point Representation:  $sign  | exponent  |  mantissa$
+\item Single-precision float has 1 bit sign, 8 bit excess-127 exponent, 23 bit mantissa (normalized with a leading bit 1 i.e the mantissa is the X in 1.X)
 \item Double has 1 bit sign, 11 bit excess-1023 exponent, 52 bit mantissa 
 \end{itemize}
 
@@ -55,22 +56,41 @@
 \item check for \bf{overflow}: If result is opposite sign of both operands (that have the same sign)
 \end{itemize}
 
+% MIPS %
+{\small\textbf{MIPS}}
+
+\textbf{R, I, J format}
 \begin{itemize}
 \itemsep -0.5em
-\item \texttt{parseInt(string)}: Interprets the given \texttt{string} as an integer, and returns that integer
-\item \texttt{math\_pi}: Refers to the number $\pi$, the mathematical constant
-\item \texttt{math\_max(a, b, c, ...)}: Returns the largest argument given
-\item \texttt{math\_floor(x)}: Returns the largest integer smaller than \texttt{x}
-\item \texttt{math\_ceil(x)}: Returns the smallest integer larger than \texttt{x}
-\item \texttt{math\_sqrt(x)}: Refers to the square root function, returns $\sqrt{x}$
-\item \texttt{math\_pow(base, exponent)}: Returns \texttt{base} to the power of \texttt{exponent}, i.e. $b^e$
-\item \texttt{is\_number(x)}, \texttt{is\_boolean(x)}, \texttt{is\_string(x)}: Returns \texttt{true} if\texttt{x} is the respective primitive data type, else \texttt{false}
-\item \texttt{is\_function(x)}: Returns \texttt{true} if \texttt{x} is a function, else \texttt{false}
-\item \texttt{is\_object(x)}: Returns \texttt{true} if \texttt{x} is an object, else \texttt{false}. Note that functions and arrays are objects
-\item \texttt{is\_array(x)}: Returns \texttt{true} if \texttt{x} is an array, else \texttt{false}. Note that the empty array \texttt{[]}, also known as the empty list, is an array
-\item \texttt{equal(x, y)}: Returns \texttt{true} if \texttt{x} and \texttt{y} have the same strucutre, and corresponding leaves are \texttt{===}, else \texttt{false}
-\item \texttt{array\_length(x)}: Returns the current length of array \texttt{x}
-\item \texttt{apply\_in\_underlying\_javascript(f, xs)}: calls the function \texttt{f} with arguments \texttt{xs}
+\item $\bf{R}$: $Opcode, rs, rt, rd, shamt, funct$
+\item $\bf{I}$: $Opcode, rs, rt, Imm$
+\item rd is not used, check datasheet for instruction syntax
+\item For branch, $Imm$ is the relative number of \i{words} to go to (with respect to $PC + 4$), in Sign and Magnitue representation
+\item $\bf{J}$: $Opcode, Address$
+\item First 4 bits are assumed to be 4 MSBs of $PC + 4$. Last 2 bits assumed to be 0 (because of word addressing)
+\end{itemize}
+
+% ISA %
+{\small\textbf{Instruction Set Architecture}}
+
+\textbf{Architectures \& Endianness}
+\begin{itemize}
+\itemsep -0.5em
+\item Von Neumann: Data(operands) stored in memory
+\item Stack: operands are on top of stack
+\item Accumulator: One operator is in the accumulator (a special register)
+\item Memory-memory (all operands in memory)
+\item Register-Register (all operands in registers) (MIPS)
+\item Big-endian: Most significant byte stored in lowest address
+\item Little-endian: Least significant byte stored in lowest address (easier to read)
+\end{itemize}
+
+\textbf{Opcode encoding}
+\begin{itemize}
+\itemsep -0.5em
+\item To maximize, reserve 1 instruction for lesser-bit instruction types.
+\item To minimize, reserve all but 1 instruction for lesser-bit instruction types
+\item Forumla for maximizing: $2^{no. of bits} * (1 - F)$ where $F$ is the fraction of bits lost by reserving bits
 \end{itemize}
 
 % THE SUBSTITUTION MODEL %
