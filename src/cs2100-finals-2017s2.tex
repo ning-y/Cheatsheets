@@ -4,6 +4,8 @@
 \usepackage{multicol}
 \usepackage{blindtext}
 \usepackage{listings}
+\usepackage{graphicx}
+\graphicspath{{images/cs2100/}}
 
 \begin{document}
 \setlength\parindent{0pt} %TODO this somehow messes up paragraph vertical spacing as well?
@@ -118,10 +120,38 @@
 \item Concensus: \\ $(X \cdot Y) + (X' \cdot Z) + (Y \cdot Z) = (X \cdot Y) + (X' \cdot Z)$ \\ $(X + Y) \cdot (X' + Z) \cdot (Y + Z) = (X + Y) \cdot (X' + Z)$
 \end{itemize}
 
+\textbf{Minterms \& Maxterms}
+\begin{itemize}
+\itemsep -0.5em
+\item Sum-Of-Products (SOP): Product term or a logical sum of product terms
+\item $m$interm: Product term that contains $n$ literals from all the variables
+\item Product-Of-Sum (POS): Sum term or a logical product of sum terms
+\item $M$axterm: Sum term that contains $n$ literals from all the variables
+\item $Mx$ = $mx'$ because of De Morgan's
+\item Sum of 2 distinct Maxterms is 1 e.g $M1234 + M1120 = 1$
+\item Product of 2 distinct minterms is 0 e.g $m1234 \cdot m1120 = 0$
+\end{itemize}
 
+% Combinatorial Circuits %
+{\small\textbf{Combinatorial Circuits}}
+\\ \textbf{Gates}
+\begin{itemize}
+\itemsep -0.5em
+\item {AND, OR, NOT} is a complete set of logic
+\item {NAND} is a complete set of logic
+\item {NOR} is a complete set of logic
+\item Produce SOP with $AND >> OR$ or $NAND >> NAND$
+\item Produce POS with $OR >> AND$ or $NOR >> NOR$
+\item With negated outputs, use NAND to simulate OR and NOR to simulate AND
+\end{itemize}
+{\centering \includegraphics[scale=0.1]{nor_nand}}
 
-
-
+\\ \textbf{K-maps}
+\begin{itemize}
+\itemsep -0.5em
+\item Labelling in a {\i gray code} manner e.g $00, 01, 11, 10$
+\item Grouping $2^N$ cells eliminates n variables
+\end{itemize}
 
 
 % THE SUBSTITUTION MODEL %
