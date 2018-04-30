@@ -5,6 +5,7 @@
 \usepackage{blindtext}
 \usepackage{listings}
 \usepackage{graphicx}
+\usepackage{enumitem}
 \graphicspath{{images/cs2100/}}
 
 \begin{document}
@@ -21,7 +22,7 @@
 % NUMBER SYSTEMS & DATA REPRESENTATION %
 {\small\textbf{Number Systems \& Data Representation }}
 \textbf{Sizes of data/types}
-\begin{itemize} 
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item byte : 8 bits \item nibble : 4 bits (half-word)
 \item word : multiple bytes (1, 2, 4) (for MIPS it's 4)
@@ -32,7 +33,7 @@
 \end{itemize}
 
 \textbf{Representation \& Complements}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Convert decimal whole numbers to base $R$ : divide by R, first remainder is LSB, last is MSB
 \item Convert decimal fractions to base R : multiply by R, first carry is MSB, last is LSB
@@ -49,7 +50,7 @@
 \end{itemize}
 
 \textbf{Operations with binary numbers}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item 2s complement addition: Simply add \& ignore carry out of MSB
 \item 2s complement subtraction: take 2s complement of number to be subtracted, then do 2s addition.
@@ -62,7 +63,7 @@
 {\small\textbf{MIPS}}
 
 \textbf{R, I, J format}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item $\bf{R}$: $Opcode, rs, rt, rd, shamt, funct$
 \item $\bf{I}$: $Opcode, rs, rt, Imm$
@@ -76,7 +77,7 @@
 {\small\textbf{Instruction Set Architecture}}
 
 \textbf{Architectures \& Endianness}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Von Neumann: Data(operands) stored in memory
 \item Stack: operands are on top of stack
@@ -88,7 +89,7 @@
 \end{itemize}
 
 \textbf{Opcode encoding}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item To maximize, reserve 1 instruction for lesser-bit instruction types.
 \item To minimize, reserve all but 1 instruction for lesser-bit instruction types
@@ -98,7 +99,7 @@
 % Boolean Algebra %
 {\small\textbf{Boolean Algebra}}
 \textbf{Laws}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Identity: $A + 0 = A$ and $A \cdot 1 = A$
 \item Complement: $A + A' = 1$ and $A \cdot A' = 0$
@@ -109,7 +110,7 @@
 \end{itemize}
 
 \textbf{Theorems}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Idempotency: $X + X = X$ and $X \cdot X = X$
 \item One/Zero Element: $X + 1 = 1$ and $X \cdot 0 = 0$
@@ -121,7 +122,7 @@
 \end{itemize}
 
 \textbf{Minterms \& Maxterms}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Sum-Of-Products (SOP): Product term or a logical sum of product terms
 \item $m$interm: Product term that contains $n$ literals from all the variables
@@ -135,7 +136,7 @@
 % Combinatorial Circuits %
 {\small\textbf{Combinatorial Circuits}}
 \\ \textbf{Gates}
-\begin{itemize}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item {AND, OR, NOT} is a complete set of logic
 \item {NAND} is a complete set of logic
@@ -146,8 +147,8 @@
 \end{itemize}
 {\centering \includegraphics[scale=0.1]{nor_nand}}
 
-\\ \textbf{K-maps}
-\begin{itemize}
+\textbf{K-maps}
+\begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Prime Implicant (PI) is a product term formed by combining the {\i maximum} possible no. of minterms (largest group)
 \item Essential Prime Implicant (EPI) is a PI that includes at least one minterm not covered by any other group
@@ -156,6 +157,76 @@
 \item EPIs are counted only by checking 1s, {\bf not} $X$s
 \item K-maps help to obtain canonical SOP, but might not provide the simplest expression possible (need to use boolean algebra for that)
 \end{itemize}
+
+\textbf {Delays} \text{: Note that for combinatorial circuits, there is a delay: for every logic gate with $n$ inputs, calculate $delay = max(t_1, t_2, \dots t_n) + t_delay$}
+{\centering \includegraphics[scale=0.18]{circuit_delay}}
+
+
+\textbf{MSI Components}
+\textbf{{\item Decoder}}
+\begin{multicols*}{2}
+{\centering \includegraphics[scale=0.13]{decoder}}
+\vfill\null
+\columnbreak
+Generate minterms and use OR to form a function
+Alternatively, generate maxterms and use NOR
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Multiplexer}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{multiplexer}}
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Demultiplexer}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{demultiplexer}}
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Encoder}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{encoder}}
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Decoder}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{decoder}}
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Priority Encoder}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{priorityEncoder}}
+\end{multicols*}
+
+\begin{multicols*}{2}
+\textbf{{\item Larger Components}}
+\vfill\null
+\columnbreak
+{\centering \includegraphics[scale=0.13]{largerComponents}}
+\end{multicols*}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % THE SUBSTITUTION MODEL %
