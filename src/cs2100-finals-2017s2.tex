@@ -12,31 +12,48 @@
 \pagenumbering{gobble}
 
 \begin{center}
-{\large CS1101S Cheatsheet 2017}\\{by ning}
+{\large CS2100 Cheatsheet 2017}\\{by vig}
 \end{center}
     \begin{multicols*}{4}
 
 % DOCUMENTATION %
-{\small\textbf{Basic Syntax and Built-in Functions}}
+{\small\textbf{Number Systems \& Data Representation }}
+\textbf{Sizes of data/types}
+\begin{itemize} 
+\itemsep -0.5em
+\item byte : 8 bits \item nibble : 4 bits (half-word)
+\item word : multiple bytes (1, 2, 4) (for MIPS it's 4)
+\item \texttt{int} : 4 bytes (1 bit for sign, 31 for magnitude)
+\item \texttt{float} : 4 bytes
+\item \texttt{double} : 8 bytes
+\item \texttt{char} : 1 byte
+\end{itemize}
 
-\begin{verbatim}
-for (var i = 0; i < 5; i = i+1) {
-    // do something
-}
+\textbf{Representation \& Complements}
+\begin{itemize}
+\itemsep -0.5em
+\item Convert decimal whole numbers to base $R$ : divide by R, first remainder is LSB, last is MSB
+\item Convert decimal fractions to base R : multiply by R, first carry is MSB, last is LSB
+\item base ${R}$ to base ${R^N}$: partition in groups of $N$ e.g groups of 4 for base 2 to base 16
+\item Convert to R-1s complement : Flip the digits; \texttt{digit = R - digit}
+\item Convert to Rs complement : Flip the digits, then add 1 to the number
+\item 1s complement has +ive and -ive 0
+\item 2s complement has only 1 representation of 0
+\item 2s complement can represent an \i{additional} negative number e.g for binary, 1000 represents -8 (+8 cannot be represented in a signed 4 bit number)
+\item Convert to excess X: Take number minus X (0 refers to -x)
+\item Float has 1 bit sign, 8 bit excess-127 exponent, 23 bit mantissa (normalized with a leading bit 1 i.e the mantissa is the X in 1.X)
+\item Double has 1 bit sign, 11 bit excess-1023 exponent, 52 bit mantissa 
+\end{itemize}
 
-while (i < 10) {
-    // do something
-}
-
-// join many lists together
-accumulate(append, [], xxs);
-
-// clone a list
-map(function(x) { return x; }, xs);
-
-// clone an object
-JSON.parse(JSON.stringify(obj));
-\end{verbatim}
+\textbf{Operations with binary numbers}
+\begin{itemize}
+\itemsep -0.5em
+\item 2s complement addition: Simply add \& ignore carry out of MSB
+\item 2s complement subtraction: take 2s complement of number to be subtracted, then do 2s addition.
+\item 1s complement addition: Add; If there is a carry out, add 1 to the result
+\item 1s complement subtraction: take 1s complement of number to be subtracted, then do 1s addition.
+\item check for \bf{overflow}: If result is opposite sign of both operands (that have the same sign)
+\end{itemize}
 
 \begin{itemize}
 \itemsep -0.5em
