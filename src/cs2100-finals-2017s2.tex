@@ -268,5 +268,27 @@ Alternatively, generate maxterms and use NOR
     \\ $Speedup_{pipeline} = \frac{Time_{seq}}{Time_{pipeline}}$
 \end{itemize}
 
+\textbf{{Hazard and resolution}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Without data forwarding: If dependent cycle is
+    \\ $\cdot$ right before: 2 cycle delay
+    \\ $\cdot$ 2 cycles before: 1 cycle delay
+\item With data forwarding: If dependent cycle is
+    \\ $\cdot$ dependent on lw: 1 cycle delay
+    \\ $\cdot$ otherwise: no delay
+\item Without control measures: 3 cycle delay 
+\item With early branching/resolution: 1 cycle delay after branch instruction  
+    \\ $\cdot$ with forwarding \& dependent on non-lw: 1 cycle bef branch
+    \\ $\cdot$ with forwarding \& dependent on lw: 2 cycles bef branch 
+    \\ $\cdot$ without forwarding: dependent: 2 cycle delay bef branch 
+\item With branch prediction: 
+    \\ $\cdot$ 3 cycles occur if no early branching
+    \\ $\cdot$ 1 cycle occur if there is early branching
+    \\ $\cdot$ then, instructions either get flushed/not flushed
+\item With delayed branch: If $\exists$ instruction before branch that can be moved into delayed slot, move it
+\end{itemize}
+
+
     \end{multicols*}
 \end{document}
