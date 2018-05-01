@@ -1,5 +1,5 @@
 \documentclass[a4paper]{article} \usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
-\usepackage[a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape]{geometry}
+\usepackage[a4paper, left=0.8cm, right=0.8cm, top=0.8cm, bottom=0.8cm, landscape]{geometry}
 % \usepackage{showframe}
 \usepackage{multicol}
 \usepackage{blindtext}
@@ -24,7 +24,8 @@
 \textbf{Sizes of data/types}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
-\item byte : 8 bits \item nibble : 4 bits (half-word)
+\item byte : 8 bits 
+\item nibble : 4 bits (half-byte)
 \item word : multiple bytes (1, 2, 4) (for MIPS it's 4)
 \item \texttt{int} : 4 bytes (1 bit for sign, 31 for magnitude)
 \item \texttt{float} : 4 bytes
@@ -68,7 +69,7 @@
 \item $\bf{R}$: $Opcode, rs, rt, rd, shamt, funct$
 \item $\bf{I}$: $Opcode, rs, rt, Imm$
 \item rd is not used, check datasheet for instruction syntax
-\item For branch, $Imm$ is the relative number of \i{words} to go to (with respect to $PC + 4$), in Sign and Magnitue representation
+\item For branch, $Imm$ is the relative number of \i{words} to go to (with respect to $PC + 4$), in 2s complement representation
 \item $\bf{J}$: $Opcode, Address$
 \item First 4 bits are assumed to be 4 MSBs of $PC + 4$. Last 2 bits assumed to be 0 (because of word addressing)
 \end{itemize}
@@ -145,7 +146,7 @@
 \item Produce POS with $OR >> AND$ or $NOR >> NOR$
 \item With negated outputs, use NAND to simulate OR and NOR to simulate AND
 \end{itemize}
-{\centering \includegraphics[scale=0.1]{nor_nand}}
+{\centering \includegraphics[scale=0.12]{nor_nand}}
 
 \textbf{K-maps}
 \begin{itemize}[leftmargin=*]
@@ -191,7 +192,7 @@
 \begin{multicols*}{2}
 \textbf{{Decoder}}
 \\ Generate minterms and use OR to form a function
-Alternatively, use NOR on maxterms
+Alternatively, use NOR on maxterms.
 \vfill\null
 \columnbreak
 {\centering \includegraphics[scale=0.13]{decoder}}
@@ -206,6 +207,7 @@ Alternatively, use NOR on maxterms
 
 \begin{multicols*}{2}
 \textbf{{Larger Components}}
+\\ Remove a decoder that gives duplicate outputs (w.r.t another decoder) by using an OR gate with the outputs from the first decoder, and the enable input of the second.
 \vfill\null
 \columnbreak
 {\centering \includegraphics[scale=0.15]{largerComponents}}
@@ -350,11 +352,25 @@ Alternatively, use NOR on maxterms
 % DIAGRAMS %
 \vfill\null
 \columnbreak
+\begin{center}
 {\centering \includegraphics[angle=90,origin=c,scale=0.35]{dataPath}}
+\vspace{5mm} %5mm vertical space
 \\ {\centering \includegraphics[angle=90,origin=c,scale=0.30]{fourBitRepresentation}}
 {\centering \includegraphics[scale=0.13]{ALUControl}}
 \\ {\centering \includegraphics[angle=90,origin=c,scale=0.25]{InstructionControl}}
-\\ {\centering \includegraphics[scale=0.25]{expandingOpcode}}
+\\ {\centering \includegraphics[scale=0.25]{expandingOpcode} }
+\\ \caption Max (1 type A) = $1 + (2^6 - 1) * 2^5$
+\\ \caption Min (1 type B) = $(2^6 - 1) + 2^5$ 
+
+\vspace{5mm} %5mm vertical space
+\begin{tabular}{ |c c| } 
+ \hline
+ Input & 0X DE AD BE EF  \\ 
+ Big-Endian & 0: DE, 1: AD \dots  \\ 
+ Little-Endian & 0: EF, 1: BE \dots  \\ 
+ \hline
+\end{tabular}
+\end{center}
 
     \end{multicols*}
 \end{document}
