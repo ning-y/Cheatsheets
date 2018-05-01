@@ -133,7 +133,7 @@
 \item Product of 2 distinct minterms is 0 e.g $m1234 \cdot m1120 = 0$
 \end{itemize}
 
-% Combinatorial Circuits %
+% COMBINATORIAL CIRCUITS %
 {\small\textbf{Combinatorial Circuits}}
 \\ \textbf{Gates}
 \begin{itemize}[leftmargin=*]
@@ -215,7 +215,7 @@ Alternatively, generate maxterms and use NOR
 {\centering \includegraphics[scale=0.13]{largerComponents}}
 \end{multicols*}
 
-%Sequential Logic%
+%SEQUENTIAL LOGIC%
 {\small\textbf{Sequential Logic }}
 \\ \textbf{{Excitation Tables}}
 \\ {\centering \includegraphics[scale=0.14]{excitationTables}}
@@ -289,6 +289,76 @@ Alternatively, generate maxterms and use NOR
 \item With delayed branch: If $\exists$ instruction before branch that can be moved into delayed slot, move it
 \end{itemize}
 
+%CACHE%
+{\small\textbf{Cache}}
+\\ \textbf{{Average Access time}}
+\\ $Rate_{hit} * Time{hit} + (1 - Rate_{hit} * Penalty_{miss}$
+
+\\ \textbf{{Direct Mapped Cache}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Blocks in cache: $2^M$
+\item Bytes per block: $2^N$
+\end{itemize}
+
+\\ \textbf{{Set Associative Cache}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item $N$-way SAC $\rightarrow$ $N$ cache blocks per set
+\item Bytes per block: $2^M$
+\item Cache bocks = $\frac{Size_{cache}}{Size_{block}}$
+\item Sets = $\frac{CacheBlocks}{N}$ = $2^N$
+\end{itemize}
+
+\\ \textbf{{Fully Associative Cache}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Bytes per block: $2^N$
+\end{itemize}
+
+\\ \textbf{{For each address}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Set Index =  $(val \bmod 2^{N + M}) // 2^N$
+\item Word Index =  $(val \bmod 2^{N}) // Bytes_{word}$
+\item Tag =  $val // 2^{N + M}$
+\end{itemize}
+
+\\ \textbf{{Miss Rates}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Conlfict miss rates decrease with increasing associativity
+\item DMC of size $N$ has the same miss rate as a 2-way SAC of size $\frac{N}{2}$
+\item Capacity miss only depends on cache size, same size $\rightarrow$ same capcatiy miss
+\item As cache size increases, capcacity miss decreases
+\end{itemize}
+
+\\ \textbf{{Block Replacement}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Least Recently Used: Note that it is hard to keep track if there are many choices and there is a cost to keeping track of this as well
+\item First in First out
+\item Random Replacement
+\item Least Frequently Used
+\end{itemize}
+
+\\ \textbf{{Writing Policy}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Write through cache: Write to both cache and main memory
+\item Write back cache: Only write to cache, write to memory when block is replaced
+\item Write Miss -- Write allocate: Load complete block and write onto the cache $\Rightarrow$ Write to main memory if using write through policy
+\item Write Miss -- Write around: Do not load block to cache, write to memory only
+\end{itemize}
+
+% DIAGRAMS %
+\vfill\null
+\columnbreak
+{\centering \includegraphics[angle=90,origin=c,scale=0.35]{dataPath}}
+\\ {\centering \includegraphics[angle=90,origin=c,scale=0.30]{fourBitRepresentation}}
+{\centering \includegraphics[scale=0.13]{ALUControl}}
+\\ {\centering \includegraphics[angle=90,origin=c,scale=0.25]{InstructionControl}}
+\\ {\centering \includegraphics[scale=0.25]{expandingOpcode}}
 
     \end{multicols*}
 \end{document}
