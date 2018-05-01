@@ -228,13 +228,45 @@ Alternatively, generate maxterms and use NOR
 \item Negative input for $Clock$ $\rightarrow$ flip-flop is negative edge-triggered
 \end{itemize}
 
-\begin{multicols*}{2}
-\textbf{{RAM}}
-\vfill\null
-\columnbreak
-{\centering \includegraphics[scale=0.13]{ram}}
-\\ \caption Static RAM
-\end{multicols*}
+\\ \textbf{{Static RAM}}
+\\ {\centering \includegraphics[scale=0.13]{staticRAM}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item Dyanmic RAM does not use flip-flop as cells
+\item For BC, Write is 0, Read is 1 
+\item 1K*8 RAM $\Rightarrow$ 1024words*8bits
+\item In 12 bit address to 4K*8 RAM constructed using 1K*8 blocks, the 2 most significant bits are fed into decoder to determine which block to use. 
+\item Expand horizontally to increase word size, vertically to increase memory size
+\end{itemize}
+
+
+%PIPELINING%
+{\small\textbf{Pipelining}}
+\\ \textbf{{Pipeline register contents}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.5em
+\item $IF/ID$: Instruction from memory \& $PC + 4$
+\item $ID/EX$: Data read from regsiter files, 32-bit Sign extended $Imm$, \& $PC + 4$
+\item $EX/MEM$: $Imm$, \& $(PC + 4) + (Imm * 4)$, ALU result, $isZero$ signal \& $RD2$ from register file
+\item $MEM/WB$: ALU result, Memory read data \& write regsiter data (passed through all pipelines)
+\end{itemize}
+
+\textbf{{Performance}}
+\begin{itemize}[leftmargin=*]
+\itemsep -0.3em
+\item If cycle/clock time is given, just use that 
+\item Single cycle: 
+    \\ $CT_{seq} = \sum^N_{k=1}T_k$
+    \\ $Time_{seq}  = I * CT_{seq}$ (choose the maximum $CT_{seq}$)
+\item Multi-cycle [1 stage per cycle, cycle time chosen to be time for longest stage]
+    \\ $CT_{multi} = max(T_k)$ i.e longest stage time
+    \\ $Time_{multi} = I * Average CPI * CT_{multi}$ 
+\item Pipeline [Several stages per cycle]
+    \\ $CT_{pipeline} = max(T_k) + T_d$ where $T_d$ is the pipeline register overhead 
+    \\ $Time_{pipeline} = (I + N - 1) * CT_{pipeline}$ 
+\item If $N_{intstructions} >> N_{stages}$, 
+    \\ $Speedup_{pipeline} = \frac{Time_{seq}}{Time_{pipeline}}$
+\end{itemize}
 
     \end{multicols*}
 \end{document}
