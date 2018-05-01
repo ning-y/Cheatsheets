@@ -15,7 +15,7 @@
 \pagenumbering{gobble}
 
 \begin{center}
-{\large CS2100 Cheatsheet 2017}\\{by vig}
+{\large CS2100 Cheatsheet 17/18 Sem 2}\\{by vig}
 \end{center}
     \begin{multicols*}{4}
 
@@ -161,41 +161,35 @@
 \textbf {Delays} \text{: Note that for combinatorial circuits, there is a delay: for every logic gate with $n$ inputs, calculate $delay = max(t_1, t_2, \dots t_n) + t_delay$}
 {\centering \includegraphics[scale=0.18]{circuit_delay}}
 
-
-\textbf{MSI Components}
-\textbf{{Decoder}}
-\begin{multicols*}{2}
-{\centering \includegraphics[scale=0.13]{decoder}}
-\vfill\null
 \columnbreak
-Generate minterms and use OR to form a function
-Alternatively, generate maxterms and use NOR
-\end{multicols*}
+\textbf{MSI Components}
 
 \begin{multicols*}{2}
 \textbf{{Multiplexer}}
 \\ Use minterm as selection line, using 0/1 as inputs. For smaller size multiplexer, use one of the variables for input lines.
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{multiplexer}}
+{\centering \includegraphics[scale=0.16]{multiplexer}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Demultiplexer}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{demultiplexer}}
+{\centering \includegraphics[scale=0.16]{demultiplexer}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Encoder}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{encoder}}
+{\centering \includegraphics[scale=0.18]{encoder}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Decoder}}
+\\ Generate minterms and use OR to form a function
+Alternatively, use NOR on maxterms
 \vfill\null
 \columnbreak
 {\centering \includegraphics[scale=0.13]{decoder}}
@@ -205,20 +199,20 @@ Alternatively, generate maxterms and use NOR
 \textbf{{Priority Encoder}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{priorityEncoder}}
+{\centering \includegraphics[scale=0.17]{priorityEncoder}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Larger Components}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{largerComponents}}
+{\centering \includegraphics[scale=0.15]{largerComponents}}
 \end{multicols*}
 
 %SEQUENTIAL LOGIC%
 {\small\textbf{Sequential Logic }}
 \\ \textbf{{Excitation Tables}}
-\\ {\centering \includegraphics[scale=0.14]{excitationTables}}
+\\ {\centering \includegraphics[scale=0.10]{excitationTables}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item For $m$ flip-flops, up to $2^m$ states exist.
@@ -292,7 +286,7 @@ Alternatively, generate maxterms and use NOR
 %CACHE%
 {\small\textbf{Cache}}
 \\ \textbf{{Average Access time}}
-\\ $Rate_{hit} * Time{hit} + (1 - Rate_{hit} * Penalty_{miss}$
+\\ $Rate_{hit} * Time_{hit} + (1 - Rate_{hit} * Penalty_{miss}$
 
 \\ \textbf{{Direct Mapped Cache}}
 \begin{itemize}[leftmargin=*]
