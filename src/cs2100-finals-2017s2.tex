@@ -282,13 +282,13 @@ Alternatively, use NOR on maxterms
     \\ $\cdot$ 3 cycles occur if no early branching
     \\ $\cdot$ 1 cycle occur if there is early branching
     \\ $\cdot$ then, instructions either get flushed/not flushed
-\item With delayed branch: If $\exists$ instruction before branch that can be moved into delayed slot, move it
+\item With delayed branch: If $\exists$ instruction before branch that can be moved into delayed slot, move it. Else, stall/no-op
 \end{itemize}
 
 %CACHE%
 {\small\textbf{Cache}}
 \\ \textbf{{Average Access time}}
-\\ $Rate_{hit} * Time_{hit} + (1 - Rate_{hit} * Penalty_{miss}$
+\\ $Rate_{hit} * Time_{hit} + (1 - Rate_{hit} * Penalty_{miss})$
 
 \\ \textbf{{Direct Mapped Cache}}
 \begin{itemize}[leftmargin=*]
