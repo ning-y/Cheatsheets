@@ -159,7 +159,7 @@
 \item K-maps help to obtain canonical SOP, but might not provide the simplest expression possible (need to use boolean algebra for that)
 \end{itemize}
 
-\textbf {Delays} \text{: Note that for combinatorial circuits, there is a delay: for every logic gate with $n$ inputs, calculate $delay = max(t_1, t_2, \dots t_n) + t_delay$}
+\textbf {Delays} : Note that for combinatorial circuits, there is a delay: for every logic gate with $n$ inputs, calculate $delay = max(t_1, t_2, \dots t_n) + t_delay$
 \begin{center}
 \includegraphics[scale=0.18]{circuit_delay}
 \end{center}
@@ -226,7 +226,7 @@ Alternatively, use NOR on maxterms.
 \item Negative input for $Clock$ $\rightarrow$ flip-flop is negative edge-triggered
 \end{itemize}
 
-\\ \textbf{{Static RAM}}
+\textbf{{Static RAM}}
 \\ {\centering \includegraphics[scale=0.13]{staticRAM}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
@@ -292,14 +292,14 @@ Alternatively, use NOR on maxterms.
 \\ \textbf{{Average Access time}}
 \\ $Rate_{hit} * Time_{hit} + (1 - Rate_{hit} * Penalty_{miss})$
 
-\\ \textbf{{Direct Mapped Cache}}
+\textbf{{Direct Mapped Cache}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Blocks in cache: $2^M$
 \item Bytes per block: $2^N$
 \end{itemize}
 
-\\ \textbf{{Set Associative Cache}}
+\textbf{{Set Associative Cache}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item $N$-way SAC $\rightarrow$ $N$ cache blocks per set
@@ -308,13 +308,13 @@ Alternatively, use NOR on maxterms.
 \item Sets = $\frac{CacheBlocks}{N}$ = $2^N$
 \end{itemize}
 
-\\ \textbf{{Fully Associative Cache}}
+\textbf{{Fully Associative Cache}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Bytes per block: $2^N$
 \end{itemize}
 
-\\ \textbf{{For each address}}
+\textbf{{For each address}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Set Index =  $(val \bmod 2^{N + M}) // 2^N$
@@ -322,7 +322,7 @@ Alternatively, use NOR on maxterms.
 \item Tag =  $val // 2^{N + M}$
 \end{itemize}
 
-\\ \textbf{{Miss Rates}}
+\textbf{{Miss Rates}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Conlfict miss rates decrease with increasing associativity
@@ -331,7 +331,7 @@ Alternatively, use NOR on maxterms.
 \item As cache size increases, capcacity miss decreases
 \end{itemize}
 
-\\ \textbf{{Block Replacement}}
+\textbf{{Block Replacement}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Least Recently Used: Note that it is hard to keep track if there are many choices and there is a cost to keeping track of this as well
@@ -340,7 +340,7 @@ Alternatively, use NOR on maxterms.
 \item Least Frequently Used
 \end{itemize}
 
-\\ \textbf{{Writing Policy}}
+\textbf{{Writing Policy}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Write through cache: Write to both cache and main memory
@@ -359,8 +359,8 @@ Alternatively, use NOR on maxterms.
 {\centering \includegraphics[scale=0.13]{ALUControl}}
 \\ {\centering \includegraphics[angle=90,origin=c,scale=0.25]{InstructionControl}}
 \\ {\centering \includegraphics[scale=0.25]{expandingOpcode} }
-\\ \caption Max (1 type A) = $1 + (2^6 - 1) * 2^5$
-\\ \caption Min (1 type B) = $(2^6 - 1) + 2^5$ 
+\\ Max (1 type A) = $1 + (2^6 - 1) * 2^5$
+\\ Min (1 type B) = $(2^6 - 1) + 2^5$
 
 \vspace{5mm} %5mm vertical space
 \begin{tabular}{ |c c| } 
