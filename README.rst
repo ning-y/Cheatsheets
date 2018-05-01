@@ -4,6 +4,7 @@ Cheatsheets
 1. `CS1101S Finals`_
 2. `UQF2101I Test 1`_
 3. `UQF2101I Test 2`_
+4. `CS2100 Finals`_
 
 CS1101S Finals
 --------------
@@ -34,3 +35,14 @@ UQF2101I Test 2
 Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 paper for convenience (there was no restriction on amount of reference material).
 `Download the PDF here
 <https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/uqf2101i-test2-2018s2.pdf>`_.
+
+
+CS2100 Finals
+--------------
+
+.. image:: docs/cs2100-finals-2017s2-0.png
+.. image:: docs/cs2100-finals-2017s2-1.png
+
+Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 paper, as per the limitation then.
+`Download the PDF here
+<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs2100-finals-2017s2.pdf>`_.
