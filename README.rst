@@ -2,9 +2,9 @@ Cheatsheets
 ===========
 
 1. `CS1101S Finals`_
-4. `CS2100 Finals`_
-2. `UQF2101I Test 1`_
-3. `UQF2101I Test 2`_
+2. `CS2100 Finals`_
+3. `UQF2101I Test 1`_
+4. `UQF2101I Test 2`_
 
 CS1101S Finals
 --------------
