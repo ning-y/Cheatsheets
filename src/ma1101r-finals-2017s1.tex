@@ -1,0 +1,508 @@
+\documentclass[10pt,landscape]{article}
+\usepackage{amssymb,amsmath,amsthm,amsfonts,bm}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.2in,left=.2in,right=.2in,bottom=.2in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+
+\newcommand{\matr}[1]{\bm{#1}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\adj}{\operatorname{\textbf{adj}}}
+\newcommand{\lspan}{\operatorname{span}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\theoremstyle{definition}
+\newcommand{\thistheoremname}{}
+\newtheorem*{genericthm*}{\thistheoremname}
+\newenvironment{namedthm*}[1]
+{\renewcommand{\thistheoremname}{#1}\begin{genericthm*}}
+{\end{genericthm*}}
+
+% -----------------------------------------------------------------------
+
+\title{MA1101R Cheatsheet 17/18 Sem 1 Finals}
+
+\begin{document}
+
+\begin{center}
+{\large MA1101R Cheatsheet 17/18 Sem 1 Finals}\\{by Lee Yiyuan and Eugene Lim}
+\end{center}
+
+\raggedright
+\footnotesize
+
+\begin{multicols}{3}
+
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section{Matrices}
+
+\begin{namedthm*}{Definition 2.5.2}
+    Let \(\matr{A} = \left(a_{ij}\right)\) be an \(n \times n\) matrix. Let \(\matr{M}_{ij}\) be an \(\nobreak{(n - 1)\times (n - 1)}\) matrix obtained from \(\matr{A}\) by deleting the \(i\)th row and the \(j\)th column. Then the \textit{determinant} of \(\matr{A}\) is defined as
+    \[
+        \det(\matr{A}) = \begin{cases}
+                    a_{11} & \text{if \(n = 1\)} \\
+                    a_{11}A_{11} + \cdots + a_{1n}A_{1n} & \text{if \(n > 1\)}
+                  \end{cases}
+    \]
+    where
+    \[
+        A_{ij} = (-1)^{i + j} \det\left(\matr{M_{ij}}\right)
+    \]
+    The number \(A_{ij}\) is called the \((i, j)\)\textit{-cofactor} of \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 2.5.8}
+    The determinant of a triangular matrix is equal to the product of its diagonal entries.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 2.5.15}
+    Let \(\matr{A}\) be a square matrix.
+    \begin{enumerate}
+        \item If \(\matr{B}\) is obtained from \(\matr{A}\) by multiplying one row of \(\matr{A}\) by a constant \(k\), then \(\det(\matr{B}) = k\det(\matr{A})\).
+        \item If \(\matr{B}\) is obtained from \(\matr{A}\) by interchanging two rows, then \(\det(\matr{B}) = -\det(\matr{A})\).
+        \item If \(\matr{B}\) is obtained from \(\matr{A}\) by adding a multiple of one row of \(\matr{A}\) to another row, then \(\det(\matr{B}) = \det(\matr{A})\).
+        \item Let \(\matr{E}\) be an elementary matrix of the same size as \(\matr{A}\). Then \(\det(\matr{EA}) = \det(\matr{E})\det(\matr{A})\).
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 2.5.25}
+    If \(\matr{A}\) is invertible, then \(\matr{A}^{-1} = \frac{1}{\det(\matr{A})}\adj(\matr{A})\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 2.5.27}
+    Suppose \(\matr{A}\vect{x} = \vect{b}\) is a linear system where \(\matr{A}\) is an \(n \times n\) matrix. Let \(\matr{A_i}\) be the matrix obtained from \(\matr{A}\) be replacing the \(i\)th column of \(\matr{A}\) by \(\vect{b}\). If \(\matr{A}\) is invertible, then the system has only one solution
+    \[
+        \vect{x} = \frac{1}{\det(\matr{A})}\begin{pmatrix}\det\left(\matr{A_1}\right) \\ \vdots \\ \det\left(\matr{A_n}\right) \end{pmatrix}
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 2.5.24}
+    Let \(\matr{A}\) be a square matrix of order \(n\). Then the \textit{(classical) adjoint} of \(\matr{A}\) is the \(n \times n\) matrix
+    \[
+        \adj(\matr{A}) = \left(A_{ij}\right)_{n \times n}^T
+    \]
+    where \(A_{ij}\) is the \((i, j)\)-cofactor of \(\matr{A}\).
+\end{namedthm*}
+
+\section{Euclidean Spaces}
+
+\begin{namedthm*}{Definition 3.2.3}
+    Let \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) be a set of vectors in \(\mathbb{R}^n\). Then the set of all linear combinations of \(\vect{u_1}, \dots, \vect{u_k}\),
+    \[
+        \{c_1\vect{u_1} + \cdots + c_k\vect{u_k} \mid c_1, \dots, c_k \in \mathbb{R}\}
+    \]
+    is called the \textit{linear span} of \(S\) (or the \textit{linear span} of \(\vect{u_1}, \dots, \vect{u_k}\)) and is denoted by \(\lspan(S)\) (or \(\lspan \{\vect{u_1}, \dots, \vect{u_k} \}\)).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 3.2.10}
+    Let \(S_1 = \{\vect{u_1}, \dots, \vect{u_k}\}\) and \(S_2 = \{\vect{v_1}, \dots, \vect{v_m}\}\) be subsets of \(\mathbb{R}^n\). Then \(\lspan\left(S_1\right) \subseteq \lspan \left(S_2\right)\) if and only if each \(u_i\) is a linear combination of \(\vect{v_1}, \dots, \vect{v_m}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.3.2}
+     Let \(V\) be a subset of \(\mathbb{R}^n\). Then \(V\) is called a \textit{subspace} of \(\mathbb{R}^n\) if \(V = \lspan(S)\) where \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) for some vectors \(\vect{u_1}, \dots, \vect{u_k} \in \mathbb{R}^n \).
+     
+     \medskip
+     \noindent
+     More precisely, \(V\) is called the \textit{subspace spanned} by \(S\) (or the \textit{subspace spanned} by \( \vect{u_1}, \dots, \vect{u_k} \)). We also say that \(S\) \textit{spans} (or \(\vect{u_1}, \dots, \vect{u_k}\) \textit{span}) the subspace \(V\).
+\end{namedthm*}
+
+\begin{namedthm*}{Remark 3.3.8}
+    Let \(V\) be a non-empty subset of \(\mathbb{R}^n\). Then \(V\) is a subspace of \(\mathbb{R}^n\) if and only if 
+    \[
+        \text{for all \(\vect{u}, \vect{v} \in V\) and \(c, d\in \mathbb{R}\)},\enspace c\vect{u} + d\vect{v} \in V
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.4.2}
+    Let \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) be a set of vectors in \(\mathbb{R}^n\). Consider the equation
+    \[
+        c_1\vect{u_1} + \cdots + c_k\vect{u_k} = \vect{0}
+    \]
+    where \(c_1, \dots, c_k\) are variables.
+    \begin{enumerate}
+        \item \(S\) is called a \textit{linearly dependent set} and \(\vect{u_1}, \dots, \vect{u_k}\) are said to be \textit{linearly independent} if the equation has only the trivial solution \(c_1 = \cdots = c_k = 0\).
+        \item \(S\) is called a \textit{linearly independent set} and \(\vect{u_1}, \dots, \vect{u_k}\) are said to be \textit{linearly dependent} if the equation has non-trivial solutions.
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.5.4}
+    Let \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) be a subset of a vector space \(V\). Then \(S\) is called a \textit{basis} for \(V\) if \(S\) is linearly independent and \(S\) spans \(V\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.5.8}
+    Let \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) be a basis for a vector space \(V\) and \(\vect{v}\) a vector in \(V\). By Theorem 3.5.7, \(\vect{v}\) is expressed uniquely as a linear combination
+    \[
+        v = c_1\vect{u_1} + \cdots + c_k\vect{u_k}
+    \]
+    The coefficients \(c_1, \dots, c_k\) are called the \textit{coordinates} of \(\vect{v}\) relative to the basis \(S\).
+    
+    \medskip
+    \noindent
+    The vector \((\vect{v})_S = (c_1, \dots, c_k) \in \mathbb{R}^k\) is called the \textit{coordinate vector} of \(\vect{v}\) relative to the basis \(S\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 3.6.1}
+    Let \(V\) be a vector space which has a basis with \(k\) vectors. Then
+    \begin{enumerate}
+        \item any subset of \(V\) with more than \(k\) vectors is always linearly dependent;
+        \item any subset of \(V\) with less than \(k\) vectors cannot span \(V\).
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.6.3}
+    The \textit{dimension} of a vector space \(V\), denoted by \(\dim(V)\), is defined to be the number of vectors in a basis for \(V\). In addition, we define the dimension of the zero space to be zero.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 3.6.7}
+    Let \(V\) be a vector space of dimension \(k\) and \(S\) a subset of \(V\). The following are equivalent:
+    \begin{enumerate}
+        \item \(S\) is a basis for \(V\).
+        \item \(S\) is linearly independent and \(|S| = k\).
+        \item \(S\) spans \(V\) and \(|S| = k\).
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 3.7.3}
+    Let \(S = \{\vect{u_1}, \dots, \vect{u_k}\}\) and \(T\) be two bases for a vector space. The square matrix \(\matr{P} = \begin{pmatrix}\left[\vect{u_1}\right]_T & \cdots & \left[\vect{u_2}\right]_T\end{pmatrix} \) is called the \textit{transition matrix} from \(S\) to \(T\).
+\end{namedthm*}
+
+\section{Vector Space of Matrices}
+
+\begin{namedthm*}{Definition 4.1.2}
+    Let \(\matr{A} = \left(a_{ij}\right)\) be an \(m \times n\) matrix. The \textit{row space} of \(\matr{A}\) is the subspace of \(\mathbb{R}^n\) spanned by the rows of \(\matr{A}\). The \textit{column space} of \(\matr{A}\) is the subspace of \(\mathbb{R}^m\) spanned by the columns of \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.1.7}
+    Let \(\matr{A}\) and \(\matr{B}\) be row equivalent matrices. Then the row space of \(\matr{A}\) and the row space of \(\matr{B}\) are identical, i.e. elementary row operations preserve the row space of a matrix.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.1.11}
+    Let \(\matr{A}\) and \(\matr{B}\) be row equivalent matrices. Then the following statements hold:
+    \begin{enumerate}
+        \item A given set of columns of \(\matr{A}\) is linearly independent if and only if the set of corresponding columns of \(\matr{B}\) is linearly independent.
+        \item A given set of columns of \(\matr{A}\) forms a basis for the column space of \(\matr{A}\) if and only if the set of corresponding columns of \(\matr{B}\) forms a basis for the column space of \(\matr{B}\).
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.2.1}
+    The row space and column space of a matrix have the same dimension.
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 4.2.3}
+    The \textit{rank} of a matrix is the dimension of its row space (or column space). We denote the rank of a matrix \(\matr{A}\) by \(\rank(\matr{A})\). Note that \(\rank(\matr{A})\) is equal to the number of nonzero rows as well as the number of pivot columns in a row-echelon form of \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.2.8}
+    Let \(\matr{A}\) and \(\matr{B}\) be \(m \times n\) and \(n \times p\) matrices respectively. Then
+    \[
+        \rank(\matr{AB}) \le \min\{\rank(\matr{A}), \rank(\matr{B})\}
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 4.3.1}
+    Let \(\matr{A}\) be an \(m \times n\) matrix. The solution space of the homogeneous system of linear equations \(\matr{A}\vect{x} = \vect{0}\) is known as the \textit{nullspace} of \(\matr{A}\).
+    
+    \medskip
+    \noindent
+    The dimension of the null space of a matrix \(\matr{A}\) is known as the \textit{nullity} of \(\matr{A}\) and is denoted by \(\nullity(\matr{A})\). If \(\matr{A}\) is an \(m \times n\) matrix, it is clear that \(\nullity(\matr{A}) \le n\) since the nullspace is a subspace of \(\mathbb{R}^n\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.3.4}
+    Let \(\matr{A}\) be a matrix with \(n\) columns. Then
+    \[
+        \rank(\matr{A}) + \nullity(\matr{A}) = n
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 4.3.6}
+    Suppose the linear equations \(\matr{A}\vect{x} = \vect{b}\) has a solution \(\vect{v}\). Then the solution set of the system is given by
+    \[
+        M = \left\{\vect{u} + \vect{v} \mid \vect{u} \text{ is an element of the nullspace of \(\matr{A}\)}\right\}
+    \]
+\end{namedthm*}
+
+\section{Orthogonality}
+
+\begin{namedthm*}{Definition 5.2.1}
+    ~
+    \begin{enumerate}
+        \item Two vectors \(\vect{u}\) and \(\vect{v}\) in \(\mathbb{R}^n\) are called \textit{orthogonal} if \(\vect{u}\cdot\vect{v} = 0\).
+        \item A set \(S\) of vectors in \(\mathbb{R}^n\) is called \textit{orthogonal} if every pair of distinct vectors in \(S\) are orthogonal.
+        \item A set \(S\) of vectors in \(\mathbb{R}^n\) is called \textit{orthonormal} if \(S\) is orthogonal and every vector in \(S\) is a unit vector.
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 5.2.4}
+    ~
+    \begin{enumerate}
+        \item A basis \(S\) for a vector space is called an \textit{orthogonal basis} if \(S\) is orthogonal.
+        \item A basis \(S\) for a vector space is called an \textit{orthonormal basis} if \(S\) is orthonormal.
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 5.2.8}
+    If \(S = \left\{\vect{u_1}, \dots, \vect{u_k}\right\}\) is an orthogonal basis for a vector space \(V\), then for any vector \(\vect{w}\) in \(V\),
+    \[
+    \vect{w} = \frac{\vect{w}\cdot\vect{u_1}}{\vect{u_1}\cdot\vect{u_1}}\vect{u_1} + \cdots + \frac{\vect{w}\cdot\vect{u_k}}{\vect{u_k}\cdot\vect{u_k}}\vect{u_k}
+    \]
+    i.e. \((\vect{w})_S = \left(\frac{\vect{w}\cdot\vect{u_1}}{\vect{u_1}\cdot\vect{u_1}}, \dots, \frac{\vect{w}\cdot\vect{u_k}}{\vect{u_k}\cdot\vect{u_k}}\right)\)
+\end{namedthm*}
+
+
+\begin{namedthm*}{Definition 5.2.10}
+    Let \(V\) be a subspace of \(\mathbb{R}^n\). A vector \(\vect{u} \in \mathbb{R}^n\) is said to be \textit{orthogonal} (or \textit{perpendicular}) to \(V\) if \(\vect{u}\) is orthogonal to all vectors in \(V\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 5.2.13}
+    Let \(V\) be a subspace of \(\mathbb{R}^n\). Every vector \(\vect{u} \in \mathbb{R}^n\) can be written uniquely as
+    \[
+        \vect{u} = \vect{n} + \vect{p}
+    \]
+    such that \(\vect{n}\) is a vector orthogonal to \(V\) and \(\vect{p}\) is a vector in \(V\). The vector \(\vect{p}\) is called the (\textit{orthogonal}) \textit{projection} of \(\vect{u}\) onto \(V\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 5.2.15}
+    Let \(V\) be a subspace of \(\mathbb{R}^n\) and \(\vect{w}\) a vector in \(\mathbb{R}^n\). If \(\left\{\vect{u_1}, \dots, \vect{u_k}\right\}\) is an orthogonal basis for \(V\), then
+    \[
+    \frac{\vect{w}\cdot\vect{u_1}}{\vect{u_1}\cdot\vect{u_1}}\vect{u_1} + \cdots + \frac{\vect{w}\cdot\vect{u_k}}{\vect{u_k}\cdot\vect{u_k}}\vect{u_k}
+    \]
+    is the projection of \(\vect{w}\) onto \(V\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 5.2.19}
+    Let \(\left\{\vect{u_1}, \dots, \vect{u_k}\right\}\) be a basis for a vector space \(V\). Let
+    \[
+        \begin{aligned}
+            \vect{v_1} &= \vect{u_1}\\
+            \vect{v_2} &= \vect{u_2} - \frac{\vect{u_2}\cdot\vect{v_1}}{\vect{v_1}\cdot\vect{v_1}}\vect{v_1}\\
+            \vdots\\
+            \vect{v_k} &= \vect{u_k} - \frac{\vect{u_k}\cdot\vect{v_1}}{\vect{v_1}\cdot\vect{v_1}}\vect{v_1} - \cdots - \frac{\vect{u_k}\cdot\vect{v_{k - 1}}}{\vect{v_{k - 1}}\cdot\vect{v_{k - 1}}}\vect{v_{k - 1}}
+        \end{aligned}
+    \]
+    Note that the right side is the projection of the vectors onto the orthogonal basis. To convert it into an orthonormal basis for V, simply divide each \(\vect{v_i}\) by their length.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 5.3.10}
+    Let \(\matr{A}\vect{x} = \vect{b}\) be a linear system. Then \(\vect{u}\) is a least squares solution to \(\matr{A}\vect{x} = \vect{b}\) if and only if \(\vect{u}\) is a solution to \(\matr{A}^T\matr{A}\vect{x} = \matr{A}^T\vect{b}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 5.4.3}
+    A square matrix \(\matr{A}\) is called \textit{orthogonal} if \(\matr{A}^{-1} = \matr{A}^T\).
+\end{namedthm*}
+
+\section{Eigens and Diagonalization}
+
+\begin{namedthm*}{Definition 6.1.3}
+    Let \(\matr{A}\) be a square matrix of order \(n\). A nonzero column vector \(\vect{u}\) in \(\mathbb{R}^n\) is called an \textit{eigenvector} of \(\matr{A}\) if
+    \[
+        \matr{A}\vect{u} = \lambda\vect{u}
+    \]
+    for some scalar \(\lambda\). The scalar \(\lambda\) is called an \textit{eigenvalue} of \(\matr{A}\) and \(\vect{u}\) is said to be an eigenvector of \(\matr{A}\) \textit{associated} with the eigenvalue \(\lambda\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 6.1.6}
+    Let \(\matr{A}\) be a square matrix of order \(n\). The equation
+    \[
+        \det(\lambda\matr{I} - \matr{A}) = 0
+    \]
+    is called the \textit{characteristic equation} of \(\matr{A}\) and the polynomial
+    \[
+        \det(\lambda\matr{I} - \matr{A})
+    \]
+    is called the \textit{characteristic polynomial} of \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 6.1.8}
+    Let \(\matr{A}\) be an \(n \times n \) matrix. The following statements are equivalent:
+    \begin{enumerate}
+        \item \(\matr{A}\) is invertible.
+        \item The linear system \(\matr{A}\vect{x} = \matr{0}\) has only the trivial solution.
+        \item The reduced row-echelon form of \(\matr{A}\) is an identity matrix.
+        \item \(\matr{A}\) can be expressed as a product of elementary matrices.
+        \item \(\det(\matr{A}) \not= 0\)
+        \item The rows of \(\matr{A}\) form a basis for \(\mathbb{R}^n\).
+        \item The columns of \(\matr{A}\) form a basis for \(\mathbb{R}^n\).
+        \item \(\rank(\matr{A}) = n\)
+        \item \(0\) is not an eigenvalue of \(\matr{A}\).
+    \end{enumerate}
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 6.1.9}
+    If \(\matr{A}\) is a triangular matrix, the eigenvalues of \(\matr{A}\) are the diagonal entries of \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 6.1.11}
+    Let \(\matr{A}\) be a square matrix of order \(n\) and \(\lambda\) an eigenvalue of \(\matr{A}\). Then the solution space of the linear system \((\lambda\matr{I} - \matr{A})\vect{x} = \vect{0}\) is called the \textit{eigenspace} of \(\matr{A}\) \textit{associated} with the eigenvalue \(\lambda\) and is denoted by \(E_\lambda\).
+    
+    \medskip
+    \noindent
+    Note that if \(\vect{u}\) is a nonzero vector in \(E_\lambda\), then \(\vect{u}\) is an eigenvector of \(\matr{A}\) associated with the eigenvalue \(\lambda\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 6.2.1}
+    A square matrix \(\matr{A}\) is called \textit{diagonalizable} if there exists an invertible matrix \(\matr{P}\) such that \(\matr{P}^{-1}\matr{A}\matr{P}\) is a diagonal matrix. Here the matrix \(\matr{P}\) is said to \textit{diagonalize} \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 6.2.3}
+    Let \(\matr{A}\) be a square matrix of order \(n\). Then \(\matr{A}\) is diagonlizable if and only if \(\matr{A}\) has \(n\) linearly independent eigenvectors.
+\end{namedthm*}
+
+\begin{namedthm*}{Remark 6.2.5.2}
+    The dimension of an eigenspace \(E_\lambda\) of a square matrix \(\matr{A}\) associated with the eigenvalue \(\lambda\) is at most the multiplicity of \(\lambda\) in the characteristic polynomial of \(\matr{A}\).
+
+    \medskip
+    \noindent
+    Furthermore, \(\matr{A}\) is diagonalizable if and only if the dimension of each eigenspace of \(\matr{A}\) is equal to the multiplicity of its associated eigenvalue.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 6.2.7}
+    Let \(\matr{A}\) be a square matrix of order \(n\). If \(\matr{A}\) has \(n\) distinct eigenvalues, then \(\matr{A}\) is diagonalizable.
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 6.3.2}
+    A square matrix \(\matr{A}\) is called \textit{orthogonally diagonalizable} if there exists an orthogonal matrix \(\matr{P}\) such that \(\matr{P}^T\matr{A}\matr{P}\) is a diagonal matrix. Here the matrix \(\matr{P}\) is said to \textit{orthogonally diagonalize} \(\matr{A}\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 6.3.4}
+    A square matrix is orthogonally diagonalizable if and only if it is symmetric.
+\end{namedthm*}
+
+\section{Linear Transformations}
+
+\begin{namedthm*}{Definition 7.1.1}
+    A \textit{linear transformation} is a mapping \(T : \mathbb{R}^n \to \mathbb{R}^m\) of the form
+    \[
+        T\left(
+            \begin{pmatrix}
+                x_1\\ 
+                \vdots\\ 
+                x_n
+            \end{pmatrix}
+        \right) = 
+            \begin{pmatrix} 
+                a_{11}x_1 + \cdots + a_{1n}x_n\\
+                \vdots\\
+                a_{m1}x_1 + \cdots + a_{mn}x_n
+            \end{pmatrix}
+        \enspace\text{for}\enspace\begin{pmatrix}x_1\\ \vdots \\ x_n\end{pmatrix} \in \mathbb{R}^n
+    \]
+    where \(a_{11}, \dots, a_{mn}\) are real numbers. In particular, if \(n = m\), \(T\) is also called a \textit{linear operator} on \(\mathbb{R}^n\). We can rewrite the formula of \(T\) as
+    \[
+        T\left(
+            \begin{pmatrix}
+                x_1\\ 
+                \vdots\\ 
+                x_n
+            \end{pmatrix}
+        \right) = 
+            \begin{pmatrix} 
+                a_{11} \cdots a_{1n}\\
+                \vdots\\
+                a_{m1} \cdots a_{mn}
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_1\\
+                \vdots\\
+                x_n
+            \end{pmatrix}
+    \]
+    The matrix \(\left(a_{ij}\right)_{m \times n}\) above is called the \textit{standard matrix} for \(T\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 7.1.10}
+    Let \(S: \mathbb{R}^n \to \mathbb{R}^m\) and \(T : \mathbb{R}^m \to \mathbb{R}^k\) be linear transformations. The \textit{composition} of \(T\) with \(S\), denoted by \(T \circ S\), is a mapping from \(\mathbb{R}^n \to \mathbb{R}^k\) such that
+    \[
+        (T \circ S)(\vect{u}) = T(S(\vect{u}))\enspace\text{for \(\vect{u} \in \mathbb{R}^n\)}
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 7.2.1}
+    Let \(T : \mathbb{R}^n \to \mathbb{R}^m\) be a linear transformation. The \textit{range} of \(T\), denoted by \(R(T)\), is the set of images of \(T\), i.e.
+    \[
+        R(T) = \left\{ T(\vect{u}) \mid \vect{u} \in \mathbb{R}^n \right\}\subseteq\mathbb{R}^m
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 7.2.4}
+    Let \(T : \mathbb{R}^n \to \mathbb{R}^m\) be a linear transformation and \(\matr{A}\) the standard matrix for \(T\). Then the range of T is defined as:
+    \[
+        R(T) = \text{the column space of \(\matr{A}\)}
+    \]
+    which is a subspace of \(\mathbb{R}^m\). This is also called the range of the linear transformation.
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 7.2.5}
+    Let \(T\) be a linear transformation. The dimension of \(R(T)\) is called the \textit{rank} of \(T\) and is denoted by \(\rank(T)\).
+
+    \medskip
+    \noindent
+    By Theorem 7.2.4, if \(\matr{A}\) is the standard matrix for \(T\), then \(\rank(T)\ = \rank(\matr{A})\).
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 7.2.7}
+    Let \(T : \mathbb{R}^n \to \mathbb{R}^m\) be a linear transformation. The \textit{kernel} of \(T\), denoted by \(\Ker(T)\), is the set of vectors in \(\mathbb{R}^n\) whose image is the zero vector in \(\mathbb{R}^m\), i.e.
+    \[
+        \Ker(T) = \left\{\vect{u}\mid T(\vect{u}) = \vect{0}\right\} \subseteq \mathbb{R}^n
+    \]
+    This is also called the nullity of T.
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 7.2.9}
+    Let \(T : \mathbb{R}^n \to \mathbb{R}^m\) be a linear transformation and \(\matr{A}\) the standard matrix for \(T\). Then
+    \[
+        \Ker(T) = \text{the nullspace of \(\matr{A}\)}
+    \]
+\end{namedthm*}
+
+\begin{namedthm*}{Definition 7.2.10}
+    Let \(T\) be a linear transformation. The dimension of \(\Ker(T)\) is called the \textit{nullity} of \(T\) and is denoted by \(\nullity(T)\).
+
+    \medskip
+    \noindent
+    By Theorem 7.2.9, if \(\matr{A}\) is the standard matrix for \(T\), then \(\nullity(T) = \nullity(\matr{A})\).
+\end{namedthm*}
+
+\begin{namedthm*}{Theorem 7.2.13}
+    If \(T : \mathbb{R}^n \to \mathbb{R}^m\) is a linear transformation, then
+    \[
+        \rank(T) + \nullity(T) = n   
+    \]
+\end{namedthm*}
+
+\end{multicols}
+
+\end{document}
+
