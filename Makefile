@@ -1,9 +1,17 @@
 TEX_GARBAGE = *.aux *.bcf *.log *.out *.run.xml
 TEX_FILES = $(wildcard src/*.tex)
-PDF_FILES = $(patsubst src/%,pdf/%,$(TEX_FILES:.tex=.pdf))
+PDF_FILES = $(patsubst src/%.tex,pdf/%.pdf,$(TEX_FILES))
+PNG_FILES = $(patsubst src/%.tex,docs/%-0.png,$(TEX_FILES))
+
+all : pdf docs
 
 clean :
 	cd pdf && rm -f $(TEX_GARBAGE)
+
+docs: $(PNG_FILES)
+
+docs/%-0.png : pdf/%.pdf
+	convert -density 300 $< -quality 90 $(patsubst pdf/%,docs/%,$(<:.pdf=.png))
 
 pdf: $(PDF_FILES)
 
