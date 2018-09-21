@@ -5,15 +5,15 @@ PNG_FILES = $(patsubst src/%.tex,docs/%-0.png,$(TEX_FILES))
 
 all : pdf docs
 
-clean :
-	cd pdf && rm -f $(TEX_GARBAGE)
+pdf: $(PDF_FILES)
+
+pdf/%.pdf : src/%.tex
+	cd src && pdflatex -output-directory ../pdf $(patsubst src/%,%,$<)
 
 docs: $(PNG_FILES)
 
 docs/%-0.png : pdf/%.pdf
 	convert -density 300 $< -quality 90 $(patsubst pdf/%,docs/%,$(<:.pdf=.png))
 
-pdf: $(PDF_FILES)
-
-pdf/%.pdf : src/%.tex
-	cd src && pdflatex -output-directory ../pdf $(patsubst src/%,%,$<)
+clean :
+	cd pdf && rm -f $(TEX_GARBAGE)
