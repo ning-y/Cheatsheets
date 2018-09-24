@@ -6,7 +6,7 @@
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{enumitem}
-\graphicspath{{images/cs2100/}}
+\graphicspath{{images/cs2105/}}
 
 \begin{document}
 \setlength\parindent{0pt} %TODO this somehow messes up paragraph vertical spacing as well?
@@ -43,6 +43,48 @@
 \item If there is high throughput $\Rightarrow$ Large amounts of data can be transferred at a time
 \item If there is timing/latency guarantee $\Rightarrow$ interactive applications feel realistic
 \item Protocol can specify security e.g encryption, checksum verification, end-point authentication
+\end{itemize}
+
+\textbf{TCP}
+\begin{itemize}[leftmargin=*]
+\item A TCP Handshake must be formed before two-way connection between client and host
+\item Reliable Data Transfer: data is received in proper order without erroneous, duplicate or missing byes
+\item Has a flow-control and congestion-control mechanism
+\end{itemize}
+
+\textbf{UDP}
+\begin{itemize}[leftmargin=*]
+\item Lightweight and connectionless
+\item Unreliable data transfer service: no guarantee of reaching in the correct order, or even reaching in the first place
+\item No congestion-control mechanism
+\end{itemize}
+
+\textbf{HTTP}
+\begin{itemize}[leftmargin=*]
+\item Stateless protocol -- cookies hold state (e.g preserve shopping cart)
+\item Common statuses 200 OK, 301 Moved Permanently, 400 Bad Request, 403 Forbidden,404 Not Found, 500 Internal Server Error
+\item A Web Cache keeps copies of recently requested objects in this storage, and makes TCP handshakes with server to get the object (if it's not cached)
+\item Non-persistence (1.0): One handshake for establishing connection, then \texttt{one file} is requested, followed by another handshake to close connection
+\item Persistence (1.1): One handshake for establishing connection, then files are requested sequentially. Connection is left open by server
+\item Pipelining (1.1): New requests made before previous ones are resolved, but order of objects is preserved (by TCP)
+\item Multiplexing (2): Responses can come back in any order, or even partially
+\end{itemize}
+
+\textbf{DNS}
+\begin{itemize}[leftmargin=*]
+\item DNS (Domain Name Server) holds Resource Records (RR)
+  \begin{itemize}[leftmargin=*]
+  \item (Name, Value, Type, TTL)
+  \item \texttt{Type=A} $\Rightarrow$ Name: hostname, Value: IP
+  \item \texttt{Type=NS} $\Rightarrow$ Name: domain, Value: IP of authoritative DNS
+  \item \texttt{Type=CNAME} $\Rightarrow$ Name: alias hostname, Value: canonical hostname
+  \item \texttt{Type=MX} $\Rightarrow$ Name: alias hostname, Value: canonical name of mail server
+  \end{itemize}
+\item Root servers direct queries to TLD servers, only ~13 root servers in the world
+\item TLD (Top-level Domain) responsible for \texttt{.com, .org, .net, .sg...}
+\item Authoritative server keeps hostname-IP mappings of organization's named hosts
+\item Local DNS acts as a proxy, caches previously retrieved mappings to cache. This allows for faster lookup. Owned by ISPs
+\item All DNS servers can implement caching, so root servers are often not called upon
 \end{itemize}
 
 \textbf{Representation \& Complements}
@@ -158,7 +200,6 @@
 \item Produce POS with $OR >> AND$ or $NOR >> NOR$
 \item With negated outputs, use NAND to simulate OR and NOR to simulate AND
 \end{itemize}
-{\centering \includegraphics[scale=0.12]{nor_nand}}
 
 \textbf{K-maps}
 \begin{itemize}[leftmargin=*]
@@ -173,7 +214,6 @@
 
 \textbf {Delays} : Note that for combinatorial circuits, there is a delay: for every logic gate with $n$ inputs, calculate $delay = max(t_1, t_2, \dots t_n) + t_delay$
 \begin{center}
-\includegraphics[scale=0.18]{circuit_delay}
 \end{center}
 
 \columnbreak
@@ -185,21 +225,18 @@
 \\ Use minterm as selection line, using 0/1 as inputs. For smaller size multiplexer, use one of the variables for input lines.
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.16]{multiplexer}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Demultiplexer}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.16]{demultiplexer}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Encoder}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.18]{encoder}}
 \end{multicols*}
 
 \begin{multicols*}{2}
@@ -208,14 +245,12 @@
 Alternatively, use NOR on maxterms.
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.13]{decoder}}
 \end{multicols*}
 
 \begin{multicols*}{2}
 \textbf{{Priority Encoder}}
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.17]{priorityEncoder}}
 \end{multicols*}
 
 \begin{multicols*}{2}
@@ -223,13 +258,11 @@ Alternatively, use NOR on maxterms.
 \\ Remove a decoder that gives duplicate outputs (w.r.t another decoder) by using an OR gate with the outputs from the first decoder, and the enable input of the second.
 \vfill\null
 \columnbreak
-{\centering \includegraphics[scale=0.15]{largerComponents}}
 \end{multicols*}
 
 %SEQUENTIAL LOGIC%
 {\small\textbf{Sequential Logic }}
 \\ \textbf{{Excitation Tables}}
-\\ {\centering \includegraphics[scale=0.10]{excitationTables}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item For $m$ flip-flops, up to $2^m$ states exist.
@@ -240,7 +273,6 @@ Alternatively, use NOR on maxterms.
 \end{itemize}
 
 \textbf{{Static RAM}}
-\\ {\centering \includegraphics[scale=0.13]{staticRAM}}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
 \item Dyanmic RAM does not use flip-flop as cells
@@ -366,15 +398,7 @@ Alternatively, use NOR on maxterms.
 \vfill\null
 \columnbreak
 \begin{center}
-{\centering \includegraphics[angle=90,origin=c,scale=0.35]{dataPath}}
-\\ {\centering \includegraphics[angle=90,origin=c,scale=0.30]{fourBitRepresentation}}
-{\centering \includegraphics[scale=0.13]{ALUControl}}
-\\ {\centering \includegraphics[angle=90,origin=c,scale=0.25]{instructionControl}}
-{\centering \includegraphics[angle=90,origin=c,scale=0.34]{powersOfTwo}}
 \vspace{5mm} %5mm vertical space
-\\ {\centering \includegraphics[scale=0.25]{expandingOpcode} }
-\\ Max (1 type A) = $1 + (2^6 - 1) * 2^5$
-\\ Min (1 type B) = $(2^6 - 1) + 2^5$
 
 \vspace{5mm} %5mm vertical space
 \begin{tabular}{ |c c| } 
