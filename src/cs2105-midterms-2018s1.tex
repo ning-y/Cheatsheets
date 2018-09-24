@@ -15,22 +15,34 @@
 \pagenumbering{gobble}
 
 \begin{center}
-{\large CS2100 Cheatsheet 17/18 Sem 2}\\{by vig}
+{\large CS2105 Cheatsheet 18/19 S1 Midterms}\\{by vig}
 \end{center}
     \begin{multicols*}{4}
 
-% NUMBER SYSTEMS & DATA REPRESENTATION %
-{\small\textbf{Number Systems \& Data Representation }}
-\textbf{Sizes of data/types}
+% APPLICATION LAYER %
+{\small\textbf{Application Layer}}
+\textbf{Processes}
 \begin{itemize}[leftmargin=*]
 \itemsep -0.5em
-\item byte : 8 bits 
-\item nibble : 4 bits (half-byte)
-\item word : multiple bytes (1, 2, 4) (for MIPS it's 4)
-\item \texttt{int} : 4 bytes (1 bit for sign, 31 for magnitude)
-\item \texttt{float} : 4 bytes
-\item \texttt{double} : 8 bytes
-\item \texttt{char} : 1 byte
+\item Applications send \texttt{messages} to each other using \texttt{sockets}
+\item Application processes can only control:
+  \begin{itemize}[leftmargin=*]
+  \item transport protocol used
+  \item minor transport-layer parameters
+  \end{itemize}
+\item To send a message to another application process we need:
+  \begin{itemize}[leftmargin=*]
+  \item IP Address of the host
+  \item Destination port number
+  \end{itemize}
+\end{itemize}
+
+\textbf{Transport services in general}
+\begin{itemize}[leftmargin=*]
+\item If there is Reliable Data Transfer (TCP) $\Rightarrow$ No loss
+\item If there is high throughput $\Rightarrow$ Large amounts of data can be transferred at a time
+\item If there is timing/latency guarantee $\Rightarrow$ interactive applications feel realistic
+\item Protocol can specify security e.g encryption, checksum verification, end-point authentication
 \end{itemize}
 
 \textbf{Representation \& Complements}
