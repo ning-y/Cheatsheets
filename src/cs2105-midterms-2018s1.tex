@@ -97,18 +97,36 @@
 
 \textbf{RDP}
 \begin{itemize}[leftmargin=*]
-  \item Checksum implemented if channel can flip bits (2.0)
-  \item ACK/NAK used to recover from bit errors (2.0)
-  \item ACK/NAK used to recover from bit errors (2.0)
-  \item Sequence number used to account for ACK/NAK corruption (2.1)
-  \item ACK$0/1$ used instead of NAK (2.2) for simplicity
-  \item Timeout added to account for packet loss (but not reordered) (3.0)
+\item Checksum implemented if channel can flip bits (2.0)
+\item ACK/NAK used to recover from bit errors (2.0)
+\item ACK/NAK used to recover from bit errors (2.0)
+\item Sequence number used to account for ACK/NAK corruption (2.1)
+\item ACK$0/1$ used instead of NAK (2.2) for simplicity
+\item Timeout added to account for packet loss (but not reordered) (3.0)
 \end{itemize}
 
 \textbf{Pipelining}
 \begin{itemize}[leftmargin=*]
+\item Go-Back-N:
+  \begin{itemize}[leftmargin=*]
+  \item Receiver sends cumulative ACK $\Rightarrow$ all packets $\leq$ $n$ have been received $\Rightarrow$ ensures order
+  \item Receiver discards any packets not in order
+  \item Sender attaches $k$-bits sequence to packet header $\Rightarrow$ can represent at least $[0, n]$
+  \item Sliding window of size $n$ is kept
+  \item Keep timer for oldest unACKed packet
+  \item Resend all $n$ packets in window on timeout
+  \end{itemize}
+\item Selective Repeat:
+  \begin{itemize}[leftmargin=*]
+    \item Receives acknowledges packets individually
+    \item Receives buffers out-of-order packets for eventual in-order delivery (to upper layer 
+    \item Sender maintains timer for each unACKed packet $\Rightarrow$ only retransmit that packet on timeout
+    \item Sender attaches $k$-bits sequence to packet header $\Rightarrow$ can represent at least $[0, n]$
+    \item Sliding window of size $n$ is kept
+    \item Keep timer for oldest unACKed packet
+    \item Resend all $n$ packets in window on timeout
+  \end{itemize}
 \end{itemize}
-
 
     \end{multicols*}
 \end{document}
