@@ -1,0 +1,495 @@
+\documentclass[a4paper]{article}
+
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{amsfonts}       % \mathbb
+\usepackage{amssymb}        % \nmid
+\usepackage{enumitem}       % [leftmargin=*]
+\usepackage{IEEEtrantools}
+
+\newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
+\newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
+
+\begin{document}
+
+\scriptsize                         % Small fonts
+\pagenumbering{gobble}              % No page numbers
+\setlength\parindent{0pt}           % No indents at start of paragraphs
+\setlength{\abovedisplayskip}{3pt}  % Less spacing before equations
+\setlength{\belowdisplayskip}{3pt}  % less spacing after equations
+
+% TITLE %
+\begin{center}
+{\large CS1231 Cheatsheet}\\{for midterms, by ning}
+\end{center}
+
+% BODY %
+\begin{multicols*}{4}
+
+%% Preface %%
+Appendix A of Epp is not covered. Theorems, corollaries, lemmas, etc. not
+mentioned in the lecture notes are marked with an asterisk (*).\\
+
+%% Proofs %%
+\heading{Proofs} \\
+
+\subheading{Basic Notation}
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+    \item $\mathbb{R}$: the set of all real numbers
+    \item $\mathbb{Z}$: the set of integers (includes $0$)
+    \item $\mathbb{Q}$: the set of rationals
+    \item $\exists$:    there exists...
+    \item $\exists!$:   there exists a unique...
+    \item $\forall$:    for all...
+    \item $\in$:        member of...
+    \item $\ni$:        such that...
+\end{itemize}
+
+\subheading{Proof Types}
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+  \item \textbf{By Construction}: finding or giving a set of directions to
+    reach the statement to be proven true.
+  \item \textbf{By Contraposition}: proving a statement through its logical
+    equivalent contrapositive.
+  \item \textbf{By Contradiction}: proving that the negation of the statement
+    leads to a logical contradiction.
+  \item \textbf{By Exhaustion}: considering each case.
+  \item \textbf{By Mathematical Induction}: proving for a base case, then an
+    induction step.
+\end{itemize}
+
+\subheading{Order of Operations}
+
+First $\sim$ (also represented as $\neg$). No priority within $\land$ and
+$\lor$, so $p \land q \lor r$ is ambiguous and should be written as
+$(p \land q) \lor r$ or $p \land (q \lor r)$. The implication, $\rightarrow$ is
+performed last. Can be overwritten by parenthesis.\\
+
+\subheading{Universal \& Existential Generalisation}\\
+\textit{`All boys wear glasses'} is written as
+  $$\forall x (\text{Boy}(x) \rightarrow \text{Glasses}(x)) $$
+If conjunction was used, this statement would be falsified by the existence of a
+`non-boy' in the domain of $x$.\\
+
+\textit{`There is a boy who wears glasses'} is written as
+  $$\exists x (\text{Boy}(x) \land \text{Glasses}(x)) $$
+If implication was used, this statement would true even if the domain of $x$ is
+empty.\\
+
+\subheading{Valid Arguments as Tautologies}\\
+All valid arguments can be \textit{restated} as tautologies.\\
+
+\subheading{Rules of Inference}\\
+Modus ponens
+\begin{eqnarray*}
+  &p \rightarrow q \\
+  &p \\
+  &\boldsymbol{\cdot}\; q
+\end{eqnarray*}
+Modus tollens
+\begin{eqnarray*}
+  &p \rightarrow q \\
+  &\neg q \\
+  &\boldsymbol{\cdot}\; \neg p
+\end{eqnarray*}
+Generalization
+\begin{eqnarray*}
+  &p\\
+  &\boldsymbol{\cdot}\; p \lor q
+\end{eqnarray*}
+Specialization
+\begin{eqnarray*}
+  &p \land q\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+Elimination
+\begin{eqnarray*}
+  &p \lor q\\
+  &\neg q\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+Transitivity
+\begin{eqnarray*}
+  &p \rightarrow q\\
+  &q \rightarrow r\\
+  &\boldsymbol{\cdot}\; p \rightarrow r
+\end{eqnarray*}
+Proof by Division into Cases
+\begin{eqnarray*}
+  &p \lor q\\
+  &p \rightarrow r\\
+  &q \rightarrow r\\
+  &\boldsymbol{\cdot}\; r
+\end{eqnarray*}
+Contradiction Rule
+\begin{eqnarray*}
+  &\neg p \rightarrow \textbf{c}\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+
+\subheading{Universal Rules of Inference}\\
+Only modus ponens, modus tollens, and transitivity have universal versions in
+the lecture notes.\\
+
+\subheading{Implicit Quantification}\\
+The notation $P(x) \implies Q(x)$ means that every element in the truth set of
+$P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
+\rightarrow Q(x)$.\\
+
+The notation $P(x) \iff Q(x)$ means that $P(x)$ and $Q(x)$ have identical truth
+sets, or equivalently, $\forall x, P(x) \leftrightarrow Q(x)$.\\
+
+\subheading{Implication Law}\\
+$$p \rightarrow q \equiv \neg p \lor q$$
+
+\subheading{Universal Instantiation}\\
+If some property is true of everything in a set, then it is true of any
+particular thing in the set.\\
+
+\subheading{Universal Generalization}\\
+If $P(c)$ must be true, and we have assumed nothing about $c$, then $\forall x,
+P(x)$ is true.\\
+
+\subheading{Regular Induction}\\
+\begin{eqnarray*}
+  &P(0) \\
+  &\forall k \in \mathbb{N}, P(k) \rightarrow P(k+1) \\
+  & \forall
+\end{eqnarray*}
+
+\subheading{Epp T2.1.1 Logical Equivalences}\\
+Commutative Laws
+  $$ p \land q \equiv q \land p $$
+  $$ p \lor  q \equiv q \lor  p $$
+Associative Laws
+  $$ (p \land q) \land r \equiv p \land (q \land r) $$
+  $$ (p \lor  q) \lor  r \equiv p \lor  (q \lor  r) $$
+Distributive Laws
+  $$ p \land (q \lor  r) \equiv (p \land q) \lor  (p \land r) $$
+  $$ p \lor  (q \land r) \equiv (p \lor  q) \land (p \lor  r) $$
+Identity Laws
+  $$ p \land \textbf{t} \equiv p $$
+  $$ p \lor  \textbf{c} \equiv p $$
+Negation Laws
+  $$ p \lor  \neg p \equiv \textbf{t} $$
+  $$ p \land \neg p \equiv \textbf{c} $$
+Double Negative Law
+  $$ \neg ( \neg p ) \equiv p $$
+Idempotent Laws
+  $$ p \land p \equiv p $$
+  $$ p \lor  p \equiv p $$
+Universal Bound Laws
+  $$ p \lor  \textbf{t} \equiv \textbf{t} $$
+  $$ p \land \textbf{c} \equiv \textbf{c} $$
+De Morgan's Laws
+  $$ \neg ( p \land q ) \equiv \neg p \lor  \neg q $$
+  $$ \neg ( p \lor  q ) \equiv \neg p \land \neg q $$
+Absorption Laws
+  $$ p \lor  (p \land q) \equiv p $$
+  $$ p \land (p \lor  q) \equiv p $$
+Negations of $\textbf{t}$ and $\textbf{c}$
+  $$ \neg \textbf{t} \equiv \textbf{c} $$
+  $$ \neg \textbf{c} \equiv \textbf{t} $$
+
+\subheading{Definition 2.2.1 (Conditional)}\\
+If $p$ and $q$ are statement variables, the conditional of $q$ by $p$ is ``if
+$p$ then $q$" or ``$p$ implies $q$", denoted $p \rightarrow q$. It is false
+when $p$ is true and $q$ is false; otherwise it is true. We call $p$ the
+\textit{hypothesis} (or \textit{antecedent}), and $q$ the \textit{conclusion}
+(or \textit{consequent}).\\
+
+A conditional statement that is true because its hypothesis is false is called
+\textit{vacuously true} or \textit{true by default}.\\
+
+\subheading{Definition 2.2.2 (Contrapositive)}\\
+The contrapositive of $p \rightarrow q$ is $\neg q \rightarrow \neg p$.\\
+
+\subheading{Definition 2.2.3 (Converse)}\\
+The converse of $p \rightarrow q$ is $q \rightarrow p$.\\
+
+\subheading{Definition 2.2.4 (Inverse)}\\
+The inverse of $p \rightarrow q$ is $\neg p \rightarrow \neg q$.\\
+
+\subheading{Definition 2.2.6 (Biconditional)}\\
+The biconditional of $p$ and $q$ is denoted $p \leftrightarrow q$ and is true if
+both $p$ and $q$ have the same truth values, and is false if $p$ and $q$ have
+opposite truth values.\\
+
+\subheading{Definition 2.2.7 (Necessary \& Sufficient)}\\
+``$r$ is sufficient for $s$" means $r \rightarrow s$, ``$r$ is necessary for
+$s$" means $\neg r \rightarrow \neg s$ or equivalently $s \rightarrow r$.\\
+
+\subheading{Definition 2.3.2 (Sound \& Unsound Arguments)}\\
+An argument is called \textit{sound}, iff it is valid and all its premises are
+true.\\
+
+\subheading{Definition 3.1.3 (Universal Statement)}\\
+A \textit{universal statement} is of the form $$\forall x \in D, Q(x)$$ It is
+defined to be true iff $Q(x)$ is true for every $x$ in $D$. It is defined to be
+false iff $Q(x)$ is false for at least one $x$ in D.\\
+
+\subheading{Definition 3.1.4 (Existential Statement)}\\
+A \textit{existential statement} is of the form $$\exists x \in D \text{ s.t. }
+Q(x)$$ It is defined to be true iff $Q(x)$ is true for at least one $x$ in $D$.
+It is defined to be false iff $Q(x)$ is false for all $x$ in $D$.\\
+
+\subheading{Theorem 3.2.1 (Negation of Universal State.)}\\
+The negation of a statement of the form $$\forall x \in D, P(x)$$ is logically
+equivalent to a statement of the form $$\exists x \in D \text{ s.t. } \neg
+P(x)$$
+
+\subheading{Theorem 3.2.2 (Negation of Existential State.)}\\
+The negation of a statement of the form $$\exists x \in D \text{ s.t. } P(x)$$
+is logically equivalent to a statement of the form $$\forall x \in D, \neg
+P(x)$$
+
+\heading{Number Theory} \\
+
+\subheading{Representation of Integers}\\
+Given any positive integer $n$ and base $b$, repeatedly apply the
+Quotient-Remainder Theorem to get,
+\begin{eqnarray*}
+  n   &= bq_0 + r_0 \\
+  q_0 &= bq_1 + r_1 \\
+  q_1 &= bq_2 + r_2 \\
+  & \cdots \\
+  q_{m-1} &= bq_m + r_m
+\end{eqnarray*}
+
+The process stops when $q_m = 0$. Eliminating the quotients $q_i$ we get,
+  $$ n = r_mb^m + r_{m-1}b^{m-1} + \cdots r_1b + r_0 $$
+
+Which may be represented compactly in base $b$ as a sequence of the digits
+$r_i$,
+  $$ n = (r_m r_{m-1} \cdots r_1 r_0)_b $$
+
+% TODO: See appendix A of Epp's textbook for all the properties
+\subheading{Properties (of Numbers)} \\
+Closure, i.e.
+$$\forall x, y \in \mathbb{Z},\;
+         x + y \in \mathbb{Z},\text{ and }
+            xy \in \mathbb{Z}$$
+Commutativity, i.e.
+  $$a+b=b+a\text{ and }ab=ba$$
+Distributivity, i.e.
+  $$a(b+c) = ab + ac \text{ and } (b+c)a = ba + ca$$
+Trichotomy, i.e.
+  $$(a < b) \oplus (b < a) \oplus (a = b)$$
+(Can be used without proof)\\
+
+\subheading{Definition 1.1.1 (Colorful)}
+
+An integer $n$ is said to be colorful if there exists some integer $k$ such
+that $n = 3k$.\\
+
+\subheading{Definition 1.3.1 (Divisibility)}\\
+If $n$ and $d$ are integers and $d \neq 0$,
+  $$ d|n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
+
+\subheading{Proposition 1.3.2 (Linear Combination)}
+$$\forall a, b, c \in \mathbb{Z},\;
+    a | b \land a | c \rightarrow
+    \forall x, y \in \mathbb{Z},\;
+    a | (bx + cy)$$
+If $a$ divides $b$ and $c$, then it also divides their linear combination
+$(bx + cy)$.\\
+
+\subheading{Theorem 4.1.1 (Linear Combination)}\\
+$$\forall a,b,c \in \mathbb{Z},\;
+  a | b \land a | c \rightarrow \forall x,y \in \mathbb{Z}, a | (bx + cy)$$
+
+\subheading{Epp T4.3.3 (Transitivity of Divisibility)}
+$$\forall a, b, c \in \mathbb{Z},\;
+  a | b \land b | c \rightarrow a | c$$
+
+\subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}
+Given any integer $a$ and any positive integer $b$, there exist unique integers
+$q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b $$
+
+\subheading{Definition 4.2.1 (Prime number)}\\
+\begin{IEEEeqnarray*}{rCl}
+  n\text{ is prime } &\iff& \forall r, s \in \mathbb{Z}^+ \\
+                    &&n = rs \rightarrow \\
+                    &&(r=1 \land s=n) \lor (r=n \land s=1) \\
+  n\text{ is composite } &\iff& \exists r, s \in \mathbb{Z}^+ \text{ s.t. }\\
+                    &&n = rs\;\land \\
+                    &&(1 < r < n) \land (1 < s < n)
+\end{IEEEeqnarray*}
+
+\subheading{Proposition 4.2.2}\\
+For any two primes $p$ and $p'$,
+  $$p\;|\;p' \rightarrow p = p'$$
+
+\subheading{Theorem 4.2.3}\\
+If $p$ is a prime and $x_1, x_2, \cdots, x_n$ are any integers s.t.
+$p\;|\;x_1x_2\cdots x_n$, then $p\;|\;x_i$ for some $x_i, i \in \{1, 2, \cdots,
+n\}$.\\
+
+\subheading{Epp T4.3.5 (Unique Prime Factorisation)}\\
+Given any integer $n > 1$
+\begin{IEEEeqnarray*}{rCl}
+  \exists k                  &\in& \mathbb{Z}^+, \\
+  \exists p_1,p_2,\cdots,p_k &\in& \text{ primes}, \\
+  \exists e_1,e_2,\cdots,e_k &\in& \mathbb{Z}^+,
+\end{IEEEeqnarray*}
+such that $$n=p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k}$$
+and any other expression for $n$ as a product of prime numbers is identical,
+except perhaps for the order in which the factors are written.\\
+
+\subheading{Epp Proposition 4.7.3}\\
+For any $a \in \mathbb{Z}$ and any prime $p$,
+  $$ p\;|\;a \rightarrow p \nmid (a+1) $$
+
+\subheading{Epp T4.7.4 (Infinitude of Primes)}\\
+The set of primes is infinite.\\
+
+\subheading{Definition 4.3.1 (Lower Bound)}\\
+An integer $b$ is said to be a \textit{lower bound} for a set $X \subseteq
+\mathbb{Z}$ if $b \leq x$ for all $x \in X$.\\
+
+Does not require $b$ to be in $X$.\\
+
+\subheading{Theorem 4.3.2 (Well Ordering Principle)}\\
+If a non-empty set $S \subseteq \mathbb{Z}$ has a lower bound, then $S$ has a
+least element.\\
+
+Note three conditions: $|S| > 0$, $S \subseteq \mathbb{Z}$, and $S$ has lower
+bound.\\
+
+Likewise, if ... upper bound ... has a greatest element.\\
+
+\subheading{Proposition 4.3.3 (Uniqueness of least element)}\\
+If a set $S$ has a least element, then the least element is unique.\\
+
+\subheading{Proposition 4.3.4 (Uniqueness of greatest e.)}\\
+If a set $S$ has a greatest element, then the greatest element is unique.\\
+
+\subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}\\
+Given any integer $a$ and any positive integer $b$, there exist unique integers
+$q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b$$
+
+\subheading{Definition 4.5.1 (Greatest Common Divisor)}\\
+Let $a$ and $b$ be integers, not both zero. The \textit{greatest common divisor}
+of $a$ and $b$, denoted $\mathrm{gcd}(a, b)$, is the integer $d$ satisfying
+
+\begin{enumerate} \itemsep -0.5em
+  \item $d\;|\;a$ and $d\;|\;b$
+  \item $\forall c \in \mathbb{Z}\;((c\;|\;a)\ \land (c\;|\;b) \rightarrow c \leq d)$
+\end{enumerate}
+
+\subheading{Proposition 4.5.2 (Existence of gcd)}\\
+For any integers $a$, $b$, not both zero, their gcd exists and is unique.\\
+
+\subheading{Theorem 4.5.3 (B\'ezout's Identity)}\\
+Let $a$, $b$ be integers, not both zero, and let $d = \mathrm{gcd}(a, b)$. Then
+there exists integers $x$, $y$ such that $$ax + by = d$$
+
+Or, the gcd of two integers is some linear combination of the said numbers,
+where $x$, $y$ above have multiple solution pairs once a solution pair $(x, y)$
+is found. Also solutions, for any integer $k$,
+
+$$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
+
+\subheading{*Epp T8.4.8 (Euclid's Lemma)}\\
+For all $a, b, c \in \mathbb{Z}$, if $\mathrm{gcd}(a, c) = 1$ and $a\;|\;bc$,
+then $a\;|\;b$.\\
+
+\subheading{*Epp Lemma 4.8.2}\\
+If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
+
+$$\mathrm{gcd}(a, b)= \mathrm{gcd}(b, r)$$
+
+\subheading{Definition 4.5.4 (Relatively Prime)}\\
+Integers $a$ and $b$ are \textit{relatively prime} (or \textit{coprime}) iff
+$\mathrm{gcd}(a,b)=1$.\\
+
+\subheading{Proposition 4.5.5}\\
+For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
+$b$, then $c\;|\;\mathrm{gcd}(a,b)$.\\
+
+% TODO: LCM for finals
+
+\subheading{Definitoin 4.7.1 (Congruence modulo)}\\
+Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
+\textit{congruent} to $n$ \textit{modulo} $d$ and write
+
+$$ m \equiv n\ (\mathrm{mod}\; d) $$
+
+iff
+
+$$ d\;|\;(m-n) $$
+
+More concisely,
+
+$$ m \equiv n\ (\mathrm{mod}\; d) \iff d\;|\;(m-n) $$
+
+\subheading{Epp T8.4.1 (Modular Equivalences)}\\
+Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
+equivalent,
+\begin{enumerate} \itemsep -0.5em
+    \item $n\;|\;(a-b)$
+    \item $a \equiv b\ (\mathrm{mod}\; n)$
+    \item $a = b + kn$ for some $k \in \mathbb{Z}$
+    \item $a$ and $b$ have the same non-negative remainder when divided by $n$
+    \item $a\;\mathrm{mod}\;n = b\;\mathrm{mod}\;n$
+\end{enumerate}
+
+\subheading{Epp T8.4.3 (Modulo Arithmetic)}\\
+Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, and suppose\\
+
+{\centering
+$a \equiv c\ (\mathrm{mod}\; n)$ and $b \equiv d\ (\textrm{mod}\; n)$\\
+}
+
+Then
+
+\begin{enumerate} \itemsep -0.5em
+    \item $(a + b) \equiv (c + d)\ (\mathrm{mod}\;n)$
+    \item $(a - b) \equiv (c - d)\ (\mathrm{mod}\;n)$
+    \item $ab \equiv cd\ (\mathrm{mod}\;n)$
+    \item $a^m \equiv c^m\ (\mathrm{mod}\;n)$, for all $m \in \mathbb{Z}^+$
+\end{enumerate}
+
+\subheading{Epp Corollary 8.4.4}\\
+Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, then
+
+$$ ab \equiv [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ (\mathrm{mod}\;n) $$
+
+or equivalently,
+
+$$ ab\;\mathrm{mod}\;n = [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ \mathrm{mod}\;n $$
+
+In particular, if $m$ is a positive integer, then
+
+$$ a^m \equiv [(a\;\textrm{mod}\;n)^m]\ (\mathrm{mod}\;n) $$
+
+\subheading{Definition 4.7.2 (Multiplicative inv. modulo $n$)}\\
+For any integers $a, n$ with $n > 1$, if an integer $s$ is such that $as \equiv
+1\ (\mathrm{mod}\;n)$, then $s$ is the \textit{multiplicative inverse of $a$
+modulo $n$}. We may write $s$ as $a^{-1}$.\\
+
+Because the commutative law still applies in modulo arithmetic, we also have
+
+$$a^{-1}a \equiv 1\ (\mathrm{mod}\;n)$$
+
+Multiplicative inverses are not unique. If $s$ is an inverse, then so is $(s +
+kn)$ for any integer $k$.\\
+
+\subheading{Theorem 4.6.3 (Existence of multiplicative inverse)}\\
+For any integer $a$, its multiplicative inverse modulo $n$ where $n>1$,
+$a^{-1}$, exists iff $a$ and $n$ are coprime.\\
+
+\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}\\
+If $n=p$ is a prime number, then all integers $a$ in the range $0<a<p$ have
+multiplicative inverses modulo $p$.\\
+
+\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
+For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
+
+$$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
+
+\end{multicols*}
+\end{document}
