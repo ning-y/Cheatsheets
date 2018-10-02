@@ -2,10 +2,11 @@ Cheatsheets
 ===========
 
 1. `CS1101S Finals`_
-2. `CS2100 Finals`_
-3. `MA1101R Finals`_
-4. `UQF2101I Test 1`_
-5. `UQF2101I Test 2`_
+2. `CS1231 Midterms`_
+3. `CS2100 Finals`_
+4. `MA1101R Finals`_
+5. `UQF2101I Test 1`_
+6. `UQF2101I Test 2`_
 
 CS1101S Finals
 --------------
@@ -16,6 +17,17 @@ CS1101S Finals
 Prepared for AY2017/18 Sem 1. Includes documentation for inbuilt *source* functions, as it was announced that the exam paper would not provide said documentation. Written for a single piece of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
 <https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1101s-finals-2017s1.pdf>`_.
+
+CS1231 Midterms
+---------------
+
+.. image:: docs/cs1231-midterms-2018s1-0.png
+.. image:: docs/cs1231-midterms-2018s1-1.png
+
+Prepared for AY2018/19 Sem 1. Does not cover Epp Appendix A.
+`Download the PDF here
+<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1231-midterms-2018s1.pdf>`_.
+
 
 CS2100 Finals
 --------------
