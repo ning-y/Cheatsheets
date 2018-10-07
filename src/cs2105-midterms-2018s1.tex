@@ -131,7 +131,7 @@
 
 \textbf{UDP}
 \begin{itemize}[leftmargin=*]
-\item User creates a socket to send segment, and specifies IP address and port # in the segment
+\item User creates a socket to send segment, and specifies IP address and port \# in the segment
 \item Receiver checks destination port in segment, and redirects to the socket with that port number
 \item Benefits:
   \begin{itemize}[leftmargin=*]
@@ -148,6 +148,39 @@
   \item Compute 1's complement (flip all bits)
   \end{itemize}
 \end{itemize}
+
+\textbf{TCP}
+\begin{itemize}[leftmargin=*]
+\item Connection-oriented -- Handshake is required before transmission
+\item Reliable, in-order byte stream
+\item Offset field allows for additional headers (it stores total number of TCP headers)
+\item Sequence Number is byte number of first byte of data in segment
+\item ACK Number is the sequence number of the next byte of data expected
+\item ACK Bit represents if the ACK number should be read
+\item SYN Bit initiates a connection
+\item FIN Bit is to denote closing of the connection (Final)
+\item RST Bit is to denote abortion of a connection due to error
+\item PSH Bit is to indicate that the data should be pushed to application level immediately, without waiting for additional data
+\item URG Bit is to indicate to a receiving station that the data is urgent and should be prioritised
+\item Receive window tells sender how much data can be sent
+\item Timeout:
+  \begin{itemize}[leftmargin=*]
+  \item Too long $\Rightarrow$ slow reaction to loss
+  \item Too short $\Rightarrow$ Premature timeout and unnecessary retransmissions
+  \item Estimate RTT using Exponential Weighted Moving Average: $RTT_E = (1 - a) * RTT_E + a * RTT_s$, where $a$ is usually $\frac{1}{8}$
+  \item Calculate deviation of RTT using $RTT_{dev} = (1 - b) * RTT_{dev} + b*RTT_s - RTT_E$, where $b$ is usually $\frac{1}{4}$
+  \item Retransmission Timeout is $RTO = RTT_{E} + 4 * RTT_{dev}$, the deviation is used as a "safety margin"
+  \item TCP Fast transmission: If 3 Duplicate ACK
+  \end{itemize}
+\end{itemize}
+
+% NETWORK LAYER %
+{\small\textbf{Network Layer}}
+\textbf{TCP}
+\begin{itemize}[leftmargin=*]
+\end{itemize}
+
+%Todo tcp sender flow here%
 
     \end{multicols*}
 \end{document}
