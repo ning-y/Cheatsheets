@@ -90,6 +90,21 @@
 \item DNS uses port 53
 \end{itemize}
 
+\textbf{DELAY}
+\begin{itemize}[leftmargin=*]
+\item There are four types of delays:
+  \begin{itemize}[leftmargin=*]
+  \item N (Number of Bits to Transmit)
+  \item Transmission Delay $(d_{trans})$ : N / Transmission Rate
+  \item Propogation Delay $(d_{prop})$: distance / Propogation Speed
+  \item Queing Delay $(d_{queue})$: Time spent in Queue at Router R
+  \item Processing Delay $(d_{process})$: Time spent to process by Router R
+  \end{itemize}
+\item RTT (Round-Trip-Time): $d_{prop} + d_{queue} + d_{process}$
+\item Throughput (End to End delay): $N / (d_{trans} + d_{prop} + d_{queue} + d_{process})$
+\item Link Utilization: $d_{trans} / (d_{trans} + RTT)$
+\end{itemize}
+
 % TRANSPORT LAYER %
 {\small\textbf{Transport Layer}} \\
 \textbf{In general}
