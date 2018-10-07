@@ -174,7 +174,9 @@
   \item Estimate RTT using Exponential Weighted Moving Average: $RTT_E = (1 - a) * RTT_E + a * RTT_s$, where $a$ is usually $\frac{1}{8}$
   \item Calculate deviation of RTT using $RTT_{dev} = (1 - b) * RTT_{dev} + b*RTT_s - RTT_E$, where $b$ is usually $\frac{1}{4}$
   \item Retransmission Timeout is $RTO = RTT_{E} + 4 * RTT_{dev}$, the deviation is used as a "safety margin"
+  \item Note that the RTO is \textbf{doubled} after each timeout
   \item TCP Fast transmission: If 3 Duplicate ACK
+  \item 
   \end{itemize}
 \end{itemize}
 
