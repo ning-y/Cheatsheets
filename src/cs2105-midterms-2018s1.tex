@@ -37,7 +37,7 @@
   \end{itemize}
 \end{itemize}
 
-\textbf{Transport services in general}
+\textbf{In general}
 \begin{itemize}[leftmargin=*]
 \item If there is Reliable Data Transfer (TCP) $\Rightarrow$ No loss
 \item If there is high throughput $\Rightarrow$ Large amounts of data can be transferred at a time
@@ -87,6 +87,7 @@
 \item All DNS servers can implement caching, so root servers are often not called upon
 \end{itemize}
 
+% TRANSPORT LAYER %
 {\small\textbf{Transport Layer}}
 \textbf{In general}
 \begin{itemize}[leftmargin=*]
@@ -125,6 +126,26 @@
     \item Sliding window of size $n$ is kept
     \item Keep timer for oldest unACKed packet
     \item Resend all $n$ packets in window on timeout
+  \end{itemize}
+\end{itemize}
+
+\textbf{UDP}
+\begin{itemize}[leftmargin=*]
+\item User creates a socket to send segment, and specifies IP address and port # in the segment
+\item Receiver checks destination port in segment, and redirects to the socket with that port number
+\item Benefits:
+  \begin{itemize}[leftmargin=*]
+  \item No connection set-up
+  \item No state to remember
+  \item Small header size $\Rightarrow$ less overhead
+  \item No congestion control (as compared to TCP)
+  \item Checksum to verify integrity
+  \end{itemize}
+\item Checksum value included in UDP checksum field. Example checksum:
+  \begin{itemize}[leftmargin=*]
+  \item Split into 16bit integers
+  \item Add integers, use wrap-around carry
+  \item Compute 1's complement (flip all bits)
   \end{itemize}
 \end{itemize}
 
