@@ -174,13 +174,46 @@
   \end{itemize}
 \end{itemize}
 
+%Todo tcp sender flow here%
+
 % NETWORK LAYER %
 {\small\textbf{Network Layer}}
-\textbf{TCP}
+\textbf{In general}
 \begin{itemize}[leftmargin=*]
+\item Provides logical communication between \texttt{hosts}, through \texttt{routers}
+\item Has two responsibilities: \texttt{forwarding} (through a single output link) and \texttt{routing} (determining the route that packets should follow)
 \end{itemize}
 
-%Todo tcp sender flow here%
+\textbf{IP}
+\begin{itemize}[leftmargin=*]
+\item IP Address is 32bit
+\item IP Address is associated with an interface e.g 802.11 wifi
+\item However, the device that we call "router", actually forwards packets between networks. This device has multiple interfaces e.g LAN ports are all one interface
+\item Dynamic Host Configuration Protocol:
+  \begin{itemize}[leftmargin=*]
+  \item Host broadcast a $Discover$ message
+  \item DHCP server (listening on port 67) reponds with an offer. First transaction ends here.
+  \item Host requests for the given IP with a new Transaction (new transaction ID used)
+  \item DHCP ACKnowledges request and assigns the IP
+  \end{itemize}
+\item Some IP Addresses are reserved
+\item Hierarchical addressing scheme:
+  \begin{itemize}[leftmargin=*]
+  \item IP Addresses grouped into subnets, each subnet having a certain prefix for all IP Addresses
+  \item Internet decides which ISP to send the packet to using the Longest Prefix of the address
+  \item Subnet mask is a common prefix used between hosts in the same subnet, where they can communicate between each other without a router
+  \end{itemize}
+\item Network Address Translation:
+  \begin{itemize}[leftmargin=*]
+  \item Entire subnet under the router is identified by a single IP Address
+  \item NAT translation table used to map $(IP_{subnet}, port)$ to $(IP_{global}, port)$
+  \item Hosts' identities are effectively "firewalled" from the outside world
+  \item External parties cannot identify hosts using IP, only using port (which is supposed to be used on the Application-level)
+  \end{itemize}
+\end{itemize}
+
+%TODO Common reserved IP Addresses %
+
 
     \end{multicols*}
 \end{document}
