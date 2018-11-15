@@ -30,8 +30,10 @@
 \begin{multicols*}{4}
 
 %% Preface %%
-Appendix A of Epp is not covered. Theorems, corollaries, lemmas, etc. not
-mentioned in the lecture notes are marked with an asterisk (*).\\
+Appendix A of Epp is not covered. Theorems, corollaries, lemmas, etc. from the
+Epp textbook are prefixed with `\textit{Epp}'; those without asterisks (*) are
+from the lecture notes, those with the asterisk are not (e.g. Epp theorems not
+covered by the lecture).\\
 
 %% Proofs %%
 \heading{Proofs} \\
@@ -523,6 +525,107 @@ multiplicative inverses modulo $p$.\\
 For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
 
 $$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
+
+\heading{Sequences}\\
+
+\subheading{Empty Sums \& Products}
+
+By definition, when $n < m$,
+
+\begin{align*}
+\sum^n_{i=m} a_i &= 0 \\
+\prod^n_{i=m} &= 1
+\end{align*}
+
+\subheading{Epp T5.1.1}
+
+For real numbered sequences $a_m, a_{m+1}, a_{m+2}, ...$ and $b_m, b_{m+1},
+b_{m+2}...$, $c \in \mathbb{R}$, the following holds for any $n \geq m$
+
+\begin{align*}
+\sum^n_{k=m} a_k + \sum^n_{k=m} b_k &= \sum^n_{k=m}(a_k + b_l) \\
+c \cdot \sum^n_{k=m} a_k &= \sum^n_{k=m} c \cdot a_k\\
+\left ( \prod^n_{k=m} a_k \right ) \cdot \left ( \prod^n_{k=m} b_k \right ) &=
+  \prod^n_{k=m}(a_k \cdot b_k)
+\end{align*}
+
+\vspace{0.3cm}
+
+\subheading{Common Sequences}\\
+
+Arithmetic sequence:
+
+\begin{align*}
+S_n &= \frac{n}{2} ( 2a + (n-1)d )
+\end{align*}
+
+Geometric sequence:
+
+\begin{align*}
+S_n &= \frac{a(r^n - 1)}{r - 1} \\
+S_{\infty} &= \frac{a}{1-r}\text{ ,\ \ \ \ $|r| < 1$}
+\end{align*}
+
+Fibonacci numbers:
+
+\begin{align*}
+\forall n \in \mathbb{N},\ F_k &= \begin{cases}
+  0 & \text{if $k=0$} \\
+  1 & \text{if $k=1$} \\
+  F_{k-1} + F_{k-2} & \text{otherwise}
+\end{cases} \\
+  &= \frac{\phi^k - (- \phi)^{-k}}{\sqrt{5}}
+\end{align*}
+
+\vspace{0.3cm}
+
+\subheading{Definition 5.4.1}
+
+A second-order linear homogeneous recurrence relation with constant coefficients
+is a recurrence relation of the form:
+
+$$F_k = aF_{k-1} + bF_{k-2}$$
+
+Where $a, b \in \mathbb{R}$, $b \neq 0$; and $\forall k \in \mathbb{Z}_{k \geq
+k_0}$ for $k_0 \in \mathbb{Z}$.
+
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+\item[-] \textit{Second-order} means recurrence relation goes up to but not
+  exceeding $F_{k-2}$.
+\item[-] \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
+  $m=1$.
+\item[-] \textit{Homogeneous} means $C=0$ in the more general case $F_k =
+  aF_{k-1} + bF_{k-2} + C$.
+\item[-] \textit{Constant coefficients} means $a, b$ does not depend on $k$.
+\end{itemize}
+
+\subheading{Epp T5.8.3 (Distinct-Roots Theorem)}
+
+If a second-order linear homogeneous recurrence relation with constant
+coefficients has real roots $r$ and $s$ for its characteristic equation,
+
+$$t^2 - at - b = 0$$
+
+Then $F_k$ can be written in closed form as
+
+$$F_k = cr^k + ds^k$$
+
+Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
+sequence. \\
+
+\subheading{Epp T5.8.5 (Single-Roots Theorem)}
+
+If a second-order linear homogeneous recurrence relation with constant
+coefficients has one single real root $r$ for its characteristic equation,
+
+$$t^2 - at - b = 0$$
+
+Then $F_k$ can be written in closed form as
+
+$$F_k = cr^n + dkr^n$$
+
+Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
+sequence.
 
 \end{multicols*}
 \end{document}
