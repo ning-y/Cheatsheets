@@ -43,8 +43,8 @@ Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 pape
 CS2105 Midterms
 --------------
 
+.. image:: docs/cs2105-midterms-2018s1-0.png
 .. image:: docs/cs2105-midterms-2018s1-1.png
-.. image:: docs/cs2105-midterms-2018s1-2.png
 
 Prepared for AY2018/19 Sem 1. Written for a single piece of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
