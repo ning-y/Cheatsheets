@@ -5,13 +5,30 @@
 ]{geometry}
 \usepackage{multicol}
 \usepackage{amsmath}
-\usepackage{amsfonts}       % \mathbb
-\usepackage{amssymb}        % \nmid
-\usepackage{enumitem}       % [leftmargin=*]
+\usepackage{amsfonts}          % \mathbb
+\usepackage{amssymb}           % \nmid
+\usepackage[makeroom]{cancel}  % \cancel in math
+\usepackage{environ}           % scaletikzpicturetowidth env
+\usepackage{enumitem}          % [leftmargin=*]
 \usepackage{IEEEtrantools}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 \newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
 \newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
+
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
 
 \begin{document}
 
@@ -23,7 +40,7 @@
 
 % TITLE %
 \begin{center}
-{\large CS1231 Cheatsheet}\\{for midterms, by ning}
+  {\large CS1231 Cheatsheet}\\{for finals, by ning}
 \end{center}
 
 % BODY %
@@ -324,7 +341,8 @@ $r_i$,
   n\text{ is prime } &\iff& \forall r, s \in \mathbb{Z}^+ \\
                     &&n = rs \rightarrow \\
                     &&(r=1 \land s=n) \lor (r=n \land s=1) \\
-  n\text{ is composite } &\iff& \exists r, s \in \mathbb{Z}^+ \text{ s.t. }\\
+  n\text{ is composite } &\iff& \exists r, s \in \mathbb{Z}^+
+  \text{ s.t. }\\
                     &&n = rs\;\land \\
                     &&(1 < r < n) \land (1 < s < n)
 \end{IEEEeqnarray*}
@@ -417,7 +435,6 @@ then $a\;|\;b$.\\
 
 \subheading{*Epp Lemma 4.8.2}\\
 If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
-
 $$\mathrm{gcd}(a, b)= \mathrm{gcd}(b, r)$$
 
 \subheading{Proposition 4.5.5}\\
@@ -426,18 +443,13 @@ $b$, then $c\;|\;\mathrm{gcd}(a,b)$.\\
 
 % TODO: LCM for finals
 
-\subheading{Definitoin 4.7.1 (Congruence modulo)}\\
+\subheading{Definition 4.7.1 (Congruence modulo)}\\
 Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
 \textit{congruent} to $n$ \textit{modulo} $d$ and write
-
 $$ m \equiv n\ (\mathrm{mod}\; d) $$
-
 iff
-
 $$ d\;|\;(m-n) $$
-
 More concisely,
-
 $$ m \equiv n\ (\mathrm{mod}\; d) \iff d\;|\;(m-n) $$
 
 \subheading{Epp T8.4.1 (Modular Equivalences)}\\
@@ -469,15 +481,10 @@ Then
 
 \subheading{Epp Corollary 8.4.4}\\
 Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, then
-
 $$ ab \equiv [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ (\mathrm{mod}\;n) $$
-
 or equivalently,
-
 $$ ab\;\mathrm{mod}\;n = [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ \mathrm{mod}\;n $$
-
 In particular, if $m$ is a positive integer, then
-
 $$ a^m \equiv [(a\;\textrm{mod}\;n)^m]\ (\mathrm{mod}\;n) $$
 
 \subheading{Definition 4.7.2 (Multiplicative inv. modulo $n$)}\\
@@ -486,9 +493,7 @@ For any integers $a, n$ with $n > 1$, if an integer $s$ is such that $as \equiv
 modulo $n$}. We may write $s$ as $a^{-1}$.\\
 
 Because the commutative law still applies in modulo arithmetic, we also have
-
 $$a^{-1}a \equiv 1\ (\mathrm{mod}\;n)$$
-
 Multiplicative inverses are not unique. If $s$ is an inverse, then so is $(s +
 kn)$ for any integer $k$.\\
 
@@ -523,7 +528,6 @@ multiplicative inverses modulo $p$.\\
 
 \subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
 For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
-
 $$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
 
 \heading{Sequences}\\
@@ -541,7 +545,6 @@ By definition, when $n < m$,
 
 For real numbered sequences $a_m, a_{m+1}, a_{m+2}, ...$ and $b_m, b_{m+1},
 b_{m+2}...$, $c \in \mathbb{R}$, the following holds for any $n \geq m$
-
 \begin{align*}
 \sum^n_{k=m} a_k + \sum^n_{k=m} b_k &= \sum^n_{k=m}(a_k + b_l) \\
 c \cdot \sum^n_{k=m} a_k &= \sum^n_{k=m} c \cdot a_k\\
@@ -554,20 +557,15 @@ c \cdot \sum^n_{k=m} a_k &= \sum^n_{k=m} c \cdot a_k\\
 \subheading{Common Sequences}\\
 
 Arithmetic sequence:
-
 \begin{align*}
 S_n &= \frac{n}{2} ( 2a + (n-1)d )
 \end{align*}
-
 Geometric sequence:
-
 \begin{align*}
 S_n &= \frac{a(r^n - 1)}{r - 1} \\
 S_{\infty} &= \frac{a}{1-r}\text{ ,\ \ \ \ $|r| < 1$}
 \end{align*}
-
 Fibonacci numbers:
-
 \begin{align*}
 \forall n \in \mathbb{N},\ F_k &= \begin{cases}
   0 & \text{if $k=0$} \\
@@ -603,13 +601,9 @@ k_0}$ for $k_0 \in \mathbb{Z}$.
 
 If a second-order linear homogeneous recurrence relation with constant
 coefficients has real roots $r$ and $s$ for its characteristic equation,
-
 $$t^2 - at - b = 0$$
-
 Then $F_k$ can be written in closed form as
-
 $$F_k = cr^k + ds^k$$
-
 Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
 sequence. \\
 
@@ -617,15 +611,688 @@ sequence. \\
 
 If a second-order linear homogeneous recurrence relation with constant
 coefficients has one single real root $r$ for its characteristic equation,
-
 $$t^2 - at - b = 0$$
-
 Then $F_k$ can be written in closed form as
-
 $$F_k = cr^n + dkr^n$$
-
 Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
-sequence.
+sequence. \\
+
+\heading{Sets} \\
+
+\subheading{Definition 6.1.1 (Subsets \& Supersets)}
+
+$S$ is a subset of $T$ if all the elements of $S$ are elements of $T$, denoted
+$S \subseteq T$. Formally, $$S \subseteq T \longleftrightarrow \forall x \in S
+(x \in T)$$
+
+\subheading{Definition 6.2.1 (Empty Set)}
+
+An empty set has no element, and is denoted $\varnothing$ or $\{\}$. Formally,
+where $\mathcal{U}$ is the universal set: $$\forall Y \in \mathcal{U} (Y \not\in
+\varnothing)$$
+
+\subheading{Epp T6.24}
+
+An empty set is a subset of all sets.
+$$\forall S\text{, $S$ is a set, }\varnothing \subseteq S$$
+
+\subheading{Definition 6.2.2 (Set Equality)}
+
+Two sets are equal iff they have the same elements.\\
+
+\subheading{Proposition 6.2.3}
+
+For any two sets $X, Y$, $X$ and $Y$ are subsets of each other iff $X = Y$.
+Formally,
+$$\forall X, Y((X \subseteq Y \land Y \subseteq X) \longleftrightarrow X=Y)$$
+
+\subheading{Epp C6.2.5 (Empty Set is Unique)}
+
+It's what it says.\\
+
+\subheading{Definition 6.2.4 (Power Set)}
+
+The power set of a set $S$ denoted $\mathcal{P}(S)$, or $2^S$; is the set whose
+elements are all possible subsets of $S$. Formally,
+$$\mathcal{P}(S) = \{X\;|\;X\subseteq S\}$$
+
+\subheading{Theorem 6.3.1}
+
+If a set $X$ has $n$ elements, $n \geq 0$, then $\mathcal{P}(X)$ has $2^n$
+elements. \\
+
+\subheading{Definition 6.3.1 (Union)}
+
+Let $S$ be a set of sets. $T$ is the union of sets in $S$, iff each element of
+$T$ belongs to some set in $S$. Formally,
+$$T=\bigcup S = \bigcup_{X\in S} X = \{ y \in \mathcal{U}\;|\;\exists X \in S (y
+\in X)\}$$
+
+\subheading{Proposition 6.3.2}
+
+Some properties of union,
+\begin{itemize}[leftmargin=*] \itemsep -0.3em
+  \item $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
+  \item $\bigcup \{A\} = A$
+  \item $A \cup \varnothing = A$
+  \item $A \cup B = B \cup A$
+  \item $A \cup (B \cup C) = (A \cup B) \cup C$
+  \item $A \cup A = A$
+  \item $A \subseteq B \longleftrightarrow A \cup B = B$
+\end{itemize}
+
+\subheading{Definition 6.3.3 (Intersection)}
+
+Let $S$ be a non-empty set of sets. $T$ is the intersection of sets in $S$, iff
+each element of $T$ also belongs to all the sets in $S$. Formally,
+\begin{align*}
+  T &= \bigcap S = \bigcap_{X \in S} X \\
+    &= \{y \in \mathcal{U}\;|\; \forall X ((X \in S) \rightarrow (y \in X)) \}
+\end{align*}
+
+\subheading{Proposition 6.3.4}
+
+Let $A, B, C$ be sets. Some properties of intersection,
+
+\begin{itemize}[leftmargin=*] \itemsep -0.3em
+  \item $A \cap \varnothing = \varnothing$
+  \item $A \cap B = B \cap A$
+  \item $A \cap (B \cap C) = (A \cap B) \cap C$
+  \item $A \subseteq B \longleftrightarrow A \cap B = A$
+  \item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+  \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+\end{itemize}
+
+\subheading{Definition 6.3.5 (Disjoint)}
+
+Let $S, T$ be sets. $S$ and $T$ are disjoint iff $S \cap T = \varnothing$.\\
+
+\subheading{Definition 6.3.6 (Mutually Disjoint)}
+
+Let $V$ be a set of sets. The sets $T \in V$ are mutually disjoint iff every two
+distinct sets are disjoint. Formally,
+$$\forall X, Y \in V (X \neq Y \rightarrow X \cap Y = \varnothing)$$
+
+\subheading{Definition 6.3.7 (Partition)}
+
+Let $S$ be a set, and $V$ a set of non-empty subsets of $S$. Then $V$ is a
+partition of $S$ iff
+\begin{enumerate} \itemsep -0.5em
+  \item The sets in $V$ are mutually disjoint
+  \item The union of sets in $V$ equals $S$
+\end{enumerate}
+
+\subheading{Definition 6.3.8 (Non-symmetric Difference)}
+
+Let $S, T$ be two sets. The (non-symmetric) difference of $S$ and $T$ denoted
+$S-T$ or $S\setminus T$ is the set whose elements belong to $S$ and do not
+belong to $T$. Formally,
+$$S - T = \{y \in \mathcal{U}\;|\;y \in S \land y \not\in T \}$$
+This is analogous to subtraction for numbers.\\
+
+\subheading{Definition 6.3.9 (Symmetric Difference)}
+
+Let $S, T$ be two sets. The symmetric difference of $S$ and $T$ denoted $S
+\ominus T$ is the set whose elements belong to $S$ or $T$ but not both.
+Formally,
+$$S \ominus T = \{y \in \mathcal{U}\;|\;y \in S \oplus y \in T \}$$
+This is analogous to the exclusive-or in predicate logic.\\
+
+\subheading{Definition 6.3.10 (Set Complement)}
+
+Let $A \subseteq \mathcal{U}$. Then, the complement of A denoted $A^c$ is
+$\mathcal{U}-A$.\\
+
+\heading{Relations}\\
+
+\subheading{Definition 8.1.1 (Ordered Pair)}
+
+Let $S$ be a non-empty set, and $x, y \in S$. The ordered pair denoted $(x, y)$
+is a mathematical object where the first element is $x$ and the second is $y$.
+$$(x, y) = (a, b) \iff x = a \land y = b$$
+
+\subheading{Definition 8.1.2 (Ordered $n$-tuple)} \\
+
+Generalise the ordered pair to $n$ elements. The ordered $n$-tuple $(x_1, x_2,
+\cdots, x_n)$ consists of $x_1, x_2, \cdots, x_n$ elements together with
+ordering.
+\begin{align*}
+       &(x_1, x_2, \cdots, x_n) = (y_1, y_2, \cdots, y_n) \\
+  \iff &x_1 = y_1, x_2 = y_2, \cdots, x_n = y_n
+\end{align*}
+
+\subheading{Definition 8.1.3 (Cartesian Product)}
+
+Let $S, T$ be two sets. The \textit{Cartesian product} (or cross product) of $S$
+and $T$ denoted $S \times T$ is the set such that
+$$\forall X \forall Y ((X,Y) \in S \times T
+  \longleftrightarrow (X \in S) \land (Y \in T))$$
+
+For example,
+\begin{align*}
+    &\{1, 2, 3\} \times \{a, b\} \\
+  =\ &\{(1, a), (1, b), (2, a), (2, b), (3, a), (3, b)\}
+\end{align*}
+
+\subheading{Definition 8.1.4 (Generalised Cartesian Prod.)}
+
+Generalise the cartesian product for $n$ sets.
+\begin{align*}
+&A_1 \times A_2 \times \cdots \times A_n \\
+  =\ &\{(a_1,\cdots,a_n)\;|\;a_1 \in A_1, \cdots, a_n \in A_n\}
+\end{align*}
+Let $V$ be a set of sets with which to apply the cartesian product to. We can
+also write
+$$\prod_{S \in V} S$$
+
+\subheading{Definition 8.2.1 (Relations)}
+
+Let $S, T$ be two sets. A \textit{binary relation} from $S$ to $T$ denoted
+$\mathcal{R}$ is a subset of the cartesian product $S \times T$.
+
+The notation $s\; \mathcal{R}\; t$ stands for $(s, t) \in \mathcal{R}$. $s\;
+\cancel{\mathcal{R}}\; t$ stands for $(s, t) \cancel{\in} \mathcal{R}$.\\
+
+\subheading{Definitions 8.2.[2-4] (Dom, Im, coDom)}
+
+Let $\mathcal{R} \subseteq S \times T$ be a binary relation from $S$ to $T$.
+Denote the domain (8.2.2) of $\mathcal{R}$ as $Dom(\mathcal{R})$; the image (or
+range, 8.2.3) as $Im(\mathcal{R})$; and the co-domain (8.2.4) as
+$coDom(\mathcal{R})$.
+\begin{align*}
+  Dom(\mathcal{R}) &= \{s \in S\;|\; \exists t \in T (s\;\mathcal{R}\;t)\} \\
+  Im(\mathcal{R})  &= \{t \in T\;|\; \exists s \in S (s\;\mathcal{R}\;t)\} \\
+  coDom(\mathcal{R}) &= T
+\end{align*}
+
+\subheading{Proposition 8.2.5}
+
+Let $\mathcal{R}$ be a binary relation. $Im(\mathcal{R}) \subseteq
+coDom(\mathcal{R})$. \\
+
+\subheading{Definition 8.2.6 (Inverse)}
+
+Let $S, T$ be sets; $\mathcal{R} \subseteq S \times T$ be a binary relation. The
+inverse of the relation $\mathcal{R}$ denoted $\mathcal{R}^{-1}$ is the relation
+from $T$ to $S$ such that
+$$\forall s \in S, \forall t \in T
+  (t\;\mathcal{R}^{-1}\;s \longleftrightarrow s\;\mathcal{R}\;t)$$
+
+\subheading{Definition 8.2.7 ($n$-ary relation)}
+
+Generalise the binary relation for $n$ sets $S_1, S_2, \cdots, S_n$. An $n$-ary
+relation on the $n$ sets is a subset of the cartesian product $\prod_{i} S_i$.
+$n$ is the arity or degree of the relation.\\
+
+\subheading{Definition 8.2.8 (Composition)}
+
+Let $S, T, U$ be sets; and $\mathcal{R} \subseteq S \times T$, $\mathcal{R}'
+\subseteq T \times U$ be relations. The \textit{composition} of $\mathcal{R}$
+with $\mathcal{R}'$, denoted $\mathcal{R}' \circ \mathcal{R}$ is the relation from
+$S$ to $U$ such that
+$$\forall x \in S, \forall z \in U (
+  x\;\mathcal{R}' \circ \mathcal{R}\;z \leftrightarrow
+    (\exists y \in T (x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}'\;z))
+)$$
+In other words, $x \in S$ and $z in U$ are related iff there is a ``path" from
+$x$ to $z$ via some intermediate $y \in T$.\\
+
+\subheading{Proposition 8.2.9 (Associativity of Composition)}
+$$\mathcal{R}'' \circ (\mathcal{R}' \circ \mathcal{R}) =
+  (\mathcal{R}'' \circ \mathcal{R}') \circ \mathcal{R} =
+  \mathcal{R}'' \circ \mathcal{R}' \circ \mathcal{R}$$
+
+\subheading{Proposition 8.2.10 (Inverse of Composition)}
+$$(\mathcal{R}' \circ \mathcal{R})^{-1} =
+  \mathcal{R}^{-1} \circ \mathcal{R}'^{-1}$$
+
+\subheading{Definitions 8.3.2 (Properties of Relations)}
+
+Let $A$ be a set, and $\mathcal{R} \in A \times A$ be a relation on $A$.\\
+
+$\mathcal{R}$ is reflexive (8.3.1) iff $\forall x \in A (x\;\mathcal{R}\;x)$.\\
+
+$\mathcal{R}$ is symmetric (8.3.2) iff $\forall x, y \in A (x\;\mathcal{R}\;y
+\rightarrow y\;\mathcal{R}\;x)$.\\
+
+$\mathcal{R}$ is transitive (8.3.3) iff $\forall x, y, z \in A
+((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;z)\rightarrow x\;\mathcal{R}\;z))$.\\
+
+\subheading{Definition 8.3.4 (Equivalence Relation)}
+
+A relation $\mathcal{R}$ is called an equivalence relation iff $\mathcal{R}$ is
+reflexive, symmetric, and transitive.\\
+
+\subheading{Definition 8.3.5 (Equivalence Class)}
+
+Let $x \in A$. The equivalence class of $x$ denoted $[x]$ is the set of all
+elements $y \in A$ that are in relation with $x$. That is
+$$[x] = \{ y \in A\;|\; x\;\mathcal{R}\;y\}$$
+
+\subheading{Epp T8.3.4 (Partition by Equivalence Relation)}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$. Then the set of
+distinct equivalence classes form a partition of $A$.\\
+
+\subheading{Epp L8.3.2}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$, and let $a, b \in A$.
+If $a\;\mathcal{R}\;b$ then $[a]=[b]$.\\
+
+\subheading{Epp L8.3.3}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$, and let $a, b \in A$.
+Either $[a] \cap [b] = \varnothing$ or $[a] = [b]$.\\
+
+\subheading{Epp T8.3.1 (Equivalence Relation by Partition)}
+
+Given a partition $S_1, S_2, cdots$ of a set $A$, there exists an equivalence
+relation $\mathcal{R}$ on $A$ whose equivalence classes make up precisely that
+partition. \\
+
+\subheading{Definition 8.5.1 (Transitive Closure)}
+
+Let $A$ be a set and $\mathcal{R}$ a relation on $A$. The transitive closure of
+$\mathcal{R}$ denoted $\mathcal{R}^t$ is a relation that satisfies the three
+properties:
+\begin{enumerate} \itemsep -0.5em
+  \item $\mathcal{R}^t$ is transitive.
+  \item $\mathcal{R} \subseteq \mathcal{R}^t$.
+  \item If $\textit{S}$ is any other transitive relation such that $\mathcal{R}
+    \subseteq \textit{S}$, then $\mathcal{R}^t \subseteq \textit{S}$.
+\end{enumerate}
+Intuitively, the transitive the closure can be understood as the smallest
+superset that is transitive. Similar definitions exist for the reflexive closure
+and symmetric closure.\\
+
+% TODO: repeated compositions
+
+\subheading{Proposition 8.5.2}
+$$\mathcal{R}^t = \bigcup^\infty_{i=1} \mathcal{R}^i$$
+
+\subheading{Definition 8.6.1 (Anti-symmetric)}
+
+Let $A$ be a set, and $R \in A \times A$ be a relation on $A$. $\mathcal{R}$ is
+anti-symmetric iff
+$$\forall x \in A, \forall y \in A
+  ((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;x) \rightarrow x = y)$$
+
+\subheading{Definition 8.6.2 (Partial Order)}
+
+$\mathcal{R}$ is a partial order iff it is reflexive, anti-symmetric, and
+transitive. A set $A$ is called a partially ordered set with respect to a
+relation $\preceq$ iff $\preceq$ is a partial order relation on $A$.\\
+
+\subheading{Hasse Diagrams}
+
+The Hasse diagram is a simplified directed graph.
+\begin{enumerate} \itemsep -0.5em
+  \item Draw the directed graph so that all arrows point upwards.
+  \item Eliminate all self-loops
+  \item Eliminate all arrows implied by transitivity.
+  \item Remove the direction of the arrows.
+\end{enumerate}
+\begin{center}
+\begin{scaletikzpicturetowidth}{0.8\columnwidth}
+\begin{tikzpicture}[scale=\tikzscale]
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (1, 0) {1};
+    \node (B) at (0, 0.5) {2};
+    \node (C) at (2, 0.2) {3};
+    \node (D) at (2, 0.8) {9};
+    \node (E) at (1, 1) {18};
+  \end{scope}
+  \begin{scope}[>={Stealth[black]},
+    every node/.style={fill=white,circle},
+    every edge/.style={draw=black,thick}]
+    \path [->] (A) edge (B);
+    \path [->] (B) edge (E);
+    \path [->] (A) edge (C);
+    \path [->] (C) edge (D);
+    \path [->] (D) edge (E);
+    % transitivity
+    \path [->] (A) edge (E);
+    \path [->] (A) edge (D);
+    \path [->] (C) edge (E);
+    % self loops
+    \path [->] (A) edge[loop below] (A);
+    \path [->] (B) edge[loop left] (B);
+    \path [->] (C) edge[loop right] (C);
+    \path [->] (D) edge[loop right] (D);
+    \path [->] (E) edge[loop above] (E);
+  \end{scope}
+\end{tikzpicture}
+\end{scaletikzpicturetowidth}
+\end{center}
+
+The above diagram represents the partial order for ``divides" on the set $A=\{1,
+2, 3, 9, 18\}$. That is
+$$\forall a, b \in A (a\;|\;b \longleftrightarrow \exists k \in
+\mathbb{Z}(b=ka))$$
+It can be represented by the following Hasse diagram.
+
+\begin{center}
+\begin{scaletikzpicturetowidth}{0.8\columnwidth}
+\begin{tikzpicture}[scale=\tikzscale]
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (1, 0) {1};
+    \node (B) at (0, 0.5) {2};
+    \node (C) at (2, 0.2) {3};
+    \node (D) at (2, 0.8) {9};
+    \node (E) at (1, 1) {18};
+  \end{scope}
+  \begin{scope}[>={Stealth[black]},
+    every node/.style={fill=white,circle},
+    every edge/.style={draw=black,thick}]
+    \path [-] (A) edge (B);
+    \path [-] (B) edge (E);
+    \path [-] (A) edge (C);
+    \path [-] (C) edge (D);
+    \path [-] (D) edge (E);
+  \end{scope}
+\end{tikzpicture}
+\end{scaletikzpicturetowidth}
+\end{center}
+
+\subheading{Definition 8.6.3 (Comparable)}
+
+Let $\preceq$ be a partial order on set $A$. $a, b \in A$ are said to be
+comparable iff either $a \preceq b$ or $b \preceq a$. Otherwise, $a$ and $b$ are
+noncomparable. \\
+
+\subheading{Definition 8.6.4 (Total Order)}
+
+Let $\preceq$ be a partial order on set $A$. $\preceq$ is said to be a total
+order iff $\preceq$ is a partial order, and all $x, y \in A$ are comparable.
+Formally,
+$$\forall x, y \in A(x \preceq y \lor y \preceq x)$$
+
+\subheading{Definition 8.6.5 (Maximal)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $x$ is a maximal
+element iff $$\forall y \in A (x \preceq y \rightarrow x = y)$$
+
+\subheading{Definition 8.6.6 (Maximum)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $T$ is the maximum
+element iff $$\forall x \in A (x \preceq T)$$
+
+\subheading{Definition 8.6.7 (Minimal)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $x$ is a minimal
+element iff $$\forall y \in A (y \preceq x \rightarrow x = y)$$
+
+\subheading{Definition 8.6.8 (Minimum)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $\bot$ is the
+minimum element iff $$\forall x \in A (\bot \preceq x)$$
+
+\subheading{Definition 8.6.9 (Well Ordered)}
+
+Let $\preceq$ be a partial order on the set $A$. A is well ordered iff every
+non-empty subset of $A$ contains a minimum element. Formally,
+$$\forall S \in \mathcal{P}(A) (S \neq \varnothing \rightarrow
+  (\exists x \in S\;\forall y \in S(x \preceq y)))$$
+
+\heading{Functions} \\
+
+\subheading{Definition 7.1.1 (Function)}
+
+Let $f$ be a relation such that $f \subseteq S \times T$. Then $f$ is a function
+from $S$ to $T$ denoted $f: S\rightarrow T$ iff
+$$\forall x \in S, \exists! y \in T(x\;f\;y)$$
+Intuitively, this means that every element in $S$ must have exactly one
+`outgoing arrow'.\\
+
+\subheading{Definitions 7.1.[2-5]}
+
+Let $f : S \rightarrow T$ be a function, $x \in S$ and $y \in T$ such that
+$f(x)=y$; $U \subseteq S$, and $V \subseteq T$.\\
+
+$x$ is a pre-image (7.1.2) of $y$.\\
+
+The inverse image of the element (7.1.3) $y$ is the set of all its pre-images,
+i.e. $\{x \in S\;|\;f(x) = y\}$.\\
+
+The inverse image of the set (7.1.4) $V$ is the set that contains all the
+pre-images of all the elements of $V$, i.e.
+$\{x \in S\;|\;\exists y \in V (f(x) = y)\}$.\\
+
+The restriction (7.1.5) of $f$ to $U$ is the set
+$\{(x, y) \in U \times T\;|\;f(x)=y\}$.\\
+
+\subheading{Definition 7.2.1 (Injective)}
+
+Let $f : S \rightarrow T$ be a function. $f$ is injective (or one-to-one) iff
+$$\forall y \in T, \forall x_1, x_2 \in S (
+  (f(x_1) = y\;\land\;f(x_2) = y) \rightarrow x_1 = x_2)$$
+Intuitively, this means that every element in $T$ has have at most one `incoming
+arrow'.\\
+
+\subheading{Definition 7.2.2 (Surjective)}
+
+Let $f : S \rightarrow T$ be a function. $f$ is surjective (or onto) iff
+$$\forall y \in T, \exists x \in S (f(x) = y)$$
+Intuitively, this means that every element in $T$ has at least one `incoming
+arrow'.\\
+
+\subheading{Definition 7.2.3 (Bijective)}
+
+A function is bijective (or is a bijection) iff it is injective and
+subjective. Intuitively, this means that every dot in $T$ has exactly one
+incoming arrow.\\
+
+\subheading{Definition 7.2.4 (Inverse)}
+
+Let $f : S \rightarrow T$ be a function and let $f^{-1}$ be the inverse relation
+of $f$ from $T$ to $S$. Then $f$ is bijective iff $f^{-1}$ is a function.\\
+
+\subheading{Definition 7.3.1 (Composition)}
+
+Let $f : S \rightarrow T$, $g: T \rightarrow U$ be functions. The composition of
+$f$ and $g$ denoted $g \circ f$ is a function from $S$ to $U$.\\
+
+\subheading{Definition 7.3.2 (Identity)}
+
+The identity function on a set $A$, $\mathcal{I}_A$ is defined by,
+$$\forall x \in A(\mathcal{I}_A(x) = x)$$
+
+\subheading{Proposition 7.3.3}
+
+Let $f : A \rightarrow A$ be an injective function of A. Then $f^{-1} \circ f =
+\mathcal{I}_A$.\\
+
+\heading{Combinatorics}\\
+
+\subheading{Definitions \& Notations}
+
+A sample space is the set of all possible outcomes of a random process or
+experiment. An event is a subset of a sample space.\\
+
+For a finite set $A$, $N(A)$ denotes the number of elements in $A$.\\
+
+An $r$-permutation of a set of $n$ elements is an ordered selection of $r$
+elements taken from the set. The number of $r$-permutations of a set of $n$
+elements is denoted $P(n, r)$.\\
+
+An $r$-combination of as set of $n$ elements is a subset of $r$ of the $n$
+elements, denoted $\binom{n}{r}$.\\
+
+An $r$-combination with repetition allowed, or multiset of size $r$, chosen from
+a set $X$ of $n$ elements is an unordered selection of elements taken from $X$
+with repetition allowed; denoted as $[x_{i_1}, x_{i_2}, \cdots, x_{i_r}]$ where
+each $x_{i_j}$ is in $X$ and some of the $x_{i_j}$ may equal each other.\\
+
+\subheading{Equally Likely Probability Formula}
+
+If $S$ is a finite sample space in which all outcomes are equally likely and $E$
+is an event in $S$, then the probability of $E$, denoted $P(E)$, is
+$$P(E) = \frac{N(E)}{N(S)}$$
+
+\subheading{Theorem 9.1.1 (Number of Elements)}
+
+If $m$ and $n$ are integers and $m \leq n$, then there are $n-m+1$ integers from
+$m$ to $n$ inclusive.\\
+
+\subheading{Theorem 9.2.1 (Multiplication Rule)}
+
+If an operation consists of $k$ steps, and the first step can be performed in
+$n_1$ ways, the second in $n_2$ ways, ..., the $k$\textsuperscript{th} step
+in $n_k$ ways, then the entire operation can be performed in $n_1 \times n_2
+\times \cdots n_k$ ways.\\
+
+\subheading{Theorem 9.2.2 (Permutations)}
+
+The number of permutations of a set with $n$ ($n \geq 1$) elements is $n!$\\
+
+\subheading{Theorem 9.2.3 ($r$-permutations from $n$)}
+
+If $n, r \in \mathbb{Z}$ and $1 \leq r \leq n$, then the number of
+$r$-permutations of a set of $n$ elements is given by,
+\begin{align*}
+  P(n, r) &= n(n-1)(n-2)\cdots(n-r+1) \\
+          &= \frac{n!}{(n-r)!}
+\end{align*}
+
+\subheading{Theorem 9.3.1 (Addition Rule)}
+
+Let $A$ be a finite set equal to the union of $k$ distinct mutually disjoint
+sets $A_1, A_2, \cdots, A_k$. Then, $$N(A) = N(A_1) + N(A_2) + \cdots + N(A_k)$$
+
+\subheading{Theorem 9.3.2 (Difference Rule)}
+
+Let $A$ be a finite set and $B$ a subset of $A$. Then,
+$$N(A-B) = N(A) - B(N)$$
+
+\subheading{Theorem 9.3.3 (Inclusion/Exclusion Principle)}
+
+If $A, B, C$ are finite sets, then
+\begin{align*}
+  N(A \cup B) = &N(A) + N(B) - N(A \cap B) \\
+  N(A \cup B \cup C) = &N(A) + N(B) + N(C) \\
+    &-N(A \cap B) - N(A \cap C)\\
+    &- N(B \cap C)+ N(A \cap B \cap C)
+\end{align*}
+
+\subheading{Pigeonhole Principle}
+
+A function from one finite set to a smaller finite set cannot be one-to-one.
+There must be at least 2 elements in the domain that have the same image in the
+co-domain.\\
+
+\subheading{Generalised Pigeonhole Principle}
+
+For any function $f$ from a finite set $X$ with $n$ elements to a finite set $Y$
+with $m$ elements and for any positive integer $k$, if $k < n/m$, then there is
+some $y \in Y$ such that $y$ is the image of at least $k + 1$ distinct elements
+of $X$.\\
+
+\subheading{Gen. Pigeonhole Principle, Contrapositive}
+
+For any function $f$ form a finite set $X$ with $n$ elements to a finite set $Y$
+with $m$ elements and for any positive integer $k$, if for each $y \in Y$,
+$f^{-1}(y)$ has at most $k$ elements, then $X$ has at most $km$ elements; in
+other words $n \leq km$.\\
+
+\subheading{Theorem 9.5.1 ($r$-combinations from $n$)}
+
+If $n, r \in \mathbb{Z}^+$ and $r \leq n$, then the number of $r-combinations$
+that can be chosen from a set of $n$ elements is given by,
+\begin{align*}
+  \binom{n}{r} &= \frac{P(n, r)}{r!} \\
+    &= \frac{n!}{r!(n-r)!}
+\end{align*}
+
+\subheading{Theorem 9.5.2 (Perm. w/ Indistinguishables)}
+
+For a set of $n$ objects of which $n_1$ are indistinguishable from each other,
+as are $n_2$, and $n_3$, ..., and $n_k$, then the number of distinguishable
+permutations of the $n$ objects is
+\begin{align*}
+  &\binom{n}{n_1} \binom{n-n_1}{n_2} \cdots \binom{n-n_1-n_2- \cdots - n_k-1}{n_k} \\
+  = &\frac{n!}{n_1!n_2!\cdots n_k!}
+\end{align*}
+
+\subheading{Theorem 9.6.1 (Multisets of $r$)}
+
+The number of $r$-combinations with repitition allowed that can be selected from
+a set of $n$ elements is $$\binom{r+n-1}{r}$$
+This equals the number of ways $r$ objects can be selected from $n$ categories
+of objects with repetitions allowed.\\
+
+\subheading{Theorem 9.7.1 (Pascal's Formula)}
+
+Let $n, r \in \mathbb{Z}^+$, $r \leq n$. Then
+$$\binom{n+1}{r} = \binom{n}{r-1} + \binom{n}{r}$$
+
+\subheading{Theorem 9.7.2 (Binomial Theorem)}
+
+Given $a, b \in \mathbb{R}$ and $n \in \mathbb{Z}^+$,
+\begin{align*}
+  (a + b)^n &= \sum^n_{k=0} \binom{n}{k} a^{n-k}b^k \\
+    &= a^n + \binom{n}{1}a^{n-1}b + \cdots + \binom{n}{n-1}ab^{n-1} + b^n
+\end{align*}
+
+\heading{Probability}\\
+
+\subheading{Axioms of Probability}
+
+Let $S$ be a sample space, and $P$ a probability function from the set of all
+events in $S$ to the set of real numbers; $A, B \subseteq S$,
+
+\begin{enumerate} \itemsep -0.5em
+  \item $0 \leq P(A) \leq 1$
+  \item $P(\varnothing) = 0$ and $P(S) = 1$
+  \item If $A, B$ are disjoint sets, i.e. $A \cap B = \varnothing$, then $P(A
+    \cup B) = P(A) + P(B)$
+\end{enumerate}
+
+\subheading{Probability of the Complement}
+$$P(A^c) = 1 - P(A)$$
+
+\subheading{Probability of the Union}
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+
+\subheading{Expected Value}
+
+The expected value of a random experiment with discrete real numbered outcomes
+$a_1, a_2, \cdots, a_n$ with corresponding probabilities $p_1, p_2, \cdots, p_n$
+is
+$$\sum_n a_kp_k$$
+
+\subheading{Conditional Probability}
+
+Let $A, B \subseteq S$. If $P(A) \neq 0$, then the conditional probability of
+$B$ given $A$, denoted $P(B|A)$ is $$P(B|A)=\frac{P(A \cap B)}{P(A)}$$
+A useful form of this equality is $$P(A \cap B) = P(B|A) \cdot P(A)$$
+
+\subheading{Bayes' Theorem}
+
+Suppose a sample space $S$ has mutually disjoint events $B_1, B_2, \cdots, B_n$.
+Suppose $A$ is an event in $S$, and all events have non-zero probabilities. If
+$k \in \mathbb{Z}^+$, $1 \leq k \leq n$, then
+$$P(B_k|A) = \frac{P(A|B_k)P(B_k)}{
+  \sum^n_{i=1} P(A|B_i)P(B_i)}$$
+
+\subheading{Independent Events}
+
+Let $A, B \subseteq S$, $A, B$ be independent events iff 
+$$P(A \cap B) = P(A)P(B)$$
+
+\subheading{Pairwise/Mutually Independent}
+
+Let $A, B, C \subseteq S$. $A, B, C$ are pairwise independent iff they satisfy
+conditions 1--3 below. They are mutally independent iff they satisify all
+conditions below.
+\begin{enumerate} \itemsep -0.5em
+  \item $P(A \cap B) = P(A) \cdot P(B)$
+  \item $P(A \cap C) = P(A) \cdot P(C)$
+  \item $P(B \cap C) = P(B) \cdot P(C)$
+  \item $P(A \cap B \cap C) = P(A) \cdot P(B) \cdot P(C)$
+\end{enumerate}
+In general, $n$ events are mutually independent iff the probability of the
+intersection of any subset of events is the product of the corresponding
+probabilities of said events.
 
 \end{multicols*}
 \end{document}
