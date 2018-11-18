@@ -1,16 +1,19 @@
 \documentclass[a4paper]{article}
-
 \usepackage[
     a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
 ]{geometry}
-\usepackage{multicol}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}          % \mathbb
 \usepackage{amssymb}           % \nmid
+\usepackage{booktabs}          % for toprule
 \usepackage[makeroom]{cancel}  % \cancel in math
 \usepackage{environ}           % scaletikzpicturetowidth env
 \usepackage{enumitem}          % [leftmargin=*]
 \usepackage{IEEEtrantools}
+\usepackage{multicol}
+\usepackage[graphicx]{realboxes}
+\usepackage{tabularx}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
@@ -1292,7 +1295,320 @@ conditions below.
 \end{enumerate}
 In general, $n$ events are mutually independent iff the probability of the
 intersection of any subset of events is the product of the corresponding
-probabilities of said events.
+probabilities of said events.\\
+
+\heading{Graphs}\\
+
+\subheading{Graph}
+
+A graph $G$ consists of 2 finite sets: a non-empty set $V(G)$ of vertices and a
+set $E(G)$ of edges, where each edge is associated with a set consisting of
+either one or two vertices called its endpoints.\\
+
+An edge connects its two endpoints. Two vertices connected by an edge are
+adjacent vertices. A vertex with a self-loop is adjacent to itself. An edge is
+incident on each of its endpoints, and two edges incident on the same endpoint
+are adjacent edges.\\
+
+For an edge $e$ incident on vertices $v, w$, we can write $e = \{v, w\}$.\\
+
+\subheading{Directed Graph}
+
+A directed graph (or digraph) consists of 2 finite sets: a non-empty set $V(G)$
+of vertices and a set $D(G)$ of directed edges, where each edge is associated
+with an ordered pair of vertices called its endpoints.\\
+
+For a directed edge $e$ associated with the pair $(v, w)$ of vertices, we can
+write $e = (v, w)$.\\
+
+\subheading{Simple Graph}
+
+A simple graph is an undirected graph that does not have any loops or parallel
+edges.\\
+
+\subheading{Complete Graph}
+
+A complete graph on $n$ vertices, $n > 0$, denoted $K_n$, is a simple graph with
+$n$ vertices and exactly one edge connecting each pair of distinct vertices.\\
+
+\subheading{Complete Bipartite Graph}
+
+A complete bipartite graph on $(m, n)$ vertices, $m, n > 0$, denoted $K_{m,n}$
+is a simple graph with distinct vertices $v_1, v_2, \cdots, v_m$ and $w_1, w_2,
+\cdots, w_n$ that satisfies the properties:\\
+
+For all $i, k = 1, 2, \cdots, m$ and $j, l = 1, 2, \cdots, n$,
+\begin{enumerate} \itemsep -0.5em
+  \item There is an edge from each $v_i$ to each $w_j$.
+  \item There is no edge from any $v_i$ to any $v_k$.
+  \item There is no edge from any $w_j$ to any $w_l$.
+\end{enumerate}
+
+\subheading{Subgraph}
+
+A graph $H$ is a subgraph of a graph $G$ iff every vertex in $H$ is also a
+vertex in $G$, and every edge in $H$ is also an edge in $G$, and every edge in
+$H$ has the same endpoints as it has in $G$.\\
+
+\subheading{Degree}
+
+The degree of $v$, a vertex of graph G, denoted $deg(v)$, equals the number of
+edges that are incident on $v$, with self-loops counted twice. The total degree
+of $G$ is the sum of the degrees of all vertices of $G$.\\
+
+\subheading{Theorem 10.1.1 (Handshake Theorem)}
+
+The sum of the degrees of all the vertices of a graph $G$ is twice the number of
+edges of $G$.
+\begin{align*}
+  \text{Total Degree of $G$} &= \sum_{v \in V(G)} deg(v) \\
+     &= 2 \times N(\text{edges in G})
+\end{align*}
+
+\subheading{Corollary 10.1.2}
+
+The total degree of a graph is even.\\
+
+\subheading{Proposition 10.1.3}
+
+In any graph there are an even number of vertices of odd degree.\\
+
+\subheading{Walk, Trails, Paths, etc.}
+
+Let $G$ be a graph and $v, w \in V(G)$.\\
+
+A walk from $v$ to $w$ is a finite alternating sequence of adjacent vertices and
+edges of $G$. It can be written in the form $v_0e_1v_1e_2\cdots v_ne_nw$; or
+$v_0v_1\cdots v_nw$; or $e_1e_2\cdots e_n$.\\
+
+A trivial walk from $v$ to $v$ consists of the single vertex $v$.\\
+
+A trail from $v$ to $w$ is a walk from $v$ to $w$ that does not contain a
+repeated edge.\\
+
+A path from $v$ to $w$ is a trail that does not contain a repeated vertex.\\
+
+A closed walk is a walk that starts and ends at the same vertex.\\
+
+A circuit (or cycle) is a closed walk that contains at least one edge and does
+not contain a repeated edge.\\
+
+A simple circuit is a circuit that does not have any repeated vertex except the
+first and last.
+
+\begin{center}
+\Rotatebox{90}{%
+\begin{tabularx}{10cm}{l c c c c}
+  \toprule
+  \null & Repeated & Repeated & Same       & Must Contain \\
+  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
+  \midrule
+  \textbf{Walk}           & allowed & allowed          & allowed & no \\
+  \textbf{Trail}          & no      & allowed          & allowed & no \\
+  \textbf{Path}           & no      & no               & no      & no \\
+  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
+  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
+  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
+  \bottomrule
+\end{tabularx}
+}
+\end{center}
+
+\subheading{Connectedness}
+
+Two vertices $v, w$ of a graph $G$ are connected iff there is a walk from $v$ to
+$w$.\\
+
+The graph $G$ is connected iff $\forall v, w \in V(G)$ there is a walk from $v$
+to $w$. \\
+
+\subheading{Lemma 10.2.1}
+
+Let G be a graph.
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+  \item If $G$ is connected, then any two distinct vertices of $G$ can be
+    connected by a path.
+  \item If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
+    removed from the circuit, then there still exists a trail from $v$ to $w$ in
+    $G$.
+  \item If $G$ is connected and $G$ contains a circuit, then an edge of the
+    circuit can be removed without disconnecting $G$.
+\end{itemize}
+
+% TODO: change all itemize bullets to [-]
+
+\subheading{Connected Component}
+
+A graph $H$ is a connected component of a graph $G$ iff
+\begin{enumerate} \itemsep -0.5em
+ \item The graph $H$ is a subgraph of $H$.
+ \item The graph $H$ is connected.
+ \item No connected subgraph of $G$ has $H$ has a subgraph and contains
+   vertices or edges that are not in $H$.
+\end{enumerate}
+
+\subheading{Euler Circuit}
+
+An Euler circuit for $G$ is a circuit that contains every vertex and every edge
+of $G$. An Eulerian graph is a graph that contains an Euler circuit.\\
+
+\subheading{Theorem 10.2.2}
+
+If a graph has an Euler circuit, then every vertex of the graph has positive
+even degree.\\
+
+Contrapositive: if some vertex of a graph has odd degree, then the
+graph does not have an Euler circuit.\\
+
+\subheading{Theorem 10.2.3}
+
+If a graph $G$ is connected and the degree of every vertex of $G$ is a positive
+even integer, then $G$ has an Euler circuit.\\
+
+\subheading{Theorem 10.2.4}
+
+A graph $G$ has an Euler circuit iff $G$ is connected and every vertex of $G$
+has positive even degree.\\
+
+\subheading{Euler Trail}
+
+An Euler trail/path from $v$ to $w$ is a sequence of adjacent edges and
+vertices that starts at $v$, ends at $w$, passes through every vertex of $G$ at
+least once, and traverses every edge of $G$ exactly once.\\
+
+\subheading{Corollary 10.2.5}
+
+Let $v, w$ be distinct vertices of $G$. There is an Euler trail from $v$ to $w$
+iff $G$ is connected, $v$ and $w$ have odd degree, and all other vertices of
+$G$ have positive even degree.\\
+
+\subheading{Hamiltonian Circuit}
+
+A Hamiltonian circuit for a graph $G$ is a simple circuit that includes every
+vertex of $G$. A Hamiltonian graph (or Hamilton graph) is a graph that contains
+a Hamiltonian circuit.\\
+
+There is no analogous criterion to T10.2.4 to determining whether a given graph
+has a Hamiltonian circuit.\\
+
+\subheading{Proposition 10.2.6}
+
+If a graph $G$ has a Hamiltonian circuit, then $G$ has a subgraph $H$ with the
+following properties,
+\begin{enumerate} \itemsep -0.5em
+ \item $H$ contains every vertex of $G$.
+ \item $H$ is connected.
+ \item $H$ has the same number of edges as vertices.
+ \item Every vertex of $H$ has degree 2.
+\end{enumerate}
+Since the converse is not true, this proposition cannot be used to check if a
+graph has a Hamiltonian circuit. However, the contrapositive can be used to
+check if a graph does not have a Hamiltonian circuit.\\
+
+\subheading{Matrix}
+
+A $m \times n$ matrix $A$ over a set $S$ is a rectangular array of elements of
+$S$ arranged into $m$ rows and $n$ columns.\\
+
+Two matrices $A$ and $B$ are equal iff $A$ and $B$ are the same size, and all
+the corresponding entries of $A$ and $B$ are equal.\\
+
+\subheading{Adjacency Matrix of a Directed Graph}
+
+Let $G$ be a directed graph with ordered vertices $v_1, v_2, \cdots, v_n$. The
+adjacency matrix of $G$ is the $n \times n$ matrix $A = (a_{ij})$ over the set
+of non-negative integers such that for all $i, j = 1,2,\cdots, n$,
+$$a_{ij} = \text{the number of arrows from $v_i$ to $v_j$}$$
+
+\subheading{Adjacency Matrix of an Undirected Graph}
+
+Let $G$ be an undirected graph with ordered vertices $v_1, v_2, \cdots, v_n$.
+The adjacency matrix of $G$ is the $n \times n$ matrix $A = (a_{ij})$ over the
+set of non-negative integers such that for all $i, j = 1,2,\cdots, n$,
+$$a_{ij} = \text{the number of edges connecting $v_i$ and $v_j$}$$
+
+\subheading{Symmetric Matrix}
+
+A $n \times n$ matrix is symmetric iff for all $i, j = 1, 2, \cdots, n$,
+$$a_{ij} = a_{ji}$$
+
+\subheading{Theorem 10.3.1}
+
+Let $G$ be a graph with connected components $G_1, G_2, \cdots, G_k$. If there
+are $n_i$ vertices in each connected component $G_i$ and these vertices are
+numbered consecutively, then the adjacency matrix of $G$ has the form
+$$\begin{pmatrix}
+  A_1    & O      & \cdots & O       & O \\
+  O      & A_2    & \cdots & O       & O \\
+  \vdots & \vdots & \ddots & \vdots  & \vdots \\
+  O      & O      & \cdots & A_{k-1} & O \\
+  O      & O      & \cdots & O       & A_k
+\end{pmatrix}$$
+where each $A_i$ is the $n_i \times n_i$ adjacency matrix of $G_i$ for all $i =
+1, 2, \cdots, k$, and the $O$'s represents matrices whose entries are all $0$.\\
+
+\subheading{Scalar Product}
+\begin{align*}
+  &\begin{pmatrix} a_{i1} & a_{i2} & \cdots & a_{in} \end{pmatrix}
+    \begin{pmatrix} b_{1j} \\ b_{2j} \\ \vdots \\ b_{nj} \end{pmatrix}\\
+  = &\ a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}
+\end{align*}
+
+\subheading{Matrix Multiplication}
+
+Let $A = (a_{ij})$, $B = (b_{ij})$, then the matrix product of $A \times B$,
+denoted $AB$, defined as $(c_{ij})$, is the matrix where
+$$c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{ik}b_{kj}$$
+Intuitively, this means that the $(i, j)$\textsuperscript{th} entry of $AB$ can
+be found by the scalar product of the $i$\textsuperscript{th} row of $A$ and the
+$j$\textsuperscript{th} column of $B$.\\
+
+\subheading{Identity Matrix}
+
+The $n \times n$ identity matrix $I_n$ (or $I$) is the $n \times n$ matrix in
+which all the entries of the main diagonal are $1$'s, and all other entries are
+$0$'s.\\
+
+\subheading{$n$\textsuperscript{th} Power of a Matrix}
+
+For any $n \times n$ matrix $A$, the powers of $A$ are defined as
+$$A^k = \begin{cases}
+  I & \text{ if $k=0$} \\
+  AA^{k-1} & \text{ for $k \in \mathbb{Z}^+, k \geq 1$}
+\end{cases}$$
+
+\subheading{Theorem 10.3.2}
+
+Let $G$ be the graph with vertices $v_1, v_2, \cdots, v_m$ and adjacency matrix
+$A$. Then, for each positive integer $n$ and for all integers $i, j = 1, 2,
+\cdots, m$, the $(i, j)$\textsuperscript{th} entry of $A^n$ is the number of
+walks of length $n$ from $v_i$ to $v_j$.\\
+
+\subheading{Isomorphic Graph}
+
+Let $G$ and $G'$ be graphs with vertex sets $V(G), V(G')$ and edge sets $E(G),
+E(G')$ respectively. $G$ is isomorphic to $G'$ iff there exists a one-to-one
+correspondence (relabelling) $g: V(G) \rightarrow V(G')$ and $h: E(G)
+\rightarrow E(G')$ such that the edge-endpoint functions of $G$ and $G'$ are
+preserved. Formally, this means that\\
+
+\hspace{0.5em}$\forall v \in V(G), e \in E(G),$
+$$\text{$v$ is endpoint of $e$ $\iff$ $g(v)$ is endpoint of $h(e)$}$$
+
+\subheading{Theorem 10.4.1}
+
+Let $S$ be a set of graphs and $R$ be the relation of graph isomorphism on $S$.
+Then $R$ is an equivalence relation on $S$.\\
+
+\subheading{Planar Graph}
+
+A planar graph is a graph that can be drawn on a two-dimensional plane without
+edges crossing.\\
+
+\subheading{Euler's Formula}
+
+For a connected planar simple graph $G = (V, E)$ with $e = |E|$ and $v = |V|$,
+the number of faces $f = e - v + 2$.
 
 \end{multicols*}
 \end{document}
