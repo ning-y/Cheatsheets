@@ -4,15 +4,16 @@
 ]{geometry}
 
 \usepackage{amsmath}
-\usepackage{amsfonts}          % \mathbb
-\usepackage{amssymb}           % \nmid
-\usepackage{booktabs}          % for toprule
-\usepackage[makeroom]{cancel}  % \cancel in math
-\usepackage{environ}           % scaletikzpicturetowidth env
-\usepackage{enumitem}          % [leftmargin=*]
+\usepackage{amsfonts}             % \mathbb
+\usepackage{amssymb}              % \nmid
+\usepackage{booktabs}             % for toprule
+\usepackage[makeroom]{cancel}     % \cancel in math
+\usepackage{environ}              % scaletikzpicturetowidth env
+\usepackage{enumitem}             % [leftmargin=*]
+\usepackage{fancyvrb}             % center-able BVerbatim env
 \usepackage{IEEEtrantools}
 \usepackage{multicol}
-\usepackage[graphicx]{realboxes}
+\usepackage[graphicx]{realboxes}  % Rotatebox for the table
 \usepackage{tabularx}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
@@ -1608,7 +1609,161 @@ edges crossing.\\
 \subheading{Euler's Formula}
 
 For a connected planar simple graph $G = (V, E)$ with $e = |E|$ and $v = |V|$,
-the number of faces $f = e - v + 2$.
+the number of faces $f = e - v + 2$.\\
+
+\subheading{Tree}
+
+A graph is circuit-free iff it has no circuits. A graph is a tree iff it is
+circuit-free and connected. A trivial tree is a graph that consists of a single
+vertex. A graph is a forest iff it is circuit-free and not connected.\\
+
+\subheading{Lemma 10.5.1}
+
+Any non-trivial tree has at least one vertex of degree 1.\\
+
+\subheading{Terminal \& Internal Vertices}
+
+If a tree $T$ has only one or two vertices, then each is a terminal vertex (or
+leaf). If $T$ has at least three vertices, then a vertex of degree 1 in $T$ is
+called a terminal vertex (or leaf), and a vertex of degree greater than 1 in $T$
+is called an internal vertex (or leaf).\\
+
+\subheading{Theorem 10.5.2}
+
+Any tree with $n > 0$ vertices has $n - 1$ edges.\\
+
+\subheading{Lemma 10.5.3}
+
+Let $C$ be any circuit in a connected graph $G$. If one of the edges of $C$ is
+removed from $G$, then the graph that remains is still connected. \\
+
+\subheading{Theorem 10.5.4}
+
+Let $G$ be a connected graph with $n$ vertices and $n-1$ edges. $G$ is a tree.\\
+
+\subheading{Rooted Tree}
+
+A rooted tree is a tree in which there is one vertex that is distinguished from
+the others as the root. The level of a vertex is the number of edges along the
+unique path between it and the root. The height of a rooted tree is the maximum
+level of any vertex of the tree.\\
+
+Given the root or any internal vertex $v$ of a rooted tree, the children of $v$
+are all those vertices that are adjacent to $v$ and are one level farther away
+from the root than $v$.\\
+
+If $w$ is a child of $v$, then $v$ is the parent of $w$. Two distinct vertices
+that are both children of the same parent are called siblings.\\
+
+Given two distinct vertices $v, w$; if $v$ lies on a unique path between $w$ and
+the root, then $v$ is an ancestor of $w$, and $w$ a descendant of $v$.\\
+
+\subheading{(Full) Binary Tree}
+
+A binary tree is a rooted tree in which every parent has at most two children.
+Each child is either a left child xor right child. Every parent has at most one
+left child and one right child. A full binary tree is a binary tree in which
+each parent has exactly two children.\\
+
+\subheading{Subtrees}
+
+The left subtree of a parent $v$ in in binary tree $T$ is the binary tree whose
+root is the left child of $v$, whose vertices consist of the left child of $v$
+and all its descendants, and whose edges consists of all those edges of $T$ that
+connect the vertices of the left subtree. The right subtree is defined
+similarly.\\
+
+\subheading{Theorem 10.6.1 (Full Binary Tree Theorem)}
+
+If $T$ is a full binary tree with $k$ internal vertices, then $T$ has a total of
+$2k + 1$ vertices and has $k + 1$ terminal vertices.\\
+
+\subheading{Theorem 10.6.2}
+
+For non-negative integers $h$, if $T$ is any binary tree with height $h$ and $t$
+terminal vertices, then
+\begin{align*}
+         t &\leq 2^h \\
+  \log_2 t &\leq h
+\end{align*}
+
+\subheading{Binary Tree Traversal}
+
+Breadth-first search starts at the root and visits its adjacent vertices, then
+moves to the next level.\\
+
+Depth-first search can be pre-order, in-order, or post-order. In pre-order,
+print, traverse left then right; in in-order, traverse left, print, then
+traverse right; in post-order, traverse left, right, then print. \\
+
+The print operation can be represented by a `dot' on a vertex in its tree
+diagram, and the order of prints can be determined by tracing the outline of the
+diagram anti-clockwise from the root. Draw the `dot' on the left, bottom, and
+right of the vertex for pre-order, in-order, and post-order respectively. \\
+
+\subheading{Spanning Tree}
+
+A spanning tree for a graph $G$ is a subgraph of $G$ that contains every vertex
+of $G$ and is a tree.\\
+
+\subheading{Proposition 10.7.1}
+
+Every connected graph has a spanning tree, and any two spanning trees for a
+graph have the same number of edges.\\
+
+\subheading{Weighted Graph}
+
+A weighted graph is a graph for which each edge has an associated positive real
+number weight. The sum of weights of all the edges is the total weight of a
+weighted graph.\\
+
+\subheading{Minimum Spanning Tree}
+
+A minimum spanning tree for a connected weighted graph is a spanning tree that
+has the least possible total weight compared to all other spanning trees for the
+graph. If $G$ is a weighted graph and $e$ is an edge of $G$, then $w(e)$ denotes
+the weight of $e$ and $w(G)$ denotes the total weight of $G$.\\
+
+\subheading{Algorithm 10.7.1 (Kruskal's Algorithm)}
+
+In this algorithm, the edges of a connected weighted graph are examined one by
+one in order of increasing weight. At each stage, the edge being examined is
+added to what will become the minimum spanning tree, provided that this addition
+does not create a circuit.
+\begin{center}
+\begin{BVerbatim}
+def kruskal(G):
+    T = new Graph()
+    edges = edges_of(G)
+    for edge in edges:
+        e = min(edge) # wrt weight
+        if T + e has no circuit:
+            T = T + e
+    return T
+\end{BVerbatim}
+\end{center}
+
+\subheading{Algorithm 10.7.2 (Prim's Algorithm)}
+
+In this algorithm, a minimum spanning tree $T$ is build by expanding outward in
+connected links from some vertex. One edge and one vertex are added at each
+iteration. The edge added is the one of least weight that connects the vertices
+already in $T$ with those not in $T$, and the vertex is the endpoint of this
+edge that is not already in $T$.
+\begin{center}
+\begin{BVerbatim}
+def prims(G):
+    seed = random.choice(V(G))
+    T = new Graph(seed)
+    vertices = V(G) - seed
+    while V(T) != V(G):
+        # find min edge connecting T to G - T
+        e = least_edge(T, vertices)
+        T = T + e
+        vertices = vertices - endpts(e)
+    return T
+\end{BVerbatim}
+\end{center}
 
 \end{multicols*}
 \end{document}
