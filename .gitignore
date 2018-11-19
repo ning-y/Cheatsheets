@@ -1,5 +1,12 @@
-*.aux
-*.bcf
-*.log
-*.out
-*.run.xml
+# in src, only track .tex files, and images dir
+src/*
+!src/*.tex
+!src/images
+
+# in pdf, only track .pdf files
+pdf/*
+!pdf/*.pdf
+
+# in docs, only track .png files
+docs/*
+!docs/*.png

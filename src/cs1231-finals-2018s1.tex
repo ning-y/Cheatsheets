@@ -1,0 +1,1782 @@
+\documentclass[a4paper]{article}
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}             % \mathbb
+\usepackage{amssymb}              % \nmid
+\usepackage{booktabs}             % for toprule
+\usepackage[makeroom]{cancel}     % \cancel in math
+\usepackage{environ}              % scaletikzpicturetowidth env
+\usepackage{enumitem}             % [leftmargin=*]
+\usepackage{fancyvrb}             % center-able BVerbatim env
+\usepackage{IEEEtrantools}
+\usepackage{multicol}
+\usepackage[graphicx]{realboxes}  % Rotatebox for the table
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
+\newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
+
+\makeatletter
+\newsavebox{\measure@tikzpicture}
+\NewEnviron{scaletikzpicturetowidth}[1]{%
+  \def\tikz@width{#1}%
+  \def\tikzscale{1}\begin{lrbox}{\measure@tikzpicture}%
+  \BODY
+  \end{lrbox}%
+  \pgfmathparse{#1/\wd\measure@tikzpicture}%
+  \edef\tikzscale{\pgfmathresult}%
+  \BODY
+}
+\makeatother
+
+% PRE-RELEASE VERSIONING %
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\rfoot{\vspace{-0.6cm}\scriptsize
+  Pre-release $\alpha$; please send suggestions to
+  \href{https://t.me/ningyuan}{\texttt{@ningyuan}} on telegram.
+  Keep up-to-date with the
+  \href{https://github.com/ningyuansg/cheatsheets}{ningyuansg/cheatsheets}
+  repository on GitHub.
+}
+
+\begin{document}
+
+\scriptsize                         % Small fonts
+\pagenumbering{gobble}              % No page numbers
+\setlength\parindent{0pt}           % No indents at start of paragraphs
+\setlength{\abovedisplayskip}{3pt}  % Less spacing before equations
+\setlength{\belowdisplayskip}{3pt}  % less spacing after equations
+
+% TITLE %
+\begin{center}
+  {\large CS1231 Cheatsheet}\\{for finals, by ning}
+\end{center}
+
+% BODY %
+\begin{multicols*}{4}
+
+%% Preface %%
+Appendix A of Epp is not covered. Theorems, corollaries, lemmas, etc. from the
+Epp textbook are prefixed with `\textit{Epp}'; those without asterisks (*) are
+from the lecture notes, those with the asterisk are not (e.g. Epp theorems not
+covered by the lecture).\\
+
+%% Proofs %%
+\heading{Proofs} \\
+
+\subheading{Basic Notation}
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+    \item $\mathbb{R}$: the set of all real numbers
+    \item $\mathbb{Z}$: the set of integers (includes $0$)
+    \item $\mathbb{Q}$: the set of rationals
+    \item $\exists$:    there exists...
+    \item $\exists!$:   there exists a unique...
+    \item $\forall$:    for all...
+    \item $\in$:        member of...
+    \item $\ni$:        such that...
+\end{itemize}
+
+\subheading{Proof Types}
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+  \item \textbf{By Construction}: finding or giving a set of directions to
+    reach the statement to be proven true.
+  \item \textbf{By Contraposition}: proving a statement through its logical
+    equivalent contrapositive.
+  \item \textbf{By Contradiction}: proving that the negation of the statement
+    leads to a logical contradiction.
+  \item \textbf{By Exhaustion}: considering each case.
+  \item \textbf{By Mathematical Induction}: proving for a base case, then an
+    induction step.
+    \vspace{-1em} % hackhackhack
+    \begin{enumerate} \itemsep -0.2em
+      \item $P(a)$
+      \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
+      \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
+    \end{enumerate}
+  \vspace{-0.5em}
+  \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
+    P(k-1), \cdots, P(a)$ are all true.
+\end{itemize}
+
+\subheading{Order of Operations}
+
+First $\sim$ (also represented as $\neg$). No priority within $\land$ and
+$\lor$, so $p \land q \lor r$ is ambiguous and should be written as
+$(p \land q) \lor r$ or $p \land (q \lor r)$. The implication, $\rightarrow$ is
+performed last. Can be overwritten by parenthesis.\\
+
+\subheading{Universal \& Existential Generalisation}\\
+\textit{`All boys wear glasses'} is written as
+  $$\forall x (\text{Boy}(x) \rightarrow \text{Glasses}(x)) $$
+If conjunction was used, this statement would be falsified by the existence of a
+`non-boy' in the domain of $x$.\\
+
+\textit{`There is a boy who wears glasses'} is written as
+  $$\exists x (\text{Boy}(x) \land \text{Glasses}(x)) $$
+If implication was used, this statement would true even if the domain of $x$ is
+empty.\\
+
+\subheading{Valid Arguments as Tautologies}\\
+All valid arguments can be \textit{restated} as tautologies.\\
+
+\subheading{Rules of Inference}\\
+Modus ponens
+\begin{eqnarray*}
+  &p \rightarrow q \\
+  &p \\
+  &\boldsymbol{\cdot}\; q
+\end{eqnarray*}
+Modus tollens
+\begin{eqnarray*}
+  &p \rightarrow q \\
+  &\neg q \\
+  &\boldsymbol{\cdot}\; \neg p
+\end{eqnarray*}
+Generalization
+\begin{eqnarray*}
+  &p\\
+  &\boldsymbol{\cdot}\; p \lor q
+\end{eqnarray*}
+Specialization
+\begin{eqnarray*}
+  &p \land q\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+Elimination
+\begin{eqnarray*}
+  &p \lor q\\
+  &\neg q\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+Transitivity
+\begin{eqnarray*}
+  &p \rightarrow q\\
+  &q \rightarrow r\\
+  &\boldsymbol{\cdot}\; p \rightarrow r
+\end{eqnarray*}
+Proof by Division into Cases
+\begin{eqnarray*}
+  &p \lor q\\
+  &p \rightarrow r\\
+  &q \rightarrow r\\
+  &\boldsymbol{\cdot}\; r
+\end{eqnarray*}
+Contradiction Rule
+\begin{eqnarray*}
+  &\neg p \rightarrow \textbf{c}\\
+  &\boldsymbol{\cdot}\; p
+\end{eqnarray*}
+
+\subheading{Universal Rules of Inference}\\
+Only modus ponens, modus tollens, and transitivity have universal versions in
+the lecture notes.\\
+
+\subheading{Implicit Quantification}\\
+The notation $P(x) \implies Q(x)$ means that every element in the truth set of
+$P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
+\rightarrow Q(x)$.\\
+
+The notation $P(x) \iff Q(x)$ means that $P(x)$ and $Q(x)$ have identical truth
+sets, or equivalently, $\forall x, P(x) \leftrightarrow Q(x)$.\\
+
+\subheading{Implication Law}\\
+$$p \rightarrow q \equiv \neg p \lor q$$
+
+\subheading{Universal Instantiation}\\
+If some property is true of everything in a set, then it is true of any
+particular thing in the set.\\
+
+\subheading{Universal Generalization}\\
+If $P(c)$ must be true, and we have assumed nothing about $c$, then $\forall x,
+P(x)$ is true.\\
+
+\subheading{Regular Induction}\\
+\begin{eqnarray*}
+  &P(0) \\
+  &\forall k \in \mathbb{N}, P(k) \rightarrow P(k+1) \\
+  & \forall
+\end{eqnarray*}
+
+\subheading{Epp T2.1.1 Logical Equivalences}\\
+Commutative Laws
+  $$ p \land q \equiv q \land p $$
+  $$ p \lor  q \equiv q \lor  p $$
+Associative Laws
+  $$ (p \land q) \land r \equiv p \land (q \land r) $$
+  $$ (p \lor  q) \lor  r \equiv p \lor  (q \lor  r) $$
+Distributive Laws
+  $$ p \land (q \lor  r) \equiv (p \land q) \lor  (p \land r) $$
+  $$ p \lor  (q \land r) \equiv (p \lor  q) \land (p \lor  r) $$
+Identity Laws
+  $$ p \land \textbf{t} \equiv p $$
+  $$ p \lor  \textbf{c} \equiv p $$
+Negation Laws
+  $$ p \lor  \neg p \equiv \textbf{t} $$
+  $$ p \land \neg p \equiv \textbf{c} $$
+Double Negative Law
+  $$ \neg ( \neg p ) \equiv p $$
+Idempotent Laws
+  $$ p \land p \equiv p $$
+  $$ p \lor  p \equiv p $$
+Universal Bound Laws
+  $$ p \lor  \textbf{t} \equiv \textbf{t} $$
+  $$ p \land \textbf{c} \equiv \textbf{c} $$
+De Morgan's Laws
+  $$ \neg ( p \land q ) \equiv \neg p \lor  \neg q $$
+  $$ \neg ( p \lor  q ) \equiv \neg p \land \neg q $$
+Absorption Laws
+  $$ p \lor  (p \land q) \equiv p $$
+  $$ p \land (p \lor  q) \equiv p $$
+Negations of $\textbf{t}$ and $\textbf{c}$
+  $$ \neg \textbf{t} \equiv \textbf{c} $$
+  $$ \neg \textbf{c} \equiv \textbf{t} $$
+
+\subheading{Definition 2.2.1 (Conditional)}\\
+If $p$ and $q$ are statement variables, the conditional of $q$ by $p$ is ``if
+$p$ then $q$" or ``$p$ implies $q$", denoted $p \rightarrow q$. It is false
+when $p$ is true and $q$ is false; otherwise it is true. We call $p$ the
+\textit{hypothesis} (or \textit{antecedent}), and $q$ the \textit{conclusion}
+(or \textit{consequent}).\\
+
+A conditional statement that is true because its hypothesis is false is called
+\textit{vacuously true} or \textit{true by default}.\\
+
+\subheading{Definition 2.2.2 (Contrapositive)}\\
+The contrapositive of $p \rightarrow q$ is $\neg q \rightarrow \neg p$.\\
+
+\subheading{Definition 2.2.3 (Converse)}\\
+The converse of $p \rightarrow q$ is $q \rightarrow p$.\\
+
+\subheading{Definition 2.2.4 (Inverse)}\\
+The inverse of $p \rightarrow q$ is $\neg p \rightarrow \neg q$.\\
+
+\subheading{Definition 2.2.6 (Biconditional)}\\
+The biconditional of $p$ and $q$ is denoted $p \leftrightarrow q$ and is true if
+both $p$ and $q$ have the same truth values, and is false if $p$ and $q$ have
+opposite truth values.\\
+
+\subheading{Definition 2.2.7 (Necessary \& Sufficient)}\\
+``$r$ is sufficient for $s$" means $r \rightarrow s$, ``$r$ is necessary for
+$s$" means $\neg r \rightarrow \neg s$ or equivalently $s \rightarrow r$.\\
+
+\subheading{Definition 2.3.2 (Sound \& Unsound Arguments)}\\
+An argument is called \textit{sound}, iff it is valid and all its premises are
+true.\\
+
+\subheading{Definition 3.1.3 (Universal Statement)}\\
+A \textit{universal statement} is of the form $$\forall x \in D, Q(x)$$ It is
+defined to be true iff $Q(x)$ is true for every $x$ in $D$. It is defined to be
+false iff $Q(x)$ is false for at least one $x$ in D.\\
+
+\subheading{Definition 3.1.4 (Existential Statement)}\\
+A \textit{existential statement} is of the form $$\exists x \in D \text{ s.t. }
+Q(x)$$ It is defined to be true iff $Q(x)$ is true for at least one $x$ in $D$.
+It is defined to be false iff $Q(x)$ is false for all $x$ in $D$.\\
+
+\subheading{Theorem 3.2.1 (Negation of Universal State.)}\\
+The negation of a statement of the form $$\forall x \in D, P(x)$$ is logically
+equivalent to a statement of the form $$\exists x \in D \text{ s.t. } \neg
+P(x)$$
+
+\subheading{Theorem 3.2.2 (Negation of Existential State.)}\\
+The negation of a statement of the form $$\exists x \in D \text{ s.t. } P(x)$$
+is logically equivalent to a statement of the form $$\forall x \in D, \neg
+P(x)$$
+
+\heading{Number Theory} \\
+
+\subheading{Properties (of Numbers)} \\
+Closure, i.e.
+$$\forall x, y \in \mathbb{Z},\;
+         x + y \in \mathbb{Z},\text{ and }
+            xy \in \mathbb{Z}$$
+Commutativity, i.e.
+  $$a+b=b+a\text{ and }ab=ba$$
+Distributivity, i.e.
+  $$a(b+c) = ab + ac \text{ and } (b+c)a = ba + ca$$
+Trichotomy, i.e.
+  $$(a < b) \oplus (b < a) \oplus (a = b)$$
+(Can be used without proof)\\
+
+\subheading{Definition 1.1.1 (Colorful)}
+
+An integer $n$ is said to be colorful if there exists some integer $k$ such
+that $n = 3k$.\\
+
+\subheading{Definition 1.3.1 (Divisibility)}\\
+If $n$ and $d$ are integers and $d \neq 0$,
+  $$ d|n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
+
+\subheading{Proposition 1.3.2 (Linear Combination)}
+$$\forall a, b, c \in \mathbb{Z},\;
+    a | b \land a | c \rightarrow
+    \forall x, y \in \mathbb{Z},\;
+    a | (bx + cy)$$
+If $a$ divides $b$ and $c$, then it also divides their linear combination
+$(bx + cy)$.\\
+
+\subheading{Theorem 4.1.1 (Linear Combination)}\\
+$$\forall a,b,c \in \mathbb{Z},\;
+  a | b \land a | c \rightarrow \forall x,y \in \mathbb{Z}, a | (bx + cy)$$
+
+\subheading{Epp T4.3.3 (Transitivity of Divisibility)}
+$$\forall a, b, c \in \mathbb{Z},\;
+  a | b \land b | c \rightarrow a | c$$
+
+\subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}
+Given any integer $a$ and any positive integer $b$, there exist unique integers
+$q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b $$
+
+\subheading{Representation of Integers}\\
+Given any positive integer $n$ and base $b$, repeatedly apply the
+Quotient-Remainder Theorem to get,
+\begin{eqnarray*}
+  n   &= bq_0 + r_0 \\
+  q_0 &= bq_1 + r_1 \\
+  q_1 &= bq_2 + r_2 \\
+  & \cdots \\
+  q_{m-1} &= bq_m + r_m
+\end{eqnarray*}
+
+The process stops when $q_m = 0$. Eliminating the quotients $q_i$ we get,
+  $$ n = r_mb^m + r_{m-1}b^{m-1} + \cdots r_1b + r_0 $$
+
+Which may be represented compactly in base $b$ as a sequence of the digits
+$r_i$,
+  $$ n = (r_m r_{m-1} \cdots r_1 r_0)_b $$
+
+\subheading{Definition 4.2.1 (Prime number)}\\
+\begin{IEEEeqnarray*}{rCl}
+  n\text{ is prime } &\iff& \forall r, s \in \mathbb{Z}^+ \\
+                    &&n = rs \rightarrow \\
+                    &&(r=1 \land s=n) \lor (r=n \land s=1) \\
+  n\text{ is composite } &\iff& \exists r, s \in \mathbb{Z}^+
+  \text{ s.t. }\\
+                    &&n = rs\;\land \\
+                    &&(1 < r < n) \land (1 < s < n)
+\end{IEEEeqnarray*}
+
+\subheading{List of Primes to 100}\\
+2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73,
+79, 83, 89, 97.\\
+
+\subheading{Proposition 4.2.2}\\
+For any two primes $p$ and $p'$,
+  $$p\;|\;p' \rightarrow p = p'$$
+
+\subheading{Theorem 4.2.3}\\
+If $p$ is a prime and $x_1, x_2, \cdots, x_n$ are any integers s.t.
+$p\;|\;x_1x_2\cdots x_n$, then $p\;|\;x_i$ for some $x_i, i \in \{1, 2, \cdots,
+n\}$.\\
+
+\subheading{Epp T4.3.5 (Unique Prime Factorisation)}\\
+Given any integer $n > 1$
+\begin{IEEEeqnarray*}{rCl}
+  \exists k                  &\in& \mathbb{Z}^+, \\
+  \exists p_1,p_2,\cdots,p_k &\in& \text{ primes}, \\
+  \exists e_1,e_2,\cdots,e_k &\in& \mathbb{Z}^+,
+\end{IEEEeqnarray*}
+such that $$n=p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k}$$
+and any other expression for $n$ as a product of prime numbers is identical,
+except perhaps for the order in which the factors are written.\\
+
+\subheading{Epp Proposition 4.7.3}\\
+For any $a \in \mathbb{Z}$ and any prime $p$,
+  $$ p\;|\;a \rightarrow p \nmid (a+1) $$
+
+\subheading{Epp T4.7.4 (Infinitude of Primes)}\\
+The set of primes is infinite.\\
+
+\subheading{Definition 4.5.4 (Relatively Prime)}\\
+Integers $a$ and $b$ are \textit{relatively prime} (or \textit{coprime}) iff
+$\mathrm{gcd}(a,b)=1$.\\
+
+\subheading{Definition 4.3.1 (Lower Bound)}\\
+An integer $b$ is said to be a \textit{lower bound} for a set $X \subseteq
+\mathbb{Z}$ if $b \leq x$ for all $x \in X$.\\
+
+Does not require $b$ to be in $X$.\\
+
+\subheading{Theorem 4.3.2 (Well Ordering Principle)}\\
+If a non-empty set $S \subseteq \mathbb{Z}$ has a lower bound, then $S$ has a
+least element.\\
+
+Note three conditions: $|S| > 0$, $S \subseteq \mathbb{Z}$, and $S$ has lower
+bound.\\
+
+Likewise, if ... upper bound ... has a greatest element.\\
+
+\subheading{Proposition 4.3.3 (Uniqueness of least element)}\\
+If a set $S$ has a least element, then the least element is unique.\\
+
+\subheading{Proposition 4.3.4 (Uniqueness of greatest e.)}\\
+If a set $S$ has a greatest element, then the greatest element is unique.\\
+
+\subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}\\
+Given any integer $a$ and any positive integer $b$, there exist unique integers
+$q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b$$
+
+\subheading{Definition 4.5.1 (Greatest Common Divisor)}\\
+Let $a$ and $b$ be integers, not both zero. The \textit{greatest common divisor}
+of $a$ and $b$, denoted $\mathrm{gcd}(a, b)$, is the integer $d$ satisfying
+
+\begin{enumerate} \itemsep -0.5em
+  \item $d\;|\;a$ and $d\;|\;b$
+  \item $\forall c \in \mathbb{Z}\;((c\;|\;a)\ \land (c\;|\;b) \rightarrow c \leq d)$
+\end{enumerate}
+
+\subheading{Proposition 4.5.2 (Existence of gcd)}\\
+For any integers $a$, $b$, not both zero, their gcd exists and is unique.\\
+
+\subheading{Theorem 4.5.3 (B\'ezout's Identity)}\\
+Let $a$, $b$ be integers, not both zero, and let $d = \mathrm{gcd}(a, b)$. Then
+there exists integers $x$, $y$ such that $$ax + by = d$$
+
+Or, the gcd of two integers is some linear combination of the said numbers,
+where $x$, $y$ above have multiple solution pairs once a solution pair $(x, y)$
+is found. Also solutions, for any integer $k$,
+
+$$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
+
+\subheading{*Epp T8.4.8 (Euclid's Lemma)}\\
+For all $a, b, c \in \mathbb{Z}$, if $\mathrm{gcd}(a, c) = 1$ and $a\;|\;bc$,
+then $a\;|\;b$.\\
+
+\subheading{*Epp Lemma 4.8.2}\\
+If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
+$$\mathrm{gcd}(a, b)= \mathrm{gcd}(b, r)$$
+
+\subheading{Proposition 4.5.5}\\
+For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
+$b$, then $c\;|\;\mathrm{gcd}(a,b)$.\\
+
+% TODO: LCM for finals
+
+\subheading{Definition 4.7.1 (Congruence modulo)}\\
+Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
+\textit{congruent} to $n$ \textit{modulo} $d$ and write
+$$ m \equiv n\ (\mathrm{mod}\; d) $$
+iff
+$$ d\;|\;(m-n) $$
+More concisely,
+$$ m \equiv n\ (\mathrm{mod}\; d) \iff d\;|\;(m-n) $$
+
+\subheading{Epp T8.4.1 (Modular Equivalences)}\\
+Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
+equivalent,
+\begin{enumerate} \itemsep -0.5em
+    \item $n\;|\;(a-b)$
+    \item $a \equiv b\ (\mathrm{mod}\; n)$
+    \item $a = b + kn$ for some $k \in \mathbb{Z}$
+    \item $a$ and $b$ have the same non-negative remainder when divided by $n$
+    \item $a\;\mathrm{mod}\;n = b\;\mathrm{mod}\;n$
+\end{enumerate}
+
+\subheading{Epp T8.4.3 (Modulo Arithmetic)}\\
+Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, and suppose\\
+
+{\centering
+$a \equiv c\ (\mathrm{mod}\; n)$ and $b \equiv d\ (\textrm{mod}\; n)$\\
+}
+
+Then
+
+\begin{enumerate} \itemsep -0.5em
+    \item $(a + b) \equiv (c + d)\ (\mathrm{mod}\;n)$
+    \item $(a - b) \equiv (c - d)\ (\mathrm{mod}\;n)$
+    \item $ab \equiv cd\ (\mathrm{mod}\;n)$
+    \item $a^m \equiv c^m\ (\mathrm{mod}\;n)$, for all $m \in \mathbb{Z}^+$
+\end{enumerate}
+
+\subheading{Epp Corollary 8.4.4}\\
+Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, then
+$$ ab \equiv [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ (\mathrm{mod}\;n) $$
+or equivalently,
+$$ ab\;\mathrm{mod}\;n = [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ \mathrm{mod}\;n $$
+In particular, if $m$ is a positive integer, then
+$$ a^m \equiv [(a\;\textrm{mod}\;n)^m]\ (\mathrm{mod}\;n) $$
+
+\subheading{Definition 4.7.2 (Multiplicative inv. modulo $n$)}\\
+For any integers $a, n$ with $n > 1$, if an integer $s$ is such that $as \equiv
+1\ (\mathrm{mod}\;n)$, then $s$ is the \textit{multiplicative inverse of $a$
+modulo $n$}. We may write $s$ as $a^{-1}$.\\
+
+Because the commutative law still applies in modulo arithmetic, we also have
+$$a^{-1}a \equiv 1\ (\mathrm{mod}\;n)$$
+Multiplicative inverses are not unique. If $s$ is an inverse, then so is $(s +
+kn)$ for any integer $k$.\\
+
+\subheading{Theorem 4.6.3 (Existence of multiplicative inverse)}\\
+For any integer $a$, its multiplicative inverse modulo $n$ where $n>1$,
+$a^{-1}$, exists iff $a$ and $n$ are coprime.\\
+
+\subheading{Finding the Multiplicative Inverse}\\
+For example, to find the multiplicative inverse of $5\ \textrm{mod}\; 18$,
+\begin{IEEEeqnarray*}{rCl}
+  18 = 3 &\times& 5 + 3 \\
+   5 = 1 &\times& 3 + 2 \\
+   3 = 1 &\times& 2 + 1 \\
+   1 = 1 &\times& 1 + 0
+\end{IEEEeqnarray*}
+So
+\begin{IEEEeqnarray*}{rCl}
+  1 &=& 1 \times 1 + 0 = 1 \\
+    &=& 1(3 - 1 \times 2) = 3 - 2  \\
+    &=& 3 - (5 - 3) = 2 \times 3 - 5 \\
+    &=& 2(18 - 3 \times 5) - 5 = 2 \times 18 - 7 \times 5 \\
+  1 - 2 \times 18 &=& -7 \times 5 \\
+  1 - 2 \times 18 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18) \\
+                1 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18)
+\end{IEEEeqnarray*}
+Therefore, we have $5^{-1}\ \textrm{mod}\; 18 = -7$, or equivalently under
+modulo $11$.\\
+
+\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}\\
+If $n=p$ is a prime number, then all integers $a$ in the range $0<a<p$ have
+multiplicative inverses modulo $p$.\\
+
+\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
+For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
+$$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
+
+\heading{Sequences}\\
+
+\subheading{Empty Sums \& Products}
+
+By definition, when $n < m$,
+
+\begin{align*}
+\sum^n_{i=m} a_i &= 0 \\
+\prod^n_{i=m} &= 1
+\end{align*}
+
+\subheading{Epp T5.1.1}
+
+For real numbered sequences $a_m, a_{m+1}, a_{m+2}, ...$ and $b_m, b_{m+1},
+b_{m+2}...$, $c \in \mathbb{R}$, the following holds for any $n \geq m$
+\begin{align*}
+\sum^n_{k=m} a_k + \sum^n_{k=m} b_k &= \sum^n_{k=m}(a_k + b_l) \\
+c \cdot \sum^n_{k=m} a_k &= \sum^n_{k=m} c \cdot a_k\\
+\left ( \prod^n_{k=m} a_k \right ) \cdot \left ( \prod^n_{k=m} b_k \right ) &=
+  \prod^n_{k=m}(a_k \cdot b_k)
+\end{align*}
+
+\vspace{0.3cm}
+
+\subheading{Common Sequences}\\
+
+Arithmetic sequence:
+\begin{align*}
+S_n &= \frac{n}{2} ( 2a + (n-1)d )
+\end{align*}
+Geometric sequence:
+\begin{align*}
+S_n &= \frac{a(r^n - 1)}{r - 1} \\
+S_{\infty} &= \frac{a}{1-r}\text{ ,\ \ \ \ $|r| < 1$}
+\end{align*}
+Fibonacci numbers:
+\begin{align*}
+\forall n \in \mathbb{N},\ F_k &= \begin{cases}
+  0 & \text{if $k=0$} \\
+  1 & \text{if $k=1$} \\
+  F_{k-1} + F_{k-2} & \text{otherwise}
+\end{cases} \\
+  &= \frac{\phi^k - (- \phi)^{-k}}{\sqrt{5}}
+\end{align*}
+
+\vspace{0.3cm}
+
+\subheading{Definition 5.4.1}
+
+A second-order linear homogeneous recurrence relation with constant coefficients
+is a recurrence relation of the form:
+
+$$F_k = aF_{k-1} + bF_{k-2}$$
+
+Where $a, b \in \mathbb{R}$, $b \neq 0$; and $\forall k \in \mathbb{Z}_{k \geq
+k_0}$ for $k_0 \in \mathbb{Z}$.
+
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+\item[-] \textit{Second-order} means recurrence relation goes up to but not
+  exceeding $F_{k-2}$.
+\item[-] \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
+  $m=1$.
+\item[-] \textit{Homogeneous} means $C=0$ in the more general case $F_k =
+  aF_{k-1} + bF_{k-2} + C$.
+\item[-] \textit{Constant coefficients} means $a, b$ does not depend on $k$.
+\end{itemize}
+
+\subheading{Epp T5.8.3 (Distinct-Roots Theorem)}
+
+If a second-order linear homogeneous recurrence relation with constant
+coefficients has real roots $r$ and $s$ for its characteristic equation,
+$$t^2 - at - b = 0$$
+Then $F_k$ can be written in closed form as
+$$F_k = cr^k + ds^k$$
+Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
+sequence. \\
+
+\subheading{Epp T5.8.5 (Single-Roots Theorem)}
+
+If a second-order linear homogeneous recurrence relation with constant
+coefficients has one single real root $r$ for its characteristic equation,
+$$t^2 - at - b = 0$$
+Then $F_k$ can be written in closed form as
+$$F_k = cr^n + dkr^n$$
+Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
+sequence. \\
+
+\heading{Sets} \\
+
+\subheading{Definition 6.1.1 (Subsets \& Supersets)}
+
+$S$ is a subset of $T$ if all the elements of $S$ are elements of $T$, denoted
+$S \subseteq T$. Formally, $$S \subseteq T \longleftrightarrow \forall x \in S
+(x \in T)$$
+
+\subheading{Definition 6.2.1 (Empty Set)}
+
+An empty set has no element, and is denoted $\varnothing$ or $\{\}$. Formally,
+where $\mathcal{U}$ is the universal set: $$\forall Y \in \mathcal{U} (Y \not\in
+\varnothing)$$
+
+\subheading{Epp T6.24}
+
+An empty set is a subset of all sets.
+$$\forall S\text{, $S$ is a set, }\varnothing \subseteq S$$
+
+\subheading{Definition 6.2.2 (Set Equality)}
+
+Two sets are equal iff they have the same elements.\\
+
+\subheading{Proposition 6.2.3}
+
+For any two sets $X, Y$, $X$ and $Y$ are subsets of each other iff $X = Y$.
+Formally,
+$$\forall X, Y((X \subseteq Y \land Y \subseteq X) \longleftrightarrow X=Y)$$
+
+\subheading{Epp C6.2.5 (Empty Set is Unique)}
+
+It's what it says.\\
+
+\subheading{Definition 6.2.4 (Power Set)}
+
+The power set of a set $S$ denoted $\mathcal{P}(S)$, or $2^S$; is the set whose
+elements are all possible subsets of $S$. Formally,
+$$\mathcal{P}(S) = \{X\;|\;X\subseteq S\}$$
+
+\subheading{Theorem 6.3.1}
+
+If a set $X$ has $n$ elements, $n \geq 0$, then $\mathcal{P}(X)$ has $2^n$
+elements. \\
+
+\subheading{Definition 6.3.1 (Union)}
+
+Let $S$ be a set of sets. $T$ is the union of sets in $S$, iff each element of
+$T$ belongs to some set in $S$. Formally,
+$$T=\bigcup S = \bigcup_{X\in S} X = \{ y \in \mathcal{U}\;|\;\exists X \in S (y
+\in X)\}$$
+
+\subheading{Proposition 6.3.2}
+
+Some properties of union,
+\begin{itemize}[leftmargin=*] \itemsep -0.3em
+  \item $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
+  \item $\bigcup \{A\} = A$
+  \item $A \cup \varnothing = A$
+  \item $A \cup B = B \cup A$
+  \item $A \cup (B \cup C) = (A \cup B) \cup C$
+  \item $A \cup A = A$
+  \item $A \subseteq B \longleftrightarrow A \cup B = B$
+\end{itemize}
+
+\subheading{Definition 6.3.3 (Intersection)}
+
+Let $S$ be a non-empty set of sets. $T$ is the intersection of sets in $S$, iff
+each element of $T$ also belongs to all the sets in $S$. Formally,
+\begin{align*}
+  T &= \bigcap S = \bigcap_{X \in S} X \\
+    &= \{y \in \mathcal{U}\;|\; \forall X ((X \in S) \rightarrow (y \in X)) \}
+\end{align*}
+
+\subheading{Proposition 6.3.4}
+
+Let $A, B, C$ be sets. Some properties of intersection,
+
+\begin{itemize}[leftmargin=*] \itemsep -0.3em
+  \item $A \cap \varnothing = \varnothing$
+  \item $A \cap B = B \cap A$
+  \item $A \cap (B \cap C) = (A \cap B) \cap C$
+  \item $A \subseteq B \longleftrightarrow A \cap B = A$
+  \item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+  \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+\end{itemize}
+
+\subheading{Definition 6.3.5 (Disjoint)}
+
+Let $S, T$ be sets. $S$ and $T$ are disjoint iff $S \cap T = \varnothing$.\\
+
+\subheading{Definition 6.3.6 (Mutually Disjoint)}
+
+Let $V$ be a set of sets. The sets $T \in V$ are mutually disjoint iff every two
+distinct sets are disjoint. Formally,
+$$\forall X, Y \in V (X \neq Y \rightarrow X \cap Y = \varnothing)$$
+
+\subheading{Definition 6.3.7 (Partition)}
+
+Let $S$ be a set, and $V$ a set of non-empty subsets of $S$. Then $V$ is a
+partition of $S$ iff
+\begin{enumerate} \itemsep -0.5em
+  \item The sets in $V$ are mutually disjoint
+  \item The union of sets in $V$ equals $S$
+\end{enumerate}
+
+\subheading{Definition 6.3.8 (Non-symmetric Difference)}
+
+Let $S, T$ be two sets. The (non-symmetric) difference of $S$ and $T$ denoted
+$S-T$ or $S\setminus T$ is the set whose elements belong to $S$ and do not
+belong to $T$. Formally,
+$$S - T = \{y \in \mathcal{U}\;|\;y \in S \land y \not\in T \}$$
+This is analogous to subtraction for numbers.\\
+
+\subheading{Definition 6.3.9 (Symmetric Difference)}
+
+Let $S, T$ be two sets. The symmetric difference of $S$ and $T$ denoted $S
+\ominus T$ is the set whose elements belong to $S$ or $T$ but not both.
+Formally,
+$$S \ominus T = \{y \in \mathcal{U}\;|\;y \in S \oplus y \in T \}$$
+This is analogous to the exclusive-or in predicate logic.\\
+
+\subheading{Definition 6.3.10 (Set Complement)}
+
+Let $A \subseteq \mathcal{U}$. Then, the complement of A denoted $A^c$ is
+$\mathcal{U}-A$.\\
+
+\heading{Relations}\\
+
+\subheading{Definition 8.1.1 (Ordered Pair)}
+
+Let $S$ be a non-empty set, and $x, y \in S$. The ordered pair denoted $(x, y)$
+is a mathematical object where the first element is $x$ and the second is $y$.
+$$(x, y) = (a, b) \iff x = a \land y = b$$
+
+\subheading{Definition 8.1.2 (Ordered $n$-tuple)} \\
+
+Generalise the ordered pair to $n$ elements. The ordered $n$-tuple $(x_1, x_2,
+\cdots, x_n)$ consists of $x_1, x_2, \cdots, x_n$ elements together with
+ordering.
+\begin{align*}
+       &(x_1, x_2, \cdots, x_n) = (y_1, y_2, \cdots, y_n) \\
+  \iff &x_1 = y_1, x_2 = y_2, \cdots, x_n = y_n
+\end{align*}
+
+\subheading{Definition 8.1.3 (Cartesian Product)}
+
+Let $S, T$ be two sets. The \textit{Cartesian product} (or cross product) of $S$
+and $T$ denoted $S \times T$ is the set such that
+$$\forall X \forall Y ((X,Y) \in S \times T
+  \longleftrightarrow (X \in S) \land (Y \in T))$$
+
+For example,
+\begin{align*}
+    &\{1, 2, 3\} \times \{a, b\} \\
+  =\ &\{(1, a), (1, b), (2, a), (2, b), (3, a), (3, b)\}
+\end{align*}
+
+\subheading{Definition 8.1.4 (Generalised Cartesian Prod.)}
+
+Generalise the cartesian product for $n$ sets.
+\begin{align*}
+&A_1 \times A_2 \times \cdots \times A_n \\
+  =\ &\{(a_1,\cdots,a_n)\;|\;a_1 \in A_1, \cdots, a_n \in A_n\}
+\end{align*}
+Let $V$ be a set of sets with which to apply the cartesian product to. We can
+also write
+$$\prod_{S \in V} S$$
+
+\subheading{Definition 8.2.1 (Relations)}
+
+Let $S, T$ be two sets. A \textit{binary relation} from $S$ to $T$ denoted
+$\mathcal{R}$ is a subset of the cartesian product $S \times T$.
+
+The notation $s\; \mathcal{R}\; t$ stands for $(s, t) \in \mathcal{R}$. $s\;
+\cancel{\mathcal{R}}\; t$ stands for $(s, t) \cancel{\in} \mathcal{R}$.\\
+
+\subheading{Definitions 8.2.[2-4] (Dom, Im, coDom)}
+
+Let $\mathcal{R} \subseteq S \times T$ be a binary relation from $S$ to $T$.
+Denote the domain (8.2.2) of $\mathcal{R}$ as $Dom(\mathcal{R})$; the image (or
+range, 8.2.3) as $Im(\mathcal{R})$; and the co-domain (8.2.4) as
+$coDom(\mathcal{R})$.
+\begin{align*}
+  Dom(\mathcal{R}) &= \{s \in S\;|\; \exists t \in T (s\;\mathcal{R}\;t)\} \\
+  Im(\mathcal{R})  &= \{t \in T\;|\; \exists s \in S (s\;\mathcal{R}\;t)\} \\
+  coDom(\mathcal{R}) &= T
+\end{align*}
+
+\subheading{Proposition 8.2.5}
+
+Let $\mathcal{R}$ be a binary relation. $Im(\mathcal{R}) \subseteq
+coDom(\mathcal{R})$. \\
+
+\subheading{Definition 8.2.6 (Inverse)}
+
+Let $S, T$ be sets; $\mathcal{R} \subseteq S \times T$ be a binary relation. The
+inverse of the relation $\mathcal{R}$ denoted $\mathcal{R}^{-1}$ is the relation
+from $T$ to $S$ such that
+$$\forall s \in S, \forall t \in T
+  (t\;\mathcal{R}^{-1}\;s \longleftrightarrow s\;\mathcal{R}\;t)$$
+
+\subheading{Definition 8.2.7 ($n$-ary relation)}
+
+Generalise the binary relation for $n$ sets $S_1, S_2, \cdots, S_n$. An $n$-ary
+relation on the $n$ sets is a subset of the cartesian product $\prod_{i} S_i$.
+$n$ is the arity or degree of the relation.\\
+
+\subheading{Definition 8.2.8 (Composition)}
+
+Let $S, T, U$ be sets; and $\mathcal{R} \subseteq S \times T$, $\mathcal{R}'
+\subseteq T \times U$ be relations. The \textit{composition} of $\mathcal{R}$
+with $\mathcal{R}'$, denoted $\mathcal{R}' \circ \mathcal{R}$ is the relation from
+$S$ to $U$ such that
+$$\forall x \in S, \forall z \in U (
+  x\;\mathcal{R}' \circ \mathcal{R}\;z \leftrightarrow
+    (\exists y \in T (x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}'\;z))
+)$$
+In other words, $x \in S$ and $z in U$ are related iff there is a ``path" from
+$x$ to $z$ via some intermediate $y \in T$.\\
+
+\subheading{Proposition 8.2.9 (Associativity of Composition)}
+$$\mathcal{R}'' \circ (\mathcal{R}' \circ \mathcal{R}) =
+  (\mathcal{R}'' \circ \mathcal{R}') \circ \mathcal{R} =
+  \mathcal{R}'' \circ \mathcal{R}' \circ \mathcal{R}$$
+
+\subheading{Proposition 8.2.10 (Inverse of Composition)}
+$$(\mathcal{R}' \circ \mathcal{R})^{-1} =
+  \mathcal{R}^{-1} \circ \mathcal{R}'^{-1}$$
+
+\subheading{Definitions 8.3.2 (Properties of Relations)}
+
+Let $A$ be a set, and $\mathcal{R} \in A \times A$ be a relation on $A$.\\
+
+$\mathcal{R}$ is reflexive (8.3.1) iff $\forall x \in A (x\;\mathcal{R}\;x)$.\\
+
+$\mathcal{R}$ is symmetric (8.3.2) iff $\forall x, y \in A (x\;\mathcal{R}\;y
+\rightarrow y\;\mathcal{R}\;x)$.\\
+
+$\mathcal{R}$ is transitive (8.3.3) iff $\forall x, y, z \in A
+((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;z)\rightarrow x\;\mathcal{R}\;z))$.\\
+
+\subheading{Definition 8.3.4 (Equivalence Relation)}
+
+A relation $\mathcal{R}$ is called an equivalence relation iff $\mathcal{R}$ is
+reflexive, symmetric, and transitive.\\
+
+\subheading{Definition 8.3.5 (Equivalence Class)}
+
+Let $x \in A$. The equivalence class of $x$ denoted $[x]$ is the set of all
+elements $y \in A$ that are in relation with $x$. That is
+$$[x] = \{ y \in A\;|\; x\;\mathcal{R}\;y\}$$
+
+\subheading{Epp T8.3.4 (Partition by Equivalence Relation)}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$. Then the set of
+distinct equivalence classes form a partition of $A$.\\
+
+\subheading{Epp L8.3.2}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$, and let $a, b \in A$.
+If $a\;\mathcal{R}\;b$ then $[a]=[b]$.\\
+
+\subheading{Epp L8.3.3}
+
+Let $\mathcal{R}$ be an equivalence relation on a set $A$, and let $a, b \in A$.
+Either $[a] \cap [b] = \varnothing$ or $[a] = [b]$.\\
+
+\subheading{Epp T8.3.1 (Equivalence Relation by Partition)}
+
+Given a partition $S_1, S_2, cdots$ of a set $A$, there exists an equivalence
+relation $\mathcal{R}$ on $A$ whose equivalence classes make up precisely that
+partition. \\
+
+\subheading{Definition 8.5.1 (Transitive Closure)}
+
+Let $A$ be a set and $\mathcal{R}$ a relation on $A$. The transitive closure of
+$\mathcal{R}$ denoted $\mathcal{R}^t$ is a relation that satisfies the three
+properties:
+\begin{enumerate} \itemsep -0.5em
+  \item $\mathcal{R}^t$ is transitive.
+  \item $\mathcal{R} \subseteq \mathcal{R}^t$.
+  \item If $\textit{S}$ is any other transitive relation such that $\mathcal{R}
+    \subseteq \textit{S}$, then $\mathcal{R}^t \subseteq \textit{S}$.
+\end{enumerate}
+Intuitively, the transitive the closure can be understood as the smallest
+superset that is transitive. Similar definitions exist for the reflexive closure
+and symmetric closure.\\
+
+% TODO: repeated compositions
+
+\subheading{Proposition 8.5.2}
+$$\mathcal{R}^t = \bigcup^\infty_{i=1} \mathcal{R}^i$$
+
+\subheading{Definition 8.6.1 (Anti-symmetric)}
+
+Let $A$ be a set, and $R \in A \times A$ be a relation on $A$. $\mathcal{R}$ is
+anti-symmetric iff
+$$\forall x \in A, \forall y \in A
+  ((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;x) \rightarrow x = y)$$
+
+\subheading{Definition 8.6.2 (Partial Order)}
+
+$\mathcal{R}$ is a partial order iff it is reflexive, anti-symmetric, and
+transitive. A set $A$ is called a partially ordered set with respect to a
+relation $\preceq$ iff $\preceq$ is a partial order relation on $A$.\\
+
+\subheading{Hasse Diagrams}
+
+The Hasse diagram is a simplified directed graph.
+\begin{enumerate} \itemsep -0.5em
+  \item Draw the directed graph so that all arrows point upwards.
+  \item Eliminate all self-loops
+  \item Eliminate all arrows implied by transitivity.
+  \item Remove the direction of the arrows.
+\end{enumerate}
+\begin{center}
+\begin{scaletikzpicturetowidth}{0.8\columnwidth}
+\begin{tikzpicture}[scale=\tikzscale]
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (1, 0) {1};
+    \node (B) at (0, 0.5) {2};
+    \node (C) at (2, 0.2) {3};
+    \node (D) at (2, 0.8) {9};
+    \node (E) at (1, 1) {18};
+  \end{scope}
+  \begin{scope}[>={Stealth[black]},
+    every node/.style={fill=white,circle},
+    every edge/.style={draw=black,thick}]
+    \path [->] (A) edge (B);
+    \path [->] (B) edge (E);
+    \path [->] (A) edge (C);
+    \path [->] (C) edge (D);
+    \path [->] (D) edge (E);
+    % transitivity
+    \path [->] (A) edge (E);
+    \path [->] (A) edge (D);
+    \path [->] (C) edge (E);
+    % self loops
+    \path [->] (A) edge[loop below] (A);
+    \path [->] (B) edge[loop left] (B);
+    \path [->] (C) edge[loop right] (C);
+    \path [->] (D) edge[loop right] (D);
+    \path [->] (E) edge[loop above] (E);
+  \end{scope}
+\end{tikzpicture}
+\end{scaletikzpicturetowidth}
+\end{center}
+
+The above diagram represents the partial order for ``divides" on the set $A=\{1,
+2, 3, 9, 18\}$. That is
+$$\forall a, b \in A (a\;|\;b \longleftrightarrow \exists k \in
+\mathbb{Z}(b=ka))$$
+It can be represented by the following Hasse diagram.
+
+\begin{center}
+\begin{scaletikzpicturetowidth}{0.8\columnwidth}
+\begin{tikzpicture}[scale=\tikzscale]
+  \begin{scope}[every node/.style={circle,thick,draw}]
+    \node (A) at (1, 0) {1};
+    \node (B) at (0, 0.5) {2};
+    \node (C) at (2, 0.2) {3};
+    \node (D) at (2, 0.8) {9};
+    \node (E) at (1, 1) {18};
+  \end{scope}
+  \begin{scope}[>={Stealth[black]},
+    every node/.style={fill=white,circle},
+    every edge/.style={draw=black,thick}]
+    \path [-] (A) edge (B);
+    \path [-] (B) edge (E);
+    \path [-] (A) edge (C);
+    \path [-] (C) edge (D);
+    \path [-] (D) edge (E);
+  \end{scope}
+\end{tikzpicture}
+\end{scaletikzpicturetowidth}
+\end{center}
+
+\subheading{Definition 8.6.3 (Comparable)}
+
+Let $\preceq$ be a partial order on set $A$. $a, b \in A$ are said to be
+comparable iff either $a \preceq b$ or $b \preceq a$. Otherwise, $a$ and $b$ are
+noncomparable. \\
+
+\subheading{Definition 8.6.4 (Total Order)}
+
+Let $\preceq$ be a partial order on set $A$. $\preceq$ is said to be a total
+order iff $\preceq$ is a partial order, and all $x, y \in A$ are comparable.
+Formally,
+$$\forall x, y \in A(x \preceq y \lor y \preceq x)$$
+
+\subheading{Definition 8.6.5 (Maximal)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $x$ is a maximal
+element iff $$\forall y \in A (x \preceq y \rightarrow x = y)$$
+
+\subheading{Definition 8.6.6 (Maximum)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $T$ is the maximum
+element iff $$\forall x \in A (x \preceq T)$$
+
+\subheading{Definition 8.6.7 (Minimal)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $x$ is a minimal
+element iff $$\forall y \in A (y \preceq x \rightarrow x = y)$$
+
+\subheading{Definition 8.6.8 (Minimum)}
+
+Let $\preceq$ be a partial order on the set $A$. An element $\bot$ is the
+minimum element iff $$\forall x \in A (\bot \preceq x)$$
+
+\subheading{Definition 8.6.9 (Well Ordered)}
+
+Let $\preceq$ be a partial order on the set $A$. A is well ordered iff every
+non-empty subset of $A$ contains a minimum element. Formally,
+$$\forall S \in \mathcal{P}(A) (S \neq \varnothing \rightarrow
+  (\exists x \in S\;\forall y \in S(x \preceq y)))$$
+
+\heading{Functions} \\
+
+\subheading{Definition 7.1.1 (Function)}
+
+Let $f$ be a relation such that $f \subseteq S \times T$. Then $f$ is a function
+from $S$ to $T$ denoted $f: S\rightarrow T$ iff
+$$\forall x \in S, \exists! y \in T(x\;f\;y)$$
+Intuitively, this means that every element in $S$ must have exactly one
+`outgoing arrow'.\\
+
+\subheading{Definitions 7.1.[2-5]}
+
+Let $f : S \rightarrow T$ be a function, $x \in S$ and $y \in T$ such that
+$f(x)=y$; $U \subseteq S$, and $V \subseteq T$.\\
+
+$x$ is a pre-image (7.1.2) of $y$.\\
+
+The inverse image of the element (7.1.3) $y$ is the set of all its pre-images,
+i.e. $\{x \in S\;|\;f(x) = y\}$.\\
+
+The inverse image of the set (7.1.4) $V$ is the set that contains all the
+pre-images of all the elements of $V$, i.e.
+$\{x \in S\;|\;\exists y \in V (f(x) = y)\}$.\\
+
+The restriction (7.1.5) of $f$ to $U$ is the set
+$\{(x, y) \in U \times T\;|\;f(x)=y\}$.\\
+
+\subheading{Definition 7.2.1 (Injective)}
+
+Let $f : S \rightarrow T$ be a function. $f$ is injective (or one-to-one) iff
+$$\forall y \in T, \forall x_1, x_2 \in S (
+  (f(x_1) = y\;\land\;f(x_2) = y) \rightarrow x_1 = x_2)$$
+Intuitively, this means that every element in $T$ has have at most one `incoming
+arrow'.\\
+
+\subheading{Definition 7.2.2 (Surjective)}
+
+Let $f : S \rightarrow T$ be a function. $f$ is surjective (or onto) iff
+$$\forall y \in T, \exists x \in S (f(x) = y)$$
+Intuitively, this means that every element in $T$ has at least one `incoming
+arrow'.\\
+
+\subheading{Definition 7.2.3 (Bijective)}
+
+A function is bijective (or is a bijection) iff it is injective and
+subjective. Intuitively, this means that every dot in $T$ has exactly one
+incoming arrow.\\
+
+\subheading{Definition 7.2.4 (Inverse)}
+
+Let $f : S \rightarrow T$ be a function and let $f^{-1}$ be the inverse relation
+of $f$ from $T$ to $S$. Then $f$ is bijective iff $f^{-1}$ is a function.\\
+
+\subheading{Definition 7.3.1 (Composition)}
+
+Let $f : S \rightarrow T$, $g: T \rightarrow U$ be functions. The composition of
+$f$ and $g$ denoted $g \circ f$ is a function from $S$ to $U$.\\
+
+\subheading{Definition 7.3.2 (Identity)}
+
+The identity function on a set $A$, $\mathcal{I}_A$ is defined by,
+$$\forall x \in A(\mathcal{I}_A(x) = x)$$
+
+\subheading{Proposition 7.3.3}
+
+Let $f : A \rightarrow A$ be an injective function of A. Then $f^{-1} \circ f =
+\mathcal{I}_A$.\\
+
+\heading{Combinatorics}\\
+
+\subheading{Definitions \& Notations}
+
+A sample space is the set of all possible outcomes of a random process or
+experiment. An event is a subset of a sample space.\\
+
+For a finite set $A$, $N(A)$ denotes the number of elements in $A$.\\
+
+An $r$-permutation of a set of $n$ elements is an ordered selection of $r$
+elements taken from the set. The number of $r$-permutations of a set of $n$
+elements is denoted $P(n, r)$.\\
+
+An $r$-combination of as set of $n$ elements is a subset of $r$ of the $n$
+elements, denoted $\binom{n}{r}$.\\
+
+An $r$-combination with repetition allowed, or multiset of size $r$, chosen from
+a set $X$ of $n$ elements is an unordered selection of elements taken from $X$
+with repetition allowed; denoted as $[x_{i_1}, x_{i_2}, \cdots, x_{i_r}]$ where
+each $x_{i_j}$ is in $X$ and some of the $x_{i_j}$ may equal each other.\\
+
+\subheading{Equally Likely Probability Formula}
+
+If $S$ is a finite sample space in which all outcomes are equally likely and $E$
+is an event in $S$, then the probability of $E$, denoted $P(E)$, is
+$$P(E) = \frac{N(E)}{N(S)}$$
+
+\subheading{Theorem 9.1.1 (Number of Elements)}
+
+If $m$ and $n$ are integers and $m \leq n$, then there are $n-m+1$ integers from
+$m$ to $n$ inclusive.\\
+
+\subheading{Theorem 9.2.1 (Multiplication Rule)}
+
+If an operation consists of $k$ steps, and the first step can be performed in
+$n_1$ ways, the second in $n_2$ ways, ..., the $k$\textsuperscript{th} step
+in $n_k$ ways, then the entire operation can be performed in $n_1 \times n_2
+\times \cdots n_k$ ways.\\
+
+\subheading{Theorem 9.2.2 (Permutations)}
+
+The number of permutations of a set with $n$ ($n \geq 1$) elements is $n!$\\
+
+\subheading{Theorem 9.2.3 ($r$-permutations from $n$)}
+
+If $n, r \in \mathbb{Z}$ and $1 \leq r \leq n$, then the number of
+$r$-permutations of a set of $n$ elements is given by,
+\begin{align*}
+  P(n, r) &= n(n-1)(n-2)\cdots(n-r+1) \\
+          &= \frac{n!}{(n-r)!}
+\end{align*}
+
+\subheading{Theorem 9.3.1 (Addition Rule)}
+
+Let $A$ be a finite set equal to the union of $k$ distinct mutually disjoint
+sets $A_1, A_2, \cdots, A_k$. Then, $$N(A) = N(A_1) + N(A_2) + \cdots + N(A_k)$$
+
+\subheading{Theorem 9.3.2 (Difference Rule)}
+
+Let $A$ be a finite set and $B$ a subset of $A$. Then,
+$$N(A-B) = N(A) - B(N)$$
+
+\subheading{Theorem 9.3.3 (Inclusion/Exclusion Principle)}
+
+If $A, B, C$ are finite sets, then
+\begin{align*}
+  N(A \cup B) = &N(A) + N(B) - N(A \cap B) \\
+  N(A \cup B \cup C) = &N(A) + N(B) + N(C) \\
+    &-N(A \cap B) - N(A \cap C)\\
+    &- N(B \cap C)+ N(A \cap B \cap C)
+\end{align*}
+
+\subheading{Pigeonhole Principle}
+
+A function from one finite set to a smaller finite set cannot be one-to-one.
+There must be at least 2 elements in the domain that have the same image in the
+co-domain.\\
+
+\subheading{Generalised Pigeonhole Principle}
+
+For any function $f$ from a finite set $X$ with $n$ elements to a finite set $Y$
+with $m$ elements and for any positive integer $k$, if $k < n/m$, then there is
+some $y \in Y$ such that $y$ is the image of at least $k + 1$ distinct elements
+of $X$.\\
+
+\subheading{Gen. Pigeonhole Principle, Contrapositive}
+
+For any function $f$ form a finite set $X$ with $n$ elements to a finite set $Y$
+with $m$ elements and for any positive integer $k$, if for each $y \in Y$,
+$f^{-1}(y)$ has at most $k$ elements, then $X$ has at most $km$ elements; in
+other words $n \leq km$.\\
+
+\subheading{Theorem 9.5.1 ($r$-combinations from $n$)}
+
+If $n, r \in \mathbb{Z}^+$ and $r \leq n$, then the number of $r-combinations$
+that can be chosen from a set of $n$ elements is given by,
+\begin{align*}
+  \binom{n}{r} &= \frac{P(n, r)}{r!} \\
+    &= \frac{n!}{r!(n-r)!}
+\end{align*}
+
+\subheading{Theorem 9.5.2 (Perm. w/ Indistinguishables)}
+
+For a set of $n$ objects of which $n_1$ are indistinguishable from each other,
+as are $n_2$, and $n_3$, ..., and $n_k$, then the number of distinguishable
+permutations of the $n$ objects is
+\begin{align*}
+  &\binom{n}{n_1} \binom{n-n_1}{n_2} \cdots \binom{n-n_1-n_2- \cdots - n_k-1}{n_k} \\
+  = &\frac{n!}{n_1!n_2!\cdots n_k!}
+\end{align*}
+
+\subheading{Theorem 9.6.1 (Multisets of $r$)}
+
+The number of $r$-combinations with repitition allowed that can be selected from
+a set of $n$ elements is $$\binom{r+n-1}{r}$$
+This equals the number of ways $r$ objects can be selected from $n$ categories
+of objects with repetitions allowed.\\
+
+\subheading{Theorem 9.7.1 (Pascal's Formula)}
+
+Let $n, r \in \mathbb{Z}^+$, $r \leq n$. Then
+$$\binom{n+1}{r} = \binom{n}{r-1} + \binom{n}{r}$$
+
+\subheading{Theorem 9.7.2 (Binomial Theorem)}
+
+Given $a, b \in \mathbb{R}$ and $n \in \mathbb{Z}^+$,
+\begin{align*}
+  (a + b)^n &= \sum^n_{k=0} \binom{n}{k} a^{n-k}b^k \\
+    &= a^n + \binom{n}{1}a^{n-1}b + \cdots + \binom{n}{n-1}ab^{n-1} + b^n
+\end{align*}
+
+\heading{Probability}\\
+
+\subheading{Axioms of Probability}
+
+Let $S$ be a sample space, and $P$ a probability function from the set of all
+events in $S$ to the set of real numbers; $A, B \subseteq S$,
+
+\begin{enumerate} \itemsep -0.5em
+  \item $0 \leq P(A) \leq 1$
+  \item $P(\varnothing) = 0$ and $P(S) = 1$
+  \item If $A, B$ are disjoint sets, i.e. $A \cap B = \varnothing$, then $P(A
+    \cup B) = P(A) + P(B)$
+\end{enumerate}
+
+\subheading{Probability of the Complement}
+$$P(A^c) = 1 - P(A)$$
+
+\subheading{Probability of the Union}
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+
+\subheading{Expected Value}
+
+The expected value of a random experiment with discrete real numbered outcomes
+$a_1, a_2, \cdots, a_n$ with corresponding probabilities $p_1, p_2, \cdots, p_n$
+is
+$$\sum_n a_kp_k$$
+
+\subheading{Conditional Probability}
+
+Let $A, B \subseteq S$. If $P(A) \neq 0$, then the conditional probability of
+$B$ given $A$, denoted $P(B|A)$ is $$P(B|A)=\frac{P(A \cap B)}{P(A)}$$
+A useful form of this equality is $$P(A \cap B) = P(B|A) \cdot P(A)$$
+
+\subheading{Bayes' Theorem}
+
+Suppose a sample space $S$ has mutually disjoint events $B_1, B_2, \cdots, B_n$.
+Suppose $A$ is an event in $S$, and all events have non-zero probabilities. If
+$k \in \mathbb{Z}^+$, $1 \leq k \leq n$, then
+$$P(B_k|A) = \frac{P(A|B_k)P(B_k)}{
+  \sum^n_{i=1} P(A|B_i)P(B_i)}$$
+
+\subheading{Independent Events}
+
+Let $A, B \subseteq S$, $A, B$ be independent events iff 
+$$P(A \cap B) = P(A)P(B)$$
+
+\subheading{Pairwise/Mutually Independent}
+
+Let $A, B, C \subseteq S$. $A, B, C$ are pairwise independent iff they satisfy
+conditions 1--3 below. They are mutally independent iff they satisify all
+conditions below.
+\begin{enumerate} \itemsep -0.5em
+  \item $P(A \cap B) = P(A) \cdot P(B)$
+  \item $P(A \cap C) = P(A) \cdot P(C)$
+  \item $P(B \cap C) = P(B) \cdot P(C)$
+  \item $P(A \cap B \cap C) = P(A) \cdot P(B) \cdot P(C)$
+\end{enumerate}
+In general, $n$ events are mutually independent iff the probability of the
+intersection of any subset of events is the product of the corresponding
+probabilities of said events.\\
+
+\heading{Graphs}\\
+
+\subheading{Graph}
+
+A graph $G$ consists of 2 finite sets: a non-empty set $V(G)$ of vertices and a
+set $E(G)$ of edges, where each edge is associated with a set consisting of
+either one or two vertices called its endpoints.\\
+
+An edge connects its two endpoints. Two vertices connected by an edge are
+adjacent vertices. A vertex with a self-loop is adjacent to itself. An edge is
+incident on each of its endpoints, and two edges incident on the same endpoint
+are adjacent edges.\\
+
+For an edge $e$ incident on vertices $v, w$, we can write $e = \{v, w\}$.\\
+
+\subheading{Directed Graph}
+
+A directed graph (or digraph) consists of 2 finite sets: a non-empty set $V(G)$
+of vertices and a set $D(G)$ of directed edges, where each edge is associated
+with an ordered pair of vertices called its endpoints.\\
+
+For a directed edge $e$ associated with the pair $(v, w)$ of vertices, we can
+write $e = (v, w)$.\\
+
+\subheading{Simple Graph}
+
+A simple graph is an undirected graph that does not have any loops or parallel
+edges.\\
+
+\subheading{Complete Graph}
+
+A complete graph on $n$ vertices, $n > 0$, denoted $K_n$, is a simple graph with
+$n$ vertices and exactly one edge connecting each pair of distinct vertices.\\
+
+\subheading{Complete Bipartite Graph}
+
+A complete bipartite graph on $(m, n)$ vertices, $m, n > 0$, denoted $K_{m,n}$
+is a simple graph with distinct vertices $v_1, v_2, \cdots, v_m$ and $w_1, w_2,
+\cdots, w_n$ that satisfies the properties:\\
+
+For all $i, k = 1, 2, \cdots, m$ and $j, l = 1, 2, \cdots, n$,
+\begin{enumerate} \itemsep -0.5em
+  \item There is an edge from each $v_i$ to each $w_j$.
+  \item There is no edge from any $v_i$ to any $v_k$.
+  \item There is no edge from any $w_j$ to any $w_l$.
+\end{enumerate}
+
+\subheading{Subgraph}
+
+A graph $H$ is a subgraph of a graph $G$ iff every vertex in $H$ is also a
+vertex in $G$, and every edge in $H$ is also an edge in $G$, and every edge in
+$H$ has the same endpoints as it has in $G$.\\
+
+\subheading{Degree}
+
+The degree of $v$, a vertex of graph G, denoted $deg(v)$, equals the number of
+edges that are incident on $v$, with self-loops counted twice. The total degree
+of $G$ is the sum of the degrees of all vertices of $G$.\\
+
+\subheading{Theorem 10.1.1 (Handshake Theorem)}
+
+The sum of the degrees of all the vertices of a graph $G$ is twice the number of
+edges of $G$.
+\begin{align*}
+  \text{Total Degree of $G$} &= \sum_{v \in V(G)} deg(v) \\
+     &= 2 \times N(\text{edges in G})
+\end{align*}
+
+\subheading{Corollary 10.1.2}
+
+The total degree of a graph is even.\\
+
+\subheading{Proposition 10.1.3}
+
+In any graph there are an even number of vertices of odd degree.\\
+
+\subheading{Walk, Trails, Paths, etc.}
+
+Let $G$ be a graph and $v, w \in V(G)$.\\
+
+A walk from $v$ to $w$ is a finite alternating sequence of adjacent vertices and
+edges of $G$. It can be written in the form $v_0e_1v_1e_2\cdots v_ne_nw$; or
+$v_0v_1\cdots v_nw$; or $e_1e_2\cdots e_n$.\\
+
+A trivial walk from $v$ to $v$ consists of the single vertex $v$.\\
+
+A trail from $v$ to $w$ is a walk from $v$ to $w$ that does not contain a
+repeated edge.\\
+
+A path from $v$ to $w$ is a trail that does not contain a repeated vertex.\\
+
+A closed walk is a walk that starts and ends at the same vertex.\\
+
+A circuit (or cycle) is a closed walk that contains at least one edge and does
+not contain a repeated edge.\\
+
+A simple circuit is a circuit that does not have any repeated vertex except the
+first and last.
+
+\begin{center}
+\Rotatebox{90}{%
+\begin{tabularx}{10cm}{l c c c c}
+  \toprule
+  \null & Repeated & Repeated & Same       & Must Contain \\
+  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
+  \midrule
+  \textbf{Walk}           & allowed & allowed          & allowed & no \\
+  \textbf{Trail}          & no      & allowed          & allowed & no \\
+  \textbf{Path}           & no      & no               & no      & no \\
+  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
+  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
+  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
+  \bottomrule
+\end{tabularx}
+}
+\end{center}
+
+\subheading{Connectedness}
+
+Two vertices $v, w$ of a graph $G$ are connected iff there is a walk from $v$ to
+$w$.\\
+
+The graph $G$ is connected iff $\forall v, w \in V(G)$ there is a walk from $v$
+to $w$. \\
+
+\subheading{Lemma 10.2.1}
+
+Let G be a graph.
+\begin{itemize}[leftmargin=*] \itemsep -0.5em
+  \item If $G$ is connected, then any two distinct vertices of $G$ can be
+    connected by a path.
+  \item If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
+    removed from the circuit, then there still exists a trail from $v$ to $w$ in
+    $G$.
+  \item If $G$ is connected and $G$ contains a circuit, then an edge of the
+    circuit can be removed without disconnecting $G$.
+\end{itemize}
+
+% TODO: change all itemize bullets to [-]
+
+\subheading{Connected Component}
+
+A graph $H$ is a connected component of a graph $G$ iff
+\begin{enumerate} \itemsep -0.5em
+ \item The graph $H$ is a subgraph of $H$.
+ \item The graph $H$ is connected.
+ \item No connected subgraph of $G$ has $H$ has a subgraph and contains
+   vertices or edges that are not in $H$.
+\end{enumerate}
+
+\subheading{Euler Circuit}
+
+An Euler circuit for $G$ is a circuit that contains every vertex and every edge
+of $G$. An Eulerian graph is a graph that contains an Euler circuit.\\
+
+\subheading{Theorem 10.2.2}
+
+If a graph has an Euler circuit, then every vertex of the graph has positive
+even degree.\\
+
+Contrapositive: if some vertex of a graph has odd degree, then the
+graph does not have an Euler circuit.\\
+
+\subheading{Theorem 10.2.3}
+
+If a graph $G$ is connected and the degree of every vertex of $G$ is a positive
+even integer, then $G$ has an Euler circuit.\\
+
+\subheading{Theorem 10.2.4}
+
+A graph $G$ has an Euler circuit iff $G$ is connected and every vertex of $G$
+has positive even degree.\\
+
+\subheading{Euler Trail}
+
+An Euler trail/path from $v$ to $w$ is a sequence of adjacent edges and
+vertices that starts at $v$, ends at $w$, passes through every vertex of $G$ at
+least once, and traverses every edge of $G$ exactly once.\\
+
+\subheading{Corollary 10.2.5}
+
+Let $v, w$ be distinct vertices of $G$. There is an Euler trail from $v$ to $w$
+iff $G$ is connected, $v$ and $w$ have odd degree, and all other vertices of
+$G$ have positive even degree.\\
+
+\subheading{Hamiltonian Circuit}
+
+A Hamiltonian circuit for a graph $G$ is a simple circuit that includes every
+vertex of $G$. A Hamiltonian graph (or Hamilton graph) is a graph that contains
+a Hamiltonian circuit.\\
+
+There is no analogous criterion to T10.2.4 to determining whether a given graph
+has a Hamiltonian circuit.\\
+
+\subheading{Proposition 10.2.6}
+
+If a graph $G$ has a Hamiltonian circuit, then $G$ has a subgraph $H$ with the
+following properties,
+\begin{enumerate} \itemsep -0.5em
+ \item $H$ contains every vertex of $G$.
+ \item $H$ is connected.
+ \item $H$ has the same number of edges as vertices.
+ \item Every vertex of $H$ has degree 2.
+\end{enumerate}
+Since the converse is not true, this proposition cannot be used to check if a
+graph has a Hamiltonian circuit. However, the contrapositive can be used to
+check if a graph does not have a Hamiltonian circuit.\\
+
+\subheading{Matrix}
+
+A $m \times n$ matrix $A$ over a set $S$ is a rectangular array of elements of
+$S$ arranged into $m$ rows and $n$ columns.\\
+
+Two matrices $A$ and $B$ are equal iff $A$ and $B$ are the same size, and all
+the corresponding entries of $A$ and $B$ are equal.\\
+
+\subheading{Adjacency Matrix of a Directed Graph}
+
+Let $G$ be a directed graph with ordered vertices $v_1, v_2, \cdots, v_n$. The
+adjacency matrix of $G$ is the $n \times n$ matrix $A = (a_{ij})$ over the set
+of non-negative integers such that for all $i, j = 1,2,\cdots, n$,
+$$a_{ij} = \text{the number of arrows from $v_i$ to $v_j$}$$
+
+\subheading{Adjacency Matrix of an Undirected Graph}
+
+Let $G$ be an undirected graph with ordered vertices $v_1, v_2, \cdots, v_n$.
+The adjacency matrix of $G$ is the $n \times n$ matrix $A = (a_{ij})$ over the
+set of non-negative integers such that for all $i, j = 1,2,\cdots, n$,
+$$a_{ij} = \text{the number of edges connecting $v_i$ and $v_j$}$$
+
+\subheading{Symmetric Matrix}
+
+A $n \times n$ matrix is symmetric iff for all $i, j = 1, 2, \cdots, n$,
+$$a_{ij} = a_{ji}$$
+
+\subheading{Theorem 10.3.1}
+
+Let $G$ be a graph with connected components $G_1, G_2, \cdots, G_k$. If there
+are $n_i$ vertices in each connected component $G_i$ and these vertices are
+numbered consecutively, then the adjacency matrix of $G$ has the form
+$$\begin{pmatrix}
+  A_1    & O      & \cdots & O       & O \\
+  O      & A_2    & \cdots & O       & O \\
+  \vdots & \vdots & \ddots & \vdots  & \vdots \\
+  O      & O      & \cdots & A_{k-1} & O \\
+  O      & O      & \cdots & O       & A_k
+\end{pmatrix}$$
+where each $A_i$ is the $n_i \times n_i$ adjacency matrix of $G_i$ for all $i =
+1, 2, \cdots, k$, and the $O$'s represents matrices whose entries are all $0$.\\
+
+\subheading{Scalar Product}
+\begin{align*}
+  &\begin{pmatrix} a_{i1} & a_{i2} & \cdots & a_{in} \end{pmatrix}
+    \begin{pmatrix} b_{1j} \\ b_{2j} \\ \vdots \\ b_{nj} \end{pmatrix}\\
+  = &\ a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{in}b_{nj}
+\end{align*}
+
+\subheading{Matrix Multiplication}
+
+Let $A = (a_{ij})$, $B = (b_{ij})$, then the matrix product of $A \times B$,
+denoted $AB$, defined as $(c_{ij})$, is the matrix where
+$$c_{ij} = a_{i1}b_{1j} + a_{i2}b_{2j} + \cdots + a_{ik}b_{kj}$$
+Intuitively, this means that the $(i, j)$\textsuperscript{th} entry of $AB$ can
+be found by the scalar product of the $i$\textsuperscript{th} row of $A$ and the
+$j$\textsuperscript{th} column of $B$.\\
+
+\subheading{Identity Matrix}
+
+The $n \times n$ identity matrix $I_n$ (or $I$) is the $n \times n$ matrix in
+which all the entries of the main diagonal are $1$'s, and all other entries are
+$0$'s.\\
+
+\subheading{$n$\textsuperscript{th} Power of a Matrix}
+
+For any $n \times n$ matrix $A$, the powers of $A$ are defined as
+$$A^k = \begin{cases}
+  I & \text{ if $k=0$} \\
+  AA^{k-1} & \text{ for $k \in \mathbb{Z}^+, k \geq 1$}
+\end{cases}$$
+
+\subheading{Theorem 10.3.2}
+
+Let $G$ be the graph with vertices $v_1, v_2, \cdots, v_m$ and adjacency matrix
+$A$. Then, for each positive integer $n$ and for all integers $i, j = 1, 2,
+\cdots, m$, the $(i, j)$\textsuperscript{th} entry of $A^n$ is the number of
+walks of length $n$ from $v_i$ to $v_j$.\\
+
+\subheading{Isomorphic Graph}
+
+Let $G$ and $G'$ be graphs with vertex sets $V(G), V(G')$ and edge sets $E(G),
+E(G')$ respectively. $G$ is isomorphic to $G'$ iff there exists a one-to-one
+correspondence (relabelling) $g: V(G) \rightarrow V(G')$ and $h: E(G)
+\rightarrow E(G')$ such that the edge-endpoint functions of $G$ and $G'$ are
+preserved. Formally, this means that\\
+
+\hspace{0.5em}$\forall v \in V(G), e \in E(G),$
+$$\text{$v$ is endpoint of $e$ $\iff$ $g(v)$ is endpoint of $h(e)$}$$
+
+\subheading{Theorem 10.4.1}
+
+Let $S$ be a set of graphs and $R$ be the relation of graph isomorphism on $S$.
+Then $R$ is an equivalence relation on $S$.\\
+
+\subheading{Planar Graph}
+
+A planar graph is a graph that can be drawn on a two-dimensional plane without
+edges crossing.\\
+
+\subheading{Euler's Formula}
+
+For a connected planar simple graph $G = (V, E)$ with $e = |E|$ and $v = |V|$,
+the number of faces $f = e - v + 2$.\\
+
+\subheading{Tree}
+
+A graph is circuit-free iff it has no circuits. A graph is a tree iff it is
+circuit-free and connected. A trivial tree is a graph that consists of a single
+vertex. A graph is a forest iff it is circuit-free and not connected.\\
+
+\subheading{Lemma 10.5.1}
+
+Any non-trivial tree has at least one vertex of degree 1.\\
+
+\subheading{Terminal \& Internal Vertices}
+
+If a tree $T$ has only one or two vertices, then each is a terminal vertex (or
+leaf). If $T$ has at least three vertices, then a vertex of degree 1 in $T$ is
+called a terminal vertex (or leaf), and a vertex of degree greater than 1 in $T$
+is called an internal vertex (or leaf).\\
+
+\subheading{Theorem 10.5.2}
+
+Any tree with $n > 0$ vertices has $n - 1$ edges.\\
+
+\subheading{Lemma 10.5.3}
+
+Let $C$ be any circuit in a connected graph $G$. If one of the edges of $C$ is
+removed from $G$, then the graph that remains is still connected. \\
+
+\subheading{Theorem 10.5.4}
+
+Let $G$ be a connected graph with $n$ vertices and $n-1$ edges. $G$ is a tree.\\
+
+\subheading{Rooted Tree}
+
+A rooted tree is a tree in which there is one vertex that is distinguished from
+the others as the root. The level of a vertex is the number of edges along the
+unique path between it and the root. The height of a rooted tree is the maximum
+level of any vertex of the tree.\\
+
+Given the root or any internal vertex $v$ of a rooted tree, the children of $v$
+are all those vertices that are adjacent to $v$ and are one level farther away
+from the root than $v$.\\
+
+If $w$ is a child of $v$, then $v$ is the parent of $w$. Two distinct vertices
+that are both children of the same parent are called siblings.\\
+
+Given two distinct vertices $v, w$; if $v$ lies on a unique path between $w$ and
+the root, then $v$ is an ancestor of $w$, and $w$ a descendant of $v$.\\
+
+\subheading{(Full) Binary Tree}
+
+A binary tree is a rooted tree in which every parent has at most two children.
+Each child is either a left child xor right child. Every parent has at most one
+left child and one right child. A full binary tree is a binary tree in which
+each parent has exactly two children.\\
+
+\subheading{Subtrees}
+
+The left subtree of a parent $v$ in in binary tree $T$ is the binary tree whose
+root is the left child of $v$, whose vertices consist of the left child of $v$
+and all its descendants, and whose edges consists of all those edges of $T$ that
+connect the vertices of the left subtree. The right subtree is defined
+similarly.\\
+
+\subheading{Theorem 10.6.1 (Full Binary Tree Theorem)}
+
+If $T$ is a full binary tree with $k$ internal vertices, then $T$ has a total of
+$2k + 1$ vertices and has $k + 1$ terminal vertices.\\
+
+\subheading{Theorem 10.6.2}
+
+For non-negative integers $h$, if $T$ is any binary tree with height $h$ and $t$
+terminal vertices, then
+\begin{align*}
+         t &\leq 2^h \\
+  \log_2 t &\leq h
+\end{align*}
+
+\subheading{Binary Tree Traversal}
+
+Breadth-first search starts at the root and visits its adjacent vertices, then
+moves to the next level.\\
+
+Depth-first search can be pre-order, in-order, or post-order. In pre-order,
+print, traverse left then right; in in-order, traverse left, print, then
+traverse right; in post-order, traverse left, right, then print. \\
+
+The print operation can be represented by a `dot' on a vertex in its tree
+diagram, and the order of prints can be determined by tracing the outline of the
+diagram anti-clockwise from the root. Draw the `dot' on the left, bottom, and
+right of the vertex for pre-order, in-order, and post-order respectively. \\
+
+\subheading{Spanning Tree}
+
+A spanning tree for a graph $G$ is a subgraph of $G$ that contains every vertex
+of $G$ and is a tree.\\
+
+\subheading{Proposition 10.7.1}
+
+Every connected graph has a spanning tree, and any two spanning trees for a
+graph have the same number of edges.\\
+
+\subheading{Weighted Graph}
+
+A weighted graph is a graph for which each edge has an associated positive real
+number weight. The sum of weights of all the edges is the total weight of a
+weighted graph.\\
+
+\subheading{Minimum Spanning Tree}
+
+A minimum spanning tree for a connected weighted graph is a spanning tree that
+has the least possible total weight compared to all other spanning trees for the
+graph. If $G$ is a weighted graph and $e$ is an edge of $G$, then $w(e)$ denotes
+the weight of $e$ and $w(G)$ denotes the total weight of $G$.\\
+
+\subheading{Algorithm 10.7.1 (Kruskal's Algorithm)}
+
+In this algorithm, the edges of a connected weighted graph are examined one by
+one in order of increasing weight. At each stage, the edge being examined is
+added to what will become the minimum spanning tree, provided that this addition
+does not create a circuit.
+\begin{center}
+\begin{BVerbatim}
+def kruskal(G):
+    T = new Graph()
+    edges = edges_of(G)
+    for edge in edges:
+        e = min(edge) # wrt weight
+        if T + e has no circuit:
+            T = T + e
+    return T
+\end{BVerbatim}
+\end{center}
+
+\subheading{Algorithm 10.7.2 (Prim's Algorithm)}
+
+In this algorithm, a minimum spanning tree $T$ is build by expanding outward in
+connected links from some vertex. One edge and one vertex are added at each
+iteration. The edge added is the one of least weight that connects the vertices
+already in $T$ with those not in $T$, and the vertex is the endpoint of this
+edge that is not already in $T$.
+\begin{center}
+\begin{BVerbatim}
+def prims(G):
+    seed = random.choice(V(G))
+    T = new Graph(seed)
+    vertices = V(G) - seed
+    while V(T) != V(G):
+        # find min edge connecting T to G - T
+        e = least_edge(T, vertices)
+        T = T + e
+        vertices = vertices - endpts(e)
+    return T
+\end{BVerbatim}
+\end{center}
+
+\end{multicols*}
+\end{document}
