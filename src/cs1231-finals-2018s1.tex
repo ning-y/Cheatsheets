@@ -457,17 +457,24 @@ $$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
 For all $a, b, c \in \mathbb{Z}$, if $\gcd(a, c) = 1$ and $a\;|\;bc$,
 then $a\;|\;b$.\\
 
-\subheading{*Epp Lemma 4.8.2}\\
+\subheading{*Epp Lemma 4.8.1 (gcd of an integer and 0)}
+
+If $r$ is a positive integer, then $\gcd(r, 0) = r$.\\
+
+\subheading{*Epp Lemma 4.8.2 (Basis of Euclid's Algorithm)}
+
 If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
 $$\gcd(a, b)= \gcd(b, r)$$
 
-\subheading{Proposition 4.5.5}\\
+\subheading{Proposition 4.5.5}
+
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
 $b$, then $c\;|\;\gcd(a,b)$.\\
 
 % TODO: LCM for finals
 
-\subheading{Definition 4.7.1 (Congruence modulo)}\\
+\subheading{Definition 4.7.1 (Congruence modulo)}
+
 Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
 \textit{congruent} to $n$ \textit{modulo} $d$ and write
 $$ m \equiv n \undermod{d} $$
@@ -476,7 +483,8 @@ $$ d\;|\;(m-n) $$
 More concisely,
 $$ m \equiv n \undermod{d} \iff d\;|\;(m-n) $$
 
-\subheading{Epp T8.4.1 (Modular Equivalences)}\\
+\subheading{Epp T8.4.1 (Modular Equivalences)}
+
 Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
 equivalent,
 \begin{enumerate} \itemsep -0.5em
