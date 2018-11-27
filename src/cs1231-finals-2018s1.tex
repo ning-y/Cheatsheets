@@ -24,6 +24,7 @@
 % Math
 \renewcommand\mod{\;\operatorname{mod}\;}  % less space between args
 \newcommand\undermod[1]{\ (\operatorname{mod}#1)}
+\DeclareMathOperator\lcm{lcm}
 % TODO operatorname{|}
 
 \makeatletter
@@ -555,7 +556,8 @@ kn)$ for any integer $k$.\\
 For any integer $a$, its multiplicative inverse modulo $n$ where $n>1$,
 $a^{-1}$, exists iff $a$ and $n$ are coprime.\\
 
-\subheading{Finding the Multiplicative Inverse}\\
+\subheading{Finding the Multiplicative Inverse}
+
 For example, to find the multiplicative inverse of $5 \mod 18$,
 \begin{IEEEeqnarray*}{rCl}
   18 = 3 &\times& 5 + 3 \\
@@ -576,13 +578,31 @@ So
 Therefore, we have $5^{-1} \mod 18 = -7$, or equivalently under
 modulo $11$.\\
 
-\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}\\
+\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}
+
 If $n=p$ is a prime number, then all integers $a$ in the range $0<a<p$ have
 multiplicative inverses modulo $p$.\\
 
-\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
+\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}
+
 For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
 $$ ab \equiv ac \undermod{n} \rightarrow b \equiv c \undermod{n} $$
+
+\subheading{*Epp T8.4.10 (Fermat's Little Theorem)}
+
+For any prime $p$ and any integer $a$, $a^p \equiv a \undermod{p}$.\\
+
+Alternatively, if $p \nmid a$ then $a^{p-1} \equiv 1 \undermod{p}$.\\
+
+\subheading{Definition 4.6.1 (Least Common Multiple)}
+
+For any non-zero integers $a, b$, their least common multiple, denoted
+$\lcm(a,b)$ is the positive integer $m$ such that:
+\begin{enumerate} \itemsep -0.5em
+  \item $a\;|\;m$ and $b\;|\;m$
+  \item $\forall c \in \mathbb{Z}^+ ((a\;|\;c) \land (b\;|\;c) \rightarrow c
+    \leq m$
+\end{enumerate}
 
 \heading{Sequences}\\
 
