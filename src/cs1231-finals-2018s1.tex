@@ -91,24 +91,25 @@ covered by the lecture).\\
 \end{tabularx}\\
 
 \subheading{Proof Types}
-\begin{itemize}[leftmargin=*] \itemsep -0.5em
-  \item \textbf{By Construction}: finding or giving a set of directions to
-    reach the statement to be proven true.
-  \item \textbf{By Contraposition}: proving a statement through its logical
+\begin{itemize}[leftmargin=*] \itemsep -0.4em
+  \item[-] \textbf{By Construction}: finding or giving a set of directions to
+    reach the statement to be proven true. In proving equality, a useful note:
+    $$a \leq b \land a \geq b \rightarrow a = b$$
+  \item[-] \textbf{By Contraposition}: proving a statement through its logically
     equivalent contrapositive.
-  \item \textbf{By Contradiction}: proving that the negation of the statement
+  \item[-] \textbf{By Contradiction}: proving that the negation of the statement
     leads to a logical contradiction.
-  \item \textbf{By Exhaustion}: considering each case.
-  \item \textbf{By Mathematical Induction}: proving for a base case, then an
-    induction step.
-    \vspace{-1em} % hackhackhack
-    \begin{enumerate} \itemsep -0.2em
+  \item[-] \textbf{By Exhaustion}: considering each case.
+  \item[-] \textbf{By Mathematical Induction}: proving for a base case, then an
+    induction step. In the inductive step, work from the $k+1$, not the $k$
+    case.
+    \vspace{-0.5em} % hackhackhack
+    \begin{enumerate}[leftmargin=*] \itemsep -0.2em
       \item $P(a)$
       \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
       \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
     \end{enumerate}
-  \vspace{-0.5em}
-  \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
+  \item[-] \textbf{By Strong Induction}: mathematical induction assuming $P(k),
     P(k-1), \cdots, P(a)$ are all true.
 \end{itemize}
 
