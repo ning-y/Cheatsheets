@@ -467,6 +467,27 @@ If $r$ is a positive integer, then $\gcd(r, 0) = r$.\\
 If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
 $$\gcd(a, b)= \gcd(b, r)$$
 
+\subheading{Algorithm 4.8.2 (Euclidean Algorithm)}
+\begin{center}
+\begin{BVerbatim}
+def gcd(a, b):
+  if a == 0:
+    return b
+  if b == 0:
+    return a
+  return gcd(a%b, b) if a >= b else gcd(a, b%a)
+\end{BVerbatim}
+\end{center}
+For example, to evaluate $\gcd(330, 156)$:
+\begin{IEEEeqnarray*}{rLl}
+   &\gcd(330, 156) &\ (= \gcd(330 \mod 156, 156)) \\
+  =&\gcd(18, 156)  &\ (= \gcd(18, 156 \mod 18)) \\
+  =&\gcd(18, 12)   &\ (= \gcd(18 \mod 12, 12)) \\
+  =&\gcd(6, 12)    &\ (= \gcd(6, 12 \mod 6)) \\
+  =&\gcd(6, 0)     &\\
+  =&\ 6 &
+\end{IEEEeqnarray*}
+
 \subheading{Proposition 4.5.5}
 
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
