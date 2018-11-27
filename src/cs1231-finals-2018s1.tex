@@ -22,10 +22,10 @@
 \newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
 
 % Math
+\newcommand\divides{\;|\;}
 \renewcommand\mod{\;\operatorname{mod}\;}  % less space between args
 \newcommand\undermod[1]{\ (\operatorname{mod}#1)}
 \DeclareMathOperator\lcm{lcm}
-% TODO operatorname{|}
 
 \makeatletter
 \newsavebox{\measure@tikzpicture}
@@ -323,23 +323,24 @@ that $n = 3k$.\\
 
 \subheading{Definition 1.3.1 (Divisibility)}\\
 If $n$ and $d$ are integers and $d \neq 0$,
-  $$ d|n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
+  $$ d \divides n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
 
 \subheading{Proposition 1.3.2 (Linear Combination)}
 $$\forall a, b, c \in \mathbb{Z},\;
-    a | b \land a | c \rightarrow
+(a \divides b) \land (a \divides c) \rightarrow
     \forall x, y \in \mathbb{Z},\;
-    a | (bx + cy)$$
+    a \divides (bx + cy)$$
 If $a$ divides $b$ and $c$, then it also divides their linear combination
 $(bx + cy)$.\\
 
 \subheading{Theorem 4.1.1 (Linear Combination)}\\
 $$\forall a,b,c \in \mathbb{Z},\;
-  a | b \land a | c \rightarrow \forall x,y \in \mathbb{Z}, a | (bx + cy)$$
+(a \divides b) \land (a \divides c)
+    \rightarrow \forall x,y \in \mathbb{Z}, a \divides (bx + cy)$$
 
 \subheading{Epp T4.3.3 (Transitivity of Divisibility)}
 $$\forall a, b, c \in \mathbb{Z},\;
-  a | b \land b | c \rightarrow a | c$$
+(a \divides b) \land (b \divides c) \rightarrow a \divides c$$
 
 \subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}
 Given any integer $a$ and any positive integer $b$, there exist unique integers
@@ -380,12 +381,12 @@ $r_i$,
 
 \subheading{Proposition 4.2.2}\\
 For any two primes $p$ and $p'$,
-  $$p\;|\;p' \rightarrow p = p'$$
+  $$p \divides p' \rightarrow p = p'$$
 
 \subheading{Theorem 4.2.3}\\
 If $p$ is a prime and $x_1, x_2, \cdots, x_n$ are any integers s.t.
-$p\;|\;x_1x_2\cdots x_n$, then $p\;|\;x_i$ for some $x_i, i \in \{1, 2, \cdots,
-n\}$.\\
+$p \divides x_1x_2\cdots x_n$, then $p \divides x_i$
+for some $x_i, i \in \{1, 2, \cdots, n\}$.\\
 
 \subheading{Epp T4.3.5 (Unique Prime Factorisation)}\\
 Given any integer $n > 1$
@@ -400,7 +401,7 @@ except perhaps for the order in which the factors are written.\\
 
 \subheading{Epp Proposition 4.7.3}\\
 For any $a \in \mathbb{Z}$ and any prime $p$,
-  $$ p\;|\;a \rightarrow p \nmid (a+1) $$
+  $$ p \divides a \rightarrow p \nmid (a+1) $$
 
 \subheading{Epp T4.7.4 (Infinitude of Primes)}\\
 The set of primes is infinite.\\
@@ -439,8 +440,9 @@ Let $a$ and $b$ be integers, not both zero. The \textit{greatest common divisor}
 of $a$ and $b$, denoted $\gcd(a, b)$, is the integer $d$ satisfying
 
 \begin{enumerate} \itemsep -0.5em
-  \item $d\;|\;a$ and $d\;|\;b$
-  \item $\forall c \in \mathbb{Z}\;((c\;|\;a)\ \land (c\;|\;b) \rightarrow c \leq d)$
+  \item $d \divides a$ and $d \divides b$
+  \item $\forall c \in \mathbb{Z}\;((c \divides a)\ \land (c \divides b)
+    \rightarrow c \leq d)$
 \end{enumerate}
 
 \subheading{Proposition 4.5.2 (Existence of gcd)}\\
@@ -457,8 +459,8 @@ is found. Also solutions, for any integer $k$,
 $$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
 
 \subheading{*Epp T8.4.8 (Euclid's Lemma)}\\
-For all $a, b, c \in \mathbb{Z}$, if $\gcd(a, c) = 1$ and $a\;|\;bc$,
-then $a\;|\;b$.\\
+For all $a, b, c \in \mathbb{Z}$, if $\gcd(a, c) = 1$ and $a \divides bc$,
+then $a \divides b$.\\
 
 \subheading{*Epp L4.8.1 (gcd of an integer and 0)}
 
@@ -493,7 +495,7 @@ For example, to evaluate $\gcd(330, 156)$:
 \subheading{Proposition 4.5.5}
 
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
-$b$, then $c\;|\;\gcd(a,b)$.\\
+$b$, then $c \divides \gcd(a,b)$.\\
 
 \subheading{Definition 4.7.1 (Congruence modulo)}
 
@@ -501,16 +503,16 @@ Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
 \textit{congruent} to $n$ \textit{modulo} $d$ and write
 $$ m \equiv n \undermod{d} $$
 iff
-$$ d\;|\;(m-n) $$
+$$ d \divides (m-n) $$
 More concisely,
-$$ m \equiv n \undermod{d} \iff d\;|\;(m-n) $$
+$$ m \equiv n \undermod{d} \iff d \divides (m-n) $$
 
 \subheading{Epp T8.4.1 (Modular Equivalences)}
 
 Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
 equivalent,
 \begin{enumerate} \itemsep -0.5em
-    \item $n\;|\;(a-b)$
+    \item $n \divides (a-b)$
     \item $a \equiv b \undermod{n}$
     \item $a = b + kn$ for some $k \in \mathbb{Z}$
     \item $a$ and $b$ have the same non-negative remainder when divided by $n$
@@ -598,9 +600,9 @@ Alternatively, if $p \nmid a$ then $a^{p-1} \equiv 1 \undermod{p}$.\\
 For any non-zero integers $a, b$, their least common multiple, denoted
 $\lcm(a,b)$ is the positive integer $m$ such that:
 \begin{enumerate} \itemsep -0.5em
-  \item $a\;|\;m$ and $b\;|\;m$
-  \item $\forall c \in \mathbb{Z}^+ ((a\;|\;c) \land (b\;|\;c) \rightarrow c
-    \leq m$
+  \item $a \divides m$ and $b \divides m$
+  \item $\forall c \in \mathbb{Z}^+ ((a \divides c) \land (b \divides c)
+    \rightarrow c \leq m$
 \end{enumerate}
 
 \heading{Sequences}\\
@@ -1048,7 +1050,7 @@ The Hasse diagram is a simplified directed graph.
 
 The above diagram represents the partial order for ``divides" on the set $A=\{1,
 2, 3, 9, 18\}$. That is
-$$\forall a, b \in A (a\;|\;b \longleftrightarrow \exists k \in
+$$\forall a, b \in A (a \divides b \longleftrightarrow \exists k \in
 \mathbb{Z}(b=ka))$$
 It can be represented by the following Hasse diagram.
 
