@@ -1775,6 +1775,16 @@ diagram, and the order of prints can be determined by tracing the outline of the
 diagram anti-clockwise from the root. Draw the `dot' on the left, bottom, and
 right of the vertex for pre-order, in-order, and post-order respectively. \\
 
+\subheading{Reconstructing BT from Traversal Order}
+
+Given a sequence of nodes traversed in depth-first pre-order, in-order, or
+post-order; it may be possible to reconstruct the binary tree. Note that in
+pre-order and post-order, the first node traversed is always the root node (of
+traversal). Then, the nodes to the left of the identified root node in the
+in-order sequence all belong to the left subtree, and likewise for the right
+subtree. Repeat these observations recursively for each subtree until the full
+binary tree is constructed.\\
+
 \subheading{Spanning Tree}
 
 A spanning tree for a graph $G$ is a subgraph of $G$ that contains every vertex
