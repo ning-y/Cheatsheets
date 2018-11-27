@@ -21,6 +21,10 @@
 \newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
 \newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
 
+% Math
+\renewcommand\mod{\;\operatorname{mod}\;}  % less space between args
+\newcommand\undermod[1]{\ (\operatorname{mod}#1)}
+
 \makeatletter
 \newsavebox{\measure@tikzpicture}
 \NewEnviron{scaletikzpicturetowidth}[1]{%
@@ -463,54 +467,54 @@ $b$, then $c\;|\;\gcd(a,b)$.\\
 \subheading{Definition 4.7.1 (Congruence modulo)}\\
 Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
 \textit{congruent} to $n$ \textit{modulo} $d$ and write
-$$ m \equiv n\ (\mathrm{mod}\; d) $$
+$$ m \equiv n \undermod{d} $$
 iff
 $$ d\;|\;(m-n) $$
 More concisely,
-$$ m \equiv n\ (\mathrm{mod}\; d) \iff d\;|\;(m-n) $$
+$$ m \equiv n \undermod{d} \iff d\;|\;(m-n) $$
 
 \subheading{Epp T8.4.1 (Modular Equivalences)}\\
 Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
 equivalent,
 \begin{enumerate} \itemsep -0.5em
     \item $n\;|\;(a-b)$
-    \item $a \equiv b\ (\mathrm{mod}\; n)$
+    \item $a \equiv b \undermod{n}$
     \item $a = b + kn$ for some $k \in \mathbb{Z}$
     \item $a$ and $b$ have the same non-negative remainder when divided by $n$
-    \item $a\;\mathrm{mod}\;n = b\;\mathrm{mod}\;n$
+    \item $a \mod n = b \mod n$
 \end{enumerate}
 
 \subheading{Epp T8.4.3 (Modulo Arithmetic)}\\
 Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, and suppose\\
 
 {\centering
-$a \equiv c\ (\mathrm{mod}\; n)$ and $b \equiv d\ (\textrm{mod}\; n)$\\
+  $a \equiv c \undermod{n}$ and $b \equiv d \undermod{n}$\\
 }
 
 Then
 
 \begin{enumerate} \itemsep -0.5em
-    \item $(a + b) \equiv (c + d)\ (\mathrm{mod}\;n)$
-    \item $(a - b) \equiv (c - d)\ (\mathrm{mod}\;n)$
-    \item $ab \equiv cd\ (\mathrm{mod}\;n)$
-    \item $a^m \equiv c^m\ (\mathrm{mod}\;n)$, for all $m \in \mathbb{Z}^+$
+  \item $(a + b) \equiv (c + d) \undermod{n}$
+  \item $(a - b) \equiv (c - d) \undermod{n}$
+  \item $ab \equiv cd \undermod{n}$
+  \item $a^m \equiv c^m \undermod{n}$, for all $m \in \mathbb{Z}^+$
 \end{enumerate}
 
 \subheading{Epp Corollary 8.4.4}\\
 Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, then
-$$ ab \equiv [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ (\mathrm{mod}\;n) $$
+$$ ab \equiv [(a \mod n)(b \mod n)]\ \undermod{n} $$
 or equivalently,
-$$ ab\;\mathrm{mod}\;n = [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ \mathrm{mod}\;n $$
+$$ ab \mod n = [(a \mod n)(b \mod n)] \undermod{n} $$
 In particular, if $m$ is a positive integer, then
-$$ a^m \equiv [(a\;\textrm{mod}\;n)^m]\ (\mathrm{mod}\;n) $$
+$$ a^m \equiv [(a \mod n)^m] \undermod{n} $$
 
 \subheading{Definition 4.7.2 (Multiplicative inv. modulo $n$)}\\
 For any integers $a, n$ with $n > 1$, if an integer $s$ is such that $as \equiv
-1\ (\mathrm{mod}\;n)$, then $s$ is the \textit{multiplicative inverse of $a$
+1 \undermod{n}$, then $s$ is the \textit{multiplicative inverse of $a$
 modulo $n$}. We may write $s$ as $a^{-1}$.\\
 
 Because the commutative law still applies in modulo arithmetic, we also have
-$$a^{-1}a \equiv 1\ (\mathrm{mod}\;n)$$
+$$a^{-1}a \equiv 1 \undermod{n}$$
 Multiplicative inverses are not unique. If $s$ is an inverse, then so is $(s +
 kn)$ for any integer $k$.\\
 
@@ -519,7 +523,7 @@ For any integer $a$, its multiplicative inverse modulo $n$ where $n>1$,
 $a^{-1}$, exists iff $a$ and $n$ are coprime.\\
 
 \subheading{Finding the Multiplicative Inverse}\\
-For example, to find the multiplicative inverse of $5\ \textrm{mod}\; 18$,
+For example, to find the multiplicative inverse of $5 \mod 18$,
 \begin{IEEEeqnarray*}{rCl}
   18 = 3 &\times& 5 + 3 \\
    5 = 1 &\times& 3 + 2 \\
@@ -533,10 +537,10 @@ So
     &=& 3 - (5 - 3) = 2 \times 3 - 5 \\
     &=& 2(18 - 3 \times 5) - 5 = 2 \times 18 - 7 \times 5 \\
   1 - 2 \times 18 &=& -7 \times 5 \\
-  1 - 2 \times 18 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18) \\
-                1 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18)
+  1 - 2 \times 18 &\equiv& -7 \times 5 \undermod{n} \\
+                1 &\equiv& -7 \times 5 \undermod{n}
 \end{IEEEeqnarray*}
-Therefore, we have $5^{-1}\ \textrm{mod}\; 18 = -7$, or equivalently under
+Therefore, we have $5^{-1} \mod 18 = -7$, or equivalently under
 modulo $11$.\\
 
 \subheading{Corollary 4.7.4 (Special case: $n$ is prime)}\\
@@ -545,7 +549,7 @@ multiplicative inverses modulo $p$.\\
 
 \subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
 For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
-$$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
+$$ ab \equiv ac \undermod{n} \rightarrow b \equiv c \undermod{n} $$
 
 \heading{Sequences}\\
 
