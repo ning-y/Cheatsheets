@@ -40,7 +40,7 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \rfoot{\vspace{-0.6cm}\scriptsize
-  Pre-release $\alpha$; please send suggestions to
+  Pre-release $\beta$; please send suggestions to
   \href{https://t.me/ningyuan}{\texttt{@ningyuan}} on telegram.
   Keep up-to-date with the
   \href{https://github.com/ningyuansg/cheatsheets}{ningyuansg/cheatsheets}
@@ -397,7 +397,7 @@ The set of primes is infinite.\\
 
 \subheading{Definition 4.5.4 (Relatively Prime)}\\
 Integers $a$ and $b$ are \textit{relatively prime} (or \textit{coprime}) iff
-$\mathrm{gcd}(a,b)=1$.\\
+$\gcd(a,b)=1$.\\
 
 \subheading{Definition 4.3.1 (Lower Bound)}\\
 An integer $b$ is said to be a \textit{lower bound} for a set $X \subseteq
@@ -426,7 +426,7 @@ $q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b$$
 
 \subheading{Definition 4.5.1 (Greatest Common Divisor)}\\
 Let $a$ and $b$ be integers, not both zero. The \textit{greatest common divisor}
-of $a$ and $b$, denoted $\mathrm{gcd}(a, b)$, is the integer $d$ satisfying
+of $a$ and $b$, denoted $\gcd(a, b)$, is the integer $d$ satisfying
 
 \begin{enumerate} \itemsep -0.5em
   \item $d\;|\;a$ and $d\;|\;b$
@@ -437,7 +437,7 @@ of $a$ and $b$, denoted $\mathrm{gcd}(a, b)$, is the integer $d$ satisfying
 For any integers $a$, $b$, not both zero, their gcd exists and is unique.\\
 
 \subheading{Theorem 4.5.3 (B\'ezout's Identity)}\\
-Let $a$, $b$ be integers, not both zero, and let $d = \mathrm{gcd}(a, b)$. Then
+Let $a$, $b$ be integers, not both zero, and let $d = \gcd(a, b)$. Then
 there exists integers $x$, $y$ such that $$ax + by = d$$
 
 Or, the gcd of two integers is some linear combination of the said numbers,
@@ -447,16 +447,16 @@ is found. Also solutions, for any integer $k$,
 $$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
 
 \subheading{*Epp T8.4.8 (Euclid's Lemma)}\\
-For all $a, b, c \in \mathbb{Z}$, if $\mathrm{gcd}(a, c) = 1$ and $a\;|\;bc$,
+For all $a, b, c \in \mathbb{Z}$, if $\gcd(a, c) = 1$ and $a\;|\;bc$,
 then $a\;|\;b$.\\
 
 \subheading{*Epp Lemma 4.8.2}\\
 If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
-$$\mathrm{gcd}(a, b)= \mathrm{gcd}(b, r)$$
+$$\gcd(a, b)= \gcd(b, r)$$
 
 \subheading{Proposition 4.5.5}\\
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
-$b$, then $c\;|\;\mathrm{gcd}(a,b)$.\\
+$b$, then $c\;|\;\gcd(a,b)$.\\
 
 % TODO: LCM for finals
 
