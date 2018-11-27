@@ -494,8 +494,6 @@ For example, to evaluate $\gcd(330, 156)$:
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
 $b$, then $c\;|\;\gcd(a,b)$.\\
 
-% TODO: LCM for finals
-
 \subheading{Definition 4.7.1 (Congruence modulo)}
 
 Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
@@ -746,13 +744,13 @@ $$T=\bigcup S = \bigcup_{X\in S} X = \{ y \in \mathcal{U}\;|\;\exists X \in S (y
 
 Some properties of union,
 \begin{itemize}[leftmargin=*] \itemsep -0.3em
-  \item $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
-  \item $\bigcup \{A\} = A$
-  \item $A \cup \varnothing = A$
-  \item $A \cup B = B \cup A$
-  \item $A \cup (B \cup C) = (A \cup B) \cup C$
-  \item $A \cup A = A$
-  \item $A \subseteq B \longleftrightarrow A \cup B = B$
+  \item[-] $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
+  \item[-] $\bigcup \{A\} = A$
+  \item[-] $A \cup \varnothing = A$
+  \item[-] $A \cup B = B \cup A$
+  \item[-] $A \cup (B \cup C) = (A \cup B) \cup C$
+  \item[-] $A \cup A = A$
+  \item[-] $A \subseteq B \longleftrightarrow A \cup B = B$
 \end{itemize}
 
 \subheading{Definition 6.3.3 (Intersection)}
@@ -769,12 +767,12 @@ each element of $T$ also belongs to all the sets in $S$. Formally,
 Let $A, B, C$ be sets. Some properties of intersection,
 
 \begin{itemize}[leftmargin=*] \itemsep -0.3em
-  \item $A \cap \varnothing = \varnothing$
-  \item $A \cap B = B \cap A$
-  \item $A \cap (B \cap C) = (A \cap B) \cap C$
-  \item $A \subseteq B \longleftrightarrow A \cap B = A$
-  \item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
-  \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+  \item[-] $A \cap \varnothing = \varnothing$
+  \item[-] $A \cap B = B \cap A$
+  \item[-] $A \cap (B \cap C) = (A \cap B) \cap C$
+  \item[-] $A \subseteq B \longleftrightarrow A \cap B = A$
+  \item[-] $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+  \item[-] $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
 \end{itemize}
 
 \subheading{Definition 6.3.5 (Disjoint)}
@@ -1497,16 +1495,14 @@ to $w$. \\
 
 Let G be a graph.
 \begin{itemize}[leftmargin=*] \itemsep -0.5em
-  \item If $G$ is connected, then any two distinct vertices of $G$ can be
+  \item[-] If $G$ is connected, then any two distinct vertices of $G$ can be
     connected by a path.
-  \item If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
+  \item[-] If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
     removed from the circuit, then there still exists a trail from $v$ to $w$ in
     $G$.
-  \item If $G$ is connected and $G$ contains a circuit, then an edge of the
+  \item[-] If $G$ is connected and $G$ contains a circuit, then an edge of the
     circuit can be removed without disconnecting $G$.
 \end{itemize}
-
-% TODO: change all itemize bullets to [-]
 
 \subheading{Connected Component}
 
