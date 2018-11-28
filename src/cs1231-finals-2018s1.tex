@@ -111,12 +111,6 @@ for corollary.\\
   \item \textbf{By Mathematical Induction}: proving for a base case, then an
     induction step. In the inductive step, work from the $k+1$, not the $k$
     case.
-    \vspace{-0.5em} % hackhackhack
-    \begin{enumerate}[leftmargin=*] \itemsep -0.2em
-      \item $P(a)$
-      \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
-      \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
-    \end{enumerate}
   \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
     P(k-1), \cdots, P(a)$ are all true.
 \end{itemize}
@@ -190,11 +184,13 @@ Contradiction Rule
   &\boldsymbol{\cdot}\; p
 \end{eqnarray*}
 
-\subheading{Universal Rules of Inference}\\
+\subheading{Universal Rules of Inference}
+
 Only modus ponens, modus tollens, and transitivity have universal versions in
 the lecture notes.\\
 
-\subheading{Implicit Quantification}\\
+\subheading{Implicit Quantification}
+
 The notation $P(x) \implies Q(x)$ means that every element in the truth set of
 $P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
 \rightarrow Q(x)$.\\
@@ -202,22 +198,27 @@ $P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
 The notation $P(x) \iff Q(x)$ means that $P(x)$ and $Q(x)$ have identical truth
 sets, or equivalently, $\forall x, P(x) \leftrightarrow Q(x)$.\\
 
-\subheading{Implication Law}\\
+\subheading{Implication Law}
+
 $$p \rightarrow q \equiv \neg p \lor q$$
 
-\subheading{Universal Instantiation}\\
+\subheading{Universal Instantiation}
+
 If some property is true of everything in a set, then it is true of any
 particular thing in the set.\\
 
-\subheading{Universal Generalization}\\
+\subheading{Universal Generalization}
+
 If $P(c)$ must be true, and we have assumed nothing about $c$, then $\forall x,
 P(x)$ is true.\\
 
-\subheading{Regular Induction}\\
+\subheading{Regular Induction}
+
+Modify the domain of the quantifiers below according to $P$, if necessary:
 \begin{eqnarray*}
   &P(0) \\
   &\forall k \in \mathbb{N}, P(k) \rightarrow P(k+1) \\
-  & \forall
+  &\forall k \in \mathbb{N}, P(n)
 \end{eqnarray*}
 
 \subheading{Epp T2.1.1 Logical Equivalences}\\
