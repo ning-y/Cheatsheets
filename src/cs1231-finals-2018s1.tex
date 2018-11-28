@@ -51,7 +51,7 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \rfoot{\vspace{-0.6cm}\scriptsize
-  Pre-release $\beta$; please send suggestions to
+  Pre-release $\gamma$; please send suggestions to
   \href{https://t.me/ningyuan}{\texttt{@ningyuan}} on telegram.
   Keep up-to-date with the
   \href{https://github.com/ningyuansg/cheatsheets}{ningyuansg/cheatsheets}
@@ -111,12 +111,6 @@ for corollary.\\
   \item \textbf{By Mathematical Induction}: proving for a base case, then an
     induction step. In the inductive step, work from the $k+1$, not the $k$
     case.
-    \vspace{-0.5em} % hackhackhack
-    \begin{enumerate}[leftmargin=*] \itemsep -0.2em
-      \item $P(a)$
-      \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
-      \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
-    \end{enumerate}
   \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
     P(k-1), \cdots, P(a)$ are all true.
 \end{itemize}
@@ -190,11 +184,13 @@ Contradiction Rule
   &\boldsymbol{\cdot}\; p
 \end{eqnarray*}
 
-\subheading{Universal Rules of Inference}\\
+\subheading{Universal Rules of Inference}
+
 Only modus ponens, modus tollens, and transitivity have universal versions in
 the lecture notes.\\
 
-\subheading{Implicit Quantification}\\
+\subheading{Implicit Quantification}
+
 The notation $P(x) \implies Q(x)$ means that every element in the truth set of
 $P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
 \rightarrow Q(x)$.\\
@@ -202,22 +198,27 @@ $P(x)$ is in the truth set of $Q(x)$, or equivalently, $\forall x, P(x)
 The notation $P(x) \iff Q(x)$ means that $P(x)$ and $Q(x)$ have identical truth
 sets, or equivalently, $\forall x, P(x) \leftrightarrow Q(x)$.\\
 
-\subheading{Implication Law}\\
+\subheading{Implication Law}
+
 $$p \rightarrow q \equiv \neg p \lor q$$
 
-\subheading{Universal Instantiation}\\
+\subheading{Universal Instantiation}
+
 If some property is true of everything in a set, then it is true of any
 particular thing in the set.\\
 
-\subheading{Universal Generalization}\\
+\subheading{Universal Generalization}
+
 If $P(c)$ must be true, and we have assumed nothing about $c$, then $\forall x,
 P(x)$ is true.\\
 
-\subheading{Regular Induction}\\
+\subheading{Regular Induction}
+
+Modify the domain of the quantifiers below according to $P$, if necessary:
 \begin{eqnarray*}
   &P(0) \\
   &\forall k \in \mathbb{N}, P(k) \rightarrow P(k+1) \\
-  & \forall
+  &\forall k \in \mathbb{N}, P(n)
 \end{eqnarray*}
 
 \subheading{Epp T2.1.1 Logical Equivalences}\\
@@ -329,14 +330,6 @@ that $n = 3k$.\\
 \subheading{Definition 1.3.1 (Divisibility)}\\
 If $n$ and $d$ are integers and $d \neq 0$,
   $$ d \divides n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
-
-\subheading{Proposition 1.3.2 (Linear Combination)}
-$$\forall a, b, c \in \mathbb{Z},\;
-(a \divides b) \land (a \divides c) \rightarrow
-    \forall x, y \in \mathbb{Z},\;
-    a \divides (bx + cy)$$
-If $a$ divides $b$ and $c$, then it also divides their linear combination
-$(bx + cy)$.\\
 
 \subheading{Theorem 4.1.1 (Linear Combination)}\\
 $$\forall a,b,c \in \mathbb{Z},\;
@@ -899,7 +892,7 @@ Let $S, T$ be two sets. A \textit{binary relation} from $S$ to $T$ denoted
 $\mathcal{R}$ is a subset of the cartesian product $S \times T$.
 
 The notation $s\; \mathcal{R}\; t$ stands for $(s, t) \in \mathcal{R}$. $s\;
-\cancel{\mathcal{R}}\; t$ stands for $(s, t) \cancel{\in} \mathcal{R}$.\\
+\cancel{\mathcal{R}}\; t$ stands for $(s, t) \not\in \mathcal{R}$.\\
 
 \subheading{Definitions 8.2.[2-4] (Dom, Im, coDom)}
 
@@ -942,8 +935,14 @@ $$\forall x \in S, \forall z \in U (
   x\;\mathcal{R}' \circ \mathcal{R}\;z \leftrightarrow
     (\exists y \in T (x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}'\;z))
 )$$
-In other words, $x \in S$ and $z in U$ are related iff there is a ``path" from
+In other words, $x \in S$ and $z \in U$ are related iff there is a `path' from
 $x$ to $z$ via some intermediate $y \in T$.\\
+
+\subheading{Repeated Compositions}
+
+$$\mathcal{R}^n := \underbrace{R \circ \cdots \circ R}_n
+    = \bigodot_n \mathcal{R}$$
+
 
 \subheading{Proposition 8.2.9 (Associativity of Composition)}
 $$\mathcal{R}'' \circ (\mathcal{R}' \circ \mathcal{R}) =
@@ -954,7 +953,7 @@ $$\mathcal{R}'' \circ (\mathcal{R}' \circ \mathcal{R}) =
 $$(\mathcal{R}' \circ \mathcal{R})^{-1} =
   \mathcal{R}^{-1} \circ \mathcal{R}'^{-1}$$
 
-\subheading{Definitions 8.3.2 (Properties of Relations)}
+  \subheading{Definitions 8.3.[1-3] (Properties of Relations)}
 
 Let $A$ be a set, and $\mathcal{R} \in A \times A$ be a relation on $A$.\\
 
@@ -965,6 +964,13 @@ $\mathcal{R}$ is symmetric (8.3.2) iff $\forall x, y \in A (x\;\mathcal{R}\;y
 
 $\mathcal{R}$ is transitive (8.3.3) iff $\forall x, y, z \in A
 ((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;z)\rightarrow x\;\mathcal{R}\;z))$.\\
+
+\subheading{Definition 8.6.1 (Anti-symmetric)}
+
+Let $A$ be a set, and $R \in A \times A$ be a relation on $A$. $\mathcal{R}$ is
+anti-symmetric iff
+$$\forall x \in A, \forall y \in A
+  ((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;x) \rightarrow x = y)$$
 
 \subheading{Definition 8.3.4 (Equivalence Relation)}
 
@@ -1016,18 +1022,6 @@ and symmetric closure.\\
 \subheading{Proposition 8.5.2}
 
 $$\mathcal{R}^t = \bigcup^\infty_{i=1} \mathcal{R}^i$$
-
-\subheading{Repeated Compositions}
-
-$$\mathcal{R}^n := \underbrace{R \circ \cdots \circ R}_n
-    = \bigodot_n \mathcal{R}$$
-
-\subheading{Definition 8.6.1 (Anti-symmetric)}
-
-Let $A$ be a set, and $R \in A \times A$ be a relation on $A$. $\mathcal{R}$ is
-anti-symmetric iff
-$$\forall x \in A, \forall y \in A
-  ((x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}\;x) \rightarrow x = y)$$
 
 \subheading{Definition 8.6.2 (Partial Order)}
 
