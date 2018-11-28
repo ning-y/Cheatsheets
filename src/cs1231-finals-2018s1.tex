@@ -18,9 +18,20 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
+% heading macros
 \newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
 \newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
 
+% Math
+\newcommand\divides{\;|\;}
+\renewcommand\mod{\;\operatorname{mod}\;}  % less space between args
+\newcommand\undermod[1]{\ (\operatorname{mod}#1)}
+\DeclareMathOperator\lcm{lcm}
+
+% make itemize use dash (-) instead of bullet
+\renewcommand\labelitemi{-}
+
+% scale tikz to column width
 \makeatletter
 \newsavebox{\measure@tikzpicture}
 \NewEnviron{scaletikzpicturetowidth}[1]{%
@@ -40,7 +51,7 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \rfoot{\vspace{-0.6cm}\scriptsize
-  Pre-release $\alpha$; please send suggestions to
+  Pre-release $\beta$; please send suggestions to
   \href{https://t.me/ningyuan}{\texttt{@ningyuan}} on telegram.
   Keep up-to-date with the
   \href{https://github.com/ningyuansg/cheatsheets}{ningyuansg/cheatsheets}
@@ -67,41 +78,45 @@
 Appendix A of Epp is not covered. Theorems, corollaries, lemmas, etc. from the
 Epp textbook are prefixed with `\textit{Epp}'; those without asterisks (*) are
 from the lecture notes, those with the asterisk are not (e.g. Epp theorems not
-covered by the lecture).\\
+covered by the lecture). In titles, `T' is short for theorem, `L' for lemma, 'C'
+for corollary.\\
 
 %% Proofs %%
 \heading{Proofs} \\
 
-\subheading{Basic Notation}
-\begin{itemize}[leftmargin=*] \itemsep -0.5em
-    \item $\mathbb{R}$: the set of all real numbers
-    \item $\mathbb{Z}$: the set of integers (includes $0$)
-    \item $\mathbb{Q}$: the set of rationals
-    \item $\exists$:    there exists...
-    \item $\exists!$:   there exists a unique...
-    \item $\forall$:    for all...
-    \item $\in$:        member of...
-    \item $\ni$:        such that...
-\end{itemize}
+\subheading{Basic Notation}\\
+
+\begin{tabularx}{\columnwidth}{rX}
+  $\mathbb{R}$ & set of real numbers \\
+  $\mathbb{Z}$ & set of integers (includes $0$) \\
+  $\mathbb{Q}$ & set of rationals \\
+  $\mathbb{N}$ & set of natural numbers (usually includes $0$) \\
+  $\exists$    & there exists... \\
+  $\exists!$   & there exists a unique... \\
+  $\forall$    & for all... \\
+  $\in$        & member of... \\
+  $\ni$        & such that... \\
+\end{tabularx}\\
 
 \subheading{Proof Types}
-\begin{itemize}[leftmargin=*] \itemsep -0.5em
+\begin{itemize}[leftmargin=*] \itemsep -0.4em
   \item \textbf{By Construction}: finding or giving a set of directions to
-    reach the statement to be proven true.
-  \item \textbf{By Contraposition}: proving a statement through its logical
+    reach the statement to be proven true. In proving equality, a useful note:
+    $$a \leq b \land a \geq b \rightarrow a = b$$
+  \item \textbf{By Contraposition}: proving a statement through its logically
     equivalent contrapositive.
   \item \textbf{By Contradiction}: proving that the negation of the statement
     leads to a logical contradiction.
   \item \textbf{By Exhaustion}: considering each case.
   \item \textbf{By Mathematical Induction}: proving for a base case, then an
-    induction step.
-    \vspace{-1em} % hackhackhack
-    \begin{enumerate} \itemsep -0.2em
+    induction step. In the inductive step, work from the $k+1$, not the $k$
+    case.
+    \vspace{-0.5em} % hackhackhack
+    \begin{enumerate}[leftmargin=*] \itemsep -0.2em
       \item $P(a)$
       \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
       \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
     \end{enumerate}
-  \vspace{-0.5em}
   \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
     P(k-1), \cdots, P(a)$ are all true.
 \end{itemize}
@@ -313,23 +328,24 @@ that $n = 3k$.\\
 
 \subheading{Definition 1.3.1 (Divisibility)}\\
 If $n$ and $d$ are integers and $d \neq 0$,
-  $$ d|n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
+  $$ d \divides n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
 
 \subheading{Proposition 1.3.2 (Linear Combination)}
 $$\forall a, b, c \in \mathbb{Z},\;
-    a | b \land a | c \rightarrow
+(a \divides b) \land (a \divides c) \rightarrow
     \forall x, y \in \mathbb{Z},\;
-    a | (bx + cy)$$
+    a \divides (bx + cy)$$
 If $a$ divides $b$ and $c$, then it also divides their linear combination
 $(bx + cy)$.\\
 
 \subheading{Theorem 4.1.1 (Linear Combination)}\\
 $$\forall a,b,c \in \mathbb{Z},\;
-  a | b \land a | c \rightarrow \forall x,y \in \mathbb{Z}, a | (bx + cy)$$
+(a \divides b) \land (a \divides c)
+    \rightarrow \forall x,y \in \mathbb{Z}, a \divides (bx + cy)$$
 
 \subheading{Epp T4.3.3 (Transitivity of Divisibility)}
 $$\forall a, b, c \in \mathbb{Z},\;
-  a | b \land b | c \rightarrow a | c$$
+(a \divides b) \land (b \divides c) \rightarrow a \divides c$$
 
 \subheading{Theorem 4.4.1 (Quotient-Remainder Theorem)}
 Given any integer $a$ and any positive integer $b$, there exist unique integers
@@ -370,12 +386,12 @@ $r_i$,
 
 \subheading{Proposition 4.2.2}\\
 For any two primes $p$ and $p'$,
-  $$p\;|\;p' \rightarrow p = p'$$
+  $$p \divides p' \rightarrow p = p'$$
 
 \subheading{Theorem 4.2.3}\\
 If $p$ is a prime and $x_1, x_2, \cdots, x_n$ are any integers s.t.
-$p\;|\;x_1x_2\cdots x_n$, then $p\;|\;x_i$ for some $x_i, i \in \{1, 2, \cdots,
-n\}$.\\
+$p \divides x_1x_2\cdots x_n$, then $p \divides x_i$
+for some $x_i, i \in \{1, 2, \cdots, n\}$.\\
 
 \subheading{Epp T4.3.5 (Unique Prime Factorisation)}\\
 Given any integer $n > 1$
@@ -390,14 +406,14 @@ except perhaps for the order in which the factors are written.\\
 
 \subheading{Epp Proposition 4.7.3}\\
 For any $a \in \mathbb{Z}$ and any prime $p$,
-  $$ p\;|\;a \rightarrow p \nmid (a+1) $$
+  $$ p \divides a \rightarrow p \nmid (a+1) $$
 
 \subheading{Epp T4.7.4 (Infinitude of Primes)}\\
 The set of primes is infinite.\\
 
 \subheading{Definition 4.5.4 (Relatively Prime)}\\
 Integers $a$ and $b$ are \textit{relatively prime} (or \textit{coprime}) iff
-$\mathrm{gcd}(a,b)=1$.\\
+$\gcd(a,b)=1$.\\
 
 \subheading{Definition 4.3.1 (Lower Bound)}\\
 An integer $b$ is said to be a \textit{lower bound} for a set $X \subseteq
@@ -426,18 +442,19 @@ $q$ and $r$ such that $$ a = bq + r \text{ and } 0 \leq r < b$$
 
 \subheading{Definition 4.5.1 (Greatest Common Divisor)}\\
 Let $a$ and $b$ be integers, not both zero. The \textit{greatest common divisor}
-of $a$ and $b$, denoted $\mathrm{gcd}(a, b)$, is the integer $d$ satisfying
+of $a$ and $b$, denoted $\gcd(a, b)$, is the integer $d$ satisfying
 
 \begin{enumerate} \itemsep -0.5em
-  \item $d\;|\;a$ and $d\;|\;b$
-  \item $\forall c \in \mathbb{Z}\;((c\;|\;a)\ \land (c\;|\;b) \rightarrow c \leq d)$
+  \item $d \divides a$ and $d \divides b$
+  \item $\forall c \in \mathbb{Z}\;((c \divides a)\ \land (c \divides b)
+    \rightarrow c \leq d)$
 \end{enumerate}
 
 \subheading{Proposition 4.5.2 (Existence of gcd)}\\
 For any integers $a$, $b$, not both zero, their gcd exists and is unique.\\
 
 \subheading{Theorem 4.5.3 (B\'ezout's Identity)}\\
-Let $a$, $b$ be integers, not both zero, and let $d = \mathrm{gcd}(a, b)$. Then
+Let $a$, $b$ be integers, not both zero, and let $d = \gcd(a, b)$. Then
 there exists integers $x$, $y$ such that $$ax + by = d$$
 
 Or, the gcd of two integers is some linear combination of the said numbers,
@@ -447,70 +464,97 @@ is found. Also solutions, for any integer $k$,
 $$ (x+\frac{kb}{d}, y-\frac{ka}{d}) $$
 
 \subheading{*Epp T8.4.8 (Euclid's Lemma)}\\
-For all $a, b, c \in \mathbb{Z}$, if $\mathrm{gcd}(a, c) = 1$ and $a\;|\;bc$,
-then $a\;|\;b$.\\
+For all $a, b, c \in \mathbb{Z}$, if $\gcd(a, c) = 1$ and $a \divides bc$,
+then $a \divides b$.\\
 
-\subheading{*Epp Lemma 4.8.2}\\
+\subheading{*Epp L4.8.1 (gcd of an integer and 0)}
+
+If $r$ is a positive integer, then $\gcd(r, 0) = r$.\\
+
+\subheading{*Epp L4.8.2 (Basis of Euclid's Algorithm)}
+
 If $a, b \in \mathbb{Z}^+$, and $q, r \in \mathbb{Z}$ s.t. $a = bq + r$, then
-$$\mathrm{gcd}(a, b)= \mathrm{gcd}(b, r)$$
+$$\gcd(a, b)= \gcd(b, r)$$
 
-\subheading{Proposition 4.5.5}\\
+\subheading{Algorithm 4.8.2 (Euclidean Algorithm)}
+\begin{center}
+\begin{BVerbatim}
+def gcd(a, b):
+  if a == 0:
+    return b
+  if b == 0:
+    return a
+  return gcd(a%b, b) if a >= b else gcd(a, b%a)
+\end{BVerbatim}
+\end{center}
+For example, to evaluate $\gcd(330, 156)$:
+\begin{IEEEeqnarray*}{rLl}
+   &\gcd(330, 156) &\ (= \gcd(330 \mod 156, 156)) \\
+  =&\gcd(18, 156)  &\ (= \gcd(18, 156 \mod 18)) \\
+  =&\gcd(18, 12)   &\ (= \gcd(18 \mod 12, 12)) \\
+  =&\gcd(6, 12)    &\ (= \gcd(6, 12 \mod 6)) \\
+  =&\gcd(6, 0)     &\\
+  =&\ 6 &
+\end{IEEEeqnarray*}
+
+\subheading{Proposition 4.5.5}
+
 For any integers $a$, $b$, not both zero, if $c$ is a common divisor of $a$ and
-$b$, then $c\;|\;\mathrm{gcd}(a,b)$.\\
+$b$, then $c \divides \gcd(a,b)$.\\
 
-% TODO: LCM for finals
+\subheading{Definition 4.7.1 (Congruence modulo)}
 
-\subheading{Definition 4.7.1 (Congruence modulo)}\\
 Let $m, z \in \mathbb{Z}$ and $d \in \mathbb{Z}^+$. We say that $m$ is
 \textit{congruent} to $n$ \textit{modulo} $d$ and write
-$$ m \equiv n\ (\mathrm{mod}\; d) $$
+$$ m \equiv n \undermod{d} $$
 iff
-$$ d\;|\;(m-n) $$
+$$ d \divides (m-n) $$
 More concisely,
-$$ m \equiv n\ (\mathrm{mod}\; d) \iff d\;|\;(m-n) $$
+$$ m \equiv n \undermod{d} \iff d \divides (m-n) $$
 
-\subheading{Epp T8.4.1 (Modular Equivalences)}\\
+\subheading{Epp T8.4.1 (Modular Equivalences)}
+
 Let $a, b, n \in \mathbb{Z}$ and $n > 1$. The following statements are all
 equivalent,
 \begin{enumerate} \itemsep -0.5em
-    \item $n\;|\;(a-b)$
-    \item $a \equiv b\ (\mathrm{mod}\; n)$
+    \item $n \divides (a-b)$
+    \item $a \equiv b \undermod{n}$
     \item $a = b + kn$ for some $k \in \mathbb{Z}$
     \item $a$ and $b$ have the same non-negative remainder when divided by $n$
-    \item $a\;\mathrm{mod}\;n = b\;\mathrm{mod}\;n$
+    \item $a \mod n = b \mod n$
 \end{enumerate}
 
 \subheading{Epp T8.4.3 (Modulo Arithmetic)}\\
 Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, and suppose\\
 
 {\centering
-$a \equiv c\ (\mathrm{mod}\; n)$ and $b \equiv d\ (\textrm{mod}\; n)$\\
+  $a \equiv c \undermod{n}$ and $b \equiv d \undermod{n}$\\
 }
 
 Then
 
 \begin{enumerate} \itemsep -0.5em
-    \item $(a + b) \equiv (c + d)\ (\mathrm{mod}\;n)$
-    \item $(a - b) \equiv (c - d)\ (\mathrm{mod}\;n)$
-    \item $ab \equiv cd\ (\mathrm{mod}\;n)$
-    \item $a^m \equiv c^m\ (\mathrm{mod}\;n)$, for all $m \in \mathbb{Z}^+$
+  \item $(a + b) \equiv (c + d) \undermod{n}$
+  \item $(a - b) \equiv (c - d) \undermod{n}$
+  \item $ab \equiv cd \undermod{n}$
+  \item $a^m \equiv c^m \undermod{n}$, for all $m \in \mathbb{Z}^+$
 \end{enumerate}
 
-\subheading{Epp Corollary 8.4.4}\\
+\subheading{Epp C8.4.4}\\
 Let $a, b, c, d, n \in \mathbb{Z}$, $n > 1$, then
-$$ ab \equiv [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ (\mathrm{mod}\;n) $$
+$$ ab \equiv [(a \mod n)(b \mod n)]\ \undermod{n} $$
 or equivalently,
-$$ ab\;\mathrm{mod}\;n = [(a\;\mathrm{mod}\;n)(b\;\mathrm{mod}\;n)]\ \mathrm{mod}\;n $$
+$$ ab \mod n = [(a \mod n)(b \mod n)] \undermod{n} $$
 In particular, if $m$ is a positive integer, then
-$$ a^m \equiv [(a\;\textrm{mod}\;n)^m]\ (\mathrm{mod}\;n) $$
+$$ a^m \equiv [(a \mod n)^m] \undermod{n} $$
 
 \subheading{Definition 4.7.2 (Multiplicative inv. modulo $n$)}\\
 For any integers $a, n$ with $n > 1$, if an integer $s$ is such that $as \equiv
-1\ (\mathrm{mod}\;n)$, then $s$ is the \textit{multiplicative inverse of $a$
+1 \undermod{n}$, then $s$ is the \textit{multiplicative inverse of $a$
 modulo $n$}. We may write $s$ as $a^{-1}$.\\
 
 Because the commutative law still applies in modulo arithmetic, we also have
-$$a^{-1}a \equiv 1\ (\mathrm{mod}\;n)$$
+$$a^{-1}a \equiv 1 \undermod{n}$$
 Multiplicative inverses are not unique. If $s$ is an inverse, then so is $(s +
 kn)$ for any integer $k$.\\
 
@@ -518,34 +562,79 @@ kn)$ for any integer $k$.\\
 For any integer $a$, its multiplicative inverse modulo $n$ where $n>1$,
 $a^{-1}$, exists iff $a$ and $n$ are coprime.\\
 
-\subheading{Finding the Multiplicative Inverse}\\
-For example, to find the multiplicative inverse of $5\ \textrm{mod}\; 18$,
-\begin{IEEEeqnarray*}{rCl}
-  18 = 3 &\times& 5 + 3 \\
-   5 = 1 &\times& 3 + 2 \\
-   3 = 1 &\times& 2 + 1 \\
-   1 = 1 &\times& 1 + 0
-\end{IEEEeqnarray*}
-So
-\begin{IEEEeqnarray*}{rCl}
-  1 &=& 1 \times 1 + 0 = 1 \\
-    &=& 1(3 - 1 \times 2) = 3 - 2  \\
-    &=& 3 - (5 - 3) = 2 \times 3 - 5 \\
-    &=& 2(18 - 3 \times 5) - 5 = 2 \times 18 - 7 \times 5 \\
-  1 - 2 \times 18 &=& -7 \times 5 \\
-  1 - 2 \times 18 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18) \\
-                1 &\equiv& -7 \times 5\ (\mathrm{mod}\; 18)
-\end{IEEEeqnarray*}
-Therefore, we have $5^{-1}\ \textrm{mod}\; 18 = -7$, or equivalently under
-modulo $11$.\\
+\subheading{Finding the Multiplicative Inverse}
 
-\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}\\
+To find the multiplicative inverse $a^{-1} \mod b$, note that since $a, b$ are
+coprime, using B\'ezout's Identity, there exists $x, y \in \mathbb{Z}_{\neq 0}$
+such that,
+\begin{align*}
+  ax + by &= \gcd(a, b) \\
+  ax + by &= 1 \\
+  ax + by &\equiv 1 \undermod{b} \\
+  ax &\equiv 1 \undermod{b} \\
+  a^{-1} &\equiv x \undermod{b}
+\end{align*}
+
+To find $x$, employ the extended Euclidean algorithm: express $b$ using the
+quotient-remainder theorem (T4.4.1) with $a$ as the quotient. Then express the
+remainder $r$ using the divisor as quotient. Repeat with the new remainder until
+a remainder of $1$ is obtained. Finally, express $1$ in terms of $a$ and $b$
+using the equalities formulated during the algorithm. For example, to find the
+multiplicative inverse of $5 \mod 18$.
+
+\begin{minipage}{0.9\columnwidth}
+$$\text{quotient-remainder theorem: } n = dq + r$$
+\begin{IEEEeqnarray}{rCccCl}
+   n & = &  d  & q & + & r \\
+  18 & = & (3) & 5 & + & 3 \\
+   5 & = & (1) & 3 & + & 2 \\
+   3 & = & (1) & 2 & + & 1
+\end{IEEEeqnarray}
+\end{minipage}\\
+
+Now, express $1$ in terms of $5$ and $18$.
+\begin{IEEEeqnarray*}{rCrlCrl}
+  1 & = & (1)  &\ 3  & - & (1)  &\ 2 \\
+    & = & (1)  &\ 3  & - & (1)  &\ [(1)5 - (1)3] \\
+    & = & (-1) &\ 5  & + & (2)  &\ 3 \\
+    & = & (-1) &\ 5  & + & (2)  &\ [(1)18 - (3)5] \\
+    & = & (2)  &\ 18 & + & (-7) &\ 5 \\
+\end{IEEEeqnarray*}
+Take $\mod 18$ on both sides,
+\begin{align*}
+  1 &\equiv (2)18 + (-7)5 \undermod{18} \\
+  (2)18 + (-7)5 &\equiv 1 \undermod{18} \\
+          (-7)5 &\equiv 1 \undermod{18} \\
+          (11)5 &\equiv 1 \undermod{18}
+\end{align*}
+
+So, $5^{-1} \mod 18 = 11$.\\
+
+\subheading{Corollary 4.7.4 (Special case: $n$ is prime)}
+
 If $n=p$ is a prime number, then all integers $a$ in the range $0<a<p$ have
 multiplicative inverses modulo $p$.\\
 
-\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}\\
+\subheading{Epp T8.4.9 (Cancellation Law for mod. arith.)}
+
 For all $a, b, c, n \in \mathbb{Z}$, $n>1$, and $a$ and $n$ are coprime,
-$$ ab \equiv ac\ (\mathrm{mod}\;n) \rightarrow b \equiv c\ (\mathrm{mod}\;n) $$
+$$ ab \equiv ac \undermod{n} \rightarrow b \equiv c \undermod{n} $$
+
+\subheading{*Epp T8.4.10 (Fermat's Little Theorem)}
+
+For any prime $p$ and any integer $a$, $a^p \equiv a \undermod{p}$.\\
+
+Alternatively, if $p \nmid a$ then $a^{p-1} \equiv 1 \undermod{p}$.\\
+
+\subheading{Definition 4.6.1 (Least Common Multiple)}
+
+For any non-zero integers $a, b$, their least common multiple, denoted
+$\lcm(a,b)$ is the positive integer $m$ such that:
+\begin{enumerate} \itemsep -0.5em
+  \item $a \divides m$ and $b \divides m$
+  \item $\forall c \in \mathbb{Z}^+ ((a \divides c) \land (b \divides c)
+    \rightarrow c \leq m$
+\end{enumerate}
 
 \heading{Sequences}\\
 
@@ -591,6 +680,7 @@ Fibonacci numbers:
 \end{cases} \\
   &= \frac{\phi^k - (- \phi)^{-k}}{\sqrt{5}}
 \end{align*}
+where $\phi = (1+\sqrt{5}/2)$.
 
 \vspace{0.3cm}
 
@@ -605,13 +695,13 @@ Where $a, b \in \mathbb{R}$, $b \neq 0$; and $\forall k \in \mathbb{Z}_{k \geq
 k_0}$ for $k_0 \in \mathbb{Z}$.
 
 \begin{itemize}[leftmargin=*] \itemsep -0.5em
-\item[-] \textit{Second-order} means recurrence relation goes up to but not
+\item \textit{Second-order} means recurrence relation goes up to but not
   exceeding $F_{k-2}$.
-\item[-] \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
+\item \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
   $m=1$.
-\item[-] \textit{Homogeneous} means $C=0$ in the more general case $F_k =
+\item \textit{Homogeneous} means $C=0$ in the more general case $F_k =
   aF_{k-1} + bF_{k-2} + C$.
-\item[-] \textit{Constant coefficients} means $a, b$ does not depend on $k$.
+\item \textit{Constant coefficients} means $a, b$ does not depend on $k$.
 \end{itemize}
 
 \subheading{Epp T5.8.3 (Distinct-Roots Theorem)}
@@ -622,7 +712,8 @@ $$t^2 - at - b = 0$$
 Then $F_k$ can be written in closed form as
 $$F_k = cr^k + ds^k$$
 Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
-sequence. \\
+sequence. Recall that the roots of a quadratic equation $ax^2 + bx + c$ are
+given by: $$x=\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
 \subheading{Epp T5.8.5 (Single-Roots Theorem)}
 
@@ -632,7 +723,7 @@ $$t^2 - at - b = 0$$
 Then $F_k$ can be written in closed form as
 $$F_k = cr^n + dkr^n$$
 Where $c, d \in \mathbb{R}$ can be found by solving for known values of the
-sequence. \\
+sequence.\\
 
 \heading{Sets} \\
 
@@ -922,10 +1013,14 @@ Intuitively, the transitive the closure can be understood as the smallest
 superset that is transitive. Similar definitions exist for the reflexive closure
 and symmetric closure.\\
 
-% TODO: repeated compositions
-
 \subheading{Proposition 8.5.2}
+
 $$\mathcal{R}^t = \bigcup^\infty_{i=1} \mathcal{R}^i$$
+
+\subheading{Repeated Compositions}
+
+$$\mathcal{R}^n := \underbrace{R \circ \cdots \circ R}_n
+    = \bigodot_n \mathcal{R}$$
 
 \subheading{Definition 8.6.1 (Anti-symmetric)}
 
@@ -984,7 +1079,7 @@ The Hasse diagram is a simplified directed graph.
 
 The above diagram represents the partial order for ``divides" on the set $A=\{1,
 2, 3, 9, 18\}$. That is
-$$\forall a, b \in A (a\;|\;b \longleftrightarrow \exists k \in
+$$\forall a, b \in A (a \divides b \longleftrightarrow \exists k \in
 \mathbb{Z}(b=ka))$$
 It can be represented by the following Hasse diagram.
 
@@ -1441,15 +1536,13 @@ to $w$. \\
 Let G be a graph.
 \begin{itemize}[leftmargin=*] \itemsep -0.5em
   \item If $G$ is connected, then any two distinct vertices of $G$ can be
-    connected by a path.
+    conted by a path.
   \item If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
-    removed from the circuit, then there still exists a trail from $v$ to $w$ in
-    $G$.
+    remd from the circuit, then there still exists a trail from $v$ to $w$ in
+    $G$
   \item If $G$ is connected and $G$ contains a circuit, then an edge of the
     circuit can be removed without disconnecting $G$.
 \end{itemize}
-
-% TODO: change all itemize bullets to [-]
 
 \subheading{Connected Component}
 
@@ -1713,6 +1806,16 @@ The print operation can be represented by a `dot' on a vertex in its tree
 diagram, and the order of prints can be determined by tracing the outline of the
 diagram anti-clockwise from the root. Draw the `dot' on the left, bottom, and
 right of the vertex for pre-order, in-order, and post-order respectively. \\
+
+\subheading{Reconstructing BT from Traversal Order}
+
+Given a sequence of nodes traversed in depth-first pre-order, in-order, or
+post-order; it may be possible to reconstruct the binary tree. Note that in
+pre-order and post-order, the first node traversed is always the root node (of
+traversal). Then, the nodes to the left of the identified root node in the
+in-order sequence all belong to the left subtree, and likewise for the right
+subtree. Repeat these observations recursively for each subtree until the full
+binary tree is constructed.\\
 
 \subheading{Spanning Tree}
 
