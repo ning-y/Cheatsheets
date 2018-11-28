@@ -892,7 +892,7 @@ Let $S, T$ be two sets. A \textit{binary relation} from $S$ to $T$ denoted
 $\mathcal{R}$ is a subset of the cartesian product $S \times T$.
 
 The notation $s\; \mathcal{R}\; t$ stands for $(s, t) \in \mathcal{R}$. $s\;
-\cancel{\mathcal{R}}\; t$ stands for $(s, t) \cancel{\in} \mathcal{R}$.\\
+\cancel{\mathcal{R}}\; t$ stands for $(s, t) \not\in \mathcal{R}$.\\
 
 \subheading{Definitions 8.2.[2-4] (Dom, Im, coDom)}
 
@@ -935,8 +935,14 @@ $$\forall x \in S, \forall z \in U (
   x\;\mathcal{R}' \circ \mathcal{R}\;z \leftrightarrow
     (\exists y \in T (x\;\mathcal{R}\;y\;\land\;y\;\mathcal{R}'\;z))
 )$$
-In other words, $x \in S$ and $z in U$ are related iff there is a ``path" from
+In other words, $x \in S$ and $z \in U$ are related iff there is a `path' from
 $x$ to $z$ via some intermediate $y \in T$.\\
+
+\subheading{Repeated Compositions}
+
+$$\mathcal{R}^n := \underbrace{R \circ \cdots \circ R}_n
+    = \bigodot_n \mathcal{R}$$
+
 
 \subheading{Proposition 8.2.9 (Associativity of Composition)}
 $$\mathcal{R}'' \circ (\mathcal{R}' \circ \mathcal{R}) =
@@ -1009,11 +1015,6 @@ and symmetric closure.\\
 \subheading{Proposition 8.5.2}
 
 $$\mathcal{R}^t = \bigcup^\infty_{i=1} \mathcal{R}^i$$
-
-\subheading{Repeated Compositions}
-
-$$\mathcal{R}^n := \underbrace{R \circ \cdots \circ R}_n
-    = \bigodot_n \mathcal{R}$$
 
 \subheading{Definition 8.6.1 (Anti-symmetric)}
 
