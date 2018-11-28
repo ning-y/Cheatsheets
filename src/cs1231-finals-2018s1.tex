@@ -18,6 +18,7 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
 
+% heading macros
 \newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}}
 \newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
 
@@ -27,6 +28,10 @@
 \newcommand\undermod[1]{\ (\operatorname{mod}#1)}
 \DeclareMathOperator\lcm{lcm}
 
+% make itemize use dash (-) instead of bullet
+\renewcommand\labelitemi{-}
+
+% scale tikz to column width
 \makeatletter
 \newsavebox{\measure@tikzpicture}
 \NewEnviron{scaletikzpicturetowidth}[1]{%
@@ -95,15 +100,15 @@ for corollary.\\
 
 \subheading{Proof Types}
 \begin{itemize}[leftmargin=*] \itemsep -0.4em
-  \item[-] \textbf{By Construction}: finding or giving a set of directions to
+  \item \textbf{By Construction}: finding or giving a set of directions to
     reach the statement to be proven true. In proving equality, a useful note:
     $$a \leq b \land a \geq b \rightarrow a = b$$
-  \item[-] \textbf{By Contraposition}: proving a statement through its logically
+  \item \textbf{By Contraposition}: proving a statement through its logically
     equivalent contrapositive.
-  \item[-] \textbf{By Contradiction}: proving that the negation of the statement
+  \item \textbf{By Contradiction}: proving that the negation of the statement
     leads to a logical contradiction.
-  \item[-] \textbf{By Exhaustion}: considering each case.
-  \item[-] \textbf{By Mathematical Induction}: proving for a base case, then an
+  \item \textbf{By Exhaustion}: considering each case.
+  \item \textbf{By Mathematical Induction}: proving for a base case, then an
     induction step. In the inductive step, work from the $k+1$, not the $k$
     case.
     \vspace{-0.5em} % hackhackhack
@@ -112,7 +117,7 @@ for corollary.\\
       \item $\forall k \in \mathbb{Z}, k \geq a\;(P(k) \rightarrow P(k+1))$
       \item $\forall n \in \mathbb{Z}, n \geq a\;(P(n))$
     \end{enumerate}
-  \item[-] \textbf{By Strong Induction}: mathematical induction assuming $P(k),
+  \item \textbf{By Strong Induction}: mathematical induction assuming $P(k),
     P(k-1), \cdots, P(a)$ are all true.
 \end{itemize}
 
@@ -690,13 +695,13 @@ Where $a, b \in \mathbb{R}$, $b \neq 0$; and $\forall k \in \mathbb{Z}_{k \geq
 k_0}$ for $k_0 \in \mathbb{Z}$.
 
 \begin{itemize}[leftmargin=*] \itemsep -0.5em
-\item[-] \textit{Second-order} means recurrence relation goes up to but not
+\item \textit{Second-order} means recurrence relation goes up to but not
   exceeding $F_{k-2}$.
-\item[-] \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
+\item \textit{Linear} means the highest power of the $(F_{k-r})^m$ term is
   $m=1$.
-\item[-] \textit{Homogeneous} means $C=0$ in the more general case $F_k =
+\item \textit{Homogeneous} means $C=0$ in the more general case $F_k =
   aF_{k-1} + bF_{k-2} + C$.
-\item[-] \textit{Constant coefficients} means $a, b$ does not depend on $k$.
+\item \textit{Constant coefficients} means $a, b$ does not depend on $k$.
 \end{itemize}
 
 \subheading{Epp T5.8.3 (Distinct-Roots Theorem)}
@@ -775,13 +780,13 @@ $$T=\bigcup S = \bigcup_{X\in S} X = \{ y \in \mathcal{U}\;|\;\exists X \in S (y
 
 Some properties of union,
 \begin{itemize}[leftmargin=*] \itemsep -0.3em
-  \item[-] $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
-  \item[-] $\bigcup \{A\} = A$
-  \item[-] $A \cup \varnothing = A$
-  \item[-] $A \cup B = B \cup A$
-  \item[-] $A \cup (B \cup C) = (A \cup B) \cup C$
-  \item[-] $A \cup A = A$
-  \item[-] $A \subseteq B \longleftrightarrow A \cup B = B$
+  \item $\bigcup \varnothing = \bigcup_{A \in \varnothing} A = \varnothing$
+  \item $\bigcup \{A\} = A$
+  \item $A \cup \varnothing = A$
+  \item $A \cup B = B \cup A$
+  \item $A \cup (B \cup C) = (A \cup B) \cup C$
+  \item $A \cup A = A$
+  \item $A \subseteq B \longleftrightarrow A \cup B = B$
 \end{itemize}
 
 \subheading{Definition 6.3.3 (Intersection)}
@@ -798,12 +803,12 @@ each element of $T$ also belongs to all the sets in $S$. Formally,
 Let $A, B, C$ be sets. Some properties of intersection,
 
 \begin{itemize}[leftmargin=*] \itemsep -0.3em
-  \item[-] $A \cap \varnothing = \varnothing$
-  \item[-] $A \cap B = B \cap A$
-  \item[-] $A \cap (B \cap C) = (A \cap B) \cap C$
-  \item[-] $A \subseteq B \longleftrightarrow A \cap B = A$
-  \item[-] $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
-  \item[-] $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
+  \item $A \cap \varnothing = \varnothing$
+  \item $A \cap B = B \cap A$
+  \item $A \cap (B \cap C) = (A \cap B) \cap C$
+  \item $A \subseteq B \longleftrightarrow A \cap B = A$
+  \item $A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$
+  \item $A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$
 \end{itemize}
 
 \subheading{Definition 6.3.5 (Disjoint)}
@@ -1007,8 +1012,6 @@ properties:
 Intuitively, the transitive the closure can be understood as the smallest
 superset that is transitive. Similar definitions exist for the reflexive closure
 and symmetric closure.\\
-
-% TODO: repeated compositions
 
 \subheading{Proposition 8.5.2}
 
@@ -1532,12 +1535,12 @@ to $w$. \\
 
 Let G be a graph.
 \begin{itemize}[leftmargin=*] \itemsep -0.5em
-  \item[-] If $G$ is connected, then any two distinct vertices of $G$ can be
-    connected by a path.
-  \item[-] If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
-    removed from the circuit, then there still exists a trail from $v$ to $w$ in
-    $G$.
-  \item[-] If $G$ is connected and $G$ contains a circuit, then an edge of the
+  \item If $G$ is connected, then any two distinct vertices of $G$ can be
+    conted by a path.
+  \item If vertices $v$ and $w$ are part of a circuit in $G$ and one edge is
+    remd from the circuit, then there still exists a trail from $v$ to $w$ in
+    $G$
+  \item If $G$ is connected and $G$ contains a circuit, then an edge of the
     circuit can be removed without disconnecting $G$.
 \end{itemize}
 
