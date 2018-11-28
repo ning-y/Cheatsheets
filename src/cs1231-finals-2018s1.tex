@@ -559,25 +559,51 @@ $a^{-1}$, exists iff $a$ and $n$ are coprime.\\
 
 \subheading{Finding the Multiplicative Inverse}
 
-For example, to find the multiplicative inverse of $5 \mod 18$,
-\begin{IEEEeqnarray*}{rCl}
-  18 = 3 &\times& 5 + 3 \\
-   5 = 1 &\times& 3 + 2 \\
-   3 = 1 &\times& 2 + 1 \\
-   1 = 1 &\times& 1 + 0
+To find the multiplicative inverse $a^{-1} \mod b$, note that since $a, b$ are
+coprime, using B\'ezout's Identity, there exists $x, y \in \mathbb{Z}_{\neq 0}$
+such that,
+\begin{align*}
+  ax + by &= \gcd(a, b) \\
+  ax + by &= 1 \\
+  ax + by &\equiv 1 \undermod{b} \\
+  ax &\equiv 1 \undermod{b} \\
+  a^{-1} &\equiv x \undermod{b}
+\end{align*}
+
+To find $x$, employ the extended Euclidean algorithm: express $b$ using the
+quotient-remainder theorem (T4.4.1) with $a$ as the quotient. Then express the
+remainder $r$ using the divisor as quotient. Repeat with the new remainder until
+a remainder of $1$ is obtained. Finally, express $1$ in terms of $a$ and $b$
+using the equalities formulated during the algorithm. For example, to find the
+multiplicative inverse of $5 \mod 18$.
+
+\begin{minipage}{0.9\columnwidth}
+$$\text{quotient-remainder theorem: } n = dq + r$$
+\begin{IEEEeqnarray}{rCccCl}
+   n & = &  d  & q & + & r \\
+  18 & = & (3) & 5 & + & 3 \\
+   5 & = & (1) & 3 & + & 2 \\
+   3 & = & (1) & 2 & + & 1
+\end{IEEEeqnarray}
+\end{minipage}\\
+
+Now, express $1$ in terms of $5$ and $18$.
+\begin{IEEEeqnarray*}{rCrlCrl}
+  1 & = & (1)  &\ 3  & - & (1)  &\ 2 \\
+    & = & (1)  &\ 3  & - & (1)  &\ [(1)5 - (1)3] \\
+    & = & (-1) &\ 5  & + & (2)  &\ 3 \\
+    & = & (-1) &\ 5  & + & (2)  &\ [(1)18 - (3)5] \\
+    & = & (2)  &\ 18 & + & (-7) &\ 5 \\
 \end{IEEEeqnarray*}
-So
-\begin{IEEEeqnarray*}{rCl}
-  1 &=& 1 \times 1 + 0 = 1 \\
-    &=& 1(3 - 1 \times 2) = 3 - 2  \\
-    &=& 3 - (5 - 3) = 2 \times 3 - 5 \\
-    &=& 2(18 - 3 \times 5) - 5 = 2 \times 18 - 7 \times 5 \\
-  1 - 2 \times 18 &=& -7 \times 5 \\
-  1 - 2 \times 18 &\equiv& -7 \times 5 \undermod{n} \\
-                1 &\equiv& -7 \times 5 \undermod{n}
-\end{IEEEeqnarray*}
-Therefore, we have $5^{-1} \mod 18 = -7$, or equivalently under
-modulo $11$.\\
+Take $\mod 18$ on both sides,
+\begin{align*}
+  1 &\equiv (2)18 + (-7)5 \undermod{18} \\
+  (2)18 + (-7)5 &\equiv 1 \undermod{18} \\
+          (-7)5 &\equiv 1 \undermod{18} \\
+          (11)5 &\equiv 1 \undermod{18}
+\end{align*}
+
+So, $5^{-1} \mod 18 = 11$.\\
 
 \subheading{Corollary 4.7.4 (Special case: $n$ is prime)}
 
