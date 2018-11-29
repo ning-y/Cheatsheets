@@ -1555,7 +1555,11 @@ A graph $H$ is a connected component of a graph $G$ iff
 \subheading{Euler Circuit}
 
 An Euler circuit for $G$ is a circuit that contains every vertex and every edge
-of $G$. An Eulerian graph is a graph that contains an Euler circuit.\\
+of $G$. That is, an Euler circuit for $G$ is a sequence of adjacent vertices and
+edges in G that has at least one edge, starts and ends at the same vertex, uses
+every vertex of $G$ at least once, and uses every edge of $G$ exactly once.\\
+
+An Eulerian graph is a graph that contains an Euler circuit.\\
 
 \subheading{Theorem 10.2.2}
 
@@ -1590,11 +1594,13 @@ $G$ have positive even degree.\\
 \subheading{Hamiltonian Circuit}
 
 A Hamiltonian circuit for a graph $G$ is a simple circuit that includes every
-vertex of $G$. A Hamiltonian graph (or Hamilton graph) is a graph that contains
-a Hamiltonian circuit.\\
+vertex of $G$. That is, a Hamiltonian circuit for $G$ is a sequence of adjacent
+vertices and distinct edges in which very vertex of $G$ appears exactly once,
+except for the first and last, which are the same.\\
 
-There is no analogous criterion to T10.2.4 to determining whether a given graph
-has a Hamiltonian circuit.\\
+A Hamiltonian graph (or Hamilton graph) is a graph that contains a Hamiltonian
+circuit. There is no analogous criterion to T10.2.4 to determining whether a
+given graph has a Hamiltonian circuit.\\
 
 \subheading{Proposition 10.2.6}
 
