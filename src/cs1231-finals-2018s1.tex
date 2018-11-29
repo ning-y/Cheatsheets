@@ -1346,6 +1346,16 @@ events in $S$ to the set of real numbers; $A, B \subseteq S$,
     \cup B) = P(A) + P(B)$
 \end{enumerate}
 
+\subheading{Theorem 9.3.3 (Inclusion/Exclusion Principle)}
+
+If $A$, $B$, and $C$ are any finite sets, then
+\begin{IEEEeqnarray*}{rCl}
+  N(A \cup B) &=& N(A) + N(B) - N(A \cap B) \\
+  N(A \cup B \cup C) &=& N(A) + N(B) + N(C) \\
+    && - N(A \cap B) - N(A \cap C) \\
+    && - N(B \cap C) + N(A \cap B \cap C)
+\end{IEEEeqnarray*}
+
 \subheading{Probability of the Complement}
 $$P(A^c) = 1 - P(A)$$
 
