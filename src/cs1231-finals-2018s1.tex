@@ -1711,6 +1711,23 @@ $$\text{$v$ is endpoint of $e$ $\iff$ $g(v)$ is endpoint of $h(e)$}$$
 Let $S$ be a set of graphs and $R$ be the relation of graph isomorphism on $S$.
 Then $R$ is an equivalence relation on $S$.\\
 
+\subheading{Theorem 10.4.2 (Invariant Properties)}
+
+Each of the following properties is an invariant for graph isomorphism, where
+$n$, $m$, and $k$ are all non-negative integers.
+\begin{enumerate} \itemsep -0.5em
+  \item has $n$ vertices;
+  \item has $m$ edges;
+  \item has a vertex of degree $k$;
+  \item has $m$ vertices of degree $k$;
+  \item has a circuit of length $k$;
+  \item has a simple circuit of length $k$;
+  \item has $m$ simple circuits of length $k$;
+  \item is connected;
+  \item has an Euler circuit;
+  \item has a Hamiltonian circuit.
+\end{enumerate}
+
 \subheading{Planar Graph}
 
 A planar graph is a graph that can be drawn on a two-dimensional plane without
@@ -1775,6 +1792,10 @@ Each child is either a left child xor right child. Every parent has at most one
 left child and one right child. A full binary tree is a binary tree in which
 each parent has exactly two children.\\
 
+The total number of vertices is the number of vertices that have a parent plus
+vertices that do not have a parent; or equivalently the number of internal
+vertices plus the terminal vertices. \\
+
 \subheading{Subtrees}
 
 The left subtree of a parent $v$ in in binary tree $T$ is the binary tree whose
@@ -1783,7 +1804,7 @@ and all its descendants, and whose edges consists of all those edges of $T$ that
 connect the vertices of the left subtree. The right subtree is defined
 similarly.\\
 
-\subheading{Theorem 10.6.1 (Full Binary Tree Theorem)}
+\subheading{*Epp T10.6.1 (Full Binary Tree Theorem)}
 
 If $T$ is a full binary tree with $k$ internal vertices, then $T$ has a total of
 $2k + 1$ vertices and has $k + 1$ terminal vertices.\\
