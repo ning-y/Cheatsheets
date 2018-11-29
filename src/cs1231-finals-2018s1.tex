@@ -1478,7 +1478,26 @@ The total degree of a graph is even.\\
 
 \subheading{Proposition 10.1.3}
 
-In any graph there are an even number of vertices of odd degree.\\
+In any graph there are an even number of vertices of odd degree.
+
+\begin{center}
+\Rotatebox{90}{%
+\begin{tabularx}{10cm}{l c c c c}
+  \toprule
+  \null & Repeated & Repeated & Same       & Must Contain \\
+  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
+  \midrule
+  \textbf{Walk}           & allowed & allowed          & allowed & no \\
+  \textbf{Trail}          & no      & allowed          & allowed & no \\
+  \textbf{Path}           & no      & no               & no      & no \\
+  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
+  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
+  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
+  \bottomrule
+\end{tabularx}
+}
+\end{center}
+\vspace{0.3cm}
 
 \subheading{Walk, Trails, Paths, etc.}
 
@@ -1501,25 +1520,7 @@ A circuit (or cycle) is a closed walk that contains at least one edge and does
 not contain a repeated edge.\\
 
 A simple circuit is a circuit that does not have any repeated vertex except the
-first and last.
-
-\begin{center}
-\Rotatebox{90}{%
-\begin{tabularx}{10cm}{l c c c c}
-  \toprule
-  \null & Repeated & Repeated & Same       & Must Contain \\
-  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
-  \midrule
-  \textbf{Walk}           & allowed & allowed          & allowed & no \\
-  \textbf{Trail}          & no      & allowed          & allowed & no \\
-  \textbf{Path}           & no      & no               & no      & no \\
-  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
-  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
-  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
-  \bottomrule
-\end{tabularx}
-}
-\end{center}
+first and last.\\
 
 \subheading{Connectedness}
 
