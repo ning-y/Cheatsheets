@@ -45,19 +45,6 @@
 }
 \makeatother
 
-% PRE-RELEASE VERSIONING %
-\usepackage{fancyhdr}
-\usepackage[hidelinks]{hyperref}
-\pagestyle{fancy}
-\renewcommand{\headrulewidth}{0pt}
-\rfoot{\vspace{-0.6cm}\scriptsize
-  Pre-release $\gamma$; please send suggestions to
-  \href{https://t.me/ningyuan}{\texttt{@ningyuan}} on telegram.
-  Keep up-to-date with the
-  \href{https://github.com/ningyuansg/cheatsheets}{ningyuansg/cheatsheets}
-  repository on GitHub.
-}
-
 \begin{document}
 
 \scriptsize                         % Small fonts
@@ -309,7 +296,8 @@ P(x)$$
 
 \heading{Number Theory} \\
 
-\subheading{Properties (of Numbers)} \\
+\subheading{Properties (of Numbers)}
+
 Closure, i.e.
 $$\forall x, y \in \mathbb{Z},\;
          x + y \in \mathbb{Z},\text{ and }
@@ -327,14 +315,19 @@ Trichotomy, i.e.
 An integer $n$ is said to be colorful if there exists some integer $k$ such
 that $n = 3k$.\\
 
-\subheading{Definition 1.3.1 (Divisibility)}\\
+\subheading{Definition 1.3.1 (Divisibility)}
+
 If $n$ and $d$ are integers and $d \neq 0$,
   $$ d \divides n \iff \exists k \in \mathbb{Z} \text{ s.t. } n=dk $$
 
-\subheading{Theorem 4.1.1 (Linear Combination)}\\
+\subheading{Theorem 4.1.1 (Linear Combination)}
 $$\forall a,b,c \in \mathbb{Z},\;
 (a \divides b) \land (a \divides c)
     \rightarrow \forall x,y \in \mathbb{Z}, a \divides (bx + cy)$$
+
+\subheading{*Epp T4.3.1 (Pos. Divisors of Pos. Integers)}
+
+For all positive integers $a, b$, $$a \divides b \rightarrow a \leq b$$
 
 \subheading{Epp T4.3.3 (Transitivity of Divisibility)}
 $$\forall a, b, c \in \mathbb{Z},\;
@@ -656,14 +649,14 @@ c \cdot \sum^n_{k=m} a_k &= \sum^n_{k=m} c \cdot a_k\\
 \subheading{Common Sequences}\\
 
 Arithmetic sequence:
-\begin{align*}
-S_n &= \frac{n}{2} ( 2a + (n-1)d )
-\end{align*}
+$$S_n = \frac{n}{2} ( 2a + (n-1)d )$$
 Geometric sequence:
-\begin{align*}
-S_n &= \frac{a(r^n - 1)}{r - 1} \\
-S_{\infty} &= \frac{a}{1-r}\text{ ,\ \ \ \ $|r| < 1$}
-\end{align*}
+\begin{IEEEeqnarray*}{rClr}
+  S_n &=& \frac{a(r^n - 1)}{r - 1}& \\
+  S_{\infty} &=& \frac{a}{1-r}\ ,&\text{$|r| < 1$}
+\end{IEEEeqnarray*}
+Triangle numbers:
+$$T_n = \sum^n_{k=1} k = \frac{n(n-1)}{2} $$
 Fibonacci numbers:
 \begin{align*}
 \forall n \in \mathbb{N},\ F_k &= \begin{cases}
@@ -1167,7 +1160,7 @@ $\{x \in S\;|\;\exists y \in V (f(x) = y)\}$.\\
 The restriction (7.1.5) of $f$ to $U$ is the set
 $\{(x, y) \in U \times T\;|\;f(x)=y\}$.\\
 
-\subheading{Definition 7.2.1 (Injective)}
+\subheading{Definition 7.2.1 (Injective, or One-to-one)}
 
 Let $f : S \rightarrow T$ be a function. $f$ is injective (or one-to-one) iff
 $$\forall y \in T, \forall x_1, x_2 \in S (
@@ -1175,7 +1168,7 @@ $$\forall y \in T, \forall x_1, x_2 \in S (
 Intuitively, this means that every element in $T$ has have at most one `incoming
 arrow'.\\
 
-\subheading{Definition 7.2.2 (Surjective)}
+\subheading{Definition 7.2.2 (Surjective, or Onto)}
 
 Let $f : S \rightarrow T$ be a function. $f$ is surjective (or onto) iff
 $$\forall y \in T, \exists x \in S (f(x) = y)$$
@@ -1185,7 +1178,7 @@ arrow'.\\
 \subheading{Definition 7.2.3 (Bijective)}
 
 A function is bijective (or is a bijection) iff it is injective and
-subjective. Intuitively, this means that every dot in $T$ has exactly one
+subjective. Intuitively, this means that every element in $T$ has exactly one
 incoming arrow.\\
 
 \subheading{Definition 7.2.4 (Inverse)}
@@ -1353,6 +1346,16 @@ events in $S$ to the set of real numbers; $A, B \subseteq S$,
     \cup B) = P(A) + P(B)$
 \end{enumerate}
 
+\subheading{Theorem 9.3.3 (Inclusion/Exclusion Principle)}
+
+If $A$, $B$, and $C$ are any finite sets, then
+\begin{IEEEeqnarray*}{rCl}
+  N(A \cup B) &=& N(A) + N(B) - N(A \cap B) \\
+  N(A \cup B \cup C) &=& N(A) + N(B) + N(C) \\
+    && - N(A \cap B) - N(A \cap C) \\
+    && - N(B \cap C) + N(A \cap B \cap C)
+\end{IEEEeqnarray*}
+
 \subheading{Probability of the Complement}
 $$P(A^c) = 1 - P(A)$$
 
@@ -1432,7 +1435,8 @@ edges.\\
 \subheading{Complete Graph}
 
 A complete graph on $n$ vertices, $n > 0$, denoted $K_n$, is a simple graph with
-$n$ vertices and exactly one edge connecting each pair of distinct vertices.\\
+$n$ vertices and exactly one edge connecting each pair of distinct vertices. The
+number of edges is $T_n$, the $n$\textsuperscript{th} triangle number.\\
 
 \subheading{Complete Bipartite Graph}
 
@@ -1474,7 +1478,26 @@ The total degree of a graph is even.\\
 
 \subheading{Proposition 10.1.3}
 
-In any graph there are an even number of vertices of odd degree.\\
+In any graph there are an even number of vertices of odd degree.
+
+\begin{center}
+\Rotatebox{90}{%
+\begin{tabularx}{10cm}{l c c c c}
+  \toprule
+  \null & Repeated & Repeated & Same       & Must Contain \\
+  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
+  \midrule
+  \textbf{Walk}           & allowed & allowed          & allowed & no \\
+  \textbf{Trail}          & no      & allowed          & allowed & no \\
+  \textbf{Path}           & no      & no               & no      & no \\
+  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
+  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
+  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
+  \bottomrule
+\end{tabularx}
+}
+\end{center}
+\vspace{0.3cm}
 
 \subheading{Walk, Trails, Paths, etc.}
 
@@ -1497,25 +1520,7 @@ A circuit (or cycle) is a closed walk that contains at least one edge and does
 not contain a repeated edge.\\
 
 A simple circuit is a circuit that does not have any repeated vertex except the
-first and last.
-
-\begin{center}
-\Rotatebox{90}{%
-\begin{tabularx}{10cm}{l c c c c}
-  \toprule
-  \null & Repeated & Repeated & Same       & Must Contain \\
-  \null & Edge?    & Vertex?  & Start/End? & $\geq 1$ Edge? \\
-  \midrule
-  \textbf{Walk}           & allowed & allowed          & allowed & no \\
-  \textbf{Trail}          & no      & allowed          & allowed & no \\
-  \textbf{Path}           & no      & no               & no      & no \\
-  \textbf{Closed Walk}    & allowed & allowed          & yes     & no \\
-  \textbf{Circuit}        & no      & allowed          & yes     & yes \\
-  \textbf{Simple Circuit} & no      & first, last only & yes     & yes\\
-  \bottomrule
-\end{tabularx}
-}
-\end{center}
+first and last.\\
 
 \subheading{Connectedness}
 
@@ -1523,7 +1528,7 @@ Two vertices $v, w$ of a graph $G$ are connected iff there is a walk from $v$ to
 $w$.\\
 
 The graph $G$ is connected iff $\forall v, w \in V(G)$ there is a walk from $v$
-to $w$. \\
+to $w$. Then, $G$ is either a tree or has a circuit.\\
 
 \subheading{Lemma 10.2.1}
 
@@ -1551,7 +1556,11 @@ A graph $H$ is a connected component of a graph $G$ iff
 \subheading{Euler Circuit}
 
 An Euler circuit for $G$ is a circuit that contains every vertex and every edge
-of $G$. An Eulerian graph is a graph that contains an Euler circuit.\\
+of $G$. That is, an Euler circuit for $G$ is a sequence of adjacent vertices and
+edges in G that has at least one edge, starts and ends at the same vertex, uses
+every vertex of $G$ at least once, and uses every edge of $G$ exactly once.\\
+
+An Eulerian graph is a graph that contains an Euler circuit.\\
 
 \subheading{Theorem 10.2.2}
 
@@ -1586,11 +1595,13 @@ $G$ have positive even degree.\\
 \subheading{Hamiltonian Circuit}
 
 A Hamiltonian circuit for a graph $G$ is a simple circuit that includes every
-vertex of $G$. A Hamiltonian graph (or Hamilton graph) is a graph that contains
-a Hamiltonian circuit.\\
+vertex of $G$. That is, a Hamiltonian circuit for $G$ is a sequence of adjacent
+vertices and distinct edges in which very vertex of $G$ appears exactly once,
+except for the first and last, which are the same.\\
 
-There is no analogous criterion to T10.2.4 to determining whether a given graph
-has a Hamiltonian circuit.\\
+A Hamiltonian graph (or Hamilton graph) is a graph that contains a Hamiltonian
+circuit. There is no analogous criterion to T10.2.4 to determining whether a
+given graph has a Hamiltonian circuit.\\
 
 \subheading{Proposition 10.2.6}
 
@@ -1701,6 +1712,23 @@ $$\text{$v$ is endpoint of $e$ $\iff$ $g(v)$ is endpoint of $h(e)$}$$
 Let $S$ be a set of graphs and $R$ be the relation of graph isomorphism on $S$.
 Then $R$ is an equivalence relation on $S$.\\
 
+\subheading{Theorem 10.4.2 (Invariant Properties)}
+
+Each of the following properties is an invariant for graph isomorphism, where
+$n$, $m$, and $k$ are all non-negative integers.
+\begin{enumerate} \itemsep -0.5em
+  \item has $n$ vertices;
+  \item has $m$ edges;
+  \item has a vertex of degree $k$;
+  \item has $m$ vertices of degree $k$;
+  \item has a circuit of length $k$;
+  \item has a simple circuit of length $k$;
+  \item has $m$ simple circuits of length $k$;
+  \item is connected;
+  \item has an Euler circuit;
+  \item has a Hamiltonian circuit.
+\end{enumerate}
+
 \subheading{Planar Graph}
 
 A planar graph is a graph that can be drawn on a two-dimensional plane without
@@ -1765,6 +1793,10 @@ Each child is either a left child xor right child. Every parent has at most one
 left child and one right child. A full binary tree is a binary tree in which
 each parent has exactly two children.\\
 
+The total number of vertices is the number of vertices that have a parent plus
+vertices that do not have a parent; or equivalently the number of internal
+vertices plus the terminal vertices. \\
+
 \subheading{Subtrees}
 
 The left subtree of a parent $v$ in in binary tree $T$ is the binary tree whose
@@ -1773,7 +1805,7 @@ and all its descendants, and whose edges consists of all those edges of $T$ that
 connect the vertices of the left subtree. The right subtree is defined
 similarly.\\
 
-\subheading{Theorem 10.6.1 (Full Binary Tree Theorem)}
+\subheading{*Epp T10.6.1 (Full Binary Tree Theorem)}
 
 If $T$ is a full binary tree with $k$ internal vertices, then $T$ has a total of
 $2k + 1$ vertices and has $k + 1$ terminal vertices.\\
