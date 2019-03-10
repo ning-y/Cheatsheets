@@ -177,6 +177,16 @@ $$P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
 The MGF is $e^{\lambda(e^t - 1)}$. The mean and variance are both $\lambda$. The
 fisher information is $1/\lambda$. \smallskip
 
+\subheading{Geometric Distribution}
+
+The geometric distribution is defined over the parameter $k \in \mathbb{Z}^+$.
+Its PMF is
+
+$$P(X=k) = p(1-p)^{k-1}$$
+
+The MFG is $pe^t/(1 - (1-p)e^t)$. The mean and variance are $1/p$ and
+$(1-p)/p^2$ respectively. \smallskip
+
 \subheading{Gamma Distribution}
 
 The gamma distribution is defined over two parameters, $\alpha > 0$, $\lambda >
@@ -260,6 +270,11 @@ then
 $$\lim_{x\rightarrow \infty}
   P \left ( \frac{S_n}{\sigma \sqrt{n}} \leq x \right )
   = \Phi(x)$$
+
+A more useful result is as follows: if $X_1, X_2, \cdots, X_n$ are i.i.d. random
+variables with large $n$, then
+
+$$\bar{X} \sim N(\mu, \sigma^2/n)$$
 
 \subheading{Linear Functions of a Random Variable}
 
