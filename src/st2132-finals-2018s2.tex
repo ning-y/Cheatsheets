@@ -1,0 +1,688 @@
+\documentclass[a4paper]{article}
+\usepackage[
+    a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape
+]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{IEEEtrantools}
+
+% heading macros
+\newcommand{\heading}[1]{{\small\underline{\textbf{#1}}}\smallskip}
+\newcommand{\subheading}[1]{{\scriptsize\textbf{#1}}}
+\renewenvironment{section}[1]
+  {
+    \subheading{#1}\smallskip
+
+  }{
+    \medskip
+  }
+
+% math macros
+\newcommand{\expectation}[1]{\operatorname{E}[#1]}
+\newcommand{\ddx}{\frac{d}{dx}}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\MSE}{MSE}
+\DeclareMathOperator{\eff}{eff}
+
+% itemize settings
+\renewcommand\labelitemi{-}
+\setlist[itemize]{leftmargin=*, noitemsep, nosep}
+
+\begin{document}
+
+\scriptsize                         % Small fonts
+\pagenumbering{gobble}              % No page numbers
+\setlength\parindent{0pt}           % No indents at start of paragraphs
+\setlength{\abovedisplayskip}{3pt}  % Less spacing before equations
+\setlength{\belowdisplayskip}{3pt}  % less spacing after equations
+
+% TITLE %
+\begin{center}
+  {\large ST2132 Cheatsheet}\\{for finals, by ning}
+\end{center}
+
+% BODY %
+\begin{multicols*}{4}
+
+\heading{ANOVA}
+
+In this section, $I$ denotes the treatments/groups, and $J$ the measurements in
+each group. For two-factor, $I, J$ denote the treatments/groups, and $J$ the
+measurements within each $I, J$ combination.
+\begin{align*}
+  \sum^I_{i=1}\sum^J_{j=1} (Y_{ij} - \bar{\bar{Y}})^2
+    &= \sum^I_{i=1}\sum^J_{j=1} (Y_{ij} - \bar{Y})^2 + \\
+    &\quad J\sum^I_{i=1} (\bar{Y_i} - \bar{\bar{Y}})^2 \\
+  SS_{TOT} &= SS_W + SS_B \\
+  SS_B/(I-1) &\sim \chi^2_{I-1} \\
+  SS_W/[I(J-1)] &\sim \chi^2_{I(J-1)} \\
+  \expectation{SS_W} &= I(J-1)\sigma^2 \\
+  \expectation{SS_B} &= J\sum^I_{i=1} \alpha_i^2 + (I-1)\sigma^2
+\end{align*}
+
+\begin{section}{One-factor ANOVA, same-sized groups}
+  The test statistic is
+  $$F = \frac{SS_B/(I-1)}{SS_W/[I(J-1)]}
+    \sim F_{I-1, I(J-1)}$$
+  Reject $H_0$ if  $F > F_{I-1, I(J-1)}(\alpha)$.
+\end{section}
+
+\begin{section}{One-factor ANOVA, differently-sized groups}
+  The test statistic follows a slightly different degree of freedoms $I-1 :=
+  df_1$ and $\sum^n_{i=1} J_i - I =: df_2$.
+  $$F \sim F_{df_1, df_2}$$
+\end{section}
+
+\begin{section}{Two-factor ANOVA}
+  There will be an additional sum of squares term for the interaction between
+  groups. Its associated degree of freedom in as a chi-square distributed random
+  variable, and within the final $F$ distributed test statistic is $(I-1)(J-1)$.
+  The sum of squared errors (within groups) has degree of freedom as chi-squared
+  $IJ(K-1)$.
+\end{section}
+
+\begin{section}{Post-ANOVA Tests}
+  Turkey's correction and Bonferroni's correction reduces the probability of
+  type I error in multiple tests after the ANOVA. The Kruskal-Wallis test, a
+  generalisation of the Mann-Whitney test, is a nonparametric test which is
+  particularly useful for small data sets.
+\end{section}
+
+\heading{Two-Sample Tests}
+
+In this section, $X_1, \cdots, X_n$ and $Y_1, \cdots, Y_m$ are each i.i.d.
+samples of $X$ and $Y$ respectively, unless otherwise stated. Define $D_i := X_i
+- Y_i$. The variances for $X$ and $Y$ are unknown. \smallskip
+
+\begin{section}{Estimating the Equality of Variances}
+  If $S_X \leq 2S_Y$ or $S_Y \leq 2S_X$, it is reasonable to assume that
+  $\sigma_X = \sigma_Y$.
+\end{section}
+
+\begin{section}{Normal, Unpaired, with Equal Variance}
+  Calculate the pooled variance, $s_p^2$ as such.
+  $$S_p^2 = \frac{(n-1)S_X^2 + (m-1) S_Y^2}{m + n - 2}$$
+  The test statistic $t$ is
+  $$t = \frac{(\bar{X}-\bar{Y}) - (\mu_X - \mu_Y)}{SE_{\bar{X}-\bar{Y}}}$$
+  which follows a $t$ distribution with $m + n - 2$ degrees of freedom.
+\end{section}
+
+\begin{section}{Normal, Unpaired, with Unequal Variance}
+  The variance of the sampling distribution $\Var(\bar{X}-\bar{Y})$ is simply
+  $$\Var(\bar{X}-\bar{Y}) = S^2_X/n + S^2_Y/m$$
+  The test statistic $t$ is
+  $$t = \frac{\bar{X}-\bar{Y} - (\mu_X-\mu_Y)}{\sqrt{S^2_X/n + S^2_Y/m}}$$
+  which follows a $t$ distribution with degrees of freedom $df$ as
+  $$df = \frac{(S^2_X/n + S^2_Y/m)^2}{
+    \frac{(S^2_X/n)^2}{n-1} + \frac{(S^2_Y/m)^2}{m-1}
+  }$$
+\end{section}
+
+\begin{section}{Normal, Paired}
+  The variance of the sampling distribution $\Var(\bar{D})$ can be estimated
+  simply by the unbiased sample variance of the series of $D_i$ random
+  variables. The test statistic $t$ is
+  $$t = \frac{\bar{D} - \mu_D}{SE_{\bar{D}}}$$
+\end{section}
+
+\begin{section}{Unpaired, Nonparametric}
+  Rank the values of the samples $X_i, Y_j$ from 1 to $n + m$. The null
+  hypotheses is that $X_i, Y_j$ are distributed identically, and therefore
+  should rank `evenly'. Then, the rank sum scores are defined as
+  $$R_X = \sum^n_{i=1} \Rank(X_i); \quad
+    R_Y = \sum^m_{j=1} \Rank(Y_j)$$
+  Select the sample with the smaller size (w.r.t. $n, m$). Denote its rank sum
+  score $R$, and define $R' := n(n+m+1) - R$. The Mann-Whitney test statistic is
+  $$R^* = \min(R, R')$$
+  $H_0$ is rejected for small $R^*$.
+\end{section}
+
+\begin{section}{Paired, Parametric}
+  Rank the \textit{absolute} values of $D_i$ from 1 to $n=m$. The null
+  hypotheses is that $D$ is distributed symmetrically about 0. Define
+  \begin{align*}
+    W_+ &= \sum \{\Rank(D_i) | D_i > 0 \} \\
+    W_- &= \sum \{\Rank(D_i) | D_i < 0 \}
+  \end{align*}
+  Denote $W := \min(W_-, W_+)$. $H_0$ is rejected for small $W$.
+\end{section}
+
+\heading{Hypothesis Testing}
+
+In a hypothesis testing question, you must include (i) assumptions made, (ii)
+the null and alternate hypotheses, (iii) the test statistic and its
+distribution, (iv) the $p$-value, and (v) the conclusion. \smallskip
+
+\begin{section}{Terminology}
+  \begin{itemize}
+    \item The significance level (or size) $\alpha$ of a test is the probability
+      of committing a \textit{type I} error, or rejecting the null hypothesis,
+      $H_0$ when it is true.
+    \item The power $1-\beta$ of a test is the probability that $H_0$ is
+      rejected when it is false.
+    \item $\beta$ denotes the probability of a \textit{type II} error, or
+      failing to reject $H_0$ when it is false.
+    \item The $\alpha$ and power of a tests are mutual trade-offs.
+    \item The set of values of a test statistic leading to rejection of $H_0$ is
+      the rejection or critical region. Those leading to acceptance is the
+      acceptance region.
+    \item The $p$-value is the smallest significance level at which $H_0$ would
+      be rejected.
+    \item The null distribution is the probability distribution of the test
+      statistic when $H_0$ is true.
+    \item $H_1$ is the alternative hypothesis.
+  \end{itemize}
+\end{section}
+
+\begin{section}{Simple and Composite Hypotheses}
+  A hypothesis that does not completely specify the probability distribution is
+  called a composite hypothesis. Otherwise, it is a simple hypothesis. A
+  hypothesis that is `one-tailed' is called a `one-sided' alternative.
+\end{section}
+
+\begin{section}{Uniformly Most Powerful}
+  If an alternative hypothesis $H_1$ is composite, a test that is most powerful
+  for every simple alternative in $H_1$ is said to be uniformly most powerful.
+  The test which is uniformly most powerful for a one-sided alternative is not
+  for the two-sided.
+\end{section}
+
+\begin{section}{Confidence Interval}
+  Denote the acceptance region of the test as $A(\theta_0)$. Then, the set
+  $$C(X) = \{\theta | X \in A(\theta) \}$$
+  is a $100\%(1-\alpha)$ confidence region for $\theta$. The CI contains all the
+  values of $\theta$ for which the null hypothesis $H_0: \theta = \theta_0$ is
+  not rejected.
+\end{section}
+
+\begin{section}{Neyman-Pearson Lemma}
+  Suppose that $H_0$ and $H_1$ are simple hypotheses. Set the significance level
+  of the test at $\alpha$. Any other test for which the significance level is
+  less than or equal to $\alpha$ has power less than or equal to that of the
+  likelihood ratio test.
+\end{section}
+
+\begin{section}{Likelihood Ratio Test (LRT)}
+  In the case of the simple alternative hypothesis, simply define $\Lambda$
+  directly.
+  $$\Lambda = \frac{
+    L(\theta | H_0)
+  }{
+    L(\theta | H_1)
+  }$$
+\end{section}
+
+\begin{section}{Generalised Likelihood Ratio Test (GLRT)}
+  The generalised likelihood ratio test a non-optimal test used for situations
+  of composite hypothesis where no optimal test exists. Denote the null and
+  alternative hypotheses as $H_0: \theta \in \omega_0$ and $H_1: \theta \in
+  \omega_1$ respectively, where $\omega_0, \omega_1$ are disjoint and subsets of
+  $\Omega$, the sample space. The generalised likelihood ratio test statistic is
+  $$\Lambda^* = \frac{
+    \max_{\theta \in \omega_0} L(\theta)
+  }{
+    \max_{\theta \in \omega_1} L(\theta)
+  }$$
+  For simplicity, we define $\Lambda$ such that $\Lambda = \min(\Lambda^*, 1)$.
+  $$\Lambda = \frac{
+    \max_{\theta \in \omega_0} L(\theta)
+  }{
+    \max_{\theta \in \Omega} L(\theta)
+  }$$
+  Then, the generalised likelihood test rejects for $\Lambda \leq \lambda_0$,
+  where $P(\Lambda \leq \lambda_0 | H_0) = \alpha$.
+\end{section}
+
+\begin{section}{Distribution of $-2\log \Lambda$}
+  For the GLRT, As the sample size $n \rightarrow \infty$, Under smoothness
+  conditions on the pmfs or pdfs involved, the null distribution of $-2\log
+  \Lambda$ tends to a chi-square distribution with degrees of freedom $df$ as
+  $$df = \dim \Omega - \dim \omega_0$$
+  $\dim \Omega, \dim \omega_0$ are the number of free parameters under $\Omega$
+  and $\omega_0$ respectively. E.g. a simple hypothesis has no free parameters,
+  but a composite alternative hypothesis such as $H_1: \mu_0 \neq 0$
+  \textit{implies} that $\mu$ is free in $\Omega$, and so $\dim \Omega = 1$. For
+  example,
+  $$\Lambda = \prod^m_{i=1} \left(
+    \frac{p_i(\hat{\theta})}{\hat{p_i}}
+  \right )^{x_i}$$
+  Denotes $\Lambda$ for the multinomial distribution with values $x_1, \cdots,
+  x_m$. The numerator under $H_0$ is maximised by the MLE $\hat{\theta}$, while
+  the unrestricted denominator is maximised by individual MLEs $\hat{p_i}$.
+\end{section}
+
+\begin{section}{Pearson Chi-square Test}
+  The Pearson chi-square test is asymptotically equal to the GLRT. The test
+  statistic for a multinomial distributed r.v. is
+  $$X^2 = \sum^m_{i=1}\frac{(O_i - E_i)^2}{E_i}
+    = \sum^m_{i=1} \frac{(x_i - np_i(\hat{\theta}))^2}{np_i(\hat{\theta})}$$
+  Where $X^2 \sim \chi^2_{m-k-1}$, $k$ is the number of values of the
+  multinomial distribution.
+\end{section}
+
+\heading{Efficiency \& Sufficiency}
+
+\begin{section}{Mean Square Error (MSE)}
+  The MSE is a common measure of accuracy of an estimator.
+  \begin{align*}
+    \MSE(\hat{\theta}) &= \expectation{(\hat{\theta}-\theta_0)^2} \\
+                       &= \Var(\hat{\theta}) +
+                          (\expectation{\hat{\theta}} - \theta_0)^2 \\
+                       &= \text{SE}^2 + \text{bias}^2
+  \end{align*}
+\end{section}
+
+\begin{section}{Efficiency}
+  The efficiency of two estimators, $\hat{\theta}_0, \hat{\theta}_1$ is given as
+  $$\eff(\hat{\theta}_0, \hat{\theta}_1) :=
+    \Var(\hat{\theta}_1)/\Var(\hat{\theta}_0)$$
+  When any of the $\Var(\hat{\theta})$ is estimated via the asymptotic variance,
+  the efficiency is called the asymptotic relative efficiency.
+\end{section}
+
+\begin{section}{Cram\'er-Rao Inequality}
+  Under smoothness assumptions of a $f(x|\theta)$ for a statistic $T:=t(X_1,
+  \cdots, X_n)$
+  $$\Var(T) \geq \frac{1}{nI(\theta)}$$
+  This gives the lower bound for the variance of any estimator of $\theta$. An
+  unbiased estimator whose variance achieves this lower bound is said to be
+  efficient. The MLE is asymptotically efficient.
+\end{section}
+
+\begin{section}{Sufficiency}
+  A statistic $T(X_1, \cdots, X_n)$ is said to be sufficient for $\theta$ if the
+  conditional distribution of $X_1, \cdots, X_n$ given $T=t$ does not depend on
+  $\theta$ for any value of $t$. If $T$ is sufficient for $\theta$, the MLE for
+  $\theta$ is a function only of $T$.
+\end{section}
+
+\begin{section}{Factorization Theorem}
+  The statistic $T(X_1, \cdots, X_n)$ is sufficient for a parameter $\theta$ iff
+  the joint pdf factorises in the form
+  $$f(\vec{x}|\theta) = g(T(\vec{x}), \theta)h(\vec{X})$$
+\end{section}
+
+\begin{section}{Exponential Family of Probability Distributions}
+  1-parameter members of the exponential family have pdfs or pmfs in the form
+  $$f(x|\theta) = \begin{cases}
+      \exp\{c(\theta)T(x)+d(\theta)+S(x)\}, & \text{if } x \in A, \\
+      0, & \text{otherwise.}
+  \end{cases}$$
+  where the set $A$ does not depend on $\theta$.
+\end{section}
+
+\begin{section}{Rao-Blackwell Theorem}
+  Let $\hat{\theta}_0$ be an estimator for $\theta$ with finite second moment,
+  $T$ a sufficient statistic for $\theta$, and $\hat{\theta}_1 =
+  \expectation{\hat{\theta}_0|T}$.
+  $$\expectation{(\hat{\theta}_1-\theta)^2} \leq
+    \expectation{(\hat{\theta_0}-\theta)^2}$$
+  $\hat{\theta}_1$ is an estimator of $\theta$ which is better than any
+  estimator $\hat{\theta}_0$ since
+  $\hat{\theta}_1=\expectation{\hat{\theta}_0|T}$ which is a function of the
+  sufficient statistic $T$.
+\end{section}
+
+\heading{Other Stuff}
+
+% Derivative Rules
+\begin{IEEEeqnarray*}{rccl}
+  \ddx \; & f(g(x))           & \; = \; & f'(g(x))g'(x) \\
+  \ddx \; & f(x)g(x)          & \; = \; & f(x)g'(x) + f'(x)g(x) \\
+  \ddx \; & \frac{f(x)}{g(x)} & \; = \; &
+    \frac{f'(x)g(x) - f(x)g'(x)}{g(x)^2} \\
+  \ddx \; & f(x)^{g(x)}       & \; = \; &
+    f(x)^{g(x)}\left (g'(x)\ln f(x) + g(x)\frac{f'(x)}{f(x)} \right )
+\end{IEEEeqnarray*}
+
+% Gamma Function
+\begin{align*}
+  \Gamma(z+1) &= z\Gamma(z) \\
+  \Gamma(1) &= 1 \\
+  \Gamma(n) &= 1 \cdot 2 \cdot \cdots \cdot (n-1) = (n-1)!
+\end{align*}
+
+% Expectation and Variance identities
+\begin{align*}
+  \expectation{Y} &= \expectation{\expectation{Y|X}} \\
+  \Var(Y) &= \Var(\expectation{Y|X}) + \expectation{\Var(Y|X)}
+\end{align*}
+
+\smallskip
+
+\heading{Older Stuff}
+
+\subheading{Baye's Rule}
+
+Suppose that $B_1, B_2, \cdots, B_n$ are partitions of the sample space $\Omega$.
+Then for any event $A$,
+$$P(B_j|A) = \frac{P(A|B_j) P(B_j)}{\sum^n_{j=1} P(A|B_j)P(B_j)}$$
+
+\subheading{Expectation}
+
+The expectation of a random variable $X$ is defined as follows for the discrete
+and continuous case respectively,
+\begin{align*}
+  \expectation{X} &= \sum_i x_i p(x_i) \\
+  \expectation{X} &= \int^\infty_{-\infty} xf(x)\ dx
+\end{align*}
+
+\subheading{Moment Generating Functions}
+
+The moment generating function (MGF) of a random variable $X$ is,
+$$M(t) = \expectation{e^{tX}}$$
+
+and the $r$\textsuperscript{th} moment of a random variable is
+$\expectation{X^r}$ if it exists. \smallskip
+
+\subheading{Variance}
+
+The variance $\sigma^2$ of a random variable $X$, then the variance of $X$ is,
+$$Var(X) = \expectation{ (X- \expectation{X})^2 }$$
+
+And
+$$Var(a + bX) = b^2Var(X)$$
+
+\subheading{Sample Variance}
+
+The unbiased sample variance $S^2$ is
+
+$$S^2 = \frac{1}{n-1} \sum^n_{i=1} (X_i - \bar{X})^2$$
+
+The biased sample variance $\hat{\sigma}^2$ is
+
+$$\hat{\sigma}^2 = \frac{1}{n}\sum^n_{i=1} (X_i - \bar{X})^2$$
+
+\subheading{Covariance}
+
+If $X$ and $Y$ are jointly distributed random variables with means $\mu_X$ and
+$\mu_Y$ respectively, then the covariance of $X$ and $T$ is,
+$$Cov(X, Y) = \expectation{(X-\mu_X)(Y-\mu_Y)}$$
+
+If $X$ and $Y$ are independent, then
+$$Cov(X, Y) = \expectation{XY} - \expectation{X}\expectation{Y}$$
+
+If $X$ and $Y$ are positively associated, then the covariance will be positive,
+and vice versa. \smallskip
+
+\subheading{Correlation}
+
+Additionally, the correlation $\rho$ can be expressed as,
+
+$$\rho = \frac{Cov(X, Y)}{\sqrt{Var(X)Var(Y)}}$$
+
+$-1 \leq \rho \leq 1$ and $\rho = \pm 1 \iff P(Y = a + bX) = 1$ for some
+constants $a, b$. \smallskip
+
+\subheading{Bernoulli Distribution}
+
+The Bernoulli distribution is defined over the parameter $p \in [0, 1]$. Its PMF
+is
+
+$$P(X = x) = \begin{cases}
+  1-p & \text{ if $x = 0$} \\
+  p   & \text{ if $x = 1$}
+\end{cases}$$
+
+The MGF is $1-p + pe^t$. The mean and variance are $p$ and $p(1-p)$
+respectively. The fisher information is $1/(pq)$. \smallskip
+
+\subheading{Binomial Distribution}
+
+The binomial distribution is defined over two parameters, $n \in \{0, 1, 2,
+\cdots\}$ and $p \in [0, 1]$. Its PMF is
+
+$$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$$
+
+The MGF is $(1-p+pe^t)^n$. The mean and variance are $np$ and $np(1-p)$
+respectively. The fisher information is $\frac{n}{p(1-p)}$ for a fixed $n$.
+\smallskip
+
+\subheading{Poisson Distribution}
+
+The poisson distribution is defined over the parameter $\lambda >0$. Its PMF is
+
+$$P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}$$
+
+The MGF is $e^{\lambda(e^t - 1)}$. The mean and variance are both $\lambda$. The
+fisher information is $1/\lambda$. \smallskip
+
+\subheading{Geometric Distribution}
+
+The geometric distribution is defined over the parameter $k \in \mathbb{Z}^+$.
+Its PMF is
+
+$$P(X=k) = p(1-p)^{k-1}$$
+
+The MFG is $pe^t/(1 - (1-p)e^t)$. The mean and variance are $1/p$ and
+$(1-p)/p^2$ respectively. \smallskip
+
+\subheading{Gamma Distribution}
+
+The gamma distribution is defined over two parameters, $\alpha > 0$, $\lambda >
+0$. Its PDF is
+
+$$f(x) = \frac{\lambda^\alpha}{\Gamma(\alpha)} x^{\alpha-1} e^{-\lambda x}$$
+
+The MGF is $\left ( 1 - \frac{t}{\lambda} \right )^{-\alpha}$ for $t < \lambda$.
+The mean and variance are $\alpha / \lambda$ and $\alpha / \lambda^2$
+respectively. \smallskip
+
+\subheading{Normal Distribution}
+
+The normal distribution is defined over two parameters, $-\infty < \mu <
+\infty$, $\sigma > 0$. Its probability density function is
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-(x-\mu)^2 / 2\sigma^2},
+  \quad -\infty < x < \infty$$
+
+The MGF is $e^{\mu t + \sigma^2 t^2 / 2}$. Its mean and variance are $\mu$ and
+$\sigma^2$ respectively. The normal distribution is symmetric about $\mu$, such
+that $f(\mu - x) = f(\mu + x)$. \smallskip
+
+\subheading{Standard Normal Distribution}
+
+$Z \sim N(0, 1)$ is the standard normal. Its CDF is commonly denoted $\Phi$ and
+its density $\phi$. To 'standardise' a normal distribution $X$ to $Z$, note that
+
+$$Z = \frac{X - \mu}{\sigma} \sim N(0, 1)$$
+
+\subheading{$\chi^2$ Distribution}
+
+For the standard random variable $Z$, the distribution of $Y = Z^2$ is called
+the chi-square distribution with 1 degree of freedom, $\chi^2_1$. \smallskip
+
+$\chi^2_1$ is a special case of the gamma distribution, where $\alpha = \lambda
+= 1/2$, i.e. $\chi^2_1 = \Gamma(1/2, 1/2)$. \smallskip
+
+Then, if $Y_1, Y_2, \cdots, Y_n$ are independent $\chi^2_1$ random variables,
+the distribution of $W = Y_1 + Y_2 + \cdots + Y_n$ is the $chi^2$ random
+variable with $n$ degrees of freedom, $\chi^2_n$. \smallskip
+
+The density of $\chi^2_n \sim \Gamma(n/2, 1/2)$ is given by
+
+$$f(x) = \frac{1}{2^{n/2} \Gamma(n/2)} x^{(n/2) - 1} e^{x/2}$$
+
+\subheading{$t$ Distribution}
+
+For the standard normal random variable $Z$ and $U \sim \chi^2_n$, where $Z$ and
+$U$ are independent, the distribution of $Z / \sqrt{U/n}$ is the $t$
+distribution with $n$ degrees of freedom. Its PDF is
+
+$$f(t) = \frac{\Gamma[(n+1)/2]}{\sqrt{n\pi}\Gamma(n/2)}
+  \left ( 1 + \frac{t^2}{n} \right )^{-(n+1)/2} $$
+
+\subheading{$F$ Distribution}
+
+If $U \sim \chi^2_n$ and $V \sim \chi^2_m$, then the distribution of $W =
+\frac{U/n}{V/m}$ is the $F$ distribution with $n$ and $m$ degrees of freedom,
+$F_{n, m}$. Its PDF is
+
+{\tiny
+$$f(x) = \frac{\Gamma[(n+m)/2]}{\Gamma(m/2)\Gamma(n/2)}
+  \left ( \frac{n}{m} \right )^{n/2}
+  x^{n/2 -1}
+  \left (1 + \frac{n}{m}x \right )^{-(n+m)/2}$$
+}
+
+for $x \geq 0$. Also, if $T \sim t_n$ then $T^2 \sim F_{1,n}$ \smallskip
+
+\subheading{Central Limit Theorem}
+
+Let $X_1, X_2, \cdots$ be a sequence of independent random variables having mean
+0 and variance $\sigma^2$ and the common distribution function $F$ and MGF $m$
+defined in a neighbourhood of zero. If
+
+$$S_n = \sum^n_{i=1} X_i$$
+
+then
+
+$$\lim_{x\rightarrow \infty}
+  P \left ( \frac{S_n}{\sigma \sqrt{n}} \leq x \right )
+  = \Phi(x)$$
+
+A more useful result is as follows: if $X_1, X_2, \cdots, X_n$ are i.i.d. random
+variables with large $n$, then
+
+$$\bar{X} \sim N(\mu, \sigma^2/n)$$
+
+\subheading{Linear Functions of a Random Variable}
+
+Let $Y = g(X)$. To find $f_Y(y)$,
+
+\begin{align*}
+  F_Y(y) &= P(Y \leq y) \\
+    &= P(g(X) \leq y) \\
+    &= P(X \leq g^{-1}(y)) \\
+    &= F_X(g^{-1}(y)) \\
+  f_Y(y) &= \frac{d}{dy} F_X(g^{-1}(y)) \\
+    &= \frac{dg^{-1}}{dy} f_X(g^{-1}(y))
+\end{align*}
+
+\subheading{Non-linear Functions of Random Variables}
+
+Let $Y = g(\vec{X})$, where $\vec{X} := (X_1, X_2, \cdots)$ with mean vector
+$\vec{\mu}$. Then, in order to find the mean and variance of $Y$, first take the
+Taylor expansion of $g(\vec{X})$,
+
+\begin{align*}
+  Y &= g(\vec{X}) \\
+    &\approx
+      g(\mu) +
+      (X_1 - \mu_1)\frac{\partial g(\mu)}{\partial x_1} +
+      (X_2 - \mu_2)\frac{\partial g(\mu)}{\partial x_2} + \cdots
+\end{align*}
+
+Then, $\expectation{Y} \approx g(\mu)$, and 
+
+$$Var(Y) \approx Var(g(\mu) + (X_1 - \mu_1)\cdots$$
+
+Consider for example, $\vec{X} := (X_1, X_2)$. Then
+
+\begin{align*}
+Var(X) \approx\;
+  &\sigma^2_{X_1} \left ( \frac{\partial g(\mu)}{\partial x_1} \right )^2 + \\
+  &\sigma^2_{X_2} \left ( \frac{\partial g(\mu)}{\partial x_2} \right )^2 + \\
+  &2\sigma_{XY} \left ( \frac{\partial g(\mu)}{\partial x_1} \right )
+  \left ( \frac{\partial g(\mu)}{\partial x_2} \right )
+\end{align*}
+
+\subheading{Simple Random Sampling}
+
+Simple random sampling \textit{without replacement} means that each sample is
+not independent of another. While the mean of the simple random sample is still
+unbiased, that is $\expectation{\bar{X}} = \mu$,
+
+$$Cov(X_i, X_j) = -\sigma^2 / (N-1)$$
+
+for two different simple random samples, i.e. $i \neq j$. The variance of the
+sample mean then becomes
+
+$$Var(\bar{X}) = \frac{\sigma^2}{n} \left ( \frac{N - n}{N - 1} \right )$$
+
+The variance of the sample total is
+
+$$Var(T) = N^2 \left ( \frac{\sigma^2}{n} \right ) \frac{N- n}{N-1}$$
+
+For both expressions above, however, $\sigma$ is unknown and must be estimated.
+Therefore, we have also the unbiased estimates for $Var(\bar{X})$ and $Var(T)$
+
+\begin{align*}
+  s^2_{\bar{X}} &= \frac{s^2}{n} \left ( 1 - \frac{n}{N} \right ) \\
+  s^2_T &= N^2 s^2_{\bar{X}}
+\end{align*}
+
+where $s^2 = \frac{1}{n-1}\sum^n_{i=1}(X_i - \bar{X})^2$ is the unbiased sample
+variance. \smallskip
+
+\subheading{Method of Moments Estimators}
+
+The method of moments estimates the parameter $\theta$ by finding expressions
+for it in terms of the lowest possible order moments and then substituting
+sample moments into these expressions. \smallskip
+
+\subheading{Maximum Likelihood Estimators}
+
+The MLE estimator finds an estimate of the parameter $\theta_0$ which maximises
+the probability of having observed the sample. The likelihood function is
+
+$$L(\theta) = \prod^n_{i=1} f(x_i|\theta)$$
+
+Often, this function is difficult to maximise. Since $\log$ is a monotonic
+increasing function, we may simplify this problem by finding the maximum of the
+loglikelihood function instead
+
+$$l(\theta) = \sum^n_{i=1} \log f(x_i|\theta)$$
+
+\subheading{Consistency}
+
+Let $\hat{\theta}_n$ be an estimate of a parameter $\theta_0$ based on a sample
+of size $n$. $\hat{theta}_n$ is said to be consistent in probability if
+$\hat{\theta}_n$ converges in probability to $\theta_0$ as $n$ approaches
+infinity. That is, for $\epsilon > 0$,
+
+$$P(|\hat{\theta}_n - \theta_0| > \epsilon) \rightarrow 0 \text{ as } n
+\rightarrow \infty$$
+
+\subheading{Fisher Information}
+
+The fisher information, $I(\theta)$ is defined as
+
+\begin{align*}
+  I(\theta) &= \operatorname{E} \left [
+    \frac{\partial}{\partial\theta} \log f(X|\theta)
+  \right ]^2 \\
+    &= - \operatorname{E} \left [
+      \frac{\partial^2}{\partial\theta^2} \log f(X|\theta)
+  \right ]
+\end{align*}
+
+\subheading{Large Sample Theory for MLE}
+
+Let $\hat{\theta}$ denote the MLE of $\theta_0$. The probability distribution of
+
+$$\sqrt{nI(\theta_0)}(\hat{\theta} - \theta_0)$$
+
+tends to a standard normal distribution. Therefore, the asymptotic variance of
+the MLE is
+
+$$\frac{1}{nI(\theta)} = - \frac{1}{\expectation{l''(\theta_0)}}$$
+
+\subheading{Approximate Confidence Intervals}
+
+Confidence intervals can be approximated through the large sample theory for MLE
+by taking $\sqrt{nI(\theta_0)}(\hat{\theta}-\theta_0) \rightarrow N(0, 1)$, as
+$n \rightarrow \infty$. \smallskip
+
+$$P \left (
+  -z(\alpha/2) \leq
+  \sqrt{nI(\hat{\theta})}(\hat{\theta} - \theta_0) \leq
+  z(\alpha/2)
+\right ) \approx 1 - \alpha$$
+
+\end{multicols*}
+\end{document}
