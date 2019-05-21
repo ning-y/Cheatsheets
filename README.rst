@@ -8,8 +8,9 @@ Cheatsheets
 5. `CS2105 Midterms`_
 6. `MA1101R Finals`_
 7. `ST2132 Midterms`_
-8. `UQF2101I Test 1`_
-9. `UQF2101I Test 2`_
+8. `ST2132 Finals`_
+9. `UQF2101I Test 1`_
+10. `UQF2101I Test 2`_
 
 CS1101S Finals
 --------------
@@ -86,6 +87,14 @@ Prepared for AY2018/19 Sem 2. Written for a single peice of double-sided A4 pape
 `Download the PDF here
 <https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/st2132-midterms-2018s2.pdf>`_.
 
+ST2132 Finals
+---------------
+.. image:: docs/st2132-finals-2018s2-0.png
+.. image:: docs/st2132-finals-2018s2-1.png
+
+Prepared for AY2018/19 Sem 2. Written for a single peice of double-sided A4 paper, as per the limitation then.
+`Download the PDF here
+<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/st2132-finals-2018s2.pdf>`_.
 
 UQF2101I Test 1
 ---------------
