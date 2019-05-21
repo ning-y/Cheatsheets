@@ -56,7 +56,8 @@
 
 In this section, $I$ denotes the treatments/groups, and $J$ the measurements in
 each group. For two-factor, $I, J$ denote the treatments/groups, and $J$ the
-measurements within each $I, J$ combination.
+measurements within each $I, J$ combination. Use ANOVA for comparing more than 2
+groups.
 \begin{align*}
   \sum^I_{i=1}\sum^J_{j=1} (Y_{ij} - \bar{\bar{Y}})^2
     &= \sum^I_{i=1}\sum^J_{j=1} (Y_{ij} - \bar{Y})^2 + \\
@@ -209,16 +210,6 @@ distribution, (iv) the $p$-value, and (v) the conclusion. \smallskip
   likelihood ratio test.
 \end{section}
 
-\begin{section}{Likelihood Ratio Test (LRT)}
-  In the case of the simple alternative hypothesis, simply define $\Lambda$
-  directly.
-  $$\Lambda = \frac{
-    L(\theta | H_0)
-  }{
-    L(\theta | H_1)
-  }$$
-\end{section}
-
 \begin{section}{Generalised Likelihood Ratio Test (GLRT)}
   The generalised likelihood ratio test a non-optimal test used for situations
   of composite hypothesis where no optimal test exists. Denote the null and
@@ -240,22 +231,27 @@ distribution, (iv) the $p$-value, and (v) the conclusion. \smallskip
   where $P(\Lambda \leq \lambda_0 | H_0) = \alpha$.
 \end{section}
 
-\begin{section}{Distribution of $-2\log \Lambda$}
+\begin{section}{Distribution of $-2\log\Lambda$}
   For the GLRT, As the sample size $n \rightarrow \infty$, Under smoothness
   conditions on the pmfs or pdfs involved, the null distribution of $-2\log
   \Lambda$ tends to a chi-square distribution with degrees of freedom $df$ as
   $$df = \dim \Omega - \dim \omega_0$$
   $\dim \Omega, \dim \omega_0$ are the number of free parameters under $\Omega$
-  and $\omega_0$ respectively. E.g. a simple hypothesis has no free parameters,
-  but a composite alternative hypothesis such as $H_1: \mu_0 \neq 0$
-  \textit{implies} that $\mu$ is free in $\Omega$, and so $\dim \Omega = 1$. For
-  example,
-  $$\Lambda = \prod^m_{i=1} \left(
-    \frac{p_i(\hat{\theta})}{\hat{p_i}}
-  \right )^{x_i}$$
-  Denotes $\Lambda$ for the multinomial distribution with values $x_1, \cdots,
-  x_m$. The numerator under $H_0$ is maximised by the MLE $\hat{\theta}$, while
-  the unrestricted denominator is maximised by individual MLEs $\hat{p_i}$.
+  and $\omega_0$ respectively. Rejecting for small $\Lambda$ is then also
+  rejecting for large $-2\log\Lambda$. Special case: the one-tailed rejection
+  region $-2\log\Lambda = n(\bar{X}-\mu_0)^2/\sigma^2 > \chi^2_1(\alpha)$ can be
+  made two tailed $|\bar{X}-\mu_0| > (\sigma/\sqrt{n})z(\alpha/2)$ by definition
+  of $\chi^2_1$.
+\end{section}
+
+\begin{section}{Likelihood Ratio Test (LRT)}
+  In the case of the simple alternative hypothesis, simply define $\Lambda$
+  directly.
+  $$\Lambda = \frac{
+    L(\theta | H_0)
+  }{
+    L(\theta | H_1)
+  }$$
 \end{section}
 
 \begin{section}{Pearson Chi-square Test}
@@ -363,6 +359,8 @@ distribution, (iv) the $p$-value, and (v) the conclusion. \smallskip
   \Cov(X, Y) &= \expectation{(X-\mu_X)(Y-\mu_Y)} \\
   \Cov(X, Y) &= \expectation{XY} - \expectation{X}\expectation{Y} \quad
     \text{if }X\independent Y \\
+  \sum^n_{i=1}(X_i - \mu_0)^2 &=
+    \left [\sum^n_{i=1}(X_i - \bar{X})^2 \right ] + n(\bar{X}-\mu_0)^2 \\
   \rho &= \frac{\Cov(X, Y)}{\sqrt{\Var(X)\Var(Y)}} \\
   S^2 &= \frac{1}{n-1} \sum^n_{i=1} (X_i - \bar{X})^2 \\
   S^2_n &= \frac{1}{n}\sum^n_{i=1} (X_i - \bar{X})^2
@@ -404,7 +402,7 @@ P(B_j|A) = \frac{P(A|B_j) P(B_j)}{\sum^n_{j=1} P(A|B_j)P(B_j)}
   \end{align*}
   Normal:
   \begin{align*}
-    f(x) &= \frac{1}{\sigma\sqrt{2\pi}}\exp\{-\frac{1}{2\sigma^2}(x-\mu)^2\},
+    f(x) &= \frac{1}{\sigma\sqrt{2\pi}}\exp\{-\frac{(x-\mu)^2}{2\sigma^2}\},
       \quad -\infty < x < \infty \\
     \expectation{X} &= \mu \\
     \Var(X) &= \sigma^2
