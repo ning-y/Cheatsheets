@@ -1,16 +1,28 @@
 Cheatsheets
 ===========
 
-1. `CS1101S Finals`_
-2. `CS1231 Finals`_
-3. `CS1231 Midterms`_
-4. `CS2100 Finals`_
-5. `CS2105 Midterms`_
-6. `MA1101R Finals`_
-7. `ST2132 Midterms`_
-8. `ST2132 Finals`_
-9. `UQF2101I Test 1`_
-10. `UQF2101I Test 2`_
+1. `CS1101S Midterms (AY19/20)`_
+2. `CS1101S Finals`_
+3. `CS1231 Finals`_
+4. `CS1231 Midterms`_
+5. `CS2100 Finals`_
+6. `CS2105 Midterms`_
+7. `MA1101R Finals`_
+8. `ST2132 Midterms`_
+9. `ST2132 Finals`_
+10. `UQF2101I Test 1`_
+11. `UQF2101I Test 2`_
+
+CS1101S Midterms (AY19/20)
+--------------------------
+
+.. image:: docs/cs1101s-midterms-2019s1-0.png
+.. image:: docs/cs1101s-midterms-2019s1-1.png
+
+Prepared for AY2019/20 Sem 1 by `Christopher Goh <https://github.com/chrisgzf>`_. Was updated from the CS1101S Finals cheatsheet. This version is written for the version of Source used in CS1101S AY19/20 (i.e. the one where empty list is null). Written for a single piece of double-sided A4 paper, as per the limitation.
+`Download the PDF here
+<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1101s-midterms-2019s1.pdf>`_.
+
 
 CS1101S Finals
 --------------

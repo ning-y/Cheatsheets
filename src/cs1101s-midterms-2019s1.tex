@@ -1,0 +1,370 @@
+\documentclass[a4paper]{article} \usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\usepackage[a4paper, left=1cm, right=1cm, top=1cm, bottom=1cm, landscape]{geometry}
+% \usepackage{showframe}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{listings}
+
+\begin{document}
+\setlength\parindent{0pt} %TODO this somehow messes up paragraph vertical spacing as well?
+\scriptsize
+% \tiny
+\pagenumbering{gobble}
+
+\begin{center}
+{\large CS1101S Midterms Cheatsheet AY19/20}\\{by chrisgzf}
+\end{center}
+    \begin{multicols*}{4}
+
+{\small\textbf{Recursive/Iterative}}: Check if there are deferred operations
+
+\begin{verbatim}
+function fact_iter(n) {
+    function mult_remaining(counter , product) {
+        return counter === 1
+            ? product
+            : mult_remaining(counter - 1, product
+            * counter);
+    }
+    return mult_remaining(n, 1);
+}
+
+function fib(n) {
+    function f(n, k, x, y) {
+        return (k > n)
+            ? y
+            : f(n, k + 1, y, x + y);
+    }
+    return (n < 2) ? n : f(n, 2, 0, 1);
+}
+
+function gcd(a, b) {
+    return b === 0
+        ? a
+        : gcd(b, a % b);
+}
+
+function cc(amount , kinds_of_coins) {
+    return amount === 0
+        ? 1
+        : amount < 0 || kinds_of_coins === 0
+            ? 0
+            : cc(amount - first_denomination(kinds_
+                 of_coins), kinds_of_coins) +
+              cc(amount , kinds_of_coins - 1);
+}
+\end{verbatim}
+
+{\small\textbf{Order of Growth}}
+\\ \\
+\textbf{Big Theta:} The function r has order of growth $\theta(g(n))$ if there are positive constants $k_{1}$ and $k_{2}$ and a number $n_{0}$ such that $k_{1}*g(n)$ $\leq$ r(n) $\leq$ $k_{2}*g(n)$ for any n $> n_{0}$.
+\\ \\
+\textbf{Big O:} The function r has order of growth $O(g(n))$ if there is a positive constant $k$ such that r(n) $\leq$ $k*g(n)$ for any sufficiently large value of n
+\\ \\
+\textbf{Big Omega:} The function r has order of growth $\Omega(g(n))$ if there is a positive constant $k$ such that $k*g(n)$ $\leq$ r(n) for any sufficiently large value of n
+\\ \\
+\textbf{Order (small to big):} 1, log n, n, n log n, $n^{2}$, $n^{3}$, $2^{n}$, $3^{n}$, $n^{n}$ \\
+
+{\small\textbf{Lists}}: A list is either null or a pair whose tail is a list.
+\\ \\
+A list of a certain type is either null or a pair whose head is of that type and whose tail is a list of that type
+
+\begin{verbatim}
+
+function reverse(xs) {
+    function rev(original, reversed) {
+        return is_null(original)
+            ? reversed
+            : rev(tail(original),
+                  pair(head(original), reversed));
+    }
+    return rev(xs ,null);
+}
+
+function append_iter(xs, ys){
+    // iterative process
+    function app(xs, ys, c) {
+        return is_null(xs)
+        ? c(ys)
+        : app(tail(xs), ys, 
+              x => c(pair(head(xs), x))
+              );
+    }
+    return app(xs, ys, x => x);
+}
+
+function remove_duplicates(lst) {
+    return is_null(lst)
+        ? null
+        : pair(head(lst), remove_duplicates(
+            filter(x => !equal(x, head(lst)),
+                   tail(lst))));
+}
+\end{verbatim}
+Passing the deferred operation as a function in an extra argument is called “Continuation-Passing Style” (CPS). \\
+
+% TREES %
+{\small\textbf{Trees}}: A tree of certain data items is a list whose elements are such data items, or trees of such data items.
+
+\begin{verbatim}
+function map_tree(f, tree) {
+    return map(sub_tree =>
+               !is_list(sub_tree)
+                   ? f(sub_tree)
+                   : map_tree(f, sub_tree)
+               , tree);
+}
+
+function flatten_tree(xs) {
+    function h(xs, prev) {
+        return is_null(xs)
+            ? prev // end of list or tree
+            : is_list(xs)
+                ? append(flatten(xs), prev) //list
+                : pair(xs, prev); // leaf
+    }
+    return accumulate(h, null, xs);
+}
+\end{verbatim}
+
+Besides the base case, these operations consider two cases. One, when the element is itself a tree, and another when it is not. \\
+\vfill\null
+\columnbreak
+% BINARY TREES %
+{\small\textbf{Binary Trees}}: A binary tree of a certain type is null or a list with three elements, whose first element is of that type and whose second and third elements are binary trees of that type.
+\\ \\
+% BINARY SEARCH TREES %
+{\small\textbf{Binary Search Trees}}: A binary search tree of Strings is a binary tree of Strings where all entries in the left subtree are smaller than its value and all entries in the right subtree are larger than its value.
+
+\begin{verbatim}
+function insert(bst, item) {
+    if (is_empty_tree(bst)) {
+        return make_tree(item, make_empty_tree(),
+        				 make_empty_tree());
+    } else {
+        if (item < entry(bst)) {
+            // smaller than i.e. left branch
+            return make_tree(entry(bst),
+                       insert(left_branch(bst),
+                              item),
+                       right_branch(bst));
+        } else if (item > entry(bst)) {
+            // bigger than entry i.e. right branch
+            return make_tree(entry(bst),
+                       left_branch(bst),
+                       insert(right_branch(bst),
+                              item));
+        } else {
+            // equal to entry.
+            // BSTs should not contain duplicates
+            return bst;
+        }
+    }
+}
+
+function find(bst, name) {
+    return is_empty_tree(bst)
+        ? false
+        : name === entry(bst)
+            ? true
+            : name < entry(bst)
+                ? find(left_branch(bst), name)
+                : find(right_branch(bst), name);
+}
+\end{verbatim}
+
+% PERMUTATIONS %
+{\small\textbf{Permutations \& Combinations}}
+\begin{verbatim}
+function permutations(s) {
+    return is_null(s)
+        ? list(null)
+        : accumulate(append, null,
+                     map(x => map(p => pair(x, p),
+                     permutations(remove(x, s))),
+                     s));
+}
+
+function subsets(s) {
+    return accumulate(
+        (x, s1) => append(s1,
+                   map(ss => pair(x, ss), s1)),
+        list(null),
+        s);
+}
+function choose(n, r) {
+    if (n < 0 || r < 0) {
+        return 0;
+    } else if (r === 0) {
+        return 1;
+    } else {
+        // Consider the 1st item, there are 2 choices:
+        // To use, or not to use
+        // Get remaining items with wishful thinking
+        const to_use = choose(n - 1, r - 1);
+        const not_to_use = choose(n - 1, r);
+        
+        return to_use + not_to_use;
+    }
+}
+
+function combinations(xs, r) {
+    if ( (r !== 0 && xs === null) || r < 0) {
+        return null;
+    } else if (r === 0) {
+        return list(null);
+    } else {
+        const no_choose = combinations(tail(xs), r);
+        const yes_choose = combinations(tail(xs),
+                                        r - 1);
+        const yes_item = map(x => pair(head(xs), x),
+                             yes_choose);
+        return append(no_choose, yes_item);
+    }
+}
+
+function makeup_amount(x, coins) {
+    if (x === 0) {
+        return list(null);
+    } else if (x < 0 || is_null(coins)) {
+        return null;
+    } else {
+        // Combinations that do not use the head coin.
+        const combi_A = makeup_amount(x, tail(coins));
+        // Combinations that do not use the head coin
+        // for the remaining amount.
+        const combi_B = makeup_amount(x - head(coins),
+                                      tail(coins));
+        // Combinations that use the head coin.
+        const combi_C = map(x => pair(head(coins), x),
+                            combi_B);
+        return append(combi_A, combi_C);
+    }
+}
+\end{verbatim}
+\vfill\null
+\columnbreak
+
+{\small\textbf{Insertion sort}} takes elements from left to right, and \textit{inserts} them into correct positions in the sorted portion of the list (or array) on the left. This is analagous to how most people would arrange playing cards.
+\\ \\
+\textbf{Time Complexity:} $\Omega(n)\ O(n^{2})$
+\begin{verbatim}
+function insert(x, xs) {
+    return is_null(xs)
+        ? list(x)
+        : x <= head(xs)
+            ? pair(x, xs)
+            : pair(head(xs), insert(x, tail(xs)));
+}
+
+function insertion_sort(xs) {
+    return is_null(xs)
+        ? xs
+        : insert(head(xs),
+                 insertion_sort(tail(xs)));
+}
+\end{verbatim}
+
+{\small\textbf{Selection sort}} picks the smallest element from a list (or array) and puts them in order in a new list.
+\\ \\
+\textbf{Time Complexity:} $\Omega(n^{2})\ O(n^{2})$
+\begin{verbatim}
+function selection_sort(xs) {
+    if (is_null(xs)) {
+        return xs;
+    } else {
+        const x = smallest(xs);
+        return pair(x,
+            selection_sort(remove(x, xs)));
+    }
+}
+
+function smallest(xs) {
+    function h(xs, min) {
+        return xs === null
+            ? min
+            : head(xs) < min
+                ? h(tail(xs), head(xs))
+                : h(tail(xs), min);
+    }
+    return h(xs, head(xs));
+}
+\end{verbatim}
+\vfill\null
+\columnbreak
+{\small\textbf{Quicksort}} is a divide-and-conquer algorithm. \texttt{Partition} takes a pivot, and positions all elements smaller than the pivot on one side, and those larger on the other. The two `sides' are then partitioned again.
+\\ \\
+\textbf{Time Complexity:} $\Omega(n log n)\ O(n^{2})$
+\begin{verbatim}
+function partition(xs, p) {
+    function h(xs, lte, gt) {
+        if (is_null(xs)) {
+            return pair(lte, gt);
+        } else {
+            const first = head(xs);
+            return first <= p
+                ? h(tail(xs), pair(first, lte), gt)
+                : h(tail(xs), lte, pair(first, gt));
+        }
+    }
+    return h(xs, null, null);
+}
+
+
+function quicksort(xs) {
+    if (is_null(xs) || is_null(tail(xs))) {
+        return xs;
+    } else {
+        const pivot = head(xs);
+        const splits = partition(tail(xs), pivot);
+        const smaller = quicksort(head(splits));
+        const bigger = quicksort(tail(splits));
+        return append(smaller, pair(pivot, bigger));
+    }
+}
+\end{verbatim}
+\vfill\null
+\columnbreak
+{\small\textbf{Mergesort}} is a divide-and-conquer algorithm.
+\\ \\
+\textbf{Time Complexity:} $\Omega(n log n)\ O(n log n)$
+\begin{verbatim}
+function take(xs, n) {
+    return n === 0
+        ? null
+        : pair(head(xs),
+               take(tail(xs), n - 1));
+}
+function drop(xs, n) {
+    return n === 0
+        ? xs
+        : drop(tail(xs), n - 1);
+}
+
+function merge(xs, ys) {
+    if (is_null(xs)) { 
+        return ys;
+    } else if (is_null(ys)) { 
+        return xs;
+    } else {
+        const x = head(xs);
+        const y = head(ys);
+        return (x < y) 
+            ? pair(x, merge(tail(xs), ys))
+            : pair(y, merge(xs, tail(ys)));
+    }
+}
+
+function merge_sort(xs) {
+    if (is_null(xs) || is_null(tail(xs))) {
+        return xs;
+    } else {
+        const mid = math_floor(length(xs) / 2);  
+        return merge(merge_sort(take(xs, mid)), 
+                     merge_sort(drop(xs, mid)));
+    }
+}
+\end{verbatim}
+
+\end{multicols*}
+\end{document}
