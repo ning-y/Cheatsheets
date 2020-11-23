@@ -21,7 +21,7 @@ CS1101S Midterms (AY19/20)
 
 Prepared for AY2019/20 Sem 1 by `Christopher Goh <https://github.com/chrisgzf>`_. Was updated from the CS1101S Finals cheatsheet. This version is written for the version of Source used in CS1101S AY19/20 (i.e. the one where empty list is null). Written for a single piece of double-sided A4 paper, as per the limitation.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1101s-midterms-2019s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs1101s-midterms-2019s1.pdf>`_.
 
 
 CS1101S Finals
@@ -32,7 +32,7 @@ CS1101S Finals
 
 Prepared for AY2017/18 Sem 1. Includes documentation for inbuilt *source* functions, as it was announced that the exam paper would not provide said documentation. Written for a single piece of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1101s-finals-2017s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs1101s-finals-2017s1.pdf>`_.
 
 CS1231 Finals
 -------------
@@ -47,7 +47,7 @@ CS1231 Finals
 
 Prepared for AY2018/19 Sem 1. Does not cover Epp Appendix A.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1231-finals-2018s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs1231-finals-2018s1.pdf>`_.
 
 CS1231 Midterms
 ---------------
@@ -57,7 +57,7 @@ CS1231 Midterms
 
 Prepared for AY2018/19 Sem 1. Does not cover Epp Appendix A.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs1231-midterms-2018s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs1231-midterms-2018s1.pdf>`_.
 
 
 CS2100 Finals
@@ -68,7 +68,7 @@ CS2100 Finals
 
 Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs2100-finals-2017s2.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs2100-finals-2017s2.pdf>`_.
 
 CS2105 Midterms
 --------------
@@ -78,7 +78,7 @@ CS2105 Midterms
 
 Prepared for AY2018/19 Sem 1. Written for a single piece of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/cs2105-midterms-2018s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/cs2105-midterms-2018s1.pdf>`_.
 
 MA1101R Finals
 --------------
@@ -88,7 +88,7 @@ MA1101R Finals
 
 Prepared for AY2017/18 Sem 1. Written for a single piece of double-sided A4 paper.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/ma1101r-finals-2017s1.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/ma1101r-finals-2017s1.pdf>`_.
 
 ST2132 Midterms
 ---------------
@@ -97,7 +97,7 @@ ST2132 Midterms
 
 Prepared for AY2018/19 Sem 2. Written for a single peice of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/st2132-midterms-2018s2.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/st2132-midterms-2018s2.pdf>`_.
 
 ST2132 Finals
 ---------------
@@ -106,7 +106,7 @@ ST2132 Finals
 
 Prepared for AY2018/19 Sem 2. Written for a single peice of double-sided A4 paper, as per the limitation then.
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/st2132-finals-2018s2.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/st2132-finals-2018s2.pdf>`_.
 
 UQF2101I Test 1
 ---------------
@@ -116,7 +116,7 @@ UQF2101I Test 1
 
 Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 paper for convenience (there was no restriction on amount of reference material).
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/uqf2101i-test1-2018s2.pdf>`_.
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/uqf2101i-test1-2018s2.pdf>`_.
 
 UQF2101I Test 2
 ---------------
@@ -126,5 +126,4 @@ UQF2101I Test 2
 
 Prepared for AY2017/18 Sem 2. Written for a single piece of double-sided A4 paper for convenience (there was no restriction on amount of reference material).
 `Download the PDF here
-<https://github.com/ningyuansg/Cheatsheets/raw/master/pdf/uqf2101i-test2-2018s2.pdf>`_.
-
+<https://github.com/ning-y/Cheatsheets/raw/master/pdf/uqf2101i-test2-2018s2.pdf>`_.
