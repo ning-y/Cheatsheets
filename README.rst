@@ -1,3 +1,12 @@
+**I am looking to handover this repository to a current student!** Since I graduated, I can't find the time to maintain this repository, nor am I able to persuade anyone to contribute their cheatsheets (because, y'know, I am not taking classes @ NUS). If you are interested in taking over, please:
+
+1. Clone this repository and push it as your own (don't fork it)
+2. Have your repository be more updated than this one, e.g. with new or updated cheatsheets
+3. Open an issue in this repository stating your intention to takeover
+
+I will then add a link from this repository to yours, then archive this repository.
+It would be great if you are neat and organised with your commits, enthusiastic about and experienced with OSS.
+
 Cheatsheets
 ===========
 
